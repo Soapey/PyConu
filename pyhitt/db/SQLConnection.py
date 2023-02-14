@@ -2,9 +2,6 @@ import pyodbc
 from pyhitt.helpers import read_config_file
 
 
-CONNECTION_STRING = ""
-
-
 class SQLConnection:
     """Context manager for managing SQL Server database connections.
 
