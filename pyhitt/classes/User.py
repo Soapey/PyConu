@@ -3,7 +3,7 @@ class User:
     Represents a user with various attributes such as ID, name, job title, email, username, password, and permission level.
 
     Attributes:
-        id (int, optional): The unique identifier for the user.
+        id (int): The unique identifier for the user.
         first_name (str): The user's first name.
         last_name (str): The user's last name.
         job_title (str): The user's job title.

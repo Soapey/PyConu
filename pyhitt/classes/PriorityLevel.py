@@ -4,7 +4,7 @@ class PriorityLevel:
     This is assigned to a WorkOrder Item and represents the urgency of it to be completed.
 
     Attributes:
-        id (int, optional): The unique identifier for the task.
+        id (int): The unique identifier for the task.
         name (str): The name of the task.
         days_until_overdue (int): The number of days until the task becomes overdue.
     """
