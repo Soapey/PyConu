@@ -12,10 +12,10 @@ class UserDepartment:
         """
         Initializes a new instance of the UserDepartment class.
 
-        Args:
-            id (int, optional): The unique identifier of the user department.
+        Parameters:
             user_id (int): The unique identifier of the user.
             department_id (int): The unique identifier of the department.
+            id_ (int, optional): The unique identifier of the user department.
         """
         self.id = id
         self.user_id = user_id

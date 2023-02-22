@@ -30,7 +30,6 @@ class User:
         Initializes a new instance of the User class with the specified attributes.
 
         Parameters:
-            id (int, optional): The unique identifier for the user.
             first_name (str): The user's first name.
             last_name (str): The user's last name.
             job_title (str): The user's job title.
@@ -39,6 +38,7 @@ class User:
             password (str): The user's password.
             permission_level (int): The user's permission level.
             available (bool): Whether the user is available.
+            id_ (int, optional): The unique identifier for the user.
         """
         self.id = id_
         self.first_name = first_name

@@ -14,12 +14,12 @@ class Site:
         """
         Initializes a new instance of the Site class.
 
-        Args:
-            id (int, optional): The unique identifier of the site.
+        Parameters:
             name (str): The name of the site.
             address (str): The address of the site.
             suburb (str): The suburb where the site is located.
             available (bool): Whether the site is available.
+            id_ (int, optional): The unique identifier of the site.
         """
         self.id = id_
         self.name = name
