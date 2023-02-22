@@ -1,5 +1,6 @@
 from datetime import date
 
+
 class ServiceTracker:
     """
     Represents a service tracker for an item with various attributes.

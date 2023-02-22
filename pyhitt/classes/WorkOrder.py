@@ -1,5 +1,6 @@
 from datetime import date
 
+
 class WorkOrder:
     """
     A class representing a work order.
