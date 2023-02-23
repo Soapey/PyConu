@@ -1,22 +1,16 @@
-class WorkOrderAssignee:
-    """
-    A class representing an assignee for a work order.
+from pyhitt.classes.Base import Base
 
-    Attributes:
-        id (int): The ID of the work order assignee (optional).
-        workorder_id (int): The ID of the work order associated with the assignee.
-        assignee_id (int): The ID of the assignee associated with the work order.
-    """
+
+class WorkOrderAssignee(Base):
+    """A class representing the assignee of the WorkOrder."""
 
     def __init__(self, workorder_id: int, assignee_id: int, id_: int = None) -> None:
-        """
-        Initializes a new instance of the WorkOrderAssignee class.
-
-        Parameters:
-            workorder_id (int): The ID of the work order associated with the assignee.
-            assignee_id (int): The ID of the assignee associated with the work order.
-            id (int, optional): The ID of the work order assignee. Defaults to None.
-        """
-        self.id = id_
+        """Initializes a new instance of the WorkOrderAssignee class."""
+        super().__init__(id_)
         self.workorder_id = workorder_id
         self.assignee_id = assignee_id
+
+    def __repr__(self) -> str:
+        """Return a string representation of the WorkOrderAssignee instance. """
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"

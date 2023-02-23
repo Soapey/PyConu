@@ -1,22 +1,16 @@
-class Item:
-    """
-    Represents an item with various attributes.
+from pyhitt.classes.Base import Base
 
-    Attributes:
-        id (int): The unique identifier for the item.
-        name (str): The name of the item.
-        comments (str): Comments or additional information about the item.
-    """
+
+class Item(Base):
+    """A class representing an item."""
 
     def __init__(self, name: str, comments: str, id_: int = None):
-        """
-        Initializes a new instance of the Item class with the specified attributes.
-
-        Parameters:
-            name (str): The name of the item.
-            comments (str): Comments or additional information about the item.
-            id_ (int, optional): The unique identifier for the item.
-        """
-        self.id = id_
+        """Initialize a new item with a name, comments, and optional ID."""
+        super().__init__(id_)
         self.name = name
         self.comments = comments
+        
+    def __repr__(self) -> str:
+        """Return a string representation of the item."""
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"

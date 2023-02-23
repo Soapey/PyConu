@@ -1,22 +1,16 @@
-class Assignee:
-    """
-    Represents an assignee with various attributes such as ID, name, and description.
+from pyhitt.classes.Base import Base
 
-    Attributes:
-        id (int): The unique identifier for the assignee.
-        name (str): The name of the assignee.
-        description (str): The description of the assignee.
-    """
+
+class Assignee(Base):
+    """A class representing an assignee for a task."""
 
     def __init__(self, name: str, description: str, id_: int = None):
-        """
-        Initializes a new instance of the Assignee class with the specified attributes.
-
-        Parameters:
-            name (str): The name of the assignee.
-            description (str): The description of the assignee.
-            id_ (int, optional): The unique identifier for the assignee.
-        """
-        self.id = id_
+        """Initialize a new assignee with a name, description, and optional ID."""
+        super().__init__(id_)
         self.name = name
         self.description = description
+
+    def __repr__(self) -> str:
+        """Return a string representation of the assignee."""
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"

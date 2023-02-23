@@ -1,18 +1,8 @@
-class User:
-    """
-    Represents a user with various attributes such as ID, name, job title, email, username, password, and permission level.
+from pyhitt.classes.Base import Base
 
-    Attributes:
-        id (int): The unique identifier for the user.
-        first_name (str): The user's first name.
-        last_name (str): The user's last name.
-        job_title (str): The user's job title.
-        email_address (str): The user's email address.
-        username (str): The user's username.
-        password (str): The user's password.
-        permission_level (int): The user's permission level.
-        available (bool): Whether the user is available.
-    """
+
+class User(Base):
+    """Represents a user with their personal and access information."""
 
     def __init__(
         self,
@@ -26,21 +16,8 @@ class User:
         available: bool,
         id_: int = None
     ):
-        """
-        Initializes a new instance of the User class with the specified attributes.
-
-        Parameters:
-            first_name (str): The user's first name.
-            last_name (str): The user's last name.
-            job_title (str): The user's job title.
-            email_address (str): The user's email address.
-            username (str): The user's username.
-            password (str): The user's password.
-            permission_level (int): The user's permission level.
-            available (bool): Whether the user is available.
-            id_ (int, optional): The unique identifier for the user.
-        """
-        self.id = id_
+        """Initialize a new user with a first name, last name, job title, email address, username, password, permissiom level and optional ID."""
+        super().__init__(id_)
         self.first_name = first_name
         self.last_name = last_name
         self.job_title = job_title
@@ -49,3 +26,9 @@ class User:
         self.password = password
         self.permission_level = permission_level
         self.available = available
+
+    
+    def __repr__(self) -> str:
+        """Return a string representation of the user."""
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"

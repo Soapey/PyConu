@@ -1,19 +1,9 @@
 from datetime import date
+from pyhitt.classes.Base import Base
 
 
-class ServiceTracker:
-    """
-    Represents a service tracker for an item with various attributes.
-
-    Attributes:
-        id (int): The unique identifier for the service tracker.
-        item_id (int): The unique identifier for the item being tracked.
-        units_calibration_date (date): The date of the most recent calibration of the item.
-        current_units (int): The current units of the item.
-        average_units_per_day (int): The average units per day of the item.
-        service_due_units (int): The number of units at which the next service is due.
-        service_interval (int): The interval between services, in units.
-    """
+class ServiceTracker(Base):
+    """A class representing a service tracker for an item."""
 
     def __init__(
         self,
@@ -26,21 +16,18 @@ class ServiceTracker:
         id_: int = None,
     ):
         """
-        Initializes a new instance of the ServiceTracker class with the specified attributes.
-
-        Parameters:
-            item_id (int): The unique identifier for the item being tracked.
-            units_calibration_date (date): The date of the most recent calibration of the item.
-            current_units (int): The current units of the item.
-            average_units_per_day (int): The average units per day of the item.
-            service_due_units (int): The number of units at which the next service is due.
-            service_interval (int): The interval between services, in units.
-            id_ (int, optional): The unique identifier for the service tracker.
+        Initialize a new service tracker with an item ID, units calibration date, current units,
+        average units per day, service due units, service interval, and optional ID.
         """
-        self.id = id_
+        super().__init__(id_)
         self.item_id = item_id
         self.units_calibration_date = units_calibration_date
         self.current_units = current_units
         self.average_units_per_day = average_units_per_day
         self.service_due_units = service_due_units
         self.service_interval = service_interval
+
+    def __repr__(self) -> str:
+        """Return a string representation of the service tracker."""
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"

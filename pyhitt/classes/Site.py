@@ -1,28 +1,18 @@
-class Site:
-    """
-    A class representing a site.
+from pyhitt.classes.Base import Base
 
-    Attributes:
-        id (int): The unique identifier of the site.
-        name (str): The name of the site.
-        address (str): The address of the site.
-        suburb (str): The suburb where the site is located.
-        available (bool): Whether the site is available.
-    """
+
+class Site(Base):
+    """A class representing a site."""
 
     def __init__(self, name: str, address: str, suburb: str, available: bool, id_: int = None) -> None:
-        """
-        Initializes a new instance of the Site class.
-
-        Parameters:
-            name (str): The name of the site.
-            address (str): The address of the site.
-            suburb (str): The suburb where the site is located.
-            available (bool): Whether the site is available.
-            id_ (int, optional): The unique identifier of the site.
-        """
-        self.id = id_
+        """Initialize a new site with a name, address, suburb, availability, and optional ID."""
+        super().__init__(id_)
         self.name = name
         self.address = address
         self.suburb = suburb
         self.available = available
+
+    def __repr__(self) -> str:
+        """Return a string representation of the site."""
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"

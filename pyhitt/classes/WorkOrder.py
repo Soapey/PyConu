@@ -1,24 +1,9 @@
 from datetime import date
+from pyhitt.classes.Base import Base
 
 
-class WorkOrder:
-    """
-    A class representing a work order.
-
-    Attributes:
-        id (int): The ID of the work order (optional).
-        site_id (int): The ID of the site where the work order needs to be performed.
-        department_id (int): The ID of the department associated with the work order.
-        prioritylevel_id (int): The ID of the priority level associated with the work order.
-        date_created (date): The date on which the work order was created.
-        date_allocated (date): The date on which the work order was allocated.
-        date_completed (date): The date on which the work order was completed (optional).
-        task_description (str): A description of the task associated with the work order.
-        purchase_order_number (str): The purchase order number associated with the work order (optional).
-        raisedby_user_id (int): The ID of the user who raised the work order.
-        comments (str): Any additional comments associated with the work order (optional).
-        close_out_comments (str): Comments regarding the work order's close out status (optional).
-    """
+class WorkOrder(Base):
+    """A class representing a work order for a task at a site."""
 
     def __init__(
         self,
@@ -35,24 +20,8 @@ class WorkOrder:
         close_out_comments: str = None,
         id_: int = None,
     ) -> None:
-        """
-        Initializes a new instance of the WorkOrder class.
-
-        Parameters:
-            site_id (int): The ID of the site where the work order needs to be performed.
-            department_id (int): The ID of the department associated with the work order.
-            prioritylevel_id (int): The ID of the priority level associated with the work order.
-            date_created (date): The date on which the work order was created.
-            date_allocated (date): The date on which the work order was allocated.
-            task_description (str): A description of the task associated with the work order.
-            raisedby_user_id (int): The ID of the user who raised the work order.
-            date_completed (date, optional): The date on which the work order was completed. Defaults to None.
-            purchase_order_number (str, optional): The purchase order number associated with the work order. Defaults to None.
-            comments (str, optional): Any additional comments associated with the work order. Defaults to None.
-            close_out_comments (str, optional): Comments regarding the work order's close out status. Defaults to None.
-            id_ (int, optional): The ID of the work order. Defaults to None.
-        """
-        self.id = id_
+        """Initialize a new WorkOrder instance. """
+        super().__init__(id_)
         self.site_id = site_id
         self.department_id = department_id
         self.prioritylevel_id = prioritylevel_id
@@ -64,3 +33,9 @@ class WorkOrder:
         self.raisedby_user_id = raisedby_user_id
         self.comments = comments
         self.close_out_comments = close_out_comments
+
+    def __repr__(self) -> str:
+        """Return a string representation of the WorkOrder instance. """
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"
+

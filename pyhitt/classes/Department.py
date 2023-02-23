@@ -1,22 +1,16 @@
-class Department:
-    """
-    A class representing a department in a company.
+from pyhitt.classes.Base import Base
 
-    Attributes:
-        id (int): The unique identifier of the department.
-        name (str): The name of the department.
-        available (bool): Whether the department is available.
-    """
+
+class Department(Base):
+    """A class representing a department."""
 
     def __init__(self, name: str, available: bool, id_: int = None) -> None:
-        """
-        Initializes a new instance of the Department class.
-
-        Parameters:
-            name (str, optional): The name of the department.
-            available (bool, optional): Whether the department is available.
-            id_ (int, optional): The unique identifier of the department. Defaults to None.
-        """
-        self.id_ = id_
+        """Initialize a new department with a name and availability status."""
+        super().__init__(id_)
         self.name = name
         self.available = available
+
+    def __repr__(self) -> str:
+        """Return a string representation of the department."""
+        values = ', '.join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({values})"
