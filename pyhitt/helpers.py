@@ -140,3 +140,13 @@ def dict_to_class_instance(d: dict, cls: type) -> object:
         setattr(instance, k, v)
 
     return instance
+
+
+def instance_matches_expected_values(instance, attribute_values: dict) -> bool:
+
+    for attribute_name, expected_attribute_value in attribute_values.items():
+        if getattr(instance, attribute_name) != expected_attribute_value:
+            return False
+    
+    return True
+    

@@ -1,24 +1,20 @@
 import os
 import pickle
-from typing import Any, Dict, Optional
 from pyhitt.classes.Base import Base
-from pyhitt.helpers import read_config_file
+from pyhitt.helpers import read_config_file, instance_matches_expected_values
 
 
-def get(cls: type, id: Optional[int] = None) -> Dict[int, object]:
+def get_by_id(cls: type, id: int = None):
     """
     Retrieve objects from a pickle file.
 
     Parameters:
         cls (type): The class to which the retrieved objects belong.
-        id (Optional[int]): The ID of the object to retrieve. Defaults to None.
+        id (int, optional): The ID of the object to retrieve. Defaults to None.
 
     Returns:
         A dictionary containing the retrieved objects, with the object ID as the key and the object itself as the value.
         If `id` is not None, the dictionary will contain a single key-value pair.
-
-    Raises:
-        FileNotFoundError: If the pickle file for the specified class does not exist.
     """
     config = read_config_file()
     database_directory = config['PickleSettings']['database_directory']
@@ -36,106 +32,147 @@ def get(cls: type, id: Optional[int] = None) -> Dict[int, object]:
             else:
                 return {e.id: e for e in data.values()}
     except FileNotFoundError:
-        raise FileNotFoundError(f"No pickle file found for class {cls.__name__}")
+        return None
 
 
-def save(objects: list[Any]) -> None:
+def get_by_attribute_value(cls: type, attribute_values: dict) -> dict:
+    """Gets all instances of the given class that match the provided attribute values.
+
+    Parameters:
+        cls (type): The class to get instances of.
+        attribute_values (dict): A dictionary containing attribute names and their
+            corresponding expected values.
+
+    Returns:
+        A dictionary object that contains all instances of the class that match the
+        provided attribute values, with the id of the object as the key.
     """
-    Save a Python object to a pickle file database.
+    # Load the configuration file and extract the database directory path
+    try:
+        config = read_config_file()
+    except FileNotFoundError:
+        print("Config file not found.")
+        return None
 
-    If the object has an ID, update the corresponding record in the table in the
-    database. If the object does not have an ID, assign a new ID and add it as
-    a new record to the table in the database.
+    try:
+        database_directory: str = config['PickleSettings']['database_directory']
+    except KeyError:
+        print("Invalid configuration: 'database_directory' not found.")
+        return None
 
-    Args:
-        obj (Any): The Python object to save to the database.
-        table_name (str): The name of the table to save the object to.
+    # Construct the filename for the pickle file
+    table_name = cls.__name__.lower()
+    file_path = os.path.join(database_directory, f"{table_name}.pickle")
 
-    Raises:
-        ValueError: If the object ID is not found in the table.
+    try:
+        # Attempt to open the pickle file for the given class
+        with open(file_path, 'rb') as f:
+            # Load the data from the file
+            data = pickle.load(f)
 
+            # Filter the data to include only instances that match the provided attribute values
+            filtered_data = {e.id: e for e in list(filter(lambda i: instance_matches_expected_values(i, attribute_values), data.values()))}
+
+            # Return the filtered data
+            return filtered_data
+
+    except FileNotFoundError:
+        return None
+
+
+def save(objects: list) -> None:
+    """Save a list of objects to a pickle file.
+    
+    Parameters:
+        objects (list): A list of objects to be saved.
+    
     Returns:
         None
     """
-
     if not objects:
-        return
+        return None
 
-    # Load configuration from file
-    config: Dict = read_config_file()
+    try:
+        config = read_config_file()
+    except FileNotFoundError:
+        print("Config file not found.")
+        return None
 
-    # Get database directory from configuration
-    database_directory: str = config['PickleSettings']['database_directory']
+    try:
+        database_directory: str = config['PickleSettings']['database_directory']
+    except KeyError:
+        print("Invalid configuration: 'database_directory' not found.")
+        return None
+
     table_name = objects[0].__class__.__name__.lower()
 
-    # Construct file path based on table name
     file_path: str = os.path.join(database_directory, f"{table_name}.pickle")
-    
-    # Load existing data from pickle file, if it exists
-    if os.path.exists(file_path):
+
+    try:
         with open(file_path, 'rb') as f:
             data = pickle.load(f)
-    else:
+    except FileNotFoundError:
         data = dict()
 
-    # Determine the object ID and update the corresponding record in the table
     max_id = max(data.keys(), default=0)
     objects_added = 0
     obj: Base
     for obj in objects:
         obj_id = obj.id
         if obj_id:
-            if obj_id not in data:
-                raise ValueError(f"No record with ID {obj_id} exists in table {table_name}")
-            data[obj_id] = obj
-        # Assign a new ID and add the object as a new record to the table
+            try:
+                data[obj_id] = obj
+            except KeyError:
+                print(f"obj_id: {obj_id} not in data set, cannot update.")
         else:
             objects_added += 1
             new_id = max_id + objects_added
             obj.id = new_id
             data[new_id] = obj
 
-        # Save updated data to pickle file
-        with open(file_path, 'wb') as f:
-            pickle.dump(data, f)
+    with open(file_path, 'wb') as f:
+        pickle.dump(data, f)
 
 
-def delete(cls: type, id: int) -> None:
+def delete(cls: type, ids: list[int]) -> None:
     """
-    Delete a record from a table in a pickle file database.
+    Deletes the objects with the specified ids from the pickle file.
 
     Parameters:
-        id (int): The ID of the record to delete.
-        table_name (str): The name of the table to delete the record from.
+        cls (type): The class of the objects to be deleted.
+        ids (list[int]): A list of ids of the objects to be deleted.
 
     Raises:
-        ValueError: If no record with the given ID exists in the table.
-
+        FileNotFoundError: If the pickle file for the specified class does not exist.
     """
-    # Load configuration from file
-    config: Dict = read_config_file()
+    # Read the configuration file to get the database directory path
+    config = read_config_file()
 
-    # Get database directory from configuration
-    database_directory: str = config['PickleSettings']['database_directory']
+    # Get the database directory path and the table name
+    try:
+        database_directory: str = config['PickleSettings']['database_directory']
+    except:
+        print("Invalid configuration: 'database_directory' not found.")
+        return None
     table_name = cls.__name__.lower()
 
-    # Construct file path based on table name
+    # Construct the file path
     file_path: str = os.path.join(database_directory, f"{table_name}.pickle")
     
-    # Load existing data from pickle file, if it exists
-    if os.path.exists(file_path):
+    # Load the data from the pickle file
+    try:
         with open(file_path, 'rb') as f:
-            data: Dict = pickle.load(f)
-    else:
-        data = dict()
+            data = pickle.load(f)
+    except FileNotFoundError:
+        print(f"No pickle file found for class {cls.__name__}")
+        return None
 
-    # Check if the record with the given ID exists in the table
-    if id not in data:
-        raise ValueError(f"No record with ID {id} exists in table {table_name}")
-    
-    # Remove the record from the table
-    del data[id]
+    # Delete the objects with the specified ids from the data
+    for id in ids:
+        if id not in data:
+            pass
+        del data[id]
 
-    # Save updated data to pickle file
-    with open(file_path, 'wb') as f:
+    # Write the updated data to the pickle file
+    with open(file_path, 'wb') as f: 
         pickle.dump(data, f)
