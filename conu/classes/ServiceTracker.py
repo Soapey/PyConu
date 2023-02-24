@@ -1,5 +1,5 @@
 from datetime import date
-from pyhitt.classes.Base import Base
+from conu.classes.Base import Base
 
 
 class ServiceTracker(Base):

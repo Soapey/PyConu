@@ -1,4 +1,4 @@
-from pyhitt.classes.Base import Base
+from conu.classes.Base import Base
 
 
 class PriorityLevel(Base):

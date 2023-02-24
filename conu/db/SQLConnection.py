@@ -1,5 +1,5 @@
 import pyodbc
-from pyhitt.helpers import read_config_file
+from conu.helpers import read_config_file
 
 
 class SQLConnection:

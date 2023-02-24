@@ -1,7 +1,7 @@
 import os
 import pickle
-from pyhitt.classes.Base import Base
-from pyhitt.helpers import read_config_file, instance_matches_expected_values
+from conu.classes.Base import Base
+from conu.helpers import read_config_file, instance_matches_expected_values
 
 
 def get_by_id(cls: type, id: int = None):

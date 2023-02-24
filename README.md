@@ -1,2 +1,3 @@
-# PyHitt
-Python based application for Hitt. Computerised Maintenance Management System
+# PyConu
+Python based application for Conu. Computerised Maintenance Management System
+Conu - From the old Irish word 'conutaing': to build, construct.
