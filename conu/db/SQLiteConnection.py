@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from conu.classes.Base import Base
-from conu.helpers import read_config_file
+from conu.helpers import read_config_file, join_to_project_folder
 
 
 class SQLiteConnection:
@@ -71,6 +71,24 @@ class SQLiteConnection:
             self.connection.rollback()
         finally:
             self.connection.close()
+
+
+def init_db(file_path: str = None, clean: bool = False):
+
+    if not file_path:
+        # Read the configuration file to get the database directory
+        config = read_config_file()
+        database_directory = config["SQLiteSettings"]["database_directory"]
+        file_path = os.path.join(database_directory, "conu.sqlite")
+
+    if clean and os.path.exists(file_path):
+        os.remove(file_path)
+
+    script_path = join_to_project_folder(r"conu\db\init.sql")
+    with open(script_path, "r") as script:
+        script_contents = script.read()
+        with SQLiteConnection() as cur:
+            cur.executescript(script_contents)
 
 
 def save_by_list(entities: list[Base]) -> None:
