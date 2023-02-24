@@ -30,10 +30,10 @@ class SQLiteConnection:
 
             # Read the configuration file to get the database directory
             config = read_config_file()
-            database_directory = config['SQLiteSettings']['database_directory']
+            database_directory = config["SQLiteSettings"]["database_directory"]
 
             # Create the default file path within the database directory
-            self.file_path = os.path.join(database_directory, 'conu.sqlite')
+            self.file_path = os.path.join(database_directory, "conu.sqlite")
 
         else:
             self.file_path = file_path
@@ -91,7 +91,11 @@ def save_by_list(entities: list[Base]) -> None:
     with SQLiteConnection() as cur:
 
         # Get the column names for the entity
-        columns = [attr for attr in dir(entities[0]) if not callable(getattr(entities[0], attr)) and not attr.startswith("__")]
+        columns = [
+            attr
+            for attr in dir(entities[0])
+            if not callable(getattr(entities[0], attr)) and not attr.startswith("__")
+        ]
 
         # If the entity has an id, update the existing row in the table. Otherwise, insert a new row into the table.
         for entity in entities:
@@ -147,7 +151,7 @@ def select_by_attrs_dict(cls: type, attrs: dict) -> dict:
         # Map the results to objects and return as a dictionary
         objects = dict()
         for row in results:
-            entity = cls(*row[1:])
+            entity = cls(*row[1:], id_=row[0])
             objects[row[0]] = entity
 
         return objects

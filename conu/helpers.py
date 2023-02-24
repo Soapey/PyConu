@@ -14,11 +14,11 @@ def read_config_file(file_path: str = None) -> configparser.ConfigParser:
     Returns:
         dict: A dictionary containing the configuration values.
     """
-    CONFIG_PATH: str = "pyhitt/config.ini"
+    CONFIG_PATH: str = "conu/config.ini"
 
     # If file_path is None, use the default config path
     if file_path is None:
-        file_path = CONFIG_PATH
+        file_path = join_to_project_folder(CONFIG_PATH)
 
     # Create a ConfigParser object and read the config file
     config: configparser.ConfigParser = configparser.ConfigParser()
@@ -132,7 +132,7 @@ def search_entities(
 
 
 def dict_to_class_instance(d: dict, cls: type) -> object:
-    
+
     instance = cls()
 
     for k, v in d.items():
@@ -147,6 +147,5 @@ def instance_matches_expected_values(instance, attribute_values: dict) -> bool:
     for attribute_name, expected_attribute_value in attribute_values.items():
         if getattr(instance, attribute_name) != expected_attribute_value:
             return False
-    
+
     return True
-    

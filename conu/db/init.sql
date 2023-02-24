@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS department;
+
+CREATE TABLE IF NOT EXISTS department (
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [name] TEXT NOT NULL,
+    [available] INTEGER NOT NULL
+);
