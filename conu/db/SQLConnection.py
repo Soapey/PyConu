@@ -2,21 +2,9 @@ import pyodbc
 from conu.helpers import read_config_file
 
 
-class SQLConnection:
-    """Context manager for managing SQL Server database connections.
-
-    This class provides a convenient way to manage database connections and transactions
-    in a consistent and reliable manner. By using this class as a context manager, you
-    can ensure that connections are properly established and closed, and that changes are
-    committed or rolled back as needed.
-    """
+class SQLServerConnection:
 
     def __init__(self, connection_string: str = None):
-        """Initialize the connection context manager with the connection string.
-
-        Args:
-            connection_string (str): A string representing the connection to the SQL Server database.
-        """
 
         if not connection_string:
             config = read_config_file()
