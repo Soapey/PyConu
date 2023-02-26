@@ -2,6 +2,10 @@ import os
 import hashlib
 import configparser
 from typing import List
+from conu.ui.PageEnum import Page
+
+def navigate(main_window, page: Page):
+    main_window.ui.page_handler.setCurrentIndex(page.value)
 
 
 def read_config_file(file_path: str = None) -> configparser.ConfigParser:

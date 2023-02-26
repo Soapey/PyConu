@@ -1,6 +1,7 @@
 import os
 import sqlite3
 from conu.classes.Base import Base
+from conu.classes.User import User
 from conu.helpers import read_config_file, join_to_project_folder
 
 
@@ -30,10 +31,9 @@ class SQLiteConnection:
 
             # Read the configuration file to get the database directory
             config = read_config_file()
-            database_directory = config["SQLiteSettings"]["database_directory"]
 
             # Create the default file path within the database directory
-            self.file_path = os.path.join(database_directory, "conu.sqlite")
+            self.file_path = config["SQLiteSettings"]["database_file"]
 
         else:
             self.file_path = file_path
@@ -73,13 +73,41 @@ class SQLiteConnection:
             self.connection.close()
 
 
+    
+def get_user_by_credentials(username: str, password: str):
+
+        with SQLiteConnection() as cur:
+            result = cur.execute("""
+            SELECT 
+                id , first_name, last_name, job_title, email_address, username, password, permission_level, available 
+            FROM 
+                user 
+            WHERE 
+                username = ? AND password = ?;
+            """, (username, password,)).fetchone()
+            return result
+         
+def ensure_superuser():
+
+    superuser = User(
+        'super', 
+        'user', 
+        'superuser', 
+        'n/a', 
+        'superuser', 
+        '394f9daf703e35cf35f020d0250bdc14ad16ccd4ee66125c2b3ec2f62d04804e218b791213a3626068b8f9e252d08c412a80b0b210ee3e943d4891a1f435c238', 
+        4, 
+        True)
+
+    if not get_user_by_credentials(superuser.username, superuser.password):
+        save_by_list([superuser])
+
 def init_db(file_path: str = None, clean: bool = False):
 
     if not file_path:
         # Read the configuration file to get the database directory
         config = read_config_file()
-        database_directory = config["SQLiteSettings"]["database_directory"]
-        file_path = os.path.join(database_directory, "conu.sqlite")
+        file_path = config["SQLiteSettings"]["database_file"]
 
     if clean and os.path.exists(file_path):
         os.remove(file_path)
@@ -89,6 +117,9 @@ def init_db(file_path: str = None, clean: bool = False):
         script_contents = script.read()
         with SQLiteConnection() as cur:
             cur.executescript(script_contents)
+
+    ensure_superuser()
+
 
 
 def save_by_list(entities: list[Base]) -> None:
@@ -100,6 +131,7 @@ def save_by_list(entities: list[Base]) -> None:
                          Each entity should be an object with attributes
                          corresponding to the columns of the database table.
     """
+
     if not entities:
         return None
 
