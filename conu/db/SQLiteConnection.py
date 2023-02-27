@@ -2,7 +2,7 @@ import os
 import sqlite3
 from conu.classes.Base import Base
 from conu.classes.User import User
-from conu.helpers import read_config_file, join_to_project_folder
+from conu.helpers import read_config_file, join_to_project_folder, hash_sha512
 
 
 class SQLiteConnection:
@@ -71,36 +71,12 @@ class SQLiteConnection:
             self.connection.rollback()
         finally:
             self.connection.close()
-
-
-    
-def get_user_by_credentials(username: str, password: str):
-
-        with SQLiteConnection() as cur:
-            result = cur.execute("""
-            SELECT 
-                id , first_name, last_name, job_title, email_address, username, password, permission_level, available 
-            FROM 
-                user 
-            WHERE 
-                username = ? AND password = ?;
-            """, (username, password,)).fetchone()
-            return result
          
-def ensure_superuser():
 
-    superuser = User(
-        'super', 
-        'user', 
-        'superuser', 
-        'n/a', 
-        'superuser', 
-        '394f9daf703e35cf35f020d0250bdc14ad16ccd4ee66125c2b3ec2f62d04804e218b791213a3626068b8f9e252d08c412a80b0b210ee3e943d4891a1f435c238', 
-        4, 
-        True)
+def quick_user(username, password, permission_level):
+    u = User('quick', 'user', 'n/a', 'n/a', username, hash_sha512(password), permission_level, 1)
+    save_by_list([u])
 
-    if not get_user_by_credentials(superuser.username, superuser.password):
-        save_by_list([superuser])
 
 def init_db(file_path: str = None, clean: bool = False):
 
@@ -118,7 +94,7 @@ def init_db(file_path: str = None, clean: bool = False):
         with SQLiteConnection() as cur:
             cur.executescript(script_contents)
 
-    ensure_superuser()
+    quick_user('gs', 'gs', 4)
 
 
 
@@ -178,7 +154,7 @@ def delete_by_attrs_dict(cls: type, attrs: dict) -> None:
         cur.execute(delete_query, tuple(attrs.values()))
 
 
-def select_by_attrs_dict(cls: type, attrs: dict) -> dict:
+def select_by_attrs_dict(cls: type, attrs: dict = None) -> dict:
     """
     Selects all entities of the given class that match the specified attribute-value pairs.
 
@@ -190,13 +166,18 @@ def select_by_attrs_dict(cls: type, attrs: dict) -> dict:
         dict: A dictionary of the selected entities, where the key is the entity ID and the value is the entity object.
     """
     with SQLiteConnection() as cur:
-        # Build the SQL query dynamically
-        query = f"SELECT * FROM {cls.__name__.lower()} WHERE "
-        query += " AND ".join(f"{key} = ?" for key in attrs.keys())
 
-        # Execute the query and fetch the results
-        data = cur.execute(query, list(attrs.values()))
-        results = data.fetchall()
+        if not attrs:
+            query = f"SELECT * FROM {cls.__name__.lower()}"
+            results = cur.execute(query).fetchall()
+        else:
+            # Build the SQL query dynamically
+            query = f"SELECT * FROM {cls.__name__.lower()} WHERE "
+            query += " AND ".join(f"{key} = ?" for key in attrs.keys())
+
+            # Execute the query and fetch the results
+            data = cur.execute(query, list(attrs.values()))
+            results = data.fetchall()
 
         # Map the results to objects and return as a dictionary
         objects = dict()

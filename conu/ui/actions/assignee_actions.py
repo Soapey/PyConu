@@ -1,14 +1,17 @@
 from conu.ui.PageEnum import Page
-from conu.helpers import navigate
-
-def clear_listingview(main_window):
-    main_window.ui.assignee_listingview_txtSearch.clear()
-    main_window.ui.assignee_listingview_tblAssignee.clear()
-    main_window.ui.assignee_listingview_tblAssignee.setRowCount(0)
+from conu.classes.Assignee import Assignee
+from conu.db.SQLiteConnection import select_by_attrs_dict
+from conu.helpers import navigate, load_entities_into_table
 
 
 def load_listingview(main_window):
-    clear_listingview(main_window)
+        
+    entities = list(select_by_attrs_dict(Assignee).values())
+
+    main_window.ui.assignee_listingview_txtSearch.clear()
+
+    load_entities_into_table(main_window.ui.assignee_listingview_tblAssignee, entities, {"id": "ID", "name": "Name", "description": "Description"})
+
     navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
 
 

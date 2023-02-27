@@ -1,6 +1,7 @@
 from conu.ui.PageEnum import Page
+from conu.classes.User import User
 from conu.helpers import hash_sha512, navigate
-from conu.db.SQLiteConnection import get_user_by_credentials
+from conu.db.SQLiteConnection import select_by_attrs_dict
 from conu.ui.actions.assignee_actions import load_listingview
 
 
@@ -25,9 +26,9 @@ def log_in_user(main_window):
     
     login_password_hash = hash_sha512(login_password)
 
-    matching_user = get_user_by_credentials(login_username, login_password_hash)
-
-    if matching_user:
+    matching_users_dict = select_by_attrs_dict(User, {'username': login_username, 'password': login_password_hash})
+    
+    if matching_users_dict:
         load_listingview(main_window)
 
 

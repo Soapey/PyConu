@@ -3,6 +3,8 @@ import hashlib
 import configparser
 from typing import List
 from conu.ui.PageEnum import Page
+import PyQt5.QtWidgets as QtWidgets
+
 
 def navigate(main_window, page: Page):
     main_window.ui.page_handler.setCurrentIndex(page.value)
@@ -135,21 +137,20 @@ def search_entities(
     return matching_entities
 
 
-def dict_to_class_instance(d: dict, cls: type) -> object:
-
-    instance = cls()
-
-    for k, v in d.items():
-        print(k)
-        setattr(instance, k, v)
-
-    return instance
-
-
-def instance_matches_expected_values(instance, attribute_values: dict) -> bool:
-
-    for attribute_name, expected_attribute_value in attribute_values.items():
-        if getattr(instance, attribute_name) != expected_attribute_value:
-            return False
-
-    return True
+def load_entities_into_table(table, entities, attribute_header_dict):
+    # Create a QTableWidget with the correct number of rows and columns
+    table.clear()
+    table.setRowCount(len(entities))
+    table.setColumnCount(len(attribute_header_dict.keys()))
+    table.setHorizontalHeaderLabels(list(attribute_header_dict.values()))
+    
+    # Loop through each entity and attribute
+    for i, entity in enumerate(entities):
+        print(entity)
+        for j, name in enumerate(attribute_header_dict.keys()):
+            # Check if the attribute exists on the entity
+            if hasattr(entity, name):
+                # Get the value of the attribute
+                value = getattr(entity, name)
+                # Set the value in the table widget
+                table.setItem(i, j, QtWidgets.QTableWidgetItem(str(value)))
