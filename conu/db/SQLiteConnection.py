@@ -1,6 +1,5 @@
 import os
 import sqlite3
-from conu.classes.Base import Base
 from conu.classes.User import User
 from conu.helpers import read_config_file, join_to_project_folder, hash_sha512
 
@@ -71,10 +70,20 @@ class SQLiteConnection:
             self.connection.rollback()
         finally:
             self.connection.close()
-         
+
 
 def quick_user(username, password, permission_level):
-    u = User('quick', 'user', 'n/a', 'n/a', username, hash_sha512(password), permission_level, 1)
+    u = User(
+        None,
+        "quick",
+        "user",
+        "n/a",
+        "n/a",
+        username,
+        hash_sha512(password),
+        permission_level,
+        1,
+    )
     save_by_list([u])
 
 
@@ -94,11 +103,10 @@ def init_db(file_path: str = None, clean: bool = False):
         with SQLiteConnection() as cur:
             cur.executescript(script_contents)
 
-    quick_user('gs', 'gs', 4)
+    quick_user("gs", "gs", 4)
 
 
-
-def save_by_list(entities: list[Base]) -> None:
+def save_by_list(entities: list) -> None:
     """
     Saves a list of entities into a sqlite3 database.
 
@@ -182,7 +190,7 @@ def select_by_attrs_dict(cls: type, attrs: dict = None) -> dict:
         # Map the results to objects and return as a dictionary
         objects = dict()
         for row in results:
-            entity = cls(*row[1:], id_=row[0])
-            objects[row[0]] = entity
+            entity = cls(*row)
+            objects[entity.id] = entity
 
         return objects
