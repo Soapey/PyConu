@@ -10,11 +10,41 @@ CREATE TABLE IF NOT EXISTS [department] (
     [available] INTEGER NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS [assigneedepartment] {
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [assignee_id] INTEGER NOT NULL,
+    [department_id] INTEGER NOT NULL,
+    FOREIGN KEY (assignee_id) REFERENCES assignee(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES department(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+};
+
+CREATE TABLE IF NOT EXISTS [form] {
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [name] TEXT NOT NULL,
+    [path] TEXT NOT NULL
+};
+
 CREATE TABLE IF NOT EXISTS [item] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
     [name] TEXT NOT NULL,
     [comments] TEXT
 );
+
+CREATE TABLE IF NOT EXISTS [itemdepartment] {
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [item_id] INTEGER NOT NULL,
+    [department_id] INTEGER NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES item(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES department(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+};
 
 CREATE TABLE IF NOT EXISTS [prioritylevel] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,

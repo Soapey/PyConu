@@ -72,21 +72,6 @@ class SQLiteConnection:
             self.connection.close()
 
 
-def quick_user(username, password, permission_level):
-    u = User(
-        None,
-        "quick",
-        "user",
-        "n/a",
-        "n/a",
-        username,
-        hash_sha512(password),
-        permission_level,
-        1,
-    )
-    save_by_list([u])
-
-
 def init_db(file_path: str = None, clean: bool = False):
 
     if not file_path:
@@ -102,8 +87,6 @@ def init_db(file_path: str = None, clean: bool = False):
         script_contents = script.read()
         with SQLiteConnection() as cur:
             cur.executescript(script_contents)
-
-    quick_user("gs", "gs", 4)
 
 
 def save_by_list(entities: list) -> None:
