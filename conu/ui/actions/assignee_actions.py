@@ -94,7 +94,7 @@ def entities_by_search(main_window, search_text):
     if not search_text:
         matches = list(global_assignees.values())
     else:
-        matches = list(filter(lambda e: search_text in "".join([str(e.id), e.name.lower(), e.description.lower()]), global_assignees.values()))
+        matches = list(filter(lambda e: search_text in "".join([str(e.id), e.name.lower()]), global_assignees.values()))
 
     load_entities_into_table(main_window.ui.assignee_listingview_tblAssignee, matches, {"id": "ID", "name": "Name", "description": "Description"})
     
