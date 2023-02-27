@@ -13,7 +13,6 @@ def connect_main_window_actions(main_window):
 
 def start_app():
 
-
     app = QApplication(sys.argv)
     
     main_window = MainWindow()

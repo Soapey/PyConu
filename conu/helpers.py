@@ -3,7 +3,7 @@ import hashlib
 import configparser
 from typing import List
 from conu.ui.PageEnum import Page
-import PyQt5.QtWidgets as QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 
 
 def navigate(main_window, page: Page):
@@ -143,14 +143,32 @@ def load_entities_into_table(table, entities, attribute_header_dict):
     table.setRowCount(len(entities))
     table.setColumnCount(len(attribute_header_dict.keys()))
     table.setHorizontalHeaderLabels(list(attribute_header_dict.values()))
+
+    header = table.horizontalHeader()
     
     # Loop through each entity and attribute
-    for i, entity in enumerate(entities):
-        print(entity)
-        for j, name in enumerate(attribute_header_dict.keys()):
+    for j, name in enumerate(attribute_header_dict.keys()):
+
+        header.setSectionResizeMode(j, QHeaderView.ResizeToContents)
+
+        for i, entity in enumerate(entities):
             # Check if the attribute exists on the entity
             if hasattr(entity, name):
                 # Get the value of the attribute
                 value = getattr(entity, name)
                 # Set the value in the table widget
-                table.setItem(i, j, QtWidgets.QTableWidgetItem(str(value)))
+                table.setItem(i, j, QTableWidgetItem(str(value)))
+
+
+def selected_row_id(tbl):
+
+    indexes = tbl.selectedIndexes()
+
+    if len(indexes) == 0:
+        return None
+
+    selected_row = indexes[0].row()
+    id_column = 0
+    id = int(tbl.item(selected_row, id_column).text())
+
+    return id
