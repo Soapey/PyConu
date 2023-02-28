@@ -6,11 +6,10 @@ CREATE TABLE IF NOT EXISTS [assignee] (
 
 CREATE TABLE IF NOT EXISTS [department] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL,
-    [available] INTEGER NOT NULL
+    [name] TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS [assigneedepartment] {
+CREATE TABLE IF NOT EXISTS [assigneedepartment] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
     [assignee_id] INTEGER NOT NULL,
     [department_id] INTEGER NOT NULL,
@@ -20,13 +19,13 @@ CREATE TABLE IF NOT EXISTS [assigneedepartment] {
     FOREIGN KEY (department_id) REFERENCES department(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
-};
+);
 
-CREATE TABLE IF NOT EXISTS [form] {
+CREATE TABLE IF NOT EXISTS [form] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
     [name] TEXT NOT NULL,
     [path] TEXT NOT NULL
-};
+);
 
 CREATE TABLE IF NOT EXISTS [item] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,7 +33,7 @@ CREATE TABLE IF NOT EXISTS [item] (
     [comments] TEXT
 );
 
-CREATE TABLE IF NOT EXISTS [itemdepartment] {
+CREATE TABLE IF NOT EXISTS [itemdepartment] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
     [item_id] INTEGER NOT NULL,
     [department_id] INTEGER NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE IF NOT EXISTS [itemdepartment] {
     FOREIGN KEY (department_id) REFERENCES department(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
-};
+);
 
 CREATE TABLE IF NOT EXISTS [prioritylevel] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -158,5 +157,8 @@ CREATE TABLE IF NOT EXISTS workorderrecurrence (
     [weekdays] TEXT,
     [day] INTEGER,
     [month] INTEGER,
-    [month_day_occurrence] INTEGER
+    [month_day_occurrence] INTEGER,
+    FOREIGN KEY (workorder_id) REFERENCES workorder(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );

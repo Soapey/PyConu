@@ -5,4 +5,3 @@ from dataclasses import dataclass
 class Department:
     id: int
     name: str
-    available: bool

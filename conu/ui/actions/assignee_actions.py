@@ -1,9 +1,9 @@
 from conu.ui.PageEnum import Page
 from conu.classes.Assignee import Assignee
 from conu.db.SQLiteConnection import (
-    select_by_attrs_dict,
     delete_by_attrs_dict,
     save_by_list,
+    get_by_user_departments
 )
 from conu.helpers import navigate, load_entities_into_table, selected_row_id
 from tkinter.messagebox import askyesno
@@ -12,7 +12,7 @@ from tkinter.messagebox import askyesno
 def load_listingview(main_window):
 
     global global_assignees
-    global_assignees = select_by_attrs_dict(Assignee)
+    global_assignees = get_by_user_departments(Assignee, main_window.current_user.id)
 
     main_window.ui.assignee_listingview_txtSearch.clear()
 

@@ -27,8 +27,10 @@ def log_in_user(main_window):
     login_password_hash = hash_sha512(login_password)
 
     matching_users_dict = select_by_attrs_dict(User, {'username': login_username, 'password': login_password_hash})
-    
+    matching_user = list(matching_users_dict.values())[0]
+
     if matching_users_dict:
+        main_window.current_user = matching_user
         load_listingview(main_window)
 
 

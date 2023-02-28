@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from conu.ui.components.MainWindow import MainWindow
-from conu.db.SQLiteConnection import init_db
+from conu.db.SQLiteConnection import init_db, add_test_data
 from conu.ui.actions.login_actions import connect as connect_login, log_out_user
 from conu.ui.actions.assignee_actions import connect as connect_assignee
 
@@ -33,7 +33,16 @@ if __name__ == "__main__":
         print("First parameter must be database 'clean' boolean.")
         sys.exit()
 
+    try:
+        add_data = bool(int(sys.argv[2]))
+    except:
+        print("Second parameter must be 'add_test_data' boolean.")
+        sys.exit()
+
     init_db(clean=clean)
+
+    if add_data:
+        add_test_data()
 
     start_app()
 

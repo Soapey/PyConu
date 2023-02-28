@@ -1,6 +1,8 @@
 import os
 import sqlite3
 from conu.classes.User import User
+from conu.classes.Department import Department
+from conu.classes.UserDepartment import UserDepartment
 from conu.helpers import read_config_file, join_to_project_folder, hash_sha512
 
 
@@ -126,6 +128,31 @@ def save_by_list(entities: list) -> None:
                 cur.execute(insert_query, values)
 
 
+def add_test_data(file_path: str = None):
+
+    if not file_path:
+        # Read the configuration file to get the database directory
+        config = read_config_file()
+        file_path = config["SQLiteSettings"]["database_file"]
+
+    user = User(None, 'Grant', 'Soper', 'Weighbridge Officer', 'gs@hunterquarries.com.au', 'gs', hash_sha512('gs'), 4, 1)
+
+    departments = [
+        Department(None, 'Maintenance'),
+        Department(None, 'Work Health & Safety'),
+        Department(None, 'Environmental'),
+    ]
+
+    save_by_list([user])
+    save_by_list(departments)
+
+    user_id = list(select_by_attrs_dict(User).keys())[0]
+    department_ids = list(select_by_attrs_dict(Department).keys())
+
+    userdepartments = [UserDepartment(None, user_id, department_id) for department_id in department_ids]
+    save_by_list(userdepartments)
+
+
 def delete_by_attrs_dict(cls: type, attrs: dict) -> None:
     """
     Deletes entities from a SQLite database based on attribute-value pairs.
@@ -177,3 +204,31 @@ def select_by_attrs_dict(cls: type, attrs: dict = None) -> dict:
             objects[entity.id] = entity
 
         return objects
+    
+
+def get_by_user_departments(cls: type, user_id: int):
+
+    fetch_table_name = cls.__name__.lower()
+    joint_table_name = f"{cls.__name__}Department"
+
+    with SQLiteConnection() as cur:
+
+        query = """
+            SELECT * 
+            FROM {} 
+            WHERE id IN (
+                SELECT {} FROM {} 
+                WHERE department_id IN (
+                    SELECT department_id FROM userdepartment WHERE user_id = ?
+                )
+            );""".format(fetch_table_name, fetch_table_name + "_id", joint_table_name)
+
+        results = cur.execute(query, (user_id,)).fetchall()
+
+        objects = dict()
+        for row in results:
+            entity = cls(*row)
+            objects[entity.id] = entity
+
+        return objects
+
