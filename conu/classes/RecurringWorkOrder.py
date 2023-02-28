@@ -1,13 +1,20 @@
-from dataclasses import dataclass
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
+from dataclasses import dataclass
 import calendar
 
 
 @dataclass
-class WorkOrderRecurrence:
+class RecurringWorkOrder:
+    # WorkOrderBase properties
     id: int
-    workorder_id: int
+    site_id: int
+    department_id: int
+    prioritylevel_id: int
+    task_description: str
+    comments: str
+
+    # RecurringWorkOrder specific properties
     type: str
     start_date: date
     lastraised_date: date
@@ -19,7 +26,9 @@ class WorkOrderRecurrence:
 
     def __repr__(self) -> str:
         type = self.type.strip().lower()
-        weekdays = [int(wd) for wd in self.weekdays.split(";")] if self.weekdays else list()
+        weekdays = (
+            [int(wd) for wd in self.weekdays.split(";")] if self.weekdays else list()
+        )
 
         if type == "daily":
             if self.interval:
@@ -32,13 +41,21 @@ class WorkOrderRecurrence:
             if self.day and self.interval:
                 return f"{self.__class__.__name__}(Occur on day {self.day} of every {self.interval} month(s))"
             else:
-                month_weekday_occurrence = "last" if self.month_weekday_occurrence > 3 else self.month_weekday_occurrence
+                month_weekday_occurrence = (
+                    "last"
+                    if self.month_weekday_occurrence > 3
+                    else self.month_weekday_occurrence
+                )
                 return f"{self.__class__.__name__}(Occur on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]}, every {self.interval} month(s))"
         elif type == "yearly":
             if self.month and self.day:
                 return f"{self.__class__.__name__}(Occur every {self.interval} year(s) on {calendar.month_name[self.month - 1]} {self.day})"
             else:
-                month_weekday_occurrence = "last" if self.month_weekday_occurrence > 3 else self.month_weekday_occurrence
+                month_weekday_occurrence = (
+                    "last"
+                    if self.month_weekday_occurrence > 3
+                    else self.month_weekday_occurrence
+                )
                 return f"{self.__class__.__name__}(Occur every {self.interval} year(s) on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]} in {calendar.month_name[self.month-1]})"
 
     def is_due(self):
@@ -64,14 +81,18 @@ class WorkOrderRecurrence:
                 elif self.weekdays:
                     if d.isoweekday() in weekdays:
                         occurrences.append(d)
-     
+
             elif type == "weekly":
-                
-                monday_date = d - timedelta(days=d.isoweekday()-1)
+
+                monday_date = d - timedelta(days=d.isoweekday() - 1)
 
                 for i in range(7):
                     week_date = monday_date + timedelta(days=i)
-                    if week_date.isoweekday() in weekdays and week_date <= date.today() and week_date > self.lastraised_date:
+                    if (
+                        week_date.isoweekday() in weekdays
+                        and week_date <= date.today()
+                        and week_date > self.lastraised_date
+                    ):
                         occurrences.append(week_date)
 
                 date_step = timedelta(days=7 * self.interval)
@@ -82,15 +103,18 @@ class WorkOrderRecurrence:
 
                 # By day number of month interval
                 if self.day and self.interval:
-                    
-                    if d.day == self.day and (relative.months + relative.years * 12) % self.interval == 0:
+
+                    if (
+                        d.day == self.day
+                        and (relative.months + relative.years * 12) % self.interval == 0
+                    ):
                         occurrences.append(d)
-                    
+
                     date_step = timedelta(days=1)
 
                 # By weekday occurrence of month interval
                 elif self.month_weekday_occurrence and self.weekdays and self.interval:
-                    
+
                     if relative.months % self.interval == 0:
                         dates = list()
 
@@ -102,18 +126,25 @@ class WorkOrderRecurrence:
 
                             _d += timedelta(days=1)
 
-                        index = self.month_weekday_occurrence if self.month_weekday_occurrence <= 3 else -1
+                        index = (
+                            self.month_weekday_occurrence
+                            if self.month_weekday_occurrence <= 3
+                            else -1
+                        )
                         occurrences.append(dates[index])
 
                         next_month_mod = (d.month + 1) % 12
                         years_to_add = d.month // 12
-                        next_month_date = date(d.year + years_to_add, 12 if next_month_mod == 0 else next_month_mod, 1)
+                        next_month_date = date(
+                            d.year + years_to_add,
+                            12 if next_month_mod == 0 else next_month_mod,
+                            1,
+                        )
                         days_to_add = next_month_date - d
                         date_step = timedelta(days=days_to_add.days)
 
-
             elif type == "yearly":
-                
+
                 if self.interval:
                     years_difference = self.start_date.year - d.year
                     if years_difference % self.interval == 0 and d.month == self.month:
@@ -125,7 +156,11 @@ class WorkOrderRecurrence:
                             date_step = timedelta(days=365)
 
                         # By weekday occurence of month number and year interval
-                        elif self.month_weekday_occurrence and self.weekdays and self.month:
+                        elif (
+                            self.month_weekday_occurrence
+                            and self.weekdays
+                            and self.month
+                        ):
 
                             dates = list()
 
@@ -137,18 +172,32 @@ class WorkOrderRecurrence:
 
                                 _d += timedelta(days=1)
 
-                            index = self.month_weekday_occurrence - 1 if self.month_weekday_occurrence <= 3 else -1
+                            index = (
+                                self.month_weekday_occurrence - 1
+                                if self.month_weekday_occurrence <= 3
+                                else -1
+                            )
                             occurrences.append(dates[index])
 
                             next_month_mod = (d.month + 1) % 12
                             years_to_add = d.month // 12
-                            next_month_date = date(d.year + years_to_add, 12 if next_month_mod == 0 else next_month_mod, 1)
+                            next_month_date = date(
+                                d.year + years_to_add,
+                                12 if next_month_mod == 0 else next_month_mod,
+                                1,
+                            )
                             days_to_add = next_month_date - d
                             date_step = timedelta(days=days_to_add.days)
 
             d += date_step
 
-        occurrences = sorted(list(filter(lambda o: o > self.lastraised_date and o <= todays_date, occurrences)))
+        occurrences = sorted(
+            list(
+                filter(
+                    lambda o: o > self.lastraised_date and o <= todays_date, occurrences
+                )
+            )
+        )
         if occurrences:
             print(occurrences)
             return todays_date >= occurrences[-1]

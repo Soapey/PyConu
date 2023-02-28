@@ -101,13 +101,13 @@ CREATE TABLE IF NOT EXISTS [workorder] (
     [site_id] INTEGER NOT NULL,
     [department_id] INTEGER NOT NULL,
     [prioritylevel_id] NOT NULL,
+    [task_description] TEXT NOT NULL,
+    [comments] TEXT,
     [date_created] TEXT NOT NULL,
     [date_allocated] TEXT NOT NULL,
-    [task_description] TEXT NOT NULL,
     [raisedby_user_id] INTEGER NOT NULL,
     [date_completed] TEXT,
     [purchase_order_number] TEXT,
-    [comments] TEXT,
     [close_out_comments] TEXT,
     FOREIGN KEY (site_id) REFERENCES site(id)
         ON UPDATE CASCADE 
@@ -147,9 +147,13 @@ CREATE TABLE IF NOT EXISTS workorderitem (
         ON DELETE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS workorderrecurrence (
+CREATE TABLE IF NOT EXISTS recurringworkorder (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [workorder_id] INTEGER NOT NULL,
+    [site_id] INTEGER NOT NULL,
+    [department_id] INTEGER NOT NULL,
+    [prioritylevel_id] INTEGER NOT NULL,
+    [task_description] TEXT NOT NULL,
+    [comments] TEXT,
     [type] TEXT NOT NULL,
     [start_date] TEXT NOT NULL,
     [lastraised_date] TEXT NOT NULL,
@@ -157,8 +161,14 @@ CREATE TABLE IF NOT EXISTS workorderrecurrence (
     [weekdays] TEXT,
     [day] INTEGER,
     [month] INTEGER,
-    [month_day_occurrence] INTEGER,
-    FOREIGN KEY (workorder_id) REFERENCES workorder(id)
+    [month_weekday_occurrence] INTEGER,
+    FOREIGN KEY (site_id) REFERENCES site(id)
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (department_id) REFERENCES department(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (prioritylevel_id) REFERENCES prioritylevel(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );

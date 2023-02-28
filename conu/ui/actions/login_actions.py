@@ -15,6 +15,18 @@ def clear_login(login_window) -> None:
     login_window.ui.login_txtPassword.clear()
 
 
+def set_toolbar_permission_visibility(main_window):
+
+    user = main_window.current_user
+
+    if not user:
+        return
+
+    admin_toolbars_visible = user.permission_level >= 3
+
+    main_window.ui.action_departments.setVisible(admin_toolbars_visible)
+
+
 def log_out_user(login_window, main_window) -> None:
     """
     Logs out the current user and navigates to the login page.
@@ -56,7 +68,11 @@ def log_in_user(login_window, main_window) -> None:
 
     if matching_users_dict:
         main_window.current_user = matching_user
+
+        set_toolbar_permission_visibility(main_window)
+
         load_assignee_listingview(main_window)
+
         main_window.showMaximized()
         login_window.close()
 

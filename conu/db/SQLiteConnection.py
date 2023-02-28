@@ -135,21 +135,41 @@ def add_test_data(file_path: str = None):
         config = read_config_file()
         file_path = config["SQLiteSettings"]["database_file"]
 
-    user = User(None, 'Grant', 'Soper', 'Weighbridge Officer', 'gs@hunterquarries.com.au', 'gs', hash_sha512('gs'), 4, 1)
-
-    departments = [
-        Department(None, 'Maintenance'),
-        Department(None, 'Work Health & Safety'),
-        Department(None, 'Environmental'),
+    users = [
+        User(
+            None, "Admin", "Admin", "Admin", "n/a", "admin", hash_sha512("admin"), 4, 1
+        ),
+        User(
+            None,
+            "Grant",
+            "Soper",
+            "Weighbridge Officer",
+            "gs@hunterquarries.com.au",
+            "gs",
+            hash_sha512("gs"),
+            2,
+            1,
+        ),
     ]
 
-    save_by_list([user])
+    departments = [
+        Department(None, "Maintenance"),
+        Department(None, "Work Health & Safety"),
+        Department(None, "Environmental"),
+    ]
+
+    save_by_list(users)
     save_by_list(departments)
 
-    user_id = list(select_by_attrs_dict(User).keys())[0]
-    department_ids = list(select_by_attrs_dict(Department).keys())
+    users = select_by_attrs_dict(User)
+    departments = select_by_attrs_dict(Department)
 
-    userdepartments = [UserDepartment(None, user_id, department_id) for department_id in department_ids]
+    userdepartments = list()
+
+    for user_id in [id for id in users]:
+        for department_id in [id for id in departments]:
+            userdepartments.append(UserDepartment(None, user_id, department_id))
+
     save_by_list(userdepartments)
 
 
@@ -204,7 +224,7 @@ def select_by_attrs_dict(cls: type, attrs: dict = None) -> dict:
             objects[entity.id] = entity
 
         return objects
-    
+
 
 def get_by_user_departments(cls: type, user_id: int):
 
@@ -221,7 +241,9 @@ def get_by_user_departments(cls: type, user_id: int):
                 WHERE department_id IN (
                     SELECT department_id FROM userdepartment WHERE user_id = ?
                 )
-            );""".format(fetch_table_name, fetch_table_name + "_id", joint_table_name)
+            );""".format(
+            fetch_table_name, fetch_table_name + "_id", joint_table_name
+        )
 
         results = cur.execute(query, (user_id,)).fetchall()
 
@@ -231,4 +253,3 @@ def get_by_user_departments(cls: type, user_id: int):
             objects[entity.id] = entity
 
         return objects
-
