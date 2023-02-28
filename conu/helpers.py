@@ -4,6 +4,7 @@ import configparser
 from typing import List
 from conu.ui.PageEnum import Page
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
+from plyer import notification
 
 
 def navigate(main_window, page: Page):
@@ -174,3 +175,20 @@ def selected_row_id(tbl):
     return id
 
 
+def show_toast(title: str, message: str, duration: int) -> None:
+    """
+    Shows a toast notification with the given title, message, and duration (in seconds).
+
+    Args:
+        title (str): The title of the notification.
+        message (str): The message to display in the notification.
+        duration (int): The duration of the notification in seconds.
+
+    Raises:
+        Exception: If the notification could not be displayed.
+
+    """
+    try:
+        notification.notify(title=title, message=message, app_name="Conu", app_icon=None, timeout=duration)
+    except Exception as e:
+        print(f"Error displaying notification: {e}")

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication
 from conu.ui.components.MainWindow import MainWindow
 from conu.db.SQLiteConnection import init_db, add_test_data
 from conu.ui.actions.login_actions import connect as connect_login, log_out_user
-from conu.ui.actions.assignee_actions import connect as connect_assignee
+from conu.ui.actions.assignee_actions import connect_assignee_actions as connect_assignee
 
 
 def connect_main_window_actions(main_window):

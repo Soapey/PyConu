@@ -2,7 +2,7 @@ from conu.ui.PageEnum import Page
 from conu.classes.User import User
 from conu.helpers import hash_sha512, navigate
 from conu.db.SQLiteConnection import select_by_attrs_dict
-from conu.ui.actions.assignee_actions import load_listingview
+from conu.ui.actions.assignee_actions import load_assignee_listingview
 
 
 def clear_login(main_window):
@@ -31,7 +31,7 @@ def log_in_user(main_window):
 
     if matching_users_dict:
         main_window.current_user = matching_user
-        load_listingview(main_window)
+        load_assignee_listingview(main_window)
 
 
 def connect(main_window):
