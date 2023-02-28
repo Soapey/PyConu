@@ -28,7 +28,7 @@ def load_assignee_listingview(main_window: MainWindow) -> None:
     Returns:
         None
     """
-    
+
     global global_assignees
     global_assignees = get_by_user_departments(Assignee, main_window.current_user.id)
 
@@ -116,7 +116,9 @@ def delete_assignee(main_window: MainWindow) -> None:
         None
     """
 
-    if not askyesno("Confirm delete", "Are you sure you would like to delete the selected record?"):
+    if not askyesno(
+        "Confirm delete", "Are you sure you would like to delete the selected record?"
+    ):
         return
     selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
     global global_assignees
@@ -216,17 +218,22 @@ def connect_assignee_actions(main_window: MainWindow) -> None:
     Returns:
         None
     """
-    
-    main_window.ui.assignee_listingview_btnNew.clicked.connect(lambda: new_assignee(main_window))
+
+    main_window.ui.assignee_listingview_btnNew.clicked.connect(
+        lambda: new_assignee(main_window)
+    )
     main_window.ui.assignee_listingview_btnEdit.clicked.connect(
         lambda: edit_assignee(main_window)
     )
     main_window.ui.assignee_listingview_btnDelete.clicked.connect(
         lambda: delete_assignee(main_window)
     )
-    main_window.ui.assignee_entryform_btnSave.clicked.connect(lambda: save_assignee(main_window))
-    main_window.ui.assignee_entryform_btnBack.clicked.connect(lambda: back_to_assignee_listingview(main_window))
-
+    main_window.ui.assignee_entryform_btnSave.clicked.connect(
+        lambda: save_assignee(main_window)
+    )
+    main_window.ui.assignee_entryform_btnBack.clicked.connect(
+        lambda: back_to_assignee_listingview(main_window)
+    )
     main_window.ui.assignee_listingview_txtSearch.textChanged.connect(
         lambda: assignees_by_search(
             main_window, main_window.ui.assignee_listingview_txtSearch.text().lower()

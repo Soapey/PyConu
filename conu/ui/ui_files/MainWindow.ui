@@ -1221,11 +1221,6 @@ QPushButton:hover {
   <tabstop>assignee_entryform_txtDescription</tabstop>
   <tabstop>department_listingview_txtSearch</tabstop>
   <tabstop>department_entryform_txtName</tabstop>
-  <tabstop>assignee_listingview_txtSearch_2</tabstop>
-  <tabstop>assignee_entryform_txtDescription_2</tabstop>
-  <tabstop>assignee_entryform_txtName_2</tabstop>
-  <tabstop>login_txtPassword_2</tabstop>
-  <tabstop>login_txtUsername_2</tabstop>
  </tabstops>
  <resources/>
  <connections/>

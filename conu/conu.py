@@ -2,19 +2,24 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from conu.ui.components.MainWindow import MainWindow
 from conu.db.SQLiteConnection import init_db, add_test_data
-from conu.ui.actions.login_actions import connect as connect_login, log_out_user
-from conu.ui.actions.assignee_actions import connect_assignee_actions as connect_assignee
+from conu.ui.actions.login_actions import (
+    connect_login_actions as connect_login,
+    log_out_user,
+)
+from conu.ui.actions.assignee_actions import connect_assignee_actions
+from conu.ui.actions.department_actions import connect_department_actions
 
 
 def connect_main_window_actions(main_window):
     connect_login(main_window)
-    connect_assignee(main_window)
+    connect_assignee_actions(main_window)
+    connect_department_actions(main_window)
 
 
 def start_app():
 
     app = QApplication(sys.argv)
-    
+
     main_window = MainWindow()
 
     log_out_user(main_window)
@@ -25,7 +30,7 @@ def start_app():
 
     sys.exit(app.exec_())
 
-    
+
 if __name__ == "__main__":
     try:
         clean = bool(int(sys.argv[1]))
@@ -45,10 +50,3 @@ if __name__ == "__main__":
         add_test_data()
 
     start_app()
-
-
-
-
-
-
-
