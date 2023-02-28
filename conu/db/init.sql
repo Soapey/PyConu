@@ -147,3 +147,16 @@ CREATE TABLE IF NOT EXISTS workorderitem (
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+
+CREATE TABLE IF NOT EXISTS workorderrecurrence (
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [workorder_id] INTEGER NOT NULL,
+    [type] TEXT NOT NULL,
+    [start_date] TEXT NOT NULL,
+    [lastraised_date] TEXT NOT NULL,
+    [interval] INTEGER,
+    [weekdays] TEXT,
+    [day] INTEGER,
+    [month] INTEGER,
+    [month_day_occurrence] INTEGER
+);
