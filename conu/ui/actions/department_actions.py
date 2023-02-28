@@ -1,9 +1,11 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Department import Department
+from conu.classes.UserDepartment import UserDepartment
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
     get_by_user_departments,
+    select_by_attrs_dict,
     save_by_list,
 )
 from conu.helpers import (
@@ -29,9 +31,7 @@ def load_department_listingview(main_window) -> None:
     """
 
     global global_departments
-    global_departments = get_by_user_departments(
-        Department, main_window.current_user.id
-    )
+    global_departments = select_by_attrs_dict(Department)
 
     main_window.ui.department_listingview_txtSearch.clear()
 
@@ -112,7 +112,7 @@ def delete_department(main_window) -> None:
         "Confirm delete", "Are you sure you would like to delete the selected record?"
     ):
         return
-    selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
+    selected_id = selected_row_id(main_window.ui.department_listingview_tblDepartment)
     global global_departments
     entity = global_departments[selected_id]
     delete_by_attrs_dict(Department, {"id": entity.id})
@@ -136,9 +136,9 @@ def save_department(main_window) -> None:
 
     entity = Department(
         None
-        if len(main_window.ui.assignee_entryform_lblId.text()) == 0
-        else int(main_window.ui.assignee_entryform_lblId.text()),
-        main_window.ui.assignee_entryform_txtName.text(),
+        if len(main_window.ui.department_entryform_lblId.text()) == 0
+        else int(main_window.ui.department_entryform_lblId.text()),
+        main_window.ui.department_entryform_txtName.text(),
     )
 
     save_by_list([entity])
@@ -185,7 +185,7 @@ def departments_by_search(main_window, search_text: str) -> None:
         )
 
     load_entities_into_table(
-        main_window.ui.assignee_listingview_tblAssignee,
+        main_window.ui.department_listingview_tblDepartment,
         matches,
         {"id": "ID", "name": "Name"},
     )

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1261</width>
+    <height>770</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="0" rowspan="2">
      <widget class="QStackedWidget" name="page_handler">
       <property name="styleSheet">
        <string notr="true"/>
@@ -948,12 +948,35 @@ QPushButton:hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1261</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuChange_View">
+    <property name="title">
+     <string>Change View</string>
+    </property>
+    <addaction name="action_assignees"/>
+    <addaction name="action_departments"/>
+   </widget>
+   <addaction name="menuChange_View"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_departments">
+   <property name="text">
+    <string>Departments</string>
+   </property>
+  </action>
+  <action name="actionListing_View">
+   <property name="text">
+    <string>Listing View</string>
+   </property>
+  </action>
+  <action name="action_assignees">
+   <property name="text">
+    <string>Assignees</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>assignee_listingview_txtSearch</tabstop>
