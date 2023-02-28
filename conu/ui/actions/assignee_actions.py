@@ -12,10 +12,9 @@ from conu.helpers import (
     selected_row_id,
 )
 from conu.ui.PageEnum import Page
-from conu.ui.components.MainWindow import MainWindow
 
 
-def load_assignee_listingview(main_window: MainWindow) -> None:
+def load_assignee_listingview(main_window) -> None:
     """Load the assignee listing view.
 
     This function retrieves a list of assignees based on the user's departments, and then displays the
@@ -39,7 +38,7 @@ def load_assignee_listingview(main_window: MainWindow) -> None:
     navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
 
 
-def clear_assignee_entryform(main_window: MainWindow) -> None:
+def clear_assignee_entryform(main_window) -> None:
     """Clear the assignee entry form.
 
     This function clears the assignee ID, name, and description fields in the assignee entry form of the
@@ -57,7 +56,7 @@ def clear_assignee_entryform(main_window: MainWindow) -> None:
     main_window.ui.assignee_entryform_txtDescription.clear()
 
 
-def new_assignee(main_window: MainWindow) -> None:
+def new_assignee(main_window) -> None:
     """
     Create a new assignee record.
 
@@ -76,7 +75,7 @@ def new_assignee(main_window: MainWindow) -> None:
     navigate(main_window, Page.ASSIGNEE_ENTRYFORM)
 
 
-def edit_assignee(main_window: MainWindow) -> None:
+def edit_assignee(main_window) -> None:
     """
     Edit an existing assignee record.
 
@@ -101,7 +100,7 @@ def edit_assignee(main_window: MainWindow) -> None:
     navigate(main_window, Page.ASSIGNEE_ENTRYFORM)
 
 
-def delete_assignee(main_window: MainWindow) -> None:
+def delete_assignee(main_window) -> None:
     """
     Delete an assignee record.
 
@@ -127,7 +126,7 @@ def delete_assignee(main_window: MainWindow) -> None:
     load_assignee_listingview(main_window)
 
 
-def save_assignee(main_window: MainWindow) -> None:
+def save_assignee(main_window) -> None:
     """
     Saves the current record to the database.
 
@@ -160,7 +159,7 @@ def save_assignee(main_window: MainWindow) -> None:
     clear_assignee_entryform(main_window)
 
 
-def back_to_assignee_listingview(main_window: MainWindow) -> None:
+def back_to_assignee_listingview(main_window) -> None:
     """
     Navigates back to the assignee listing view.
 
@@ -176,7 +175,7 @@ def back_to_assignee_listingview(main_window: MainWindow) -> None:
     navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
 
 
-def assignees_by_search(main_window: MainWindow, search_text: str) -> None:
+def assignees_by_search(main_window, search_text: str) -> None:
     """
     Filters the list of assignees by the given search text and loads the filtered
     assignees into the table in the assignee listing view.
@@ -208,7 +207,7 @@ def assignees_by_search(main_window: MainWindow, search_text: str) -> None:
     )
 
 
-def connect_assignee_actions(main_window: MainWindow) -> None:
+def connect_assignee_actions(main_window) -> None:
     """
     Connects the actions for the assignee listing view and the assignee entry form.
 

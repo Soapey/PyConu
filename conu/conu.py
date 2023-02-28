@@ -1,19 +1,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from conu.ui.components.MainWindow import MainWindow
+from conu.ui.components.LoginWindow import LoginWindow
 from conu.db.SQLiteConnection import init_db, add_test_data
-from conu.ui.actions.login_actions import (
-    connect_login_actions as connect_login,
-    log_out_user,
-)
-from conu.ui.actions.assignee_actions import connect_assignee_actions
-from conu.ui.actions.department_actions import connect_department_actions
-
-
-def connect_main_window_actions(main_window):
-    connect_login(main_window)
-    connect_assignee_actions(main_window)
-    connect_department_actions(main_window)
+from conu.ui.actions.login_actions import log_out_user
 
 
 def start_app():
@@ -22,11 +12,9 @@ def start_app():
 
     main_window = MainWindow()
 
-    log_out_user(main_window)
+    login_window = LoginWindow(main_window)
 
-    main_window.showMaximized()
-
-    connect_main_window_actions(main_window)
+    log_out_user(login_window, main_window)
 
     sys.exit(app.exec_())
 

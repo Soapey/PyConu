@@ -12,10 +12,9 @@ from conu.helpers import (
     selected_row_id,
 )
 from conu.ui.PageEnum import Page
-from conu.ui.components.MainWindow import MainWindow
 
 
-def load_department_listingview(main_window: MainWindow) -> None:
+def load_department_listingview(main_window) -> None:
     """Load the department listing view for the given main window.
 
     This function sets the global `global_departments` variable to the departments
@@ -41,7 +40,7 @@ def load_department_listingview(main_window: MainWindow) -> None:
     navigate(main_window, Page.DEPARTMENT_LISTINGVIEW)
 
 
-def clear_department_entryform(main_window: MainWindow) -> None:
+def clear_department_entryform(main_window) -> None:
     """Clear the department entry form for the given main window.
 
     This function clears the ID and name fields of the department entry form.
@@ -57,7 +56,7 @@ def clear_department_entryform(main_window: MainWindow) -> None:
     main_window.ui.department_entryform_txtName.clear()
 
 
-def new_department(main_window: MainWindow) -> None:
+def new_department(main_window) -> None:
     """Create a new department using the department entry form in the given main window.
 
     This function clears the department entry form and sets focus on the name field. It then
@@ -75,7 +74,7 @@ def new_department(main_window: MainWindow) -> None:
     navigate(main_window, Page.DEPARTMENT_ENTRYFORM)
 
 
-def edit_department(main_window: MainWindow) -> None:
+def edit_department(main_window) -> None:
     """Edit the selected department using the department entry form in the given main window.
 
     This function gets the ID of the selected department from the department listing view, and
@@ -99,7 +98,7 @@ def edit_department(main_window: MainWindow) -> None:
     navigate(main_window, Page.DEPARTMENT_ENTRYFORM)
 
 
-def delete_department(main_window: MainWindow) -> None:
+def delete_department(main_window) -> None:
     """
     Deletes the selected record.
 
@@ -120,7 +119,7 @@ def delete_department(main_window: MainWindow) -> None:
     load_department_listingview(main_window)
 
 
-def save_department(main_window: MainWindow) -> None:
+def save_department(main_window) -> None:
     """
     Saves the current record.
 
@@ -149,7 +148,7 @@ def save_department(main_window: MainWindow) -> None:
     clear_department_entryform(main_window)
 
 
-def back_to_department_listingview(main_window: MainWindow) -> None:
+def back_to_department_listingview(main_window) -> None:
     """Clear the department entry form and navigate back to the department listing view page.
 
     Args:
@@ -163,7 +162,7 @@ def back_to_department_listingview(main_window: MainWindow) -> None:
     navigate(main_window, Page.DEPARTMENT_LISTINGVIEW)
 
 
-def departments_by_search(main_window: MainWindow, search_text: str) -> None:
+def departments_by_search(main_window, search_text: str) -> None:
     """Search for departments that match the specified search text and load them into the table view.
 
     Args:
@@ -192,7 +191,7 @@ def departments_by_search(main_window: MainWindow, search_text: str) -> None:
     )
 
 
-def connect_department_actions(main_window: MainWindow) -> None:
+def connect_department_actions(main_window) -> None:
     """Connect department-related actions in the main window to their corresponding functions.
 
     Args:
