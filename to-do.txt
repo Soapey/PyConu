@@ -1,0 +1,3 @@
+* Add form_is_valid on save button click for each entryform view
+* Add toast notification on save/delete of any record
+* Hide edit/delete buttons if no row in tables are selected, show them again once row is selected

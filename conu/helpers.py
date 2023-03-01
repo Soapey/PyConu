@@ -5,6 +5,8 @@ from typing import List
 from conu.ui.PageEnum import Page
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 from plyer import notification
+import tkinter as tk
+from tkinter import filedialog
 
 
 def navigate(main_window, page: Page):
@@ -146,7 +148,7 @@ def load_entities_into_table(table, entities, attribute_header_dict):
     table.setHorizontalHeaderLabels(list(attribute_header_dict.values()))
 
     header = table.horizontalHeader()
-    
+
     # Loop through each entity and attribute
     for j, name in enumerate(attribute_header_dict.keys()):
 
@@ -189,6 +191,22 @@ def show_toast(title: str, message: str, duration: int) -> None:
 
     """
     try:
-        notification.notify(title=title, message=message, app_name="Conu", app_icon=None, timeout=duration)
+        notification.notify(
+            title=title,
+            message=message,
+            app_name="Conu",
+            app_icon=None,
+            timeout=duration,
+        )
     except Exception as e:
         print(f"Error displaying notification: {e}")
+
+
+def select_file_path() -> str:
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    if file_path:
+        return file_path
+    else:
+        return None
