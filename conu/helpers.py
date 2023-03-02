@@ -218,3 +218,9 @@ def select_file_path() -> str:
         return file_path
     else:
         return None
+
+
+def set_button_visibility(buttons: list, is_visible: bool):
+
+    for button in buttons:
+        button.setVisible(is_visible)

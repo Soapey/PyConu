@@ -21,7 +21,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_assignee_listingview">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -237,35 +237,21 @@ QPushButton:hover {
       </widget>
       <widget class="QWidget" name="page_assignee_entryform">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="3" column="1" colspan="2">
-         <widget class="QTextEdit" name="assignee_entryform_txtDescription">
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_7">
           <property name="font">
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
-          <property name="styleSheet">
-           <string notr="true">QTextEdit {
-	background-color: white;
-	border-style: inset;
-	border-width: 1px;
-	border-radius: 5px;
-	border-color: black;
-	padding: 4px;
-}
-
-QTextEdit:focus {
-	border-width: 2px;
-	border-color: #028090;
-}
-</string>
+          <property name="text">
+           <string>Description</string>
           </property>
-          <property name="documentTitle">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>OPTIONAL</string>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
           </property>
          </widget>
         </item>
@@ -292,7 +278,7 @@ QTextEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
+        <item row="6" column="1">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -305,7 +291,30 @@ QTextEdit:focus {
           </property>
          </spacer>
         </item>
-        <item row="5" column="0">
+        <item row="1" column="1" colspan="2">
+         <widget class="QLabel" name="assignee_entryform_lblId">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
          <widget class="QPushButton" name="assignee_entryform_btnBack">
           <property name="font">
            <font>
@@ -339,56 +348,35 @@ QPushButton:hover {
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_7">
+        <item row="3" column="1" colspan="2">
+         <widget class="QTextEdit" name="assignee_entryform_txtDescription">
           <property name="font">
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
            </font>
-          </property>
-          <property name="text">
-           <string>Description</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QPushButton" name="assignee_entryform_btnSave">
-          <property name="font">
-           <font>
-            <family>Arial</family>
-            <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton {
-	width: 60px;
-	color: white;
-    background-color: #006494;
-    border-style: outset;
-    border-radius: 10px;
-    padding: 5px;
+           <string notr="true">QTextEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
 }
 
-QPushButton:hover {
-	    background-color: #0582ca;
-}</string>
+QTextEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
           </property>
-          <property name="text">
-           <string>Save</string>
+          <property name="documentTitle">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>OPTIONAL</string>
           </property>
          </widget>
         </item>
@@ -424,6 +412,72 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Name</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="3">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="assignee_entryform_btnSave">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	width: 60px;
+	color: white;
+    background-color: #006494;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #0582ca;
+}</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="label_5">
           <property name="font">
@@ -450,31 +504,8 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="1" column="1" colspan="2">
-         <widget class="QLabel" name="assignee_entryform_lblId">
-          <property name="font">
-           <font>
-            <family>Arial</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-	background-color: lightgrey;
-	border-style: inset;
-	border-width: 1px;
-	border-radius: 5px;
-	border-color: black;
-	padding: 4px;
-}</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_6">
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_2">
           <property name="font">
            <font>
             <family>Arial</family>
@@ -484,25 +515,49 @@ QLineEdit:focus {
            </font>
           </property>
           <property name="text">
-           <string>Name</string>
+           <string>Departments</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
           </property>
          </widget>
         </item>
-        <item row="4" column="0" colspan="3">
-         <spacer name="verticalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="4" column="1" colspan="2">
+         <widget class="QScrollArea" name="assignee_entryform_scrollDepartments">
+          <property name="styleSheet">
+           <string notr="true">QScrollArea {
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+}</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
-         </spacer>
+          <property name="widgetResizable">
+           <bool>false</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>1008</width>
+             <height>154</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="0">
+             <layout class="QVBoxLayout" name="assignee_entryform_vboxDepartments">
+              <property name="spacing">
+               <number>3</number>
+              </property>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>

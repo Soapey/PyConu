@@ -26,45 +26,31 @@ class Ui_MainWindow(object):
         self.page_assignee_listingview.setObjectName("page_assignee_listingview")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.page_assignee_listingview)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.assignee_listingview_tblAssignee = QtWidgets.QTableWidget(
-            self.page_assignee_listingview
-        )
+        self.assignee_listingview_tblAssignee = QtWidgets.QTableWidget(self.page_assignee_listingview)
         self.assignee_listingview_tblAssignee.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.assignee_listingview_tblAssignee.setStyleSheet(
-            "QTableWidget {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QTableWidget:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
-        self.assignee_listingview_tblAssignee.setEditTriggers(
-            QtWidgets.QAbstractItemView.NoEditTriggers
-        )
+        self.assignee_listingview_tblAssignee.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.assignee_listingview_tblAssignee.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.assignee_listingview_tblAssignee.setTabKeyNavigation(False)
         self.assignee_listingview_tblAssignee.setAlternatingRowColors(False)
-        self.assignee_listingview_tblAssignee.setSelectionMode(
-            QtWidgets.QAbstractItemView.SingleSelection
-        )
-        self.assignee_listingview_tblAssignee.setSelectionBehavior(
-            QtWidgets.QAbstractItemView.SelectRows
-        )
+        self.assignee_listingview_tblAssignee.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.assignee_listingview_tblAssignee.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.assignee_listingview_tblAssignee.setCornerButtonEnabled(False)
-        self.assignee_listingview_tblAssignee.setObjectName(
-            "assignee_listingview_tblAssignee"
-        )
+        self.assignee_listingview_tblAssignee.setObjectName("assignee_listingview_tblAssignee")
         self.assignee_listingview_tblAssignee.setColumnCount(0)
         self.assignee_listingview_tblAssignee.setRowCount(0)
-        self.assignee_listingview_tblAssignee.horizontalHeader().setStretchLastSection(
-            True
-        )
+        self.assignee_listingview_tblAssignee.horizontalHeader().setStretchLastSection(True)
         self.assignee_listingview_tblAssignee.verticalHeader().setVisible(False)
         self.gridLayout_3.addWidget(self.assignee_listingview_tblAssignee, 3, 0, 1, 3)
         self.label_4 = QtWidgets.QLabel(self.page_assignee_listingview)
@@ -72,130 +58,102 @@ class Ui_MainWindow(object):
         font.setFamily("Impact")
         font.setPointSize(20)
         self.label_4.setFont(font)
-        self.label_4.setStyleSheet(
-            "QLabel {\n"
-            "    color: white;\n"
-            "    background-color: #05668d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "    margin: 0px 0px 20px 0px;\n"
-            "}"
-        )
+        self.label_4.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.gridLayout_3.addWidget(self.label_4, 0, 0, 1, 3)
-        self.assignee_listingview_btnNew = QtWidgets.QPushButton(
-            self.page_assignee_listingview
-        )
+        self.assignee_listingview_btnNew = QtWidgets.QPushButton(self.page_assignee_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.assignee_listingview_btnNew.setFont(font)
-        self.assignee_listingview_btnNew.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.assignee_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.assignee_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.assignee_listingview_btnNew.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #0db39e;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #16db93;\n"
-            "}"
-        )
+        self.assignee_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
         self.assignee_listingview_btnNew.setObjectName("assignee_listingview_btnNew")
         self.gridLayout_3.addWidget(self.assignee_listingview_btnNew, 1, 0, 1, 1)
-        self.assignee_listingview_btnDelete = QtWidgets.QPushButton(
-            self.page_assignee_listingview
-        )
+        self.assignee_listingview_btnDelete = QtWidgets.QPushButton(self.page_assignee_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.assignee_listingview_btnDelete.setFont(font)
-        self.assignee_listingview_btnDelete.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.assignee_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.assignee_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.assignee_listingview_btnDelete.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #f94144;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #ff595e;\n"
-            "}"
-        )
-        self.assignee_listingview_btnDelete.setObjectName(
-            "assignee_listingview_btnDelete"
-        )
+        self.assignee_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.assignee_listingview_btnDelete.setObjectName("assignee_listingview_btnDelete")
         self.gridLayout_3.addWidget(self.assignee_listingview_btnDelete, 1, 2, 1, 1)
-        self.assignee_listingview_txtSearch = QtWidgets.QLineEdit(
-            self.page_assignee_listingview
-        )
+        self.assignee_listingview_txtSearch = QtWidgets.QLineEdit(self.page_assignee_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
         self.assignee_listingview_txtSearch.setFont(font)
-        self.assignee_listingview_txtSearch.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
+        self.assignee_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
         self.assignee_listingview_txtSearch.setClearButtonEnabled(True)
-        self.assignee_listingview_txtSearch.setObjectName(
-            "assignee_listingview_txtSearch"
-        )
+        self.assignee_listingview_txtSearch.setObjectName("assignee_listingview_txtSearch")
         self.gridLayout_3.addWidget(self.assignee_listingview_txtSearch, 2, 0, 1, 3)
-        self.assignee_listingview_btnEdit = QtWidgets.QPushButton(
-            self.page_assignee_listingview
-        )
+        self.assignee_listingview_btnEdit = QtWidgets.QPushButton(self.page_assignee_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.assignee_listingview_btnEdit.setFont(font)
-        self.assignee_listingview_btnEdit.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.assignee_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.assignee_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.assignee_listingview_btnEdit.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #f8961e;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #f9c74f;\n"
-            "}"
-        )
+        self.assignee_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
         self.assignee_listingview_btnEdit.setObjectName("assignee_listingview_btnEdit")
         self.gridLayout_3.addWidget(self.assignee_listingview_btnEdit, 1, 1, 1, 1)
         self.page_handler.addWidget(self.page_assignee_listingview)
@@ -203,79 +161,6 @@ class Ui_MainWindow(object):
         self.page_assignee_entryform.setObjectName("page_assignee_entryform")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.page_assignee_entryform)
         self.gridLayout_4.setObjectName("gridLayout_4")
-        self.assignee_entryform_txtDescription = QtWidgets.QTextEdit(
-            self.page_assignee_entryform
-        )
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.assignee_entryform_txtDescription.setFont(font)
-        self.assignee_entryform_txtDescription.setStyleSheet(
-            "QTextEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QTextEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}\n"
-            ""
-        )
-        self.assignee_entryform_txtDescription.setDocumentTitle("")
-        self.assignee_entryform_txtDescription.setObjectName(
-            "assignee_entryform_txtDescription"
-        )
-        self.gridLayout_4.addWidget(self.assignee_entryform_txtDescription, 3, 1, 1, 2)
-        self.label_8 = QtWidgets.QLabel(self.page_assignee_entryform)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_8.setFont(font)
-        self.label_8.setStyleSheet("QLabel {\n" "    color: grey;\n" "}")
-        self.label_8.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
-        self.label_8.setObjectName("label_8")
-        self.gridLayout_4.addWidget(self.label_8, 1, 0, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-        )
-        self.gridLayout_4.addItem(spacerItem, 5, 1, 1, 1)
-        self.assignee_entryform_btnBack = QtWidgets.QPushButton(
-            self.page_assignee_entryform
-        )
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.assignee_entryform_btnBack.setFont(font)
-        self.assignee_entryform_btnBack.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
-        self.assignee_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.assignee_entryform_btnBack.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #6c757d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #adb5bd;\n"
-            "}"
-        )
-        self.assignee_entryform_btnBack.setObjectName("assignee_entryform_btnBack")
-        self.gridLayout_4.addWidget(self.assignee_entryform_btnBack, 5, 0, 1, 1)
         self.label_7 = QtWidgets.QLabel(self.page_assignee_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -283,102 +168,106 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_7.setFont(font)
-        self.label_7.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTop | QtCore.Qt.AlignTrailing
-        )
+        self.label_7.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
         self.label_7.setObjectName("label_7")
         self.gridLayout_4.addWidget(self.label_7, 3, 0, 1, 1)
-        self.assignee_entryform_btnSave = QtWidgets.QPushButton(
-            self.page_assignee_entryform
-        )
+        self.label_8 = QtWidgets.QLabel(self.page_assignee_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.assignee_entryform_btnSave.setFont(font)
-        self.assignee_entryform_btnSave.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
-        self.assignee_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.assignee_entryform_btnSave.setStyleSheet(
-            "QPushButton {\n"
-            "    width: 60px;\n"
-            "    color: white;\n"
-            "    background-color: #006494;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #0582ca;\n"
-            "}"
-        )
-        self.assignee_entryform_btnSave.setObjectName("assignee_entryform_btnSave")
-        self.gridLayout_4.addWidget(self.assignee_entryform_btnSave, 5, 2, 1, 1)
-        self.assignee_entryform_txtName = QtWidgets.QLineEdit(
-            self.page_assignee_entryform
-        )
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.assignee_entryform_txtName.setFont(font)
-        self.assignee_entryform_txtName.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}\n"
-            ""
-        )
-        self.assignee_entryform_txtName.setClearButtonEnabled(True)
-        self.assignee_entryform_txtName.setObjectName("assignee_entryform_txtName")
-        self.gridLayout_4.addWidget(self.assignee_entryform_txtName, 2, 1, 1, 2)
-        self.label_5 = QtWidgets.QLabel(self.page_assignee_entryform)
-        font = QtGui.QFont()
-        font.setFamily("Impact")
-        font.setPointSize(20)
-        self.label_5.setFont(font)
-        self.label_5.setStyleSheet(
-            "QLabel {\n"
-            "    color: white;\n"
-            "    background-color: #05668d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "    margin: 0px 0px 20px 0px;\n"
-            "}"
-        )
-        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_5.setObjectName("label_5")
-        self.gridLayout_4.addWidget(self.label_5, 0, 0, 1, 3)
+        self.label_8.setFont(font)
+        self.label_8.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_8.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_8.setObjectName("label_8")
+        self.gridLayout_4.addWidget(self.label_8, 1, 0, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_4.addItem(spacerItem, 6, 1, 1, 1)
         self.assignee_entryform_lblId = QtWidgets.QLabel(self.page_assignee_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         self.assignee_entryform_lblId.setFont(font)
-        self.assignee_entryform_lblId.setStyleSheet(
-            "QLabel {\n"
-            "    background-color: lightgrey;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}"
-        )
+        self.assignee_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
         self.assignee_entryform_lblId.setText("")
         self.assignee_entryform_lblId.setObjectName("assignee_entryform_lblId")
         self.gridLayout_4.addWidget(self.assignee_entryform_lblId, 1, 1, 1, 2)
+        self.assignee_entryform_btnBack = QtWidgets.QPushButton(self.page_assignee_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.assignee_entryform_btnBack.setFont(font)
+        self.assignee_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.assignee_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.assignee_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.assignee_entryform_btnBack.setObjectName("assignee_entryform_btnBack")
+        self.gridLayout_4.addWidget(self.assignee_entryform_btnBack, 6, 0, 1, 1)
+        self.assignee_entryform_txtDescription = QtWidgets.QTextEdit(self.page_assignee_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.assignee_entryform_txtDescription.setFont(font)
+        self.assignee_entryform_txtDescription.setStyleSheet("QTextEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.assignee_entryform_txtDescription.setDocumentTitle("")
+        self.assignee_entryform_txtDescription.setObjectName("assignee_entryform_txtDescription")
+        self.gridLayout_4.addWidget(self.assignee_entryform_txtDescription, 3, 1, 1, 2)
+        self.assignee_entryform_txtName = QtWidgets.QLineEdit(self.page_assignee_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.assignee_entryform_txtName.setFont(font)
+        self.assignee_entryform_txtName.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.assignee_entryform_txtName.setClearButtonEnabled(True)
+        self.assignee_entryform_txtName.setObjectName("assignee_entryform_txtName")
+        self.gridLayout_4.addWidget(self.assignee_entryform_txtName, 2, 1, 1, 2)
         self.label_6 = QtWidgets.QLabel(self.page_assignee_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -386,15 +275,81 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_6.setFont(font)
-        self.label_6.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label_6.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_6.setObjectName("label_6")
         self.gridLayout_4.addWidget(self.label_6, 2, 0, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
-        )
-        self.gridLayout_4.addItem(spacerItem1, 4, 0, 1, 3)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_4.addItem(spacerItem1, 5, 0, 1, 3)
+        self.assignee_entryform_btnSave = QtWidgets.QPushButton(self.page_assignee_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.assignee_entryform_btnSave.setFont(font)
+        self.assignee_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.assignee_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.assignee_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
+        self.assignee_entryform_btnSave.setObjectName("assignee_entryform_btnSave")
+        self.gridLayout_4.addWidget(self.assignee_entryform_btnSave, 6, 2, 1, 1)
+        self.label_5 = QtWidgets.QLabel(self.page_assignee_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_5.setFont(font)
+        self.label_5.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.gridLayout_4.addWidget(self.label_5, 0, 0, 1, 3)
+        self.label_2 = QtWidgets.QLabel(self.page_assignee_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_2.setFont(font)
+        self.label_2.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_4.addWidget(self.label_2, 4, 0, 1, 1)
+        self.assignee_entryform_scrollDepartments = QtWidgets.QScrollArea(self.page_assignee_entryform)
+        self.assignee_entryform_scrollDepartments.setStyleSheet("QScrollArea {\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"}")
+        self.assignee_entryform_scrollDepartments.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.assignee_entryform_scrollDepartments.setWidgetResizable(False)
+        self.assignee_entryform_scrollDepartments.setObjectName("assignee_entryform_scrollDepartments")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1008, 154))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
+        self.gridLayout_7.setObjectName("gridLayout_7")
+        self.assignee_entryform_vboxDepartments = QtWidgets.QVBoxLayout()
+        self.assignee_entryform_vboxDepartments.setSpacing(3)
+        self.assignee_entryform_vboxDepartments.setObjectName("assignee_entryform_vboxDepartments")
+        self.gridLayout_7.addLayout(self.assignee_entryform_vboxDepartments, 0, 0, 1, 1)
+        self.assignee_entryform_scrollDepartments.setWidget(self.scrollAreaWidgetContents)
+        self.gridLayout_4.addWidget(self.assignee_entryform_scrollDepartments, 4, 1, 1, 2)
         self.page_handler.addWidget(self.page_assignee_entryform)
         self.page_department_listingview = QtWidgets.QWidget()
         self.page_department_listingview.setObjectName("page_department_listingview")
@@ -405,201 +360,149 @@ class Ui_MainWindow(object):
         font.setFamily("Impact")
         font.setPointSize(20)
         self.label_17.setFont(font)
-        self.label_17.setStyleSheet(
-            "QLabel {\n"
-            "    color: white;\n"
-            "    background-color: #05668d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "    margin: 0px 0px 20px 0px;\n"
-            "}"
-        )
+        self.label_17.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
         self.label_17.setAlignment(QtCore.Qt.AlignCenter)
         self.label_17.setObjectName("label_17")
         self.gridLayout_2.addWidget(self.label_17, 0, 0, 1, 3)
-        self.department_listingview_btnNew = QtWidgets.QPushButton(
-            self.page_department_listingview
-        )
+        self.department_listingview_btnNew = QtWidgets.QPushButton(self.page_department_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.department_listingview_btnNew.setFont(font)
-        self.department_listingview_btnNew.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.department_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.department_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.department_listingview_btnNew.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #0db39e;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #16db93;\n"
-            "}"
-        )
-        self.department_listingview_btnNew.setObjectName(
-            "department_listingview_btnNew"
-        )
+        self.department_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.department_listingview_btnNew.setObjectName("department_listingview_btnNew")
         self.gridLayout_2.addWidget(self.department_listingview_btnNew, 1, 0, 1, 1)
-        self.department_listingview_btnEdit = QtWidgets.QPushButton(
-            self.page_department_listingview
-        )
+        self.department_listingview_btnEdit = QtWidgets.QPushButton(self.page_department_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.department_listingview_btnEdit.setFont(font)
-        self.department_listingview_btnEdit.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.department_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.department_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.department_listingview_btnEdit.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #f8961e;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #f9c74f;\n"
-            "}"
-        )
-        self.department_listingview_btnEdit.setObjectName(
-            "department_listingview_btnEdit"
-        )
+        self.department_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
+        self.department_listingview_btnEdit.setObjectName("department_listingview_btnEdit")
         self.gridLayout_2.addWidget(self.department_listingview_btnEdit, 1, 1, 1, 1)
-        self.department_listingview_btnDelete = QtWidgets.QPushButton(
-            self.page_department_listingview
-        )
+        self.department_listingview_btnDelete = QtWidgets.QPushButton(self.page_department_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.department_listingview_btnDelete.setFont(font)
-        self.department_listingview_btnDelete.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.department_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.department_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.department_listingview_btnDelete.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #f94144;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #ff595e;\n"
-            "}"
-        )
-        self.department_listingview_btnDelete.setObjectName(
-            "department_listingview_btnDelete"
-        )
+        self.department_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.department_listingview_btnDelete.setObjectName("department_listingview_btnDelete")
         self.gridLayout_2.addWidget(self.department_listingview_btnDelete, 1, 2, 1, 1)
-        self.department_listingview_txtSearch = QtWidgets.QLineEdit(
-            self.page_department_listingview
-        )
+        self.department_listingview_txtSearch = QtWidgets.QLineEdit(self.page_department_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
         self.department_listingview_txtSearch.setFont(font)
-        self.department_listingview_txtSearch.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
+        self.department_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
         self.department_listingview_txtSearch.setClearButtonEnabled(True)
-        self.department_listingview_txtSearch.setObjectName(
-            "department_listingview_txtSearch"
-        )
+        self.department_listingview_txtSearch.setObjectName("department_listingview_txtSearch")
         self.gridLayout_2.addWidget(self.department_listingview_txtSearch, 2, 0, 1, 3)
-        self.department_listingview_tblDepartment = QtWidgets.QTableWidget(
-            self.page_department_listingview
-        )
+        self.department_listingview_tblDepartment = QtWidgets.QTableWidget(self.page_department_listingview)
         self.department_listingview_tblDepartment.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.department_listingview_tblDepartment.setStyleSheet(
-            "QTableWidget {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QTableWidget:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
-        self.department_listingview_tblDepartment.setEditTriggers(
-            QtWidgets.QAbstractItemView.NoEditTriggers
-        )
+        self.department_listingview_tblDepartment.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.department_listingview_tblDepartment.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.department_listingview_tblDepartment.setTabKeyNavigation(False)
         self.department_listingview_tblDepartment.setAlternatingRowColors(False)
-        self.department_listingview_tblDepartment.setSelectionMode(
-            QtWidgets.QAbstractItemView.SingleSelection
-        )
-        self.department_listingview_tblDepartment.setSelectionBehavior(
-            QtWidgets.QAbstractItemView.SelectRows
-        )
+        self.department_listingview_tblDepartment.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.department_listingview_tblDepartment.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.department_listingview_tblDepartment.setCornerButtonEnabled(False)
-        self.department_listingview_tblDepartment.setObjectName(
-            "department_listingview_tblDepartment"
-        )
+        self.department_listingview_tblDepartment.setObjectName("department_listingview_tblDepartment")
         self.department_listingview_tblDepartment.setColumnCount(0)
         self.department_listingview_tblDepartment.setRowCount(0)
-        self.department_listingview_tblDepartment.horizontalHeader().setStretchLastSection(
-            True
-        )
+        self.department_listingview_tblDepartment.horizontalHeader().setStretchLastSection(True)
         self.department_listingview_tblDepartment.verticalHeader().setVisible(False)
-        self.gridLayout_2.addWidget(
-            self.department_listingview_tblDepartment, 3, 0, 1, 3
-        )
+        self.gridLayout_2.addWidget(self.department_listingview_tblDepartment, 3, 0, 1, 3)
         self.page_handler.addWidget(self.page_department_listingview)
         self.page_department_entryform = QtWidgets.QWidget()
         self.page_department_entryform.setObjectName("page_department_entryform")
         self.gridLayout_8 = QtWidgets.QGridLayout(self.page_department_entryform)
         self.gridLayout_8.setObjectName("gridLayout_8")
-        self.department_entryform_lblId = QtWidgets.QLabel(
-            self.page_department_entryform
-        )
+        self.department_entryform_lblId = QtWidgets.QLabel(self.page_department_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         self.department_entryform_lblId.setFont(font)
-        self.department_entryform_lblId.setStyleSheet(
-            "QLabel {\n"
-            "    background-color: lightgrey;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}"
-        )
+        self.department_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
         self.department_entryform_lblId.setText("")
         self.department_entryform_lblId.setObjectName("department_entryform_lblId")
         self.gridLayout_8.addWidget(self.department_entryform_lblId, 1, 1, 1, 2)
@@ -610,9 +513,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_18.setFont(font)
-        self.label_18.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label_18.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_18.setObjectName("label_18")
         self.gridLayout_8.addWidget(self.label_18, 2, 0, 1, 1)
         self.label_19 = QtWidgets.QLabel(self.page_department_entryform)
@@ -622,39 +523,33 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_19.setFont(font)
-        self.label_19.setStyleSheet("QLabel {\n" "    color: grey;\n" "}")
-        self.label_19.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label_19.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_19.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_19.setObjectName("label_19")
         self.gridLayout_8.addWidget(self.label_19, 1, 0, 1, 1)
-        self.department_entryform_btnSave = QtWidgets.QPushButton(
-            self.page_department_entryform
-        )
+        self.department_entryform_btnSave = QtWidgets.QPushButton(self.page_department_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.department_entryform_btnSave.setFont(font)
-        self.department_entryform_btnSave.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.department_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.department_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.department_entryform_btnSave.setStyleSheet(
-            "QPushButton {\n"
-            "    width: 60px;\n"
-            "    color: white;\n"
-            "    background-color: #006494;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #0582ca;\n"
-            "}"
-        )
+        self.department_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
         self.department_entryform_btnSave.setObjectName("department_entryform_btnSave")
         self.gridLayout_8.addWidget(self.department_entryform_btnSave, 4, 2, 1, 1)
         self.label_21 = QtWidgets.QLabel(self.page_department_entryform)
@@ -662,80 +557,64 @@ class Ui_MainWindow(object):
         font.setFamily("Impact")
         font.setPointSize(20)
         self.label_21.setFont(font)
-        self.label_21.setStyleSheet(
-            "QLabel {\n"
-            "    color: white;\n"
-            "    background-color: #05668d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "    margin: 0px 0px 20px 0px;\n"
-            "}"
-        )
+        self.label_21.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
         self.label_21.setAlignment(QtCore.Qt.AlignCenter)
         self.label_21.setObjectName("label_21")
         self.gridLayout_8.addWidget(self.label_21, 0, 0, 1, 3)
-        self.department_entryform_txtName = QtWidgets.QLineEdit(
-            self.page_department_entryform
-        )
+        self.department_entryform_txtName = QtWidgets.QLineEdit(self.page_department_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         self.department_entryform_txtName.setFont(font)
-        self.department_entryform_txtName.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}\n"
-            ""
-        )
+        self.department_entryform_txtName.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
         self.department_entryform_txtName.setClearButtonEnabled(True)
         self.department_entryform_txtName.setObjectName("department_entryform_txtName")
         self.gridLayout_8.addWidget(self.department_entryform_txtName, 2, 1, 1, 2)
-        self.department_entryform_btnBack = QtWidgets.QPushButton(
-            self.page_department_entryform
-        )
+        self.department_entryform_btnBack = QtWidgets.QPushButton(self.page_department_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.department_entryform_btnBack.setFont(font)
-        self.department_entryform_btnBack.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.department_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.department_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.department_entryform_btnBack.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #6c757d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #adb5bd;\n"
-            "}"
-        )
+        self.department_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
         self.department_entryform_btnBack.setObjectName("department_entryform_btnBack")
         self.gridLayout_8.addWidget(self.department_entryform_btnBack, 4, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
-        )
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_8.addItem(spacerItem2, 3, 0, 1, 3)
-        spacerItem3 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-        )
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_8.addItem(spacerItem3, 4, 1, 1, 1)
         self.page_handler.addWidget(self.page_department_entryform)
         self.page_form_listingview = QtWidgets.QWidget()
@@ -747,16 +626,14 @@ class Ui_MainWindow(object):
         font.setFamily("Impact")
         font.setPointSize(20)
         self.label_20.setFont(font)
-        self.label_20.setStyleSheet(
-            "QLabel {\n"
-            "    color: white;\n"
-            "    background-color: #05668d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "    margin: 0px 0px 20px 0px;\n"
-            "}"
-        )
+        self.label_20.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
         self.label_20.setAlignment(QtCore.Qt.AlignCenter)
         self.label_20.setObjectName("label_20")
         self.gridLayout_5.addWidget(self.label_20, 0, 0, 1, 3)
@@ -767,136 +644,106 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.form_listingview_btnNew.setFont(font)
-        self.form_listingview_btnNew.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.form_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.form_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_listingview_btnNew.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #0db39e;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #16db93;\n"
-            "}"
-        )
+        self.form_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
         self.form_listingview_btnNew.setObjectName("form_listingview_btnNew")
         self.gridLayout_5.addWidget(self.form_listingview_btnNew, 1, 0, 1, 1)
-        self.form_listingview_btnEdit = QtWidgets.QPushButton(
-            self.page_form_listingview
-        )
+        self.form_listingview_btnEdit = QtWidgets.QPushButton(self.page_form_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.form_listingview_btnEdit.setFont(font)
-        self.form_listingview_btnEdit.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.form_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.form_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_listingview_btnEdit.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #f8961e;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #f9c74f;\n"
-            "}"
-        )
+        self.form_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
         self.form_listingview_btnEdit.setObjectName("form_listingview_btnEdit")
         self.gridLayout_5.addWidget(self.form_listingview_btnEdit, 1, 1, 1, 1)
-        self.form_listingview_btnDelete = QtWidgets.QPushButton(
-            self.page_form_listingview
-        )
+        self.form_listingview_btnDelete = QtWidgets.QPushButton(self.page_form_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.form_listingview_btnDelete.setFont(font)
-        self.form_listingview_btnDelete.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.form_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.form_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_listingview_btnDelete.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #f94144;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #ff595e;\n"
-            "}"
-        )
+        self.form_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
         self.form_listingview_btnDelete.setObjectName("form_listingview_btnDelete")
         self.gridLayout_5.addWidget(self.form_listingview_btnDelete, 1, 2, 1, 1)
-        self.form_listingview_txtSearch = QtWidgets.QLineEdit(
-            self.page_form_listingview
-        )
+        self.form_listingview_txtSearch = QtWidgets.QLineEdit(self.page_form_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
         self.form_listingview_txtSearch.setFont(font)
-        self.form_listingview_txtSearch.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
+        self.form_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
         self.form_listingview_txtSearch.setClearButtonEnabled(True)
         self.form_listingview_txtSearch.setObjectName("form_listingview_txtSearch")
         self.gridLayout_5.addWidget(self.form_listingview_txtSearch, 2, 0, 1, 3)
-        self.form_listingview_tblForm = QtWidgets.QTableWidget(
-            self.page_form_listingview
-        )
+        self.form_listingview_tblForm = QtWidgets.QTableWidget(self.page_form_listingview)
         self.form_listingview_tblForm.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.form_listingview_tblForm.setStyleSheet(
-            "QTableWidget {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QTableWidget:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
-        self.form_listingview_tblForm.setEditTriggers(
-            QtWidgets.QAbstractItemView.NoEditTriggers
-        )
+        self.form_listingview_tblForm.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.form_listingview_tblForm.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.form_listingview_tblForm.setTabKeyNavigation(False)
         self.form_listingview_tblForm.setAlternatingRowColors(False)
-        self.form_listingview_tblForm.setSelectionMode(
-            QtWidgets.QAbstractItemView.SingleSelection
-        )
-        self.form_listingview_tblForm.setSelectionBehavior(
-            QtWidgets.QAbstractItemView.SelectRows
-        )
+        self.form_listingview_tblForm.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.form_listingview_tblForm.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.form_listingview_tblForm.setCornerButtonEnabled(False)
         self.form_listingview_tblForm.setObjectName("form_listingview_tblForm")
         self.form_listingview_tblForm.setColumnCount(0)
@@ -909,9 +756,7 @@ class Ui_MainWindow(object):
         self.page_form_entryform.setObjectName("page_form_entryform")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.page_form_entryform)
         self.gridLayout_6.setObjectName("gridLayout_6")
-        spacerItem4 = QtWidgets.QSpacerItem(
-            989, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-        )
+        spacerItem4 = QtWidgets.QSpacerItem(989, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_6.addItem(spacerItem4, 5, 3, 1, 1)
         self.label = QtWidgets.QLabel(self.page_form_entryform)
         font = QtGui.QFont()
@@ -920,9 +765,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
-        self.label.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label.setObjectName("label")
         self.gridLayout_6.addWidget(self.label, 3, 0, 1, 1)
         self.label_22 = QtWidgets.QLabel(self.page_form_entryform)
@@ -932,9 +775,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_22.setFont(font)
-        self.label_22.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label_22.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_22.setObjectName("label_22")
         self.gridLayout_6.addWidget(self.label_22, 2, 0, 1, 1)
         self.label_24 = QtWidgets.QLabel(self.page_form_entryform)
@@ -944,10 +785,10 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_24.setFont(font)
-        self.label_24.setStyleSheet("QLabel {\n" "    color: grey;\n" "}")
-        self.label_24.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label_24.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_24.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_24.setObjectName("label_24")
         self.gridLayout_6.addWidget(self.label_24, 1, 0, 1, 1)
         self.form_entryform_btnBack = QtWidgets.QPushButton(self.page_form_entryform)
@@ -957,47 +798,37 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.form_entryform_btnBack.setFont(font)
-        self.form_entryform_btnBack.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.form_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.form_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_entryform_btnBack.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #6c757d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #adb5bd;\n"
-            "}"
-        )
+        self.form_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
         self.form_entryform_btnBack.setObjectName("form_entryform_btnBack")
         self.gridLayout_6.addWidget(self.form_entryform_btnBack, 5, 0, 1, 1)
-        self.form_entryform_btnSelectPath = QtWidgets.QPushButton(
-            self.page_form_entryform
-        )
+        self.form_entryform_btnSelectPath = QtWidgets.QPushButton(self.page_form_entryform)
         self.form_entryform_btnSelectPath.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_entryform_btnSelectPath.setStyleSheet(
-            "QPushButton {\n"
-            "    color: white;\n"
-            "    background-color: #6c757d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #adb5bd;\n"
-            "}"
-        )
+        self.form_entryform_btnSelectPath.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
         self.form_entryform_btnSelectPath.setObjectName("form_entryform_btnSelectPath")
         self.gridLayout_6.addWidget(self.form_entryform_btnSelectPath, 3, 5, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(
-            1222, 478, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
-        )
+        spacerItem5 = QtWidgets.QSpacerItem(1222, 478, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_6.addItem(spacerItem5, 4, 0, 1, 6)
         self.form_entryform_btnSave = QtWidgets.QPushButton(self.page_form_entryform)
         font = QtGui.QFont()
@@ -1006,24 +837,20 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.form_entryform_btnSave.setFont(font)
-        self.form_entryform_btnSave.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor)
-        )
+        self.form_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.form_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_entryform_btnSave.setStyleSheet(
-            "QPushButton {\n"
-            "    width: 60px;\n"
-            "    color: white;\n"
-            "    background-color: #006494;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "        background-color: #0582ca;\n"
-            "}"
-        )
+        self.form_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
         self.form_entryform_btnSave.setObjectName("form_entryform_btnSave")
         self.gridLayout_6.addWidget(self.form_entryform_btnSave, 5, 5, 1, 1)
         self.label_23 = QtWidgets.QLabel(self.page_form_entryform)
@@ -1031,16 +858,14 @@ class Ui_MainWindow(object):
         font.setFamily("Impact")
         font.setPointSize(20)
         self.label_23.setFont(font)
-        self.label_23.setStyleSheet(
-            "QLabel {\n"
-            "    color: white;\n"
-            "    background-color: #05668d;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "    margin: 0px 0px 20px 0px;\n"
-            "}"
-        )
+        self.label_23.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
         self.label_23.setAlignment(QtCore.Qt.AlignCenter)
         self.label_23.setObjectName("label_23")
         self.gridLayout_6.addWidget(self.label_23, 0, 0, 1, 6)
@@ -1051,22 +876,20 @@ class Ui_MainWindow(object):
         self.form_entryform_txtPath.setFont(font)
         self.form_entryform_txtPath.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.form_entryform_txtPath.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.form_entryform_txtPath.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}\n"
-            ""
-        )
+        self.form_entryform_txtPath.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
         self.form_entryform_txtPath.setReadOnly(False)
         self.form_entryform_txtPath.setObjectName("form_entryform_txtPath")
         self.gridLayout_6.addWidget(self.form_entryform_txtPath, 3, 2, 1, 3)
@@ -1075,22 +898,20 @@ class Ui_MainWindow(object):
         font.setFamily("Arial")
         font.setPointSize(10)
         self.form_entryform_txtName.setFont(font)
-        self.form_entryform_txtName.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}\n"
-            ""
-        )
+        self.form_entryform_txtName.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
         self.form_entryform_txtName.setClearButtonEnabled(True)
         self.form_entryform_txtName.setObjectName("form_entryform_txtName")
         self.gridLayout_6.addWidget(self.form_entryform_txtName, 2, 2, 1, 4)
@@ -1099,16 +920,14 @@ class Ui_MainWindow(object):
         font.setFamily("Arial")
         font.setPointSize(10)
         self.form_entryform_lblId.setFont(font)
-        self.form_entryform_lblId.setStyleSheet(
-            "QLabel {\n"
-            "    background-color: lightgrey;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 4px;\n"
-            "}"
-        )
+        self.form_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
         self.form_entryform_lblId.setText("")
         self.form_entryform_lblId.setObjectName("form_entryform_lblId")
         self.gridLayout_6.addWidget(self.form_entryform_lblId, 1, 2, 1, 4)
@@ -1138,21 +957,12 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuChange_View.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(5)
+        self.page_handler.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        MainWindow.setTabOrder(
-            self.assignee_listingview_txtSearch, self.assignee_entryform_txtName
-        )
-        MainWindow.setTabOrder(
-            self.assignee_entryform_txtName, self.assignee_entryform_txtDescription
-        )
-        MainWindow.setTabOrder(
-            self.assignee_entryform_txtDescription,
-            self.department_listingview_txtSearch,
-        )
-        MainWindow.setTabOrder(
-            self.department_listingview_txtSearch, self.department_entryform_txtName
-        )
+        MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
+        MainWindow.setTabOrder(self.assignee_entryform_txtName, self.assignee_entryform_txtDescription)
+        MainWindow.setTabOrder(self.assignee_entryform_txtDescription, self.department_listingview_txtSearch)
+        MainWindow.setTabOrder(self.department_listingview_txtSearch, self.department_entryform_txtName)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -1161,71 +971,56 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "ASSIGNEES"))
         self.assignee_listingview_btnNew.setText(_translate("MainWindow", "New"))
         self.assignee_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
-        self.assignee_listingview_txtSearch.setPlaceholderText(
-            _translate("MainWindow", "Search")
-        )
+        self.assignee_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
         self.assignee_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
-        self.assignee_entryform_txtDescription.setPlaceholderText(
-            _translate("MainWindow", "OPTIONAL")
-        )
-        self.label_8.setText(_translate("MainWindow", "ID"))
-        self.assignee_entryform_btnBack.setText(
-            _translate("MainWindow", "Back to listing view")
-        )
         self.label_7.setText(_translate("MainWindow", "Description"))
-        self.assignee_entryform_btnSave.setText(_translate("MainWindow", "Save"))
-        self.assignee_entryform_txtName.setPlaceholderText(
-            _translate("MainWindow", "REQUIRED")
-        )
-        self.label_5.setText(_translate("MainWindow", "ASSIGNEE ENTRY FORM"))
+        self.label_8.setText(_translate("MainWindow", "ID"))
+        self.assignee_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
+        self.assignee_entryform_txtDescription.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
+        self.assignee_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
         self.label_6.setText(_translate("MainWindow", "Name"))
+        self.assignee_entryform_btnSave.setText(_translate("MainWindow", "Save"))
+        self.label_5.setText(_translate("MainWindow", "ASSIGNEE ENTRY FORM"))
+        self.label_2.setText(_translate("MainWindow", "Departments"))
         self.label_17.setText(_translate("MainWindow", "DEPARTMENTS"))
         self.department_listingview_btnNew.setText(_translate("MainWindow", "New"))
         self.department_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
-        self.department_listingview_btnDelete.setText(
-            _translate("MainWindow", "Delete")
-        )
-        self.department_listingview_txtSearch.setPlaceholderText(
-            _translate("MainWindow", "Search")
-        )
+        self.department_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
+        self.department_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
         self.department_listingview_tblDepartment.setSortingEnabled(True)
         self.label_18.setText(_translate("MainWindow", "Name"))
         self.label_19.setText(_translate("MainWindow", "ID"))
         self.department_entryform_btnSave.setText(_translate("MainWindow", "Save"))
         self.label_21.setText(_translate("MainWindow", "DEPARTMENT ENTRY FORM"))
-        self.department_entryform_txtName.setPlaceholderText(
-            _translate("MainWindow", "REQUIRED")
-        )
-        self.department_entryform_btnBack.setText(
-            _translate("MainWindow", "Back to listing view")
-        )
+        self.department_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.department_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
         self.label_20.setText(_translate("MainWindow", "FORMS"))
         self.form_listingview_btnNew.setText(_translate("MainWindow", "New"))
         self.form_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
         self.form_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
-        self.form_listingview_txtSearch.setPlaceholderText(
-            _translate("MainWindow", "Search")
-        )
+        self.form_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
         self.form_listingview_tblForm.setSortingEnabled(True)
         self.label.setText(_translate("MainWindow", "Path"))
         self.label_22.setText(_translate("MainWindow", "Name"))
         self.label_24.setText(_translate("MainWindow", "ID"))
-        self.form_entryform_btnBack.setText(
-            _translate("MainWindow", "Back to listing view")
-        )
-        self.form_entryform_btnSelectPath.setText(
-            _translate("MainWindow", "Select Path")
-        )
+        self.form_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
+        self.form_entryform_btnSelectPath.setText(_translate("MainWindow", "Select Path"))
         self.form_entryform_btnSave.setText(_translate("MainWindow", "Save"))
         self.label_23.setText(_translate("MainWindow", "FORM ENTRY FORM"))
-        self.form_entryform_txtPath.setPlaceholderText(
-            _translate("MainWindow", "REQUIRED")
-        )
-        self.form_entryform_txtName.setPlaceholderText(
-            _translate("MainWindow", "REQUIRED")
-        )
+        self.form_entryform_txtPath.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.form_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))
         self.actionListing_View.setText(_translate("MainWindow", "Listing View"))
         self.action_assignees.setText(_translate("MainWindow", "Assignees"))
         self.action_forms.setText(_translate("MainWindow", "Forms"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
