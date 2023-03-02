@@ -10,6 +10,8 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
+    show_error,
+    show_toast,
 )
 from conu.ui.PageEnum import Page
 
@@ -123,7 +125,24 @@ def delete_assignee(main_window) -> None:
     global global_assignees
     entity = global_assignees[selected_id]
     delete_by_attrs_dict(Assignee, {"id": entity.id})
+    show_toast("Delete Successful", f"Successfully deleted assignee: {entity.name}", 1)
     load_assignee_listingview(main_window)
+
+
+def assignee_entryform_is_valid(main_window) -> bool:
+
+    error_strings = list()
+
+    entered_name = main_window.ui.assignee_entryform_txtName.text()
+
+    if not entered_name:
+        error_strings.append("Name field cannot be blank.")
+
+    if error_strings:
+        show_error("Cannot Save Assignee", error_strings)
+        return False
+
+    return True
 
 
 def save_assignee(main_window) -> None:
@@ -139,6 +158,9 @@ def save_assignee(main_window) -> None:
         None
     """
 
+    if not assignee_entryform_is_valid(main_window):
+        return
+
     if not askyesno(
         "Confirm save", "Are you sure you would like to save the current record?"
     ):
@@ -153,6 +175,8 @@ def save_assignee(main_window) -> None:
     )
 
     save_by_list([entity])
+
+    show_toast("Safe Successful", f"Successfully saved assignee: {entity.name}", 1)
 
     load_assignee_listingview(main_window)
 

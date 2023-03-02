@@ -1,10 +1,8 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Department import Department
-from conu.classes.UserDepartment import UserDepartment
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
-    get_by_user_departments,
     select_by_attrs_dict,
     save_by_list,
 )
@@ -12,6 +10,8 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
+    show_error,
+    show_toast,
 )
 from conu.ui.PageEnum import Page
 
@@ -116,7 +116,26 @@ def delete_department(main_window) -> None:
     global global_departments
     entity = global_departments[selected_id]
     delete_by_attrs_dict(Department, {"id": entity.id})
+    show_toast(
+        "Delete Successful", f"Successfully deleted department: {entity.name}", 1
+    )
     load_department_listingview(main_window)
+
+
+def department_entryform_is_valid(main_window) -> bool:
+
+    error_strings = list()
+
+    entered_name = main_window.ui.department_entryform_txtName.text()
+
+    if not entered_name:
+        error_strings.append("Name field cannot be blank.")
+
+    if error_strings:
+        show_error("Cannot Save Department", error_strings)
+        return False
+
+    return True
 
 
 def save_department(main_window) -> None:
@@ -129,6 +148,10 @@ def save_department(main_window) -> None:
     Returns:
         None.
     """
+
+    if not department_entryform_is_valid(main_window):
+        return
+
     if not askyesno(
         "Confirm save", "Are you sure you would like to save the current record?"
     ):
@@ -142,6 +165,8 @@ def save_department(main_window) -> None:
     )
 
     save_by_list([entity])
+
+    show_toast("Save Successful", f"Successfully saved form: {entity.name}", 1)
 
     load_department_listingview(main_window)
 

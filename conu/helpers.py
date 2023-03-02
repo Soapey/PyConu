@@ -202,6 +202,14 @@ def show_toast(title: str, message: str, duration: int) -> None:
         print(f"Error displaying notification: {e}")
 
 
+def show_error(title, errors):
+
+    # create a label widget with formatted error strings
+    errors_text = "\n".join([f"• {error}" for error in errors])
+
+    show_toast(title, errors_text, 1)
+
+
 def select_file_path() -> str:
     root = tk.Tk()
     root.withdraw()
