@@ -18,9 +18,12 @@ from conu.helpers import (
     selected_row_id,
     show_error,
     show_toast,
-    set_button_visibility
+    set_button_visibility,
 )
 from conu.ui.PageEnum import Page
+
+
+assigned_department_ids = set()
 
 
 def load_assignee_listingview(main_window) -> None:
@@ -61,11 +64,13 @@ def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
         None
     """
 
-    main_window.ui.assignee_entryform_lblId.clear() # Clear assignee ID label
-    main_window.ui.assignee_entryform_txtName.clear() # Clear assignee name text field
-    main_window.ui.assignee_entryform_txtDescription.clear() # Clear assignee description text field
+    main_window.ui.assignee_entryform_lblId.clear()  # Clear assignee ID label
+    main_window.ui.assignee_entryform_txtName.clear()  # Clear assignee name text field
+    main_window.ui.assignee_entryform_txtDescription.clear()  # Clear assignee description text field
 
-    vbox_departments = main_window.ui.assignee_entryform_vboxDepartments # Get assignee departments vertical box layout
+    vbox_departments = (
+        main_window.ui.assignee_entryform_vboxDepartments
+    )  # Get assignee departments vertical box layout
     vbox_departments.setAlignment(Qt.AlignTop)
     while vbox_departments.count():
         widget_to_remove = vbox_departments.takeAt(0).widget()
@@ -77,21 +82,30 @@ def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
     global_departments = select_by_attrs_dict(Department)
     global_assigneedepartments = select_by_attrs_dict(AssigneeDepartment)
 
-    assigned_department_ids = set() # Create a set to store the IDs of departments assigned to the assignee, if an assignee ID has been provided
+    # Create a set to store the IDs of departments assigned to the assignee, if an assignee ID has been provided
+    global assigned_department_ids
     if assignee_id:
-        assigned_department_ids = {ad.department_id for ad in global_assigneedepartments.values() if ad.assignee_id == assignee_id}
+        assigned_department_ids = {
+            ad.department_id
+            for ad in global_assigneedepartments.values()
+            if ad.assignee_id == assignee_id
+        }
 
     # Loop through each department and create a QCheckBox widget for it
     for department in list(global_departments.values()):
-        checkbox = QCheckBox(department.name, main_window.ui.page_assignee_entryform) # Create a QCheckBox widget with the department name and add it to the vbox_departments layout
-        checkbox.setProperty('object', department)
-        checkbox.setChecked(False) # Set the checkbox to unchecked by default
+        checkbox = QCheckBox(
+            department.name, main_window.ui.page_assignee_entryform
+        )  # Create a QCheckBox widget with the department name and add it to the vbox_departments layout
+        checkbox.setProperty("object", department)
+        checkbox.setChecked(False)  # Set the checkbox to unchecked by default
 
         # Check if the department is assigned to the assignee, and if so, set the checkbox to checked
         if department.id in assigned_department_ids:
             checkbox.setChecked(True)
 
-        vbox_departments.addWidget(checkbox) # Add the checkbox widget to the vbox_departments layout
+        vbox_departments.addWidget(
+            checkbox
+        )  # Add the checkbox widget to the vbox_departments layout
 
 
 def new_assignee(main_window) -> None:
@@ -202,13 +216,6 @@ def save_assignee(main_window) -> None:
         "Confirm save", "Are you sure you would like to save the current record?"
     ):
         return
-    
-    vbox_departments = main_window.ui.assignee_entryform_vboxDepartments
-    for i in range(vbox_departments.count()):
-        widget = vbox_departments.itemAt(i).widget
-        if widget:
-            pass
-            # To-Do
 
     entity = Assignee(
         None
@@ -218,7 +225,30 @@ def save_assignee(main_window) -> None:
         main_window.ui.assignee_entryform_txtDescription.toPlainText(),
     )
 
-    save_by_list([entity])
+    entity_id = sorted(save_by_list([entity]), key=lambda e: e.id, reverse=True)[0].id
+
+    assigneedepartments_to_save = list()
+    vbox_departments = main_window.ui.assignee_entryform_vboxDepartments
+    for i in range(vbox_departments.count()):
+        widget: QCheckBox = vbox_departments.itemAt(i).widget()
+        department: Department = widget.property("object")
+
+        if widget.isChecked():
+
+            if department.id not in assigned_department_ids:
+                assigneedepartments_to_save.append(
+                    AssigneeDepartment(None, entity_id, department.id)
+                )
+
+        else:
+
+            if department.id in assigned_department_ids:
+                delete_by_attrs_dict(
+                    AssigneeDepartment,
+                    {"assignee_id": entity_id, "department_id": department.id},
+                )
+
+    save_by_list(assigneedepartments_to_save)
 
     show_toast("Safe Successful", f"Successfully saved assignee: {entity.name}", 1)
 
@@ -277,13 +307,17 @@ def assignees_by_search(main_window, search_text: str) -> None:
 
 def set_assignee_button_visibility(main_window):
 
-    is_visible = selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is None
+    is_visible = (
+        selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is None
+    )
 
-    set_button_visibility([
-        main_window.ui.assignee_listingview_btnEdit,
-        main_window.ui.assignee_listingview_btnDelete,
-    ], is_visible)
-
+    set_button_visibility(
+        [
+            main_window.ui.assignee_listingview_btnEdit,
+            main_window.ui.assignee_listingview_btnDelete,
+        ],
+        is_visible,
+    )
 
 
 def connect_assignee_actions(main_window) -> None:
@@ -317,4 +351,6 @@ def connect_assignee_actions(main_window) -> None:
             main_window, main_window.ui.assignee_listingview_txtSearch.text().lower()
         )
     )
-    main_window.ui.assignee_listingview_tblAssignee.currentItemChanged.connect(lambda: set_assignee_button_visibility(main_window))
+    main_window.ui.assignee_listingview_tblAssignee.currentItemChanged.connect(
+        lambda: set_assignee_button_visibility(main_window)
+    )

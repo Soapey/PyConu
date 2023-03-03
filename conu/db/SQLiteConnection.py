@@ -91,7 +91,7 @@ def init_db(file_path: str = None, clean: bool = False):
             cur.executescript(script_contents)
 
 
-def save_by_list(entities: list) -> None:
+def save_by_list(entities: list) -> list:
     """
     Saves a list of entities into a sqlite3 database.
 
@@ -105,7 +105,7 @@ def save_by_list(entities: list) -> None:
         return None
 
     # Get the table name based on the entity class name
-    table_name = entities[0].__class__.__name__.lower()
+    return_entities = list()
 
     with SQLiteConnection() as cur:
 
@@ -118,14 +118,27 @@ def save_by_list(entities: list) -> None:
 
         # If the entity has an id, update the existing row in the table. Otherwise, insert a new row into the table.
         for entity in entities:
+
+            cls = entity.__class__
+            table_name = entity.__class__.__name__.lower()
             values = [getattr(entity, col) for col in columns]
 
             if entity.id:
-                update_query = f"UPDATE {table_name} SET {', '.join([f'{col} = ?' for col in columns])} WHERE id = ?"
-                cur.execute(update_query, (*values, entity.id))
+                print("Updating entity", entity)
+                update_query = f"UPDATE {table_name} SET {', '.join([f'{col} = ?' for col in columns])} WHERE id = ? RETURNING *;"
+                updated_entity = cur.execute(
+                    update_query, (*values, entity.id)
+                ).fetchone()
+                return_entities.append(cls(*updated_entity))
             else:
-                insert_query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['?' for col in columns])})"
-                cur.execute(insert_query, values)
+                print("Inserting entity", entity)
+                insert_query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['?' for col in columns])}) RETURNING *;"
+                inserted_entity = cur.execute(insert_query, values).fetchone()
+                return_entities.append(cls(*inserted_entity))
+
+    print("Returning entities:", return_entities)
+
+    return return_entities
 
 
 def add_test_data(file_path: str = None):
@@ -188,8 +201,12 @@ def delete_by_attrs_dict(cls: type, attrs: dict) -> None:
         table_name = cls.__name__.lower()
 
         # Construct the SQL query to delete entities with the given attribute-value pairs
-        delete_query = f"DELETE FROM {table_name} WHERE {' AND '.join(f'{attr} = ?' for attr in attrs)}"
-        cur.execute(delete_query, tuple(attrs.values()))
+        delete_query = f"DELETE FROM {table_name} WHERE {' AND '.join(f'{attr} = ?' for attr in attrs)} RETURNING *;"
+        deleted_entity_tuples = cur.execute(
+            delete_query, tuple(attrs.values())
+        ).fetchall()
+        deleted_entities = [cls(*t) for t in deleted_entity_tuples]
+        print("Deleted entities:", deleted_entities)
 
 
 def select_by_attrs_dict(cls: type, attrs: dict = None) -> dict:
