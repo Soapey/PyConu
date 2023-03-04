@@ -11,6 +11,7 @@ from conu.helpers import (
     navigate,
     selected_row_id,
     create_notification,
+    set_button_visibility,
 )
 from conu.ui.PageEnum import Page
 
@@ -35,6 +36,8 @@ def load_department_listingview(main_window) -> None:
     main_window.ui.department_listingview_txtSearch.clear()
 
     departments_by_search(main_window, None)
+
+    set_department_button_visibility(main_window)
 
     navigate(main_window, Page.DEPARTMENT_LISTINGVIEW)
 
@@ -118,7 +121,7 @@ def delete_department(main_window) -> None:
     create_notification(
         "Delete Successful",
         [f"Successfully deleted department: {entity.name}"],
-        "74c69d",
+        "#74c69d",
     )
     load_department_listingview(main_window)
 
@@ -168,7 +171,7 @@ def save_department(main_window) -> None:
     save_by_list([entity])
 
     create_notification(
-        "Save Successful", [f"Successfully saved form: {entity.name}"], "74c69d"
+        "Save Successful", [f"Successfully saved form: {entity.name}"], "#74c69d"
     )
 
     load_department_listingview(main_window)
@@ -219,6 +222,21 @@ def departments_by_search(main_window, search_text: str) -> None:
     )
 
 
+def set_department_button_visibility(main_window):
+
+    is_visible = (
+        selected_row_id(main_window.ui.department_listingview_tblDepartment) is not None
+    )
+
+    set_button_visibility(
+        [
+            main_window.ui.department_listingview_btnEdit,
+            main_window.ui.department_listingview_btnDelete,
+        ],
+        is_visible,
+    )
+
+
 def connect_department_actions(main_window) -> None:
     """Connect department-related actions in the main window to their corresponding functions.
 
@@ -247,4 +265,7 @@ def connect_department_actions(main_window) -> None:
         lambda: departments_by_search(
             main_window, main_window.ui.department_listingview_txtSearch.text().lower()
         )
+    )
+    main_window.ui.department_listingview_tblDepartment.itemSelectionChanged.connect(
+        lambda: set_department_button_visibility(main_window)
     )

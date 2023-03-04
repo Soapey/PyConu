@@ -11,6 +11,7 @@ from conu.helpers import (
     navigate,
     selected_row_id,
     create_notification,
+    set_button_visibility,
 )
 from conu.ui.PageEnum import Page
 from conu.helpers import select_file_path
@@ -24,6 +25,8 @@ def load_form_listingview(main_window) -> None:
     main_window.ui.form_listingview_txtSearch.clear()
 
     forms_by_search(main_window, None)
+
+    set_form_button_visibility(main_window)
 
     navigate(main_window, Page.FORM_LISTINGVIEW)
 
@@ -69,7 +72,7 @@ def delete_form(main_window) -> None:
     entity = global_forms[selected_id]
     delete_by_attrs_dict(Form, {"id": entity.id})
     create_notification(
-        "Delete Successful", f"Successfully deleted form: {entity.name}", "74c69d"
+        "Delete Successful", [f"Successfully deleted form: {entity.name}"], "#74c69d"
     )
     load_form_listingview(main_window)
 
@@ -115,7 +118,7 @@ def save_form(main_window) -> None:
     save_by_list([entity])
 
     create_notification(
-        "Save Successful", f"Successfully saved form: {entity.name}", "74c69d"
+        "Save Successful", [f"Successfully saved form: {entity.name}"], "#74c69d"
     )
 
     load_form_listingview(main_window)
@@ -163,6 +166,19 @@ def select_form_filepath(main_window):
         main_window.ui.form_entryform_txtPath.setText(filepath)
 
 
+def set_form_button_visibility(main_window):
+
+    is_visible = selected_row_id(main_window.ui.form_listingview_tblForm) is not None
+
+    set_button_visibility(
+        [
+            main_window.ui.form_listingview_btnEdit,
+            main_window.ui.form_listingview_btnDelete,
+        ],
+        is_visible,
+    )
+
+
 def connect_form_actions(main_window) -> None:
 
     main_window.ui.form_listingview_btnNew.clicked.connect(
@@ -187,4 +203,7 @@ def connect_form_actions(main_window) -> None:
     )
     main_window.ui.form_entryform_btnSelectPath.clicked.connect(
         lambda: select_form_filepath(main_window)
+    )
+    main_window.ui.department_listingview_tblDepartment.itemSelectionChanged.connect(
+        lambda: set_form_button_visibility(main_window)
     )

@@ -46,6 +46,8 @@ def load_assignee_listingview(main_window) -> None:
 
     assignees_by_search(main_window, None)
 
+    set_assignee_button_visibility(main_window)
+
     navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
 
 
@@ -313,7 +315,7 @@ def assignees_by_search(main_window, search_text: str) -> None:
 def set_assignee_button_visibility(main_window):
 
     is_visible = (
-        selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is None
+        selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is not None
     )
 
     set_button_visibility(
@@ -356,6 +358,6 @@ def connect_assignee_actions(main_window) -> None:
             main_window, main_window.ui.assignee_listingview_txtSearch.text().lower()
         )
     )
-    main_window.ui.assignee_listingview_tblAssignee.currentItemChanged.connect(
+    main_window.ui.assignee_listingview_tblAssignee.itemSelectionChanged.connect(
         lambda: set_assignee_button_visibility(main_window)
     )
