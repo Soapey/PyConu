@@ -2,6 +2,7 @@ from conu.classes.User import User
 from conu.db.SQLiteConnection import select_by_attrs_dict
 from conu.helpers import hash_sha512, create_notification
 from conu.ui.actions.assignee_actions import load_assignee_listingview
+from conu.ui.components.Notification import Notification, NotificationColour
 
 
 def clear_login(login_window) -> None:
@@ -55,7 +56,9 @@ def login_entryform_is_valid(login_window) -> bool:
         error_strings.append("Password field cannot be blank.")
 
     if error_strings:
-        create_notification("Invalid Login Credentials", error_strings, "red")
+        Notification(
+            "Invalid Login Credentials", error_strings, NotificationColour.ERROR
+        ).show()
         return False
 
     return True
@@ -101,17 +104,17 @@ def log_in_user(login_window, main_window) -> None:
         main_window.showMaximized()
         login_window.close()
 
-        create_notification(
+        Notification(
             "Log In Successful",
             [f"Welcome {matching_user.first_name} {matching_user.last_name}"],
-            "#74c69d",
-        )
+            NotificationColour.SUCCESS,
+        ).show()
     else:
-        create_notification(
+        Notification(
             "Invalid Login Credentials",
             ["No user matches the given credentials."],
-            "red",
-        )
+            NotificationColour.ERROR,
+        ).show()
 
 
 def connect_login_actions(login_window, main_window) -> None:

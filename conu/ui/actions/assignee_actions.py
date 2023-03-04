@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 from conu.classes.Assignee import Assignee
 from conu.classes.Department import Department
 from conu.classes.AssigneeDepartment import AssigneeDepartment
+from conu.ui.components.Notification import Notification, NotificationColour
 
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
@@ -16,7 +17,6 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
-    create_notification,
     set_button_visibility,
 )
 from conu.ui.PageEnum import Page
@@ -177,11 +177,11 @@ def delete_assignee(main_window) -> None:
     global global_assignees
     entity = global_assignees[selected_id]
     delete_by_attrs_dict(Assignee, {"id": entity.id})
-    create_notification(
+    Notification(
         "Delete Successful",
         [f"Successfully deleted assignee: {entity.name}"],
-        "#74c69d",
-    )
+        NotificationColour.SUCCESS,
+    ).show()
     load_assignee_listingview(main_window)
 
 
@@ -195,7 +195,9 @@ def assignee_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
 
     if error_strings:
-        create_notification("Cannot Save Assignee", error_strings, "red")
+        Notification(
+            "Cannot Save Assignee", error_strings, NotificationColour.ERROR
+        ).show()
         return False
 
     return True
@@ -255,9 +257,11 @@ def save_assignee(main_window) -> None:
 
     save_by_list(assigneedepartments_to_save)
 
-    create_notification(
-        "Safe Successful", [f"Successfully saved assignee: {entity.name}"], "#74c69d"
-    )
+    Notification(
+        "Safe Successful",
+        [f"Successfully saved assignee: {entity.name}"],
+        NotificationColour.SUCCESS,
+    ).show()
 
     load_assignee_listingview(main_window)
 

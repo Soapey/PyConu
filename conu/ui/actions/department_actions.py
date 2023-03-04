@@ -1,6 +1,8 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Department import Department
+from conu.ui.components.Notification import Notification, NotificationColour
+
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
     select_by_attrs_dict,
@@ -10,7 +12,6 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
-    create_notification,
     set_button_visibility,
 )
 from conu.ui.PageEnum import Page
@@ -118,11 +119,11 @@ def delete_department(main_window) -> None:
     global global_departments
     entity = global_departments[selected_id]
     delete_by_attrs_dict(Department, {"id": entity.id})
-    create_notification(
+    Notification(
         "Delete Successful",
         [f"Successfully deleted department: {entity.name}"],
-        "#74c69d",
-    )
+        NotificationColour.SUCCESS,
+    ).show()
     load_department_listingview(main_window)
 
 
@@ -136,7 +137,9 @@ def department_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
 
     if error_strings:
-        create_notification("Cannot Save Department", error_strings, "red")
+        Notification(
+            "Cannot Save Department", error_strings, NotificationColour.ERROR
+        ).show()
         return False
 
     return True
@@ -170,9 +173,11 @@ def save_department(main_window) -> None:
 
     save_by_list([entity])
 
-    create_notification(
-        "Save Successful", [f"Successfully saved form: {entity.name}"], "#74c69d"
-    )
+    Notification(
+        "Save Successful",
+        [f"Successfully saved form: {entity.name}"],
+        NotificationColour.SUCCESS,
+    ).show()
 
     load_department_listingview(main_window)
 

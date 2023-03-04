@@ -1,6 +1,7 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Form import Form
+from conu.ui.components.Notification import Notification, NotificationColour
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
     save_by_list,
@@ -10,7 +11,6 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
-    create_notification,
     set_button_visibility,
 )
 from conu.ui.PageEnum import Page
@@ -71,9 +71,11 @@ def delete_form(main_window) -> None:
     global global_forms
     entity = global_forms[selected_id]
     delete_by_attrs_dict(Form, {"id": entity.id})
-    create_notification(
-        "Delete Successful", [f"Successfully deleted form: {entity.name}"], "#74c69d"
-    )
+    Notification(
+        "Delete Successful",
+        [f"Successfully deleted form: {entity.name}"],
+        NotificationColour.SUCCESS,
+    ).show()
     load_form_listingview(main_window)
 
 
@@ -91,7 +93,7 @@ def form_entryform_is_valid(main_window) -> bool:
         error_strings.append("Path field cannot be blank.")
 
     if error_strings:
-        create_notification("Cannot Save Form", error_strings, "red")
+        Notification("Cannot Save Form", error_strings, NotificationColour.ERROR).show()
         return False
 
     return True
@@ -117,9 +119,11 @@ def save_form(main_window) -> None:
 
     save_by_list([entity])
 
-    create_notification(
-        "Save Successful", [f"Successfully saved form: {entity.name}"], "#74c69d"
-    )
+    Notification(
+        "Save Successful",
+        [f"Successfully saved form: {entity.name}"],
+        NotificationColour.SUCCESS,
+    ).show()
 
     load_form_listingview(main_window)
 
