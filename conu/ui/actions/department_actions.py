@@ -10,8 +10,7 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
-    show_error,
-    show_toast,
+    create_notification,
 )
 from conu.ui.PageEnum import Page
 
@@ -116,8 +115,10 @@ def delete_department(main_window) -> None:
     global global_departments
     entity = global_departments[selected_id]
     delete_by_attrs_dict(Department, {"id": entity.id})
-    show_toast(
-        "Delete Successful", f"Successfully deleted department: {entity.name}", 1
+    create_notification(
+        "Delete Successful",
+        [f"Successfully deleted department: {entity.name}"],
+        "74c69d",
     )
     load_department_listingview(main_window)
 
@@ -132,7 +133,7 @@ def department_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
 
     if error_strings:
-        show_error("Cannot Save Department", error_strings)
+        create_notification("Cannot Save Department", error_strings, "red")
         return False
 
     return True
@@ -166,7 +167,9 @@ def save_department(main_window) -> None:
 
     save_by_list([entity])
 
-    show_toast("Save Successful", f"Successfully saved form: {entity.name}", 1)
+    create_notification(
+        "Save Successful", [f"Successfully saved form: {entity.name}"], "74c69d"
+    )
 
     load_department_listingview(main_window)
 

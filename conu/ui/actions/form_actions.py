@@ -10,8 +10,7 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
-    show_error,
-    show_toast,
+    create_notification,
 )
 from conu.ui.PageEnum import Page
 from conu.helpers import select_file_path
@@ -69,7 +68,9 @@ def delete_form(main_window) -> None:
     global global_forms
     entity = global_forms[selected_id]
     delete_by_attrs_dict(Form, {"id": entity.id})
-    show_toast("Delete Successful", f"Successfully deleted form: {entity.name}", 1)
+    create_notification(
+        "Delete Successful", f"Successfully deleted form: {entity.name}", "74c69d"
+    )
     load_form_listingview(main_window)
 
 
@@ -87,7 +88,7 @@ def form_entryform_is_valid(main_window) -> bool:
         error_strings.append("Path field cannot be blank.")
 
     if error_strings:
-        show_error("Cannot Save Form", error_strings)
+        create_notification("Cannot Save Form", error_strings, "red")
         return False
 
     return True
@@ -113,7 +114,9 @@ def save_form(main_window) -> None:
 
     save_by_list([entity])
 
-    show_toast("Save Successful", f"Successfully saved form: {entity.name}", 1)
+    create_notification(
+        "Save Successful", f"Successfully saved form: {entity.name}", "74c69d"
+    )
 
     load_form_listingview(main_window)
 

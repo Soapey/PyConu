@@ -4,9 +4,9 @@ import configparser
 from typing import List
 from conu.ui.PageEnum import Page
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
-from plyer import notification
 import tkinter as tk
 from tkinter import filedialog
+import threading
 
 
 def navigate(main_window, page: Page):
@@ -177,39 +177,6 @@ def selected_row_id(tbl):
     return id
 
 
-def show_toast(title: str, message: str, duration: int) -> None:
-    """
-    Shows a toast notification with the given title, message, and duration (in seconds).
-
-    Args:
-        title (str): The title of the notification.
-        message (str): The message to display in the notification.
-        duration (int): The duration of the notification in seconds.
-
-    Raises:
-        Exception: If the notification could not be displayed.
-
-    """
-    try:
-        notification.notify(
-            title=title,
-            message=message,
-            app_name="Conu",
-            app_icon=None,
-            timeout=duration,
-        )
-    except Exception as e:
-        print(f"Error displaying notification: {e}")
-
-
-def show_error(title, errors):
-
-    # create a label widget with formatted error strings
-    errors_text = "\n".join([f"• {error}" for error in errors])
-
-    show_toast(title, errors_text, 1)
-
-
 def select_file_path() -> str:
     root = tk.Tk()
     root.withdraw()
@@ -224,3 +191,43 @@ def set_button_visibility(buttons: list, is_visible: bool):
 
     for button in buttons:
         button.setVisible(is_visible)
+
+
+def create_notification(title, message_items, bg_color="#333333", duration=3000):
+
+    message = "\n".join([f"• {m}" for m in message_items])
+
+    def show_notification():
+        root = tk.Tk()
+        root.overrideredirect(True)
+        root.geometry("+{}+{}".format(root.winfo_screenwidth(), 0))
+        root.configure(bg=bg_color)
+
+        # Create title label
+        title_label = tk.Label(
+            root, text=title, fg="white", bg=bg_color, font=("Arial", 14, "bold")
+        )
+        title_label.pack(side="top", fill="x")
+
+        # Create message label
+        message_label = tk.Label(
+            root, text=message, fg="white", bg=bg_color, font=("Arial", 12)
+        )
+        message_label.pack(side="top", fill="x")
+
+        # Resize window to fit contents
+        root.update_idletasks()
+        width = root.winfo_reqwidth()
+        height = root.winfo_reqheight()
+        x = root.winfo_screenwidth() - width
+        y = 0
+        root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+
+        # Set timeout to close notification after duration
+        root.after(duration, root.destroy)
+
+        root.mainloop()
+
+    # Run show_notification function in a separate thread
+    t = threading.Thread(target=show_notification)
+    t.start()

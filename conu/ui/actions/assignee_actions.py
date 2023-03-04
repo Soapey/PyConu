@@ -16,8 +16,7 @@ from conu.helpers import (
     load_entities_into_table,
     navigate,
     selected_row_id,
-    show_error,
-    show_toast,
+    create_notification,
     set_button_visibility,
 )
 from conu.ui.PageEnum import Page
@@ -176,7 +175,11 @@ def delete_assignee(main_window) -> None:
     global global_assignees
     entity = global_assignees[selected_id]
     delete_by_attrs_dict(Assignee, {"id": entity.id})
-    show_toast("Delete Successful", f"Successfully deleted assignee: {entity.name}", 1)
+    create_notification(
+        "Delete Successful",
+        [f"Successfully deleted assignee: {entity.name}"],
+        "#74c69d",
+    )
     load_assignee_listingview(main_window)
 
 
@@ -190,7 +193,7 @@ def assignee_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
 
     if error_strings:
-        show_error("Cannot Save Assignee", error_strings)
+        create_notification("Cannot Save Assignee", error_strings, "red")
         return False
 
     return True
@@ -250,7 +253,9 @@ def save_assignee(main_window) -> None:
 
     save_by_list(assigneedepartments_to_save)
 
-    show_toast("Safe Successful", f"Successfully saved assignee: {entity.name}", 1)
+    create_notification(
+        "Safe Successful", [f"Successfully saved assignee: {entity.name}"], "#74c69d"
+    )
 
     load_assignee_listingview(main_window)
 
