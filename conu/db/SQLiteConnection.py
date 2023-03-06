@@ -3,6 +3,7 @@ import sqlite3
 from conu.classes.User import User
 from conu.classes.Department import Department
 from conu.classes.UserDepartment import UserDepartment
+from conu.classes.PriorityLevel import PriorityLevel
 from conu.helpers import read_config_file, join_to_project_folder, hash_sha512
 
 
@@ -171,10 +172,19 @@ def add_test_data(file_path: str = None):
         Department(None, "Work, Health & Safety"),
         Department(None, "Transport"),
     ]
+
+    prioritylevels = [
+        PriorityLevel(None, "Very High", 3),
+        PriorityLevel(None, "High", 7),
+        PriorityLevel(None, "Medium", 14),
+        PriorityLevel(None, "Low", 31),
+        PriorityLevel(None, "Monitoring", 183),
+    ]
     
 
     save_by_list(users)
     save_by_list(departments)
+    save_by_list(prioritylevels)
 
     users = select_by_attrs_dict(User)
     departments = select_by_attrs_dict(Department)

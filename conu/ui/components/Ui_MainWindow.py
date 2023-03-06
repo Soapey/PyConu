@@ -935,6 +935,305 @@ class Ui_MainWindow(object):
         self.form_entryform_lblId.setObjectName("form_entryform_lblId")
         self.gridLayout_6.addWidget(self.form_entryform_lblId, 1, 2, 1, 4)
         self.page_handler.addWidget(self.page_form_entryform)
+        self.page_prioritylevel_listingview = QtWidgets.QWidget()
+        self.page_prioritylevel_listingview.setObjectName("page_prioritylevel_listingview")
+        self.gridLayout_10 = QtWidgets.QGridLayout(self.page_prioritylevel_listingview)
+        self.gridLayout_10.setObjectName("gridLayout_10")
+        self.label_9 = QtWidgets.QLabel(self.page_prioritylevel_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_9.setFont(font)
+        self.label_9.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_9.setObjectName("label_9")
+        self.gridLayout_10.addWidget(self.label_9, 0, 0, 1, 3)
+        self.prioritylevel_listingview_btnNew = QtWidgets.QPushButton(self.page_prioritylevel_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.prioritylevel_listingview_btnNew.setFont(font)
+        self.prioritylevel_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.prioritylevel_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.prioritylevel_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.prioritylevel_listingview_btnNew.setObjectName("prioritylevel_listingview_btnNew")
+        self.gridLayout_10.addWidget(self.prioritylevel_listingview_btnNew, 1, 0, 1, 1)
+        self.prioritylevel_listingview_btnEdit = QtWidgets.QPushButton(self.page_prioritylevel_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.prioritylevel_listingview_btnEdit.setFont(font)
+        self.prioritylevel_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.prioritylevel_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.prioritylevel_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
+        self.prioritylevel_listingview_btnEdit.setObjectName("prioritylevel_listingview_btnEdit")
+        self.gridLayout_10.addWidget(self.prioritylevel_listingview_btnEdit, 1, 1, 1, 1)
+        self.prioritylevel_listingview_btnDelete = QtWidgets.QPushButton(self.page_prioritylevel_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.prioritylevel_listingview_btnDelete.setFont(font)
+        self.prioritylevel_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.prioritylevel_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.prioritylevel_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.prioritylevel_listingview_btnDelete.setObjectName("prioritylevel_listingview_btnDelete")
+        self.gridLayout_10.addWidget(self.prioritylevel_listingview_btnDelete, 1, 2, 1, 1)
+        self.prioritylevel_listingview_txtSearch = QtWidgets.QLineEdit(self.page_prioritylevel_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.prioritylevel_listingview_txtSearch.setFont(font)
+        self.prioritylevel_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.prioritylevel_listingview_txtSearch.setClearButtonEnabled(True)
+        self.prioritylevel_listingview_txtSearch.setObjectName("prioritylevel_listingview_txtSearch")
+        self.gridLayout_10.addWidget(self.prioritylevel_listingview_txtSearch, 2, 0, 1, 3)
+        self.prioritylevel_listingview_tblPriorityLevel = QtWidgets.QTableWidget(self.page_prioritylevel_listingview)
+        self.prioritylevel_listingview_tblPriorityLevel.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.prioritylevel_listingview_tblPriorityLevel.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.prioritylevel_listingview_tblPriorityLevel.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.prioritylevel_listingview_tblPriorityLevel.setTabKeyNavigation(False)
+        self.prioritylevel_listingview_tblPriorityLevel.setAlternatingRowColors(False)
+        self.prioritylevel_listingview_tblPriorityLevel.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.prioritylevel_listingview_tblPriorityLevel.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.prioritylevel_listingview_tblPriorityLevel.setCornerButtonEnabled(False)
+        self.prioritylevel_listingview_tblPriorityLevel.setObjectName("prioritylevel_listingview_tblPriorityLevel")
+        self.prioritylevel_listingview_tblPriorityLevel.setColumnCount(0)
+        self.prioritylevel_listingview_tblPriorityLevel.setRowCount(0)
+        self.prioritylevel_listingview_tblPriorityLevel.horizontalHeader().setStretchLastSection(True)
+        self.prioritylevel_listingview_tblPriorityLevel.verticalHeader().setVisible(False)
+        self.gridLayout_10.addWidget(self.prioritylevel_listingview_tblPriorityLevel, 3, 0, 1, 3)
+        self.page_handler.addWidget(self.page_prioritylevel_listingview)
+        self.page_prioritylevel_entryform = QtWidgets.QWidget()
+        self.page_prioritylevel_entryform.setObjectName("page_prioritylevel_entryform")
+        self.gridLayout_11 = QtWidgets.QGridLayout(self.page_prioritylevel_entryform)
+        self.gridLayout_11.setObjectName("gridLayout_11")
+        self.label_26 = QtWidgets.QLabel(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_26.setFont(font)
+        self.label_26.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_26.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_26.setObjectName("label_26")
+        self.gridLayout_11.addWidget(self.label_26, 1, 0, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(1007, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_11.addItem(spacerItem6, 5, 1, 1, 1)
+        self.label_27 = QtWidgets.QLabel(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_27.setFont(font)
+        self.label_27.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_27.setObjectName("label_27")
+        self.gridLayout_11.addWidget(self.label_27, 2, 0, 1, 1)
+        self.prioritylevel_entryform_btnSave = QtWidgets.QPushButton(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.prioritylevel_entryform_btnSave.setFont(font)
+        self.prioritylevel_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.prioritylevel_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.prioritylevel_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
+        self.prioritylevel_entryform_btnSave.setObjectName("prioritylevel_entryform_btnSave")
+        self.gridLayout_11.addWidget(self.prioritylevel_entryform_btnSave, 5, 2, 1, 1)
+        self.prioritylevel_entryform_txtName = QtWidgets.QLineEdit(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.prioritylevel_entryform_txtName.setFont(font)
+        self.prioritylevel_entryform_txtName.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.prioritylevel_entryform_txtName.setClearButtonEnabled(True)
+        self.prioritylevel_entryform_txtName.setObjectName("prioritylevel_entryform_txtName")
+        self.gridLayout_11.addWidget(self.prioritylevel_entryform_txtName, 2, 1, 1, 2)
+        self.prioritylevel_entryform_lblId = QtWidgets.QLabel(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.prioritylevel_entryform_lblId.setFont(font)
+        self.prioritylevel_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.prioritylevel_entryform_lblId.setText("")
+        self.prioritylevel_entryform_lblId.setObjectName("prioritylevel_entryform_lblId")
+        self.gridLayout_11.addWidget(self.prioritylevel_entryform_lblId, 1, 1, 1, 2)
+        self.label_25 = QtWidgets.QLabel(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_25.setFont(font)
+        self.label_25.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_25.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_25.setObjectName("label_25")
+        self.gridLayout_11.addWidget(self.label_25, 0, 0, 1, 3)
+        spacerItem7 = QtWidgets.QSpacerItem(1222, 480, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_11.addItem(spacerItem7, 4, 0, 1, 3)
+        self.prioritylevel_entryform_btnBack = QtWidgets.QPushButton(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.prioritylevel_entryform_btnBack.setFont(font)
+        self.prioritylevel_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.prioritylevel_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.prioritylevel_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.prioritylevel_entryform_btnBack.setObjectName("prioritylevel_entryform_btnBack")
+        self.gridLayout_11.addWidget(self.prioritylevel_entryform_btnBack, 5, 0, 1, 1)
+        self.label_3 = QtWidgets.QLabel(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_3.setFont(font)
+        self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_3.setObjectName("label_3")
+        self.gridLayout_11.addWidget(self.label_3, 3, 0, 1, 1)
+        self.prioritylevel_entryform_spnDaysUntilOverdue = QtWidgets.QSpinBox(self.page_prioritylevel_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.prioritylevel_entryform_spnDaysUntilOverdue.setFont(font)
+        self.prioritylevel_entryform_spnDaysUntilOverdue.setStyleSheet("QSpinBox {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.prioritylevel_entryform_spnDaysUntilOverdue.setMinimum(1)
+        self.prioritylevel_entryform_spnDaysUntilOverdue.setMaximum(36500)
+        self.prioritylevel_entryform_spnDaysUntilOverdue.setObjectName("prioritylevel_entryform_spnDaysUntilOverdue")
+        self.gridLayout_11.addWidget(self.prioritylevel_entryform_spnDaysUntilOverdue, 3, 1, 1, 2)
+        self.page_handler.addWidget(self.page_prioritylevel_entryform)
         self.gridLayout.addWidget(self.page_handler, 0, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -954,13 +1253,16 @@ class Ui_MainWindow(object):
         self.action_assignees.setObjectName("action_assignees")
         self.action_forms = QtWidgets.QAction(MainWindow)
         self.action_forms.setObjectName("action_forms")
+        self.action_prioritylevels = QtWidgets.QAction(MainWindow)
+        self.action_prioritylevels.setObjectName("action_prioritylevels")
         self.menuChange_View.addAction(self.action_assignees)
         self.menuChange_View.addAction(self.action_departments)
         self.menuChange_View.addAction(self.action_forms)
+        self.menuChange_View.addAction(self.action_prioritylevels)
         self.menubar.addAction(self.menuChange_View.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(1)
+        self.page_handler.setCurrentIndex(7)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
         MainWindow.setTabOrder(self.assignee_entryform_txtName, self.assignee_entryform_txtDescription)
@@ -1012,11 +1314,25 @@ class Ui_MainWindow(object):
         self.label_23.setText(_translate("MainWindow", "FORM ENTRY FORM"))
         self.form_entryform_txtPath.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
         self.form_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.label_9.setText(_translate("MainWindow", "PRIORITY LEVELS"))
+        self.prioritylevel_listingview_btnNew.setText(_translate("MainWindow", "New"))
+        self.prioritylevel_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
+        self.prioritylevel_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
+        self.prioritylevel_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
+        self.prioritylevel_listingview_tblPriorityLevel.setSortingEnabled(True)
+        self.label_26.setText(_translate("MainWindow", "ID"))
+        self.label_27.setText(_translate("MainWindow", "Name"))
+        self.prioritylevel_entryform_btnSave.setText(_translate("MainWindow", "Save"))
+        self.prioritylevel_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.label_25.setText(_translate("MainWindow", "PRIORITY LEVEL ENTRY FORM"))
+        self.prioritylevel_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
+        self.label_3.setText(_translate("MainWindow", "Days Until Overdue"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))
         self.actionListing_View.setText(_translate("MainWindow", "Listing View"))
         self.action_assignees.setText(_translate("MainWindow", "Assignees"))
         self.action_forms.setText(_translate("MainWindow", "Forms"))
+        self.action_prioritylevels.setText(_translate("MainWindow", "Priority Levels"))
 
 
 if __name__ == "__main__":

@@ -6,12 +6,7 @@ from conu.ui.components.Notification import Notification, NotificationColour
 
 
 def clear_login(login_window) -> None:
-    """
-    Clears the username and password fields of the login form.
 
-    Args:
-        login_window (object): the login window of the application.
-    """
     login_window.ui.login_txtUsername.clear()
     login_window.ui.login_txtPassword.clear()
 
@@ -29,16 +24,13 @@ def set_toolbar_permission_visibility(main_window):
 
 
 def log_out_user(login_window, main_window) -> None:
-    """
-    Logs out the current user and navigates to the login page.
 
-    Args:
-        login_window (object): the login window of the application.
-        main_window (object): the main window of the application.
-    """
     main_window.current_user = None
+
     clear_login(login_window)
+
     login_window.showMaximized()
+
     main_window.close()
 
 
@@ -56,26 +48,12 @@ def login_entryform_is_valid(login_window) -> bool:
         error_strings.append("Password field cannot be blank.")
 
     if error_strings:
-        Notification(
-            "Invalid Login Credentials", error_strings, NotificationColour.ERROR
-        ).show()
-        return False
+        Notification("Invalid Login Credentials", error_strings, NotificationColour.ERROR).show()
 
-    return True
+    return not bool(error_strings)
 
 
 def log_in_user(login_window, main_window) -> None:
-    """
-    Logs in the user with the provided username and password, if they exist in the database,
-    and navigates to the assignee listing view.
-
-    Args:
-        login_window (object): the login window of the application.
-        main_window (object): the main window of the application.
-
-    Returns:
-        None
-    """
 
     if not login_entryform_is_valid(login_window):
         return
@@ -95,6 +73,7 @@ def log_in_user(login_window, main_window) -> None:
     if matching_users_dict:
 
         matching_user = list(matching_users_dict.values())[0]
+
         main_window.current_user = matching_user
 
         set_toolbar_permission_visibility(main_window)
@@ -102,32 +81,14 @@ def log_in_user(login_window, main_window) -> None:
         load_assignee_listingview(main_window)
 
         main_window.showMaximized()
+
         login_window.close()
 
-        Notification(
-            "Log In Successful",
-            [f"Welcome {matching_user.first_name} {matching_user.last_name}"],
-            NotificationColour.SUCCESS,
-        ).show()
+        Notification("Log In Successful", [f"Welcome {matching_user.first_name} {matching_user.last_name}"], NotificationColour.SUCCESS).show()
     else:
-        Notification(
-            "Invalid Login Credentials",
-            ["No user matches the given credentials."],
-            NotificationColour.ERROR,
-        ).show()
+        Notification("Invalid Login Credentials", ["No user matches the given credentials."], NotificationColour.ERROR).show()
 
 
 def connect_login_actions(login_window, main_window) -> None:
-    """
-    Connects the login button to the log_in_user function.
 
-    Args:
-        login_window (object): the login window of the application.
-        main_window (object): the main window of the application.
-
-    Returns:
-        None
-    """
-    login_window.ui.login_btnLogin.clicked.connect(
-        lambda: log_in_user(login_window, main_window)
-    )
+    login_window.ui.login_btnLogin.clicked.connect(lambda: log_in_user(login_window, main_window))

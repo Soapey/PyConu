@@ -137,12 +137,9 @@ def department_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
 
     if error_strings:
-        Notification(
-            "Cannot Save Department", error_strings, NotificationColour.ERROR
-        ).show()
-        return False
+        Notification("Cannot Save Department", error_strings, NotificationColour.ERROR).show()
 
-    return True
+    return not bool(error_strings)
 
 
 def save_department(main_window) -> None:

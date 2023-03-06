@@ -4,6 +4,7 @@ from conu.ui.actions.menu_actions import connect_menu_actions
 from conu.ui.actions.assignee_actions import connect_assignee_actions
 from conu.ui.actions.department_actions import connect_department_actions
 from conu.ui.actions.form_actions import connect_form_actions
+from conu.ui.actions.prioritylevel_actions import connect_prioritylevel_actions
 
 
 class MainWindow(QMainWindow):
@@ -19,3 +20,4 @@ class MainWindow(QMainWindow):
         connect_assignee_actions(self)
         connect_department_actions(self)
         connect_form_actions(self)
+        connect_prioritylevel_actions(self)

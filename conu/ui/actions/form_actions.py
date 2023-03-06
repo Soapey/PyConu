@@ -26,7 +26,7 @@ def load_form_listingview(main_window) -> None:
 
     forms_by_search(main_window, None)
 
-    set_form_button_visibility(main_window)
+    set_form_button_visibility(main_window, [main_window.ui.form_listingview_btnEdit, main_window.ui.form_listingview_btnDelete])
 
     navigate(main_window, Page.FORM_LISTINGVIEW)
 
@@ -63,19 +63,17 @@ def edit_form(main_window) -> None:
 
 def delete_form(main_window) -> None:
 
-    if not askyesno(
-        "Confirm delete", "Are you sure you would like to delete the selected record?"
-    ):
+    if not askyesno("Confirm delete", "Are you sure you would like to delete the selected record?"):
         return
+    
     selected_id = selected_row_id(main_window.ui.form_listingview_tblForm)
     global global_forms
     entity = global_forms[selected_id]
+
     delete_by_attrs_dict(Form, {"id": entity.id})
-    Notification(
-        "Delete Successful",
-        [f"Successfully deleted form: {entity.name}"],
-        NotificationColour.SUCCESS,
-    ).show()
+
+    Notification("Delete Successful", [f"Successfully deleted form: {entity.name}"], NotificationColour.SUCCESS).show()
+
     load_form_listingview(main_window)
 
 
@@ -94,9 +92,8 @@ def form_entryform_is_valid(main_window) -> bool:
 
     if error_strings:
         Notification("Cannot Save Form", error_strings, NotificationColour.ERROR).show()
-        return False
 
-    return True
+    return not bool(error_strings)
 
 
 def save_form(main_window) -> None:
@@ -119,11 +116,7 @@ def save_form(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification(
-        "Save Successful",
-        [f"Successfully saved form: {entity.name}"],
-        NotificationColour.SUCCESS,
-    ).show()
+    Notification("Save Successful", [f"Successfully saved form: {entity.name}"], NotificationColour.SUCCESS).show()
 
     load_form_listingview(main_window)
 
@@ -170,16 +163,11 @@ def select_form_filepath(main_window):
         main_window.ui.form_entryform_txtPath.setText(filepath)
 
 
-def set_form_button_visibility(main_window):
-
-    is_visible = selected_row_id(main_window.ui.form_listingview_tblForm) is not None
+def set_form_button_visibility(main_window, buttons):
 
     set_button_visibility(
-        [
-            main_window.ui.form_listingview_btnEdit,
-            main_window.ui.form_listingview_btnDelete,
-        ],
-        is_visible,
+        buttons,
+        selected_row_id(main_window.ui.form_listingview_tblForm) is not None,
     )
 
 
@@ -208,6 +196,6 @@ def connect_form_actions(main_window) -> None:
     main_window.ui.form_entryform_btnSelectPath.clicked.connect(
         lambda: select_form_filepath(main_window)
     )
-    main_window.ui.department_listingview_tblDepartment.itemSelectionChanged.connect(
-        lambda: set_form_button_visibility(main_window)
+    main_window.ui.form_listingview_tblForm.itemSelectionChanged.connect(
+        lambda: set_form_button_visibility(main_window, [main_window.ui.form_listingview_btnEdit, main_window.ui.form_listingview_btnDelete])
     )
