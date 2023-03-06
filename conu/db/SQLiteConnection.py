@@ -167,9 +167,11 @@ def add_test_data(file_path: str = None):
 
     departments = [
         Department(None, "Maintenance"),
-        Department(None, "Work Health & Safety"),
         Department(None, "Environmental"),
+        Department(None, "Work, Health & Safety"),
+        Department(None, "Transport"),
     ]
+    
 
     save_by_list(users)
     save_by_list(departments)

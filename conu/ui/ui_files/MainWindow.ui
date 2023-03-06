@@ -525,35 +525,40 @@ QPushButton:hover {
         <item row="4" column="1" colspan="2">
          <widget class="QScrollArea" name="assignee_entryform_scrollDepartments">
           <property name="styleSheet">
-           <string notr="true">QScrollArea {
-	border-style: inset;
-	border-width: 1px;
-	border-radius: 5px;
-	border-color: black;
-}</string>
-          </property>
-          <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOff</enum>
+           <string notr="true"/>
           </property>
           <property name="widgetResizable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="scrollAreaWidgetContents">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1008</width>
+             <width>1084</width>
              <height>154</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
             <item row="0" column="0">
-             <layout class="QVBoxLayout" name="assignee_entryform_vboxDepartments">
-              <property name="spacing">
-               <number>3</number>
+             <widget class="QGroupBox" name="assignee_entryform_groupDepartments">
+              <property name="styleSheet">
+               <string notr="true">QGroupBox {
+	border: none;
+}</string>
               </property>
-             </layout>
+              <property name="title">
+               <string/>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="assignee_entryform_vboxDepartments"/>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </widget>

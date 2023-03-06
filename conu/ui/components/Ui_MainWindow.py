@@ -330,24 +330,27 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.gridLayout_4.addWidget(self.label_2, 4, 0, 1, 1)
         self.assignee_entryform_scrollDepartments = QtWidgets.QScrollArea(self.page_assignee_entryform)
-        self.assignee_entryform_scrollDepartments.setStyleSheet("QScrollArea {\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"}")
-        self.assignee_entryform_scrollDepartments.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.assignee_entryform_scrollDepartments.setWidgetResizable(False)
+        self.assignee_entryform_scrollDepartments.setStyleSheet("")
+        self.assignee_entryform_scrollDepartments.setWidgetResizable(True)
         self.assignee_entryform_scrollDepartments.setObjectName("assignee_entryform_scrollDepartments")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1008, 154))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1084, 154))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
+        self.assignee_entryform_groupDepartments = QtWidgets.QGroupBox(self.scrollAreaWidgetContents)
+        self.assignee_entryform_groupDepartments.setStyleSheet("QGroupBox {\n"
+"    border: none;\n"
+"}")
+        self.assignee_entryform_groupDepartments.setTitle("")
+        self.assignee_entryform_groupDepartments.setFlat(False)
+        self.assignee_entryform_groupDepartments.setObjectName("assignee_entryform_groupDepartments")
+        self.gridLayout_9 = QtWidgets.QGridLayout(self.assignee_entryform_groupDepartments)
+        self.gridLayout_9.setObjectName("gridLayout_9")
         self.assignee_entryform_vboxDepartments = QtWidgets.QVBoxLayout()
-        self.assignee_entryform_vboxDepartments.setSpacing(3)
         self.assignee_entryform_vboxDepartments.setObjectName("assignee_entryform_vboxDepartments")
-        self.gridLayout_7.addLayout(self.assignee_entryform_vboxDepartments, 0, 0, 1, 1)
+        self.gridLayout_9.addLayout(self.assignee_entryform_vboxDepartments, 0, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.assignee_entryform_groupDepartments, 0, 0, 1, 1)
         self.assignee_entryform_scrollDepartments.setWidget(self.scrollAreaWidgetContents)
         self.gridLayout_4.addWidget(self.assignee_entryform_scrollDepartments, 4, 1, 1, 2)
         self.page_handler.addWidget(self.page_assignee_entryform)

@@ -1,6 +1,6 @@
 from conu.classes.User import User
 from conu.db.SQLiteConnection import select_by_attrs_dict
-from conu.helpers import hash_sha512, create_notification
+from conu.helpers import hash_sha512
 from conu.ui.actions.assignee_actions import load_assignee_listingview
 from conu.ui.components.Notification import Notification, NotificationColour
 

@@ -6,7 +6,6 @@ from conu.ui.PageEnum import Page
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 import tkinter as tk
 from tkinter import filedialog
-import threading
 
 
 def navigate(main_window, page: Page):
@@ -193,41 +192,9 @@ def set_button_visibility(buttons: list, is_visible: bool):
         button.setVisible(is_visible)
 
 
-def create_notification(title, message_items, bg_color="#333333", duration=3000):
+def clear_widget_children(widget):
 
-    message = "\n".join([f"• {m}" for m in message_items])
-
-    def show_notification():
-        root = tk.Tk()
-        root.overrideredirect(True)
-        root.geometry("+{}+{}".format(root.winfo_screenwidth(), 0))
-        root.configure(bg=bg_color)
-
-        # Create title label
-        title_label = tk.Label(
-            root, text=title, fg="white", bg=bg_color, font=("Arial", 14, "bold")
-        )
-        title_label.pack(side="top", fill="x")
-
-        # Create message label
-        message_label = tk.Label(
-            root, text=message, fg="white", bg=bg_color, font=("Arial", 12)
-        )
-        message_label.pack(side="top", fill="x")
-
-        # Resize window to fit contents
-        root.update_idletasks()
-        width = root.winfo_reqwidth()
-        height = root.winfo_reqheight()
-        x = root.winfo_screenwidth() - width
-        y = 0
-        root.geometry("{}x{}+{}+{}".format(width, height, x, y))
-
-        # Set timeout to close notification after duration
-        root.after(duration, root.destroy)
-
-        root.mainloop()
-
-    # Run show_notification function in a separate thread
-    t = threading.Thread(target=show_notification)
-    t.start()
+    while widget.count():
+        child = widget.takeAt(0)
+        if child.widget():
+            child.widget().deleteLater()
