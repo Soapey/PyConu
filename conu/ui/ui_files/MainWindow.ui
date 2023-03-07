@@ -4518,7 +4518,7 @@ QSpinBox:focus {
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel {
-	background-color: lightgrey;
+	background-color: white;
 	border-style: inset;
 	border-width: 1px;
 	border-radius: 5px;

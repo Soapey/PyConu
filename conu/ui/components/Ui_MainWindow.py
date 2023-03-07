@@ -2815,7 +2815,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.label_54.setFont(font)
         self.label_54.setStyleSheet("QLabel {\n"
-"    background-color: lightgrey;\n"
+"    background-color: white;\n"
 "    border-style: inset;\n"
 "    border-width: 1px;\n"
 "    border-radius: 5px;\n"
