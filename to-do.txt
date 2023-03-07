@@ -1,1 +1,3 @@
+* Do not show any new/edit/delete buttons if the user is a read-only permission
+* Add export buttons to each table that creates a csv file for the table
 * Hide edit/delete buttons if no row in tables are selected, show them again once row is selected

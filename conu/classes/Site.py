@@ -7,4 +7,3 @@ class Site:
     name: str
     address: str
     suburb: str
-    available: bool

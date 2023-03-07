@@ -18,7 +18,7 @@ from conu.helpers import (
     selected_row_id,
     set_button_visibility,
 )
-from conu.ui.components.Notification import Notification, NotificationColour
+from conu.ui.components.Notification import Notification
 from conu.ui.PageEnum import Page
 
 
@@ -34,7 +34,7 @@ def load_assignee_listingview(main_window) -> None:
 
     assignees_by_search(main_window, None)
 
-    set_assignee_button_visibility(main_window, [main_window.ui.assignee_listingview_btnEdit, main_window.ui.assignee_listingview_btnDelete])
+    set_assignee_button_visibility(main_window)
 
     navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
 
@@ -121,11 +121,7 @@ def delete_assignee(main_window) -> None:
 
     delete_by_attrs_dict(Assignee, {"id": entity.id})
 
-    Notification(
-        "Delete Successful",
-        [f"Successfully deleted assignee: {entity.name}"],
-        NotificationColour.SUCCESS,
-    ).show()
+    Notification("Delete Successful", [f"Successfully deleted assignee: {entity.name}"]).show()
 
     load_assignee_listingview(main_window)
 
@@ -142,7 +138,7 @@ def assignee_entryform_is_valid(main_window) -> bool:
         error_strings.append("At least one department must be selected.")
 
     if error_strings:
-        Notification("Cannot Save Assignee", error_strings, NotificationColour.ERROR).show()
+        Notification("Cannot Save Assignee", error_strings).show()
 
     return not bool(error_strings)
 
@@ -179,9 +175,7 @@ def save_assignee(main_window) -> None:
     if not assignee_entryform_is_valid(main_window):
         return
 
-    if not askyesno(
-        "Confirm save", "Are you sure you would like to save the current record?"
-    ):
+    if not askyesno("Confirm save", "Are you sure you would like to save the current record?"):
         return
 
     entity = Assignee(
@@ -196,11 +190,7 @@ def save_assignee(main_window) -> None:
 
     save_and_delete_assigneedepartments(main_window, entity_id)
 
-    Notification(
-        "Safe Successful",
-        [f"Successfully saved assignee: {entity.name}"],
-        NotificationColour.SUCCESS,
-    ).show()
+    Notification("Safe Successful", [f"Successfully saved assignee: {entity.name}"]).show()
 
     load_assignee_listingview(main_window)
 
@@ -235,12 +225,23 @@ def assignees_by_search(main_window, search_text: str) -> None:
     )
 
 
-def set_assignee_button_visibility(main_window, buttons):
+def set_assignee_button_visibility(main_window):
 
-    set_button_visibility(
-        buttons,
-        selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is not None,
-    )
+    if main_window.current_user.permission_level <= 1:
+        set_button_visibility([
+            main_window.ui.assignee_listingview_btnNew,
+            main_window.ui.assignee_listingview_btnEdit,
+            main_window.ui.assignee_listingview_btnDelete,
+            ],
+            is_visible=False)
+    else:
+        set_button_visibility([main_window.ui.assignee_listingview_btnNew], is_visible=True)
+        set_button_visibility([
+            main_window.ui.assignee_listingview_btnEdit,
+            main_window.ui.assignee_listingview_btnDelete
+            ],
+            is_visible=selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is not None,
+        )
 
 
 def connect_assignee_actions(main_window) -> None:
@@ -266,5 +267,5 @@ def connect_assignee_actions(main_window) -> None:
         )
     )
     main_window.ui.assignee_listingview_tblAssignee.itemSelectionChanged.connect(
-        lambda: set_assignee_button_visibility(main_window, [main_window.ui.assignee_listingview_btnEdit, main_window.ui.assignee_listingview_btnDelete])
+        lambda: set_assignee_button_visibility(main_window)
     )

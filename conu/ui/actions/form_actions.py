@@ -1,7 +1,7 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Form import Form
-from conu.ui.components.Notification import Notification, NotificationColour
+from conu.ui.components.Notification import Notification
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
     save_by_list,
@@ -26,7 +26,7 @@ def load_form_listingview(main_window) -> None:
 
     forms_by_search(main_window, None)
 
-    set_form_button_visibility(main_window, [main_window.ui.form_listingview_btnEdit, main_window.ui.form_listingview_btnDelete])
+    set_form_button_visibility(main_window)
 
     navigate(main_window, Page.FORM_LISTINGVIEW)
 
@@ -41,9 +41,8 @@ def clear_form_entryform(main_window) -> None:
 def new_form(main_window) -> None:
 
     clear_form_entryform(main_window)
-    main_window.ui.form_entryform_txtName.setFocus()
 
-    print("entryform ready!")
+    main_window.ui.form_entryform_txtName.setFocus()
 
     navigate(main_window, Page.FORM_ENTRYFORM)
 
@@ -51,13 +50,14 @@ def new_form(main_window) -> None:
 def edit_form(main_window) -> None:
 
     selected_id = selected_row_id(main_window.ui.form_listingview_tblForm)
-
     global global_forms
     entity = global_forms[selected_id]
+
     main_window.ui.form_entryform_lblId.setText(str(entity.id))
     main_window.ui.form_entryform_txtName.setText(entity.name)
     main_window.ui.form_entryform_txtPath.setText(entity.path)
     main_window.ui.form_entryform_txtName.setFocus()
+
     navigate(main_window, Page.FORM_ENTRYFORM)
 
 
@@ -72,7 +72,7 @@ def delete_form(main_window) -> None:
 
     delete_by_attrs_dict(Form, {"id": entity.id})
 
-    Notification("Delete Successful", [f"Successfully deleted form: {entity.name}"], NotificationColour.SUCCESS).show()
+    Notification("Delete Successful", [f"Successfully deleted form: {entity.name}"]).show()
 
     load_form_listingview(main_window)
 
@@ -91,7 +91,7 @@ def form_entryform_is_valid(main_window) -> bool:
         error_strings.append("Path field cannot be blank.")
 
     if error_strings:
-        Notification("Cannot Save Form", error_strings, NotificationColour.ERROR).show()
+        Notification("Cannot Save Form", error_strings).show()
 
     return not bool(error_strings)
 
@@ -116,7 +116,7 @@ def save_form(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification("Save Successful", [f"Successfully saved form: {entity.name}"], NotificationColour.SUCCESS).show()
+    Notification("Save Successful", [f"Successfully saved form: {entity.name}"]).show()
 
     load_form_listingview(main_window)
 
@@ -163,12 +163,23 @@ def select_form_filepath(main_window):
         main_window.ui.form_entryform_txtPath.setText(filepath)
 
 
-def set_form_button_visibility(main_window, buttons):
+def set_form_button_visibility(main_window):
 
-    set_button_visibility(
-        buttons,
-        selected_row_id(main_window.ui.form_listingview_tblForm) is not None,
-    )
+    if main_window.current_user.permission_level <= 1:
+        set_button_visibility([
+            main_window.ui.form_listingview_btnNew,
+            main_window.ui.form_listingview_btnEdit,
+            main_window.ui.form_listingview_btnDelete,
+            ],
+            is_visible=False)
+    else:
+        set_button_visibility([main_window.ui.form_listingview_btnNew], is_visible=True)
+        set_button_visibility([
+            main_window.ui.form_listingview_btnEdit,
+            main_window.ui.form_listingview_btnDelete
+            ],
+            is_visible=selected_row_id(main_window.ui.form_listingview_tblForm) is not None,
+        )
 
 
 def connect_form_actions(main_window) -> None:
@@ -197,5 +208,5 @@ def connect_form_actions(main_window) -> None:
         lambda: select_form_filepath(main_window)
     )
     main_window.ui.form_listingview_tblForm.itemSelectionChanged.connect(
-        lambda: set_form_button_visibility(main_window, [main_window.ui.form_listingview_btnEdit, main_window.ui.form_listingview_btnDelete])
+        lambda: set_form_button_visibility(main_window)
     )

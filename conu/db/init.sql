@@ -68,8 +68,7 @@ CREATE TABLE IF NOT EXISTS [site] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
     [name] TEXT NOT NULL,
     [address] TEXT,
-    [suburb] TEXT,
-    [available] INTEGER NOT NULL
+    [suburb] TEXT
 );
 
 CREATE TABLE IF NOT EXISTS [user] (

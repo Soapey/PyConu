@@ -151,18 +151,48 @@ def add_test_data(file_path: str = None):
 
     users = [
         User(
-            None, "Admin", "Admin", "Admin", "n/a", "admin", hash_sha512("admin"), 4, 1
+            id=None, 
+            first_name="1", 
+            last_name="1", 
+            job_title="1", 
+            email_address="n/a", 
+            username="u1", 
+            password=hash_sha512("u1"), 
+            permission_level=1, 
+            available=1
         ),
         User(
-            None,
-            "Grant",
-            "Soper",
-            "Weighbridge Officer",
-            "gs@hunterquarries.com.au",
-            "gs",
-            hash_sha512("gs"),
-            2,
-            1,
+            id=None, 
+            first_name="2", 
+            last_name="2", 
+            job_title="2", 
+            email_address="n/a", 
+            username="u2", 
+            password=hash_sha512("u2"), 
+            permission_level=2, 
+            available=1
+        ),
+        User(
+            id=None, 
+            first_name="3", 
+            last_name="3", 
+            job_title="3", 
+            email_address="n/a", 
+            username="u3", 
+            password=hash_sha512("u3"), 
+            permission_level=3, 
+            available=1
+        ),
+        User(
+            id=None, 
+            first_name="4", 
+            last_name="4", 
+            job_title="4", 
+            email_address="n/a", 
+            username="u4", 
+            password=hash_sha512("u4"), 
+            permission_level=4, 
+            available=1
         ),
     ]
 
