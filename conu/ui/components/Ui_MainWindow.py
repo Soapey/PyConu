@@ -2098,6 +2098,339 @@ class Ui_MainWindow(object):
         self.label_38.setObjectName("label_38")
         self.gridLayout_15.addWidget(self.label_38, 8, 0, 1, 1)
         self.page_handler.addWidget(self.page_user_entryform)
+        self.page_item_listingview = QtWidgets.QWidget()
+        self.page_item_listingview.setObjectName("page_item_listingview")
+        self.gridLayout_18 = QtWidgets.QGridLayout(self.page_item_listingview)
+        self.gridLayout_18.setObjectName("gridLayout_18")
+        self.label_39 = QtWidgets.QLabel(self.page_item_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_39.setFont(font)
+        self.label_39.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_39.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_39.setObjectName("label_39")
+        self.gridLayout_18.addWidget(self.label_39, 0, 0, 1, 3)
+        self.item_listingview_btnNew = QtWidgets.QPushButton(self.page_item_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.item_listingview_btnNew.setFont(font)
+        self.item_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.item_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.item_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.item_listingview_btnNew.setObjectName("item_listingview_btnNew")
+        self.gridLayout_18.addWidget(self.item_listingview_btnNew, 1, 0, 1, 1)
+        self.item_listingview_btnEdit = QtWidgets.QPushButton(self.page_item_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.item_listingview_btnEdit.setFont(font)
+        self.item_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.item_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.item_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
+        self.item_listingview_btnEdit.setObjectName("item_listingview_btnEdit")
+        self.gridLayout_18.addWidget(self.item_listingview_btnEdit, 1, 1, 1, 1)
+        self.item_listingview_btnDelete = QtWidgets.QPushButton(self.page_item_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.item_listingview_btnDelete.setFont(font)
+        self.item_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.item_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.item_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.item_listingview_btnDelete.setObjectName("item_listingview_btnDelete")
+        self.gridLayout_18.addWidget(self.item_listingview_btnDelete, 1, 2, 1, 1)
+        self.item_listingview_txtSearch = QtWidgets.QLineEdit(self.page_item_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.item_listingview_txtSearch.setFont(font)
+        self.item_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.item_listingview_txtSearch.setClearButtonEnabled(True)
+        self.item_listingview_txtSearch.setObjectName("item_listingview_txtSearch")
+        self.gridLayout_18.addWidget(self.item_listingview_txtSearch, 2, 0, 1, 3)
+        self.item_listingview_tblItem = QtWidgets.QTableWidget(self.page_item_listingview)
+        self.item_listingview_tblItem.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.item_listingview_tblItem.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.item_listingview_tblItem.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.item_listingview_tblItem.setTabKeyNavigation(False)
+        self.item_listingview_tblItem.setAlternatingRowColors(False)
+        self.item_listingview_tblItem.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.item_listingview_tblItem.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.item_listingview_tblItem.setCornerButtonEnabled(False)
+        self.item_listingview_tblItem.setObjectName("item_listingview_tblItem")
+        self.item_listingview_tblItem.setColumnCount(0)
+        self.item_listingview_tblItem.setRowCount(0)
+        self.item_listingview_tblItem.horizontalHeader().setStretchLastSection(True)
+        self.item_listingview_tblItem.verticalHeader().setVisible(False)
+        self.gridLayout_18.addWidget(self.item_listingview_tblItem, 3, 0, 1, 3)
+        self.page_handler.addWidget(self.page_item_listingview)
+        self.page_item_entryform = QtWidgets.QWidget()
+        self.page_item_entryform.setObjectName("page_item_entryform")
+        self.gridLayout_20 = QtWidgets.QGridLayout(self.page_item_entryform)
+        self.gridLayout_20.setObjectName("gridLayout_20")
+        self.label_47 = QtWidgets.QLabel(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_47.setFont(font)
+        self.label_47.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_47.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_47.setObjectName("label_47")
+        self.gridLayout_20.addWidget(self.label_47, 0, 0, 1, 3)
+        spacerItem12 = QtWidgets.QSpacerItem(1007, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_20.addItem(spacerItem12, 6, 1, 1, 1)
+        self.label_43 = QtWidgets.QLabel(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_43.setFont(font)
+        self.label_43.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_43.setObjectName("label_43")
+        self.gridLayout_20.addWidget(self.label_43, 2, 0, 1, 1)
+        self.item_entryform_btnBack = QtWidgets.QPushButton(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.item_entryform_btnBack.setFont(font)
+        self.item_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.item_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.item_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.item_entryform_btnBack.setObjectName("item_entryform_btnBack")
+        self.gridLayout_20.addWidget(self.item_entryform_btnBack, 6, 0, 1, 1)
+        self.label_46 = QtWidgets.QLabel(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_46.setFont(font)
+        self.label_46.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_46.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_46.setObjectName("label_46")
+        self.gridLayout_20.addWidget(self.label_46, 1, 0, 1, 1)
+        self.label_45 = QtWidgets.QLabel(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_45.setFont(font)
+        self.label_45.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_45.setObjectName("label_45")
+        self.gridLayout_20.addWidget(self.label_45, 3, 0, 1, 1)
+        spacerItem13 = QtWidgets.QSpacerItem(1222, 219, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_20.addItem(spacerItem13, 5, 0, 1, 3)
+        self.item_entryform_btnSave = QtWidgets.QPushButton(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.item_entryform_btnSave.setFont(font)
+        self.item_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.item_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.item_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
+        self.item_entryform_btnSave.setObjectName("item_entryform_btnSave")
+        self.gridLayout_20.addWidget(self.item_entryform_btnSave, 6, 2, 1, 1)
+        self.item_entryform_txtName = QtWidgets.QLineEdit(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.item_entryform_txtName.setFont(font)
+        self.item_entryform_txtName.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.item_entryform_txtName.setClearButtonEnabled(True)
+        self.item_entryform_txtName.setObjectName("item_entryform_txtName")
+        self.gridLayout_20.addWidget(self.item_entryform_txtName, 2, 1, 1, 2)
+        self.item_entryform_txtComments = QtWidgets.QTextEdit(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.item_entryform_txtComments.setFont(font)
+        self.item_entryform_txtComments.setStyleSheet("QTextEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.item_entryform_txtComments.setDocumentTitle("")
+        self.item_entryform_txtComments.setObjectName("item_entryform_txtComments")
+        self.gridLayout_20.addWidget(self.item_entryform_txtComments, 3, 1, 1, 2)
+        self.item_entryform_lblId = QtWidgets.QLabel(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.item_entryform_lblId.setFont(font)
+        self.item_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.item_entryform_lblId.setText("")
+        self.item_entryform_lblId.setObjectName("item_entryform_lblId")
+        self.gridLayout_20.addWidget(self.item_entryform_lblId, 1, 1, 1, 2)
+        self.label_40 = QtWidgets.QLabel(self.page_item_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_40.setFont(font)
+        self.label_40.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_40.setObjectName("label_40")
+        self.gridLayout_20.addWidget(self.label_40, 4, 0, 1, 1)
+        self.item_entryform_scrollDepartments = QtWidgets.QScrollArea(self.page_item_entryform)
+        self.item_entryform_scrollDepartments.setStyleSheet("QScrollArea {\n"
+"    min-height: 200px;\n"
+"}")
+        self.item_entryform_scrollDepartments.setWidgetResizable(True)
+        self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
+        self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1084, 200))
+        self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
+        self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
+        self.gridLayout_21.setObjectName("gridLayout_21")
+        self.item_entryform_groupDepartments = QtWidgets.QGroupBox(self.scrollAreaWidgetContents_3)
+        self.item_entryform_groupDepartments.setStyleSheet("QGroupBox {\n"
+"    border: none;\n"
+"}")
+        self.item_entryform_groupDepartments.setTitle("")
+        self.item_entryform_groupDepartments.setObjectName("item_entryform_groupDepartments")
+        self.gridLayout_22 = QtWidgets.QGridLayout(self.item_entryform_groupDepartments)
+        self.gridLayout_22.setObjectName("gridLayout_22")
+        self.item_entryform_vboxDepartments = QtWidgets.QVBoxLayout()
+        self.item_entryform_vboxDepartments.setObjectName("item_entryform_vboxDepartments")
+        self.gridLayout_22.addLayout(self.item_entryform_vboxDepartments, 0, 0, 1, 1)
+        self.gridLayout_21.addWidget(self.item_entryform_groupDepartments, 0, 0, 1, 1)
+        self.item_entryform_scrollDepartments.setWidget(self.scrollAreaWidgetContents_3)
+        self.gridLayout_20.addWidget(self.item_entryform_scrollDepartments, 4, 1, 1, 2)
+        self.page_handler.addWidget(self.page_item_entryform)
         self.gridLayout.addWidget(self.page_handler, 0, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -2129,19 +2462,22 @@ class Ui_MainWindow(object):
         self.action_changepassword.setObjectName("action_changepassword")
         self.action_users = QtWidgets.QAction(MainWindow)
         self.action_users.setObjectName("action_users")
+        self.action_items = QtWidgets.QAction(MainWindow)
+        self.action_items.setObjectName("action_items")
         self.menuChange_View.addAction(self.action_assignees)
         self.menuChange_View.addAction(self.action_departments)
         self.menuChange_View.addAction(self.action_forms)
         self.menuChange_View.addAction(self.action_prioritylevels)
         self.menuChange_View.addAction(self.action_sites)
         self.menuChange_View.addAction(self.action_users)
+        self.menuChange_View.addAction(self.action_items)
         self.menuUser.addAction(self.action_logout)
         self.menuUser.addAction(self.action_changepassword)
         self.menubar.addAction(self.menuChange_View.menuAction())
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(11)
+        self.page_handler.setCurrentIndex(13)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
         MainWindow.setTabOrder(self.assignee_entryform_txtName, self.assignee_entryform_txtDescription)
@@ -2249,6 +2585,21 @@ class Ui_MainWindow(object):
         self.user_entryform_txtUsername.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
         self.user_entryform_txtNewPassword.setPlaceholderText(_translate("MainWindow", "REQUIRED IF NOT ADMIN"))
         self.label_38.setText(_translate("MainWindow", "New Password"))
+        self.label_39.setText(_translate("MainWindow", "ITEMS"))
+        self.item_listingview_btnNew.setText(_translate("MainWindow", "New"))
+        self.item_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
+        self.item_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
+        self.item_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
+        self.item_listingview_tblItem.setSortingEnabled(True)
+        self.label_47.setText(_translate("MainWindow", "ITEM ENTRY FORM"))
+        self.label_43.setText(_translate("MainWindow", "Name"))
+        self.item_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
+        self.label_46.setText(_translate("MainWindow", "ID"))
+        self.label_45.setText(_translate("MainWindow", "Comments"))
+        self.item_entryform_btnSave.setText(_translate("MainWindow", "Save"))
+        self.item_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.item_entryform_txtComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
+        self.label_40.setText(_translate("MainWindow", "Departments"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.menuUser.setTitle(_translate("MainWindow", "User"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))
@@ -2260,6 +2611,7 @@ class Ui_MainWindow(object):
         self.action_logout.setText(_translate("MainWindow", "Log Out"))
         self.action_changepassword.setText(_translate("MainWindow", "Change Password"))
         self.action_users.setText(_translate("MainWindow", "Users"))
+        self.action_items.setText(_translate("MainWindow", "Items"))
 
 
 if __name__ == "__main__":

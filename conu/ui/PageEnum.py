@@ -20,3 +20,6 @@ class Page(Enum):
 
     USER_LISTINGVIEW = 10
     USER_ENTRYFORM = 11
+
+    ITEM_LISTINGVIEW = 12
+    ITEM_ENTRYFORM = 13

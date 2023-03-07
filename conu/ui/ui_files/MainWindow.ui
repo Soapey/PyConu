@@ -21,7 +21,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>11</number>
+       <number>13</number>
       </property>
       <widget class="QWidget" name="page_assignee_listingview">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -3377,6 +3377,548 @@ QLineEdit:focus {
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_item_listingview">
+       <layout class="QGridLayout" name="gridLayout_18">
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_39">
+          <property name="font">
+           <font>
+            <family>Impact</family>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: white;
+    background-color: #05668d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 10px;
+	margin: 0px 0px 20px 0px;
+}</string>
+          </property>
+          <property name="text">
+           <string>ITEMS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="item_listingview_btnNew">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #0db39e;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #16db93;
+}</string>
+          </property>
+          <property name="text">
+           <string>New</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="item_listingview_btnEdit">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #f8961e;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #f9c74f;
+}</string>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="item_listingview_btnDelete">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #f94144;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #ff595e;
+}</string>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QLineEdit" name="item_listingview_txtSearch">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QLineEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="placeholderText">
+           <string>Search</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="3">
+         <widget class="QTableWidget" name="item_listingview_tblItem">
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QTableWidget:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>false</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_item_entryform">
+       <layout class="QGridLayout" name="gridLayout_20">
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_47">
+          <property name="font">
+           <font>
+            <family>Impact</family>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: white;
+    background-color: #05668d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 10px;
+	margin: 0px 0px 20px 0px;
+}</string>
+          </property>
+          <property name="text">
+           <string>ITEM ENTRY FORM</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <spacer name="horizontalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>1007</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_43">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Name</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="item_entryform_btnBack">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #6c757d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #adb5bd;
+}</string>
+          </property>
+          <property name="text">
+           <string>Back to listing view</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_46">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: grey;
+}</string>
+          </property>
+          <property name="text">
+           <string>ID</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_45">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Comments</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="3">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>1222</width>
+            <height>219</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="item_entryform_btnSave">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	width: 60px;
+	color: white;
+    background-color: #006494;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #0582ca;
+}</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="2">
+         <widget class="QLineEdit" name="item_entryform_txtName">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QLineEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>REQUIRED</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" colspan="2">
+         <widget class="QTextEdit" name="item_entryform_txtComments">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTextEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QTextEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
+          </property>
+          <property name="documentTitle">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>OPTIONAL</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QLabel" name="item_entryform_lblId">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_40">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Departments</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="2">
+         <widget class="QScrollArea" name="item_entryform_scrollDepartments">
+          <property name="styleSheet">
+           <string notr="true">QScrollArea {
+	min-height: 200px;
+}</string>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_3">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>1084</width>
+             <height>200</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_21">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="item_entryform_groupDepartments">
+              <property name="styleSheet">
+               <string notr="true">QGroupBox {
+	border: none;
+}</string>
+              </property>
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_22">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="item_entryform_vboxDepartments"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -3400,6 +3942,7 @@ QLineEdit:focus {
     <addaction name="action_prioritylevels"/>
     <addaction name="action_sites"/>
     <addaction name="action_users"/>
+    <addaction name="action_items"/>
    </widget>
    <widget class="QMenu" name="menuUser">
     <property name="title">
@@ -3455,6 +3998,11 @@ QLineEdit:focus {
   <action name="action_users">
    <property name="text">
     <string>Users</string>
+   </property>
+  </action>
+  <action name="action_items">
+   <property name="text">
+    <string>Items</string>
    </property>
   </action>
  </widget>
