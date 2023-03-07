@@ -535,8 +535,8 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1084</width>
-             <height>154</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -2550,7 +2550,14 @@ QLineEdit:focus {
     <addaction name="action_prioritylevels"/>
     <addaction name="action_sites"/>
    </widget>
+   <widget class="QMenu" name="menuUser">
+    <property name="title">
+     <string>User</string>
+    </property>
+    <addaction name="action_logout"/>
+   </widget>
    <addaction name="menuChange_View"/>
+   <addaction name="menuUser"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_departments">
@@ -2581,6 +2588,11 @@ QLineEdit:focus {
   <action name="action_sites">
    <property name="text">
     <string>Sites</string>
+   </property>
+  </action>
+  <action name="action_logout">
+   <property name="text">
+    <string>Log Out</string>
    </property>
   </action>
  </widget>

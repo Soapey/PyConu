@@ -7,5 +7,5 @@ class Notification(winotify.Notification):
             app_id="Conu",
             title=title,
             msg="\n".join(f"• {message}" for message in message_list),
-            icon=""
+            icon=str()
         )

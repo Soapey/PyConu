@@ -9,8 +9,9 @@ from conu.ui.actions.site_actions import connect_site_actions
 
 
 class MainWindow(QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self, login_window) -> None:
         super().__init__()
+        self.login_window = login_window
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.current_user = None
