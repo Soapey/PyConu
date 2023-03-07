@@ -334,7 +334,7 @@ class Ui_MainWindow(object):
         self.assignee_entryform_scrollDepartments.setWidgetResizable(True)
         self.assignee_entryform_scrollDepartments.setObjectName("assignee_entryform_scrollDepartments")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1084, 154))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -2064,6 +2064,16 @@ class Ui_MainWindow(object):
 "")
         self.user_entryform_txtUsername.setObjectName("user_entryform_txtUsername")
         self.gridLayout_15.addWidget(self.user_entryform_txtUsername, 6, 1, 1, 2)
+        self.label_38 = QtWidgets.QLabel(self.page_user_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_38.setFont(font)
+        self.label_38.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_38.setObjectName("label_38")
+        self.gridLayout_15.addWidget(self.label_38, 8, 0, 1, 1)
         self.user_entryform_txtNewPassword = QtWidgets.QLineEdit(self.page_user_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -2086,17 +2096,7 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.user_entryform_txtNewPassword.setObjectName("user_entryform_txtNewPassword")
-        self.gridLayout_15.addWidget(self.user_entryform_txtNewPassword, 8, 1, 1, 1)
-        self.label_38 = QtWidgets.QLabel(self.page_user_entryform)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_38.setFont(font)
-        self.label_38.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_38.setObjectName("label_38")
-        self.gridLayout_15.addWidget(self.label_38, 8, 0, 1, 1)
+        self.gridLayout_15.addWidget(self.user_entryform_txtNewPassword, 8, 1, 1, 2)
         self.page_handler.addWidget(self.page_user_entryform)
         self.page_item_listingview = QtWidgets.QWidget()
         self.page_item_listingview.setObjectName("page_item_listingview")
@@ -2431,6 +2431,415 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidget(self.scrollAreaWidgetContents_3)
         self.gridLayout_20.addWidget(self.item_entryform_scrollDepartments, 4, 1, 1, 2)
         self.page_handler.addWidget(self.page_item_entryform)
+        self.page_servicetracker_listingview = QtWidgets.QWidget()
+        self.page_servicetracker_listingview.setObjectName("page_servicetracker_listingview")
+        self.gridLayout_19 = QtWidgets.QGridLayout(self.page_servicetracker_listingview)
+        self.gridLayout_19.setObjectName("gridLayout_19")
+        self.label_41 = QtWidgets.QLabel(self.page_servicetracker_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_41.setFont(font)
+        self.label_41.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_41.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_41.setObjectName("label_41")
+        self.gridLayout_19.addWidget(self.label_41, 0, 0, 1, 3)
+        self.servicetracker_listingview_btnNew = QtWidgets.QPushButton(self.page_servicetracker_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.servicetracker_listingview_btnNew.setFont(font)
+        self.servicetracker_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.servicetracker_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.servicetracker_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.servicetracker_listingview_btnNew.setObjectName("servicetracker_listingview_btnNew")
+        self.gridLayout_19.addWidget(self.servicetracker_listingview_btnNew, 1, 0, 1, 1)
+        self.servicetracker_listingview_btnEdit = QtWidgets.QPushButton(self.page_servicetracker_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.servicetracker_listingview_btnEdit.setFont(font)
+        self.servicetracker_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.servicetracker_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.servicetracker_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
+        self.servicetracker_listingview_btnEdit.setObjectName("servicetracker_listingview_btnEdit")
+        self.gridLayout_19.addWidget(self.servicetracker_listingview_btnEdit, 1, 1, 1, 1)
+        self.servicetracker_listingview_btnDelete = QtWidgets.QPushButton(self.page_servicetracker_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.servicetracker_listingview_btnDelete.setFont(font)
+        self.servicetracker_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.servicetracker_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.servicetracker_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.servicetracker_listingview_btnDelete.setObjectName("servicetracker_listingview_btnDelete")
+        self.gridLayout_19.addWidget(self.servicetracker_listingview_btnDelete, 1, 2, 1, 1)
+        self.servicetracker_listingview_txtSearch = QtWidgets.QLineEdit(self.page_servicetracker_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.servicetracker_listingview_txtSearch.setFont(font)
+        self.servicetracker_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.servicetracker_listingview_txtSearch.setClearButtonEnabled(True)
+        self.servicetracker_listingview_txtSearch.setObjectName("servicetracker_listingview_txtSearch")
+        self.gridLayout_19.addWidget(self.servicetracker_listingview_txtSearch, 2, 0, 1, 3)
+        self.servicetracker_listingview_tblServiceTracker = QtWidgets.QTableWidget(self.page_servicetracker_listingview)
+        self.servicetracker_listingview_tblServiceTracker.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.servicetracker_listingview_tblServiceTracker.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.servicetracker_listingview_tblServiceTracker.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.servicetracker_listingview_tblServiceTracker.setTabKeyNavigation(False)
+        self.servicetracker_listingview_tblServiceTracker.setAlternatingRowColors(False)
+        self.servicetracker_listingview_tblServiceTracker.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.servicetracker_listingview_tblServiceTracker.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.servicetracker_listingview_tblServiceTracker.setCornerButtonEnabled(False)
+        self.servicetracker_listingview_tblServiceTracker.setObjectName("servicetracker_listingview_tblServiceTracker")
+        self.servicetracker_listingview_tblServiceTracker.setColumnCount(0)
+        self.servicetracker_listingview_tblServiceTracker.setRowCount(0)
+        self.servicetracker_listingview_tblServiceTracker.horizontalHeader().setStretchLastSection(True)
+        self.servicetracker_listingview_tblServiceTracker.verticalHeader().setVisible(False)
+        self.gridLayout_19.addWidget(self.servicetracker_listingview_tblServiceTracker, 3, 0, 1, 3)
+        self.page_handler.addWidget(self.page_servicetracker_listingview)
+        self.page_servicetracker_entryform = QtWidgets.QWidget()
+        self.page_servicetracker_entryform.setObjectName("page_servicetracker_entryform")
+        self.gridLayout_23 = QtWidgets.QGridLayout(self.page_servicetracker_entryform)
+        self.gridLayout_23.setObjectName("gridLayout_23")
+        self.label_52 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_52.setFont(font)
+        self.label_52.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_52.setObjectName("label_52")
+        self.gridLayout_23.addWidget(self.label_52, 7, 0, 1, 1)
+        self.servicetracker_entryform_lblId = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.servicetracker_entryform_lblId.setFont(font)
+        self.servicetracker_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.servicetracker_entryform_lblId.setText("")
+        self.servicetracker_entryform_lblId.setObjectName("servicetracker_entryform_lblId")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_lblId, 1, 1, 1, 2)
+        self.label_50 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_50.setFont(font)
+        self.label_50.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_50.setObjectName("label_50")
+        self.gridLayout_23.addWidget(self.label_50, 3, 0, 1, 1)
+        self.servicetracker_entryform_spnCurrentUnits = QtWidgets.QSpinBox(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_spnCurrentUnits.setStyleSheet("QSpinBox {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.servicetracker_entryform_spnCurrentUnits.setObjectName("servicetracker_entryform_spnCurrentUnits")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_spnCurrentUnits, 4, 1, 1, 2)
+        self.label_42 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_42.setFont(font)
+        self.label_42.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_42.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_42.setObjectName("label_42")
+        self.gridLayout_23.addWidget(self.label_42, 0, 0, 1, 3)
+        self.servicetracker_entryform_spnServiceDueUnits = QtWidgets.QSpinBox(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_spnServiceDueUnits.setStyleSheet("QSpinBox {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.servicetracker_entryform_spnServiceDueUnits.setObjectName("servicetracker_entryform_spnServiceDueUnits")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_spnServiceDueUnits, 6, 1, 1, 2)
+        spacerItem14 = QtWidgets.QSpacerItem(982, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_23.addItem(spacerItem14, 9, 1, 1, 1)
+        spacerItem15 = QtWidgets.QSpacerItem(1222, 354, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_23.addItem(spacerItem15, 8, 0, 1, 3)
+        self.servicetracker_entryform_btnBack = QtWidgets.QPushButton(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.servicetracker_entryform_btnBack.setFont(font)
+        self.servicetracker_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.servicetracker_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.servicetracker_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.servicetracker_entryform_btnBack.setObjectName("servicetracker_entryform_btnBack")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_btnBack, 9, 0, 1, 1)
+        self.label_48 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_48.setFont(font)
+        self.label_48.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_48.setObjectName("label_48")
+        self.gridLayout_23.addWidget(self.label_48, 5, 0, 1, 1)
+        self.label_44 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_44.setFont(font)
+        self.label_44.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_44.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_44.setObjectName("label_44")
+        self.gridLayout_23.addWidget(self.label_44, 1, 0, 1, 1)
+        self.label_49 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_49.setFont(font)
+        self.label_49.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_49.setObjectName("label_49")
+        self.gridLayout_23.addWidget(self.label_49, 4, 0, 1, 1)
+        self.servicetracker_entryform_btnSave = QtWidgets.QPushButton(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.servicetracker_entryform_btnSave.setFont(font)
+        self.servicetracker_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.servicetracker_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.servicetracker_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
+        self.servicetracker_entryform_btnSave.setObjectName("servicetracker_entryform_btnSave")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_btnSave, 9, 2, 1, 1)
+        self.servicetracker_entryform_dteCalibrationDate = QtWidgets.QDateEdit(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_dteCalibrationDate.setStyleSheet("QDateEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QDateEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.servicetracker_entryform_dteCalibrationDate.setObjectName("servicetracker_entryform_dteCalibrationDate")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_dteCalibrationDate, 3, 1, 1, 2)
+        self.servicetracker_entryform_spnAverageUnitsPerDay = QtWidgets.QSpinBox(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_spnAverageUnitsPerDay.setStyleSheet("QSpinBox {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.servicetracker_entryform_spnAverageUnitsPerDay.setObjectName("servicetracker_entryform_spnAverageUnitsPerDay")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_spnAverageUnitsPerDay, 5, 1, 1, 2)
+        self.label_51 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_51.setFont(font)
+        self.label_51.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_51.setObjectName("label_51")
+        self.gridLayout_23.addWidget(self.label_51, 6, 0, 1, 1)
+        self.servicetracker_entryform_spnServiceIntervalUnits = QtWidgets.QSpinBox(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_spnServiceIntervalUnits.setStyleSheet("QSpinBox {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QSpinBox:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.servicetracker_entryform_spnServiceIntervalUnits.setObjectName("servicetracker_entryform_spnServiceIntervalUnits")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_spnServiceIntervalUnits, 7, 1, 1, 2)
+        self.label_53 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_53.setFont(font)
+        self.label_53.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_53.setObjectName("label_53")
+        self.gridLayout_23.addWidget(self.label_53, 2, 0, 1, 1)
+        self.label_54 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.label_54.setFont(font)
+        self.label_54.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.label_54.setText("")
+        self.label_54.setObjectName("label_54")
+        self.gridLayout_23.addWidget(self.label_54, 2, 1, 1, 1)
+        self.servicetracker_entryform_btnSelectItem = QtWidgets.QPushButton(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_btnSelectItem.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.servicetracker_entryform_btnSelectItem.setObjectName("servicetracker_entryform_btnSelectItem")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_btnSelectItem, 2, 2, 1, 1)
+        self.page_handler.addWidget(self.page_servicetracker_entryform)
         self.gridLayout.addWidget(self.page_handler, 0, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -2464,6 +2873,8 @@ class Ui_MainWindow(object):
         self.action_users.setObjectName("action_users")
         self.action_items = QtWidgets.QAction(MainWindow)
         self.action_items.setObjectName("action_items")
+        self.action_servicetrackers = QtWidgets.QAction(MainWindow)
+        self.action_servicetrackers.setObjectName("action_servicetrackers")
         self.menuChange_View.addAction(self.action_assignees)
         self.menuChange_View.addAction(self.action_departments)
         self.menuChange_View.addAction(self.action_forms)
@@ -2471,13 +2882,14 @@ class Ui_MainWindow(object):
         self.menuChange_View.addAction(self.action_sites)
         self.menuChange_View.addAction(self.action_users)
         self.menuChange_View.addAction(self.action_items)
+        self.menuChange_View.addAction(self.action_servicetrackers)
         self.menuUser.addAction(self.action_logout)
         self.menuUser.addAction(self.action_changepassword)
         self.menubar.addAction(self.menuChange_View.menuAction())
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(13)
+        self.page_handler.setCurrentIndex(15)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
         MainWindow.setTabOrder(self.assignee_entryform_txtName, self.assignee_entryform_txtDescription)
@@ -2583,8 +2995,8 @@ class Ui_MainWindow(object):
         self.user_entryform_txtEmailAddress.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
         self.label_13.setText(_translate("MainWindow", "Username"))
         self.user_entryform_txtUsername.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
-        self.user_entryform_txtNewPassword.setPlaceholderText(_translate("MainWindow", "REQUIRED IF NOT ADMIN"))
         self.label_38.setText(_translate("MainWindow", "New Password"))
+        self.user_entryform_txtNewPassword.setPlaceholderText(_translate("MainWindow", "REQUIRED IF NOT ADMIN"))
         self.label_39.setText(_translate("MainWindow", "ITEMS"))
         self.item_listingview_btnNew.setText(_translate("MainWindow", "New"))
         self.item_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
@@ -2600,6 +3012,23 @@ class Ui_MainWindow(object):
         self.item_entryform_txtName.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
         self.item_entryform_txtComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
         self.label_40.setText(_translate("MainWindow", "Departments"))
+        self.label_41.setText(_translate("MainWindow", "SERVICE TRACKERS"))
+        self.servicetracker_listingview_btnNew.setText(_translate("MainWindow", "New"))
+        self.servicetracker_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
+        self.servicetracker_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
+        self.servicetracker_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
+        self.servicetracker_listingview_tblServiceTracker.setSortingEnabled(True)
+        self.label_52.setText(_translate("MainWindow", "Service Interval Units"))
+        self.label_50.setText(_translate("MainWindow", "Calibration Date"))
+        self.label_42.setText(_translate("MainWindow", "SERVICE TRACKER ENTRY FORM"))
+        self.servicetracker_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
+        self.label_48.setText(_translate("MainWindow", "Average Units per Day"))
+        self.label_44.setText(_translate("MainWindow", "ID"))
+        self.label_49.setText(_translate("MainWindow", "Units on Calibration Date"))
+        self.servicetracker_entryform_btnSave.setText(_translate("MainWindow", "Save"))
+        self.label_51.setText(_translate("MainWindow", "Service Due Units"))
+        self.label_53.setText(_translate("MainWindow", "Item"))
+        self.servicetracker_entryform_btnSelectItem.setText(_translate("MainWindow", "Select Item"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.menuUser.setTitle(_translate("MainWindow", "User"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))
@@ -2612,6 +3041,7 @@ class Ui_MainWindow(object):
         self.action_changepassword.setText(_translate("MainWindow", "Change Password"))
         self.action_users.setText(_translate("MainWindow", "Users"))
         self.action_items.setText(_translate("MainWindow", "Items"))
+        self.action_servicetrackers.setText(_translate("MainWindow", "Service Trackers"))
 
 
 if __name__ == "__main__":
