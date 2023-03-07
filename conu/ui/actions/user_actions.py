@@ -175,24 +175,25 @@ def user_entryform_is_valid(main_window) -> bool:
     if not main_window.ui.user_entryform_txtUsername.text():
         error_strings.append("Username field cannot be blank.")
 
-    old_password = main_window.ui.user_entryform_txtOldPassword.text()
-    new_password = main_window.ui.user_entryform_txtNewPassword.text()
+    if main_window.current_user.permission_level <= 2:
+        old_password = main_window.ui.user_entryform_txtOldPassword.text()
+        new_password = main_window.ui.user_entryform_txtNewPassword.text()
 
-    if not old_password:
-        error_strings.append("Old Password field cannot be blank.")
+        if not old_password:
+            error_strings.append("Old Password field cannot be blank.")
 
-    if not new_password:
-        error_strings.append("New Password field cannot be blank.")
+        if not new_password:
+            error_strings.append("New Password field cannot be blank.")
 
-    if old_password and new_password:
-        if selected_id:
-            if entities:
-                entity = entities[0]
-                if hash_sha512(old_password) != entity.password:
-                    error_strings.append("Old Password is not correct.")
-        else:
-            if old_password != new_password:
-                error_strings.append("Old Password does not match New Password.")
+        if old_password and new_password:
+            if selected_id:
+                if entities:
+                    entity = entities[0]
+                    if hash_sha512(old_password) != entity.password:
+                        error_strings.append("Old Password is not correct.")
+            else:
+                if old_password != new_password:
+                    error_strings.append("Old Password does not match New Password.")
 
     vboxDepartments = main_window.ui.user_entryform_vboxDepartments
     if not any(
@@ -246,6 +247,15 @@ def save_user(main_window) -> None:
     ):
         return
 
+    global global_users
+    selected_id = selected_row_id(main_window.ui.user_listingview_tblUser)
+    matches = list(select_by_attrs_dict(User, {"id": selected_id}).values())
+    if matches:
+        match = matches[0]
+
+    old_password = main_window.ui.user_entryform_txtOldPassword.text()
+    new_password = main_window.ui.user_entryform_txtNewPassword.text()
+
     entity = User(
         None
         if len(main_window.ui.user_entryform_lblId.text()) == 0
@@ -255,10 +265,14 @@ def save_user(main_window) -> None:
         main_window.ui.user_entryform_txtJobTitle.text(),
         main_window.ui.user_entryform_txtEmailAddress.text(),
         main_window.ui.user_entryform_txtUsername.text(),
-        hash_sha512(main_window.ui.user_entryform_txtNewPassword.text()),
+        None,
         main_window.ui.user_entryform_spnPermissionLevel.value(),
         main_window.ui.user_entryform_chkAvailable.isChecked(),
     )
+    if not old_password or not new_password:
+        entity.password = match.password
+    else:
+        entity.password = hash_sha512(main_window.ui.entryform_txtPassword.text())
 
     entity_id = sorted(save_by_list([entity]), key=lambda e: e.id, reverse=True)[0].id
 

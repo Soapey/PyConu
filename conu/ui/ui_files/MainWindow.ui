@@ -3246,7 +3246,7 @@ QLineEdit:focus {
            <enum>QLineEdit::Password</enum>
           </property>
           <property name="placeholderText">
-           <string>REQUIRED</string>
+           <string>REQUIRED IF NOT ADMIN</string>
           </property>
          </widget>
         </item>
@@ -3353,7 +3353,7 @@ QLineEdit:focus {
 </string>
           </property>
           <property name="placeholderText">
-           <string>REQUIRED</string>
+           <string>REQUIRED IF NOT ADMIN</string>
           </property>
          </widget>
         </item>

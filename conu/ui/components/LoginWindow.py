@@ -77,7 +77,12 @@ class LoginWindow(QMainWindow):
         login_password_hash = hash_sha512(entered_password)
 
         matching_users_dict = select_by_attrs_dict(
-            User, {"username": entered_username, "password": login_password_hash}
+            User,
+            {
+                "username": entered_username,
+                "password": login_password_hash,
+                "available": 1,
+            },
         )
 
         if matching_users_dict:
