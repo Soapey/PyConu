@@ -21,7 +21,6 @@ class LoginWindow(QMainWindow):
         self.ui.login_txtUsername.clear()
         self.ui.login_txtPassword.clear()
 
-
     def set_toolbar_permission_visibility(self):
 
         user = self.main_window.current_user
@@ -32,7 +31,7 @@ class LoginWindow(QMainWindow):
         admin_toolbars_visible = user.permission_level >= 3
 
         self.main_window.ui.action_departments.setVisible(admin_toolbars_visible)
-
+        self.main_window.ui.action_users.setVisible(admin_toolbars_visible)
 
     def log_out_user(self) -> None:
 
@@ -45,7 +44,6 @@ class LoginWindow(QMainWindow):
         self.showMaximized()
 
         self.main_window.close()
-
 
     def login_entryform_is_valid(self) -> bool:
 
@@ -64,7 +62,6 @@ class LoginWindow(QMainWindow):
             Notification("Invalid Login Credentials", error_strings).show()
 
         return not bool(error_strings)
-
 
     def log_in_user(self) -> None:
 
@@ -97,9 +94,14 @@ class LoginWindow(QMainWindow):
 
             self.close()
 
-            Notification("Log In Successful", [f"Welcome {matching_user.first_name} {matching_user.last_name}"]).show()
+            Notification(
+                "Log In Successful",
+                [f"Welcome {matching_user.first_name} {matching_user.last_name}"],
+            ).show()
         else:
-            Notification("Invalid Login Credentials", ["No user matches the given credentials."]).show()
+            Notification(
+                "Invalid Login Credentials", ["No user matches the given credentials."]
+            ).show()
 
     def _connect_window_actions(self):
         self.ui.login_btnLogin.clicked.connect(lambda: self.log_in_user())

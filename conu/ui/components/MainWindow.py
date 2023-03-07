@@ -6,6 +6,7 @@ from conu.ui.actions.department_actions import connect_department_actions
 from conu.ui.actions.form_actions import connect_form_actions
 from conu.ui.actions.prioritylevel_actions import connect_prioritylevel_actions
 from conu.ui.actions.site_actions import connect_site_actions
+from conu.ui.actions.user_actions import connect_user_actions
 
 
 class MainWindow(QMainWindow):
@@ -24,3 +25,4 @@ class MainWindow(QMainWindow):
         connect_form_actions(self)
         connect_prioritylevel_actions(self)
         connect_site_actions(self)
+        connect_user_actions(self)

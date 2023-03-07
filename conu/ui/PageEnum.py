@@ -17,3 +17,6 @@ class Page(Enum):
 
     SITE_LISTINGVIEW = 8
     SITE_ENTRYFORM = 9
+
+    USER_LISTINGVIEW = 10
+    USER_ENTRYFORM = 11
