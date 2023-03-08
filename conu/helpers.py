@@ -1,6 +1,7 @@
 import os
 import hashlib
 import configparser
+from datetime import datetime, date
 from typing import List
 from conu.ui.PageEnum import Page
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
@@ -158,6 +159,13 @@ def load_entities_into_table(table, entities, attribute_header_dict):
             if hasattr(entity, name):
                 # Get the value of the attribute
                 value = getattr(entity, name)
+
+                if isinstance(value, date):
+                    value = datetime.strftime(value, "%d-%m-%Y")
+                    print(value)
+                elif isinstance(value, datetime):
+                    value = datetime.strftime(value, "%d-%m-$Y %H:%M:%S")
+
                 # Set the value in the table widget
                 table.setItem(i, j, QTableWidgetItem(str(value)))
 
