@@ -107,7 +107,7 @@ def delete_servicetracker(main_window) -> None:
     global global_items
 
     entity = global_servicetrackers[selected_id]
-    item = global_items(entity.item_id)
+    item = global_items[entity.item_id]
 
     delete_by_attrs_dict(ServiceTracker, {"id": entity.id})
 
@@ -180,7 +180,9 @@ def back_to_servicetracker_listingview(main_window) -> None:
 def servicetrackers_by_search(main_window, search_text: str) -> None:
 
     global global_servicetrackers
+
     global global_items
+    global_items = select_by_attrs_dict(Item)
 
     if not search_text:
         matches = list(global_servicetrackers.values())
@@ -188,7 +190,13 @@ def servicetrackers_by_search(main_window, search_text: str) -> None:
         matches = list(
             filter(
                 lambda e: search_text
-                in "".join([str(e.id), global_items[e.item_id].name.lower()]),
+                in "".join(
+                    [
+                        str(e.id),
+                        global_items[e.item_id].name.lower(),
+                        str(e.is_due()).lower(),
+                    ]
+                ),
                 global_servicetrackers.values(),
             )
         )

@@ -18,7 +18,7 @@ class ServiceTracker:
 
     def is_due(self) -> bool:
 
-        days_since_calibration = date.today() - self.units_calibration_date
+        days_since_calibration = (date.today() - self.units_calibration_date).days
         estimated_current_units = self.current_units + (
             days_since_calibration * self.average_units_per_day
         )
@@ -87,6 +87,7 @@ class ServiceTracker:
             "Average Units per Day",
             "Service Due Units",
             "Service Interval Units",
+            "Is Due",
         ]
 
         table.clear()
@@ -123,3 +124,4 @@ class ServiceTracker:
             )
             table.setItem(row_index, 5, QTableWidgetItem(str(entity.service_due_units)))
             table.setItem(row_index, 6, QTableWidgetItem(str(entity.service_interval)))
+            table.setItem(row_index, 7, QTableWidgetItem(str(entity.is_due())))
