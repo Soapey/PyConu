@@ -5,6 +5,7 @@ from conu.ui.actions.prioritylevel_actions import load_prioritylevel_listingview
 from conu.ui.actions.site_actions import load_site_listingview
 from conu.ui.actions.user_actions import load_user_listingview
 from conu.ui.actions.item_actions import load_item_listingview
+from conu.ui.actions.servicetracker_actions import load_servicetracker_listingview
 
 
 def connect_menu_actions(main_window):
@@ -32,6 +33,9 @@ def connect_menu_actions(main_window):
     )
     main_window.ui.action_items.triggered.connect(
         lambda: load_item_listingview(main_window)
+    )
+    main_window.ui.action_servicetrackers.triggered.connect(
+        lambda: load_servicetracker_listingview(main_window)
     )
     main_window.ui.action_changepassword.triggered.connect(
         lambda: print("Change Password clicked placeholder.")

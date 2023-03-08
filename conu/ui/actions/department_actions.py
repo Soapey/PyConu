@@ -105,7 +105,7 @@ def save_department(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification("Save Successful", [f"Successfully saved form: {entity.name}"]).show()
+    Notification("Save Successful", [f"Successfully saved department: {entity.name}"]).show()
 
     load_department_listingview(main_window)
 

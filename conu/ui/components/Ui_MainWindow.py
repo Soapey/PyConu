@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1261, 770)
+        MainWindow.resize(1261, 771)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -1881,7 +1881,7 @@ class Ui_MainWindow(object):
         self.user_entryform_scrollDepartments.setWidgetResizable(True)
         self.user_entryform_scrollDepartments.setObjectName("user_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 1008, 200))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.gridLayout_16 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_16.setObjectName("gridLayout_16")
@@ -2412,7 +2412,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1084, 200))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
@@ -2621,6 +2621,7 @@ class Ui_MainWindow(object):
 "    border-color: #028090;\n"
 "}\n"
 "")
+        self.servicetracker_entryform_spnCurrentUnits.setMaximum(999999999)
         self.servicetracker_entryform_spnCurrentUnits.setObjectName("servicetracker_entryform_spnCurrentUnits")
         self.gridLayout_23.addWidget(self.servicetracker_entryform_spnCurrentUnits, 4, 1, 1, 2)
         self.label_42 = QtWidgets.QLabel(self.page_servicetracker_entryform)
@@ -2654,11 +2655,12 @@ class Ui_MainWindow(object):
 "    border-color: #028090;\n"
 "}\n"
 "")
+        self.servicetracker_entryform_spnServiceDueUnits.setMaximum(999999999)
         self.servicetracker_entryform_spnServiceDueUnits.setObjectName("servicetracker_entryform_spnServiceDueUnits")
         self.gridLayout_23.addWidget(self.servicetracker_entryform_spnServiceDueUnits, 6, 1, 1, 2)
         spacerItem14 = QtWidgets.QSpacerItem(982, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_23.addItem(spacerItem14, 9, 1, 1, 1)
-        spacerItem15 = QtWidgets.QSpacerItem(1222, 354, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem15 = QtWidgets.QSpacerItem(1222, 355, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_23.addItem(spacerItem15, 8, 0, 1, 3)
         self.servicetracker_entryform_btnBack = QtWidgets.QPushButton(self.page_servicetracker_entryform)
         font = QtGui.QFont()
@@ -2753,6 +2755,7 @@ class Ui_MainWindow(object):
 "    border-color: #028090;\n"
 "}\n"
 "")
+        self.servicetracker_entryform_dteCalibrationDate.setCalendarPopup(True)
         self.servicetracker_entryform_dteCalibrationDate.setObjectName("servicetracker_entryform_dteCalibrationDate")
         self.gridLayout_23.addWidget(self.servicetracker_entryform_dteCalibrationDate, 3, 1, 1, 2)
         self.servicetracker_entryform_spnAverageUnitsPerDay = QtWidgets.QSpinBox(self.page_servicetracker_entryform)
@@ -2770,6 +2773,7 @@ class Ui_MainWindow(object):
 "    border-color: #028090;\n"
 "}\n"
 "")
+        self.servicetracker_entryform_spnAverageUnitsPerDay.setMaximum(999999999)
         self.servicetracker_entryform_spnAverageUnitsPerDay.setObjectName("servicetracker_entryform_spnAverageUnitsPerDay")
         self.gridLayout_23.addWidget(self.servicetracker_entryform_spnAverageUnitsPerDay, 5, 1, 1, 2)
         self.label_51 = QtWidgets.QLabel(self.page_servicetracker_entryform)
@@ -2797,6 +2801,7 @@ class Ui_MainWindow(object):
 "    border-color: #028090;\n"
 "}\n"
 "")
+        self.servicetracker_entryform_spnServiceIntervalUnits.setMaximum(999999999)
         self.servicetracker_entryform_spnServiceIntervalUnits.setObjectName("servicetracker_entryform_spnServiceIntervalUnits")
         self.gridLayout_23.addWidget(self.servicetracker_entryform_spnServiceIntervalUnits, 7, 1, 1, 2)
         self.label_53 = QtWidgets.QLabel(self.page_servicetracker_entryform)
@@ -2809,12 +2814,12 @@ class Ui_MainWindow(object):
         self.label_53.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_53.setObjectName("label_53")
         self.gridLayout_23.addWidget(self.label_53, 2, 0, 1, 1)
-        self.label_54 = QtWidgets.QLabel(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_lblItem = QtWidgets.QLabel(self.page_servicetracker_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
-        self.label_54.setFont(font)
-        self.label_54.setStyleSheet("QLabel {\n"
+        self.servicetracker_entryform_lblItem.setFont(font)
+        self.servicetracker_entryform_lblItem.setStyleSheet("QLabel {\n"
 "    background-color: white;\n"
 "    border-style: inset;\n"
 "    border-width: 1px;\n"
@@ -2822,10 +2827,11 @@ class Ui_MainWindow(object):
 "    border-color: black;\n"
 "    padding: 4px;\n"
 "}")
-        self.label_54.setText("")
-        self.label_54.setObjectName("label_54")
-        self.gridLayout_23.addWidget(self.label_54, 2, 1, 1, 1)
+        self.servicetracker_entryform_lblItem.setText("")
+        self.servicetracker_entryform_lblItem.setObjectName("servicetracker_entryform_lblItem")
+        self.gridLayout_23.addWidget(self.servicetracker_entryform_lblItem, 2, 1, 1, 1)
         self.servicetracker_entryform_btnSelectItem = QtWidgets.QPushButton(self.page_servicetracker_entryform)
+        self.servicetracker_entryform_btnSelectItem.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.servicetracker_entryform_btnSelectItem.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    background-color: #6c757d;\n"

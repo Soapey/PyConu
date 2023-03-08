@@ -8,6 +8,7 @@ from conu.ui.actions.prioritylevel_actions import connect_prioritylevel_actions
 from conu.ui.actions.site_actions import connect_site_actions
 from conu.ui.actions.user_actions import connect_user_actions
 from conu.ui.actions.item_actions import connect_item_actions
+from conu.ui.actions.servicetracker_actions import connect_servicetracker_actions
 
 
 class MainWindow(QMainWindow):
@@ -28,3 +29,4 @@ class MainWindow(QMainWindow):
         connect_site_actions(self)
         connect_user_actions(self)
         connect_item_actions(self)
+        connect_servicetracker_actions(self)
