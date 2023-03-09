@@ -1,26 +1,43 @@
 from datetime import date
-from dataclasses import dataclass
 from conu.db.SQLiteConnection import select_by_attrs_dict
 from conu.classes.PriorityLevel import PriorityLevel
 
 
-@dataclass
 class WorkOrder:
-    # WorkOrderBase properties
-    id: int
-    site_id: int
-    department_id: int
-    prioritylevel_id: int
-    task_description: str
-    comments: str
+    def __init__(
+        self,
+        id: int,
+        site_id: int,
+        department_id: int,
+        prioritylevel_id: int,
+        task_description: str,
+        comments: str,
+        date_created: date,
+        date_allocated: date,
+        raisedby_user_id: int,
+        date_completed: date,
+        purchase_order_number: str,
+        close_out_comments: str,
+    ) -> None:
+        self.id = id
+        self.site_id = site_id
+        self.department_id = department_id
+        self.prioritylevel_id = prioritylevel_id
+        self.task_description = task_description
+        self.comments = comments
+        self.date_created = date_created
+        self.date_allocated = date_allocated
+        self.raisedby_user_id = raisedby_user_id
+        self.date_completed = date_completed
+        self.purchase_order_number = purchase_order_number
+        self.close_out_comments = close_out_comments
 
-    # WorkOrder specific properties
-    date_created: date
-    date_allocated: date
-    raisedby_user_id: int
-    date_completed: date
-    purchase_order_number: str
-    close_out_comments: str
+    def __repr__(self):
+        attrs = ", ".join(f"{k}={v!r}" for k, v in self.__dict__.items())
+        return f"{self.__class__.__name__}({attrs})"
+
+    def __str__(self) -> str:
+        return self.__repr__()
 
     def is_due(self, priority_levels: list = None) -> bool:
 
