@@ -10,9 +10,9 @@ from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
     select_by_attrs_dict,
     save_by_list,
+    get_by_user_departments,
 )
 from conu.helpers import (
-    load_entities_into_table,
     navigate,
     selected_row_id,
     set_button_visibility,
@@ -233,6 +233,20 @@ def set_servicetracker_button_visibility(main_window):
         )
 
 
+def select_item(main_window):
+
+    global global_items
+    global_items = get_by_user_departments(Item, main_window.current_user.id)
+
+    SelectWindow(
+        global_items,
+        main_window.ui.servicetracker_entryform_lblItem.setText,
+        "name",
+        main_window.ui.servicetracker_entryform_lblItem.setProperty,
+        {"id": "ID", "name": "Name", "comments": "Comments"},
+    )
+
+
 def connect_servicetracker_actions(main_window) -> None:
 
     main_window.ui.servicetracker_listingview_btnNew.clicked.connect(
@@ -245,13 +259,7 @@ def connect_servicetracker_actions(main_window) -> None:
         lambda: delete_servicetracker(main_window)
     )
     main_window.ui.servicetracker_entryform_btnSelectItem.clicked.connect(
-        lambda: SelectWindow(
-            Item,
-            main_window.ui.servicetracker_entryform_lblItem.setText,
-            "name",
-            main_window.ui.servicetracker_entryform_lblItem.setProperty,
-            {"id": "ID", "name": "Name", "comments": "Comments"},
-        )
+        lambda: select_item(main_window)
     )
     main_window.ui.servicetracker_entryform_btnSave.clicked.connect(
         lambda: save_servicetracker(main_window)

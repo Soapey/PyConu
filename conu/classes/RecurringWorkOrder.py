@@ -58,6 +58,9 @@ class RecurringWorkOrder:
                 )
                 return f"{self.__class__.__name__}(Occur every {self.interval} year(s) on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]} in {calendar.month_name[self.month-1]})"
 
+    def __str__(self) -> str:
+        return self.__repr__()
+
     def is_due(self):
 
         occurrences = list()
