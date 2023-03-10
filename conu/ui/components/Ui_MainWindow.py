@@ -334,7 +334,7 @@ class Ui_MainWindow(object):
         self.assignee_entryform_scrollDepartments.setWidgetResizable(True)
         self.assignee_entryform_scrollDepartments.setObjectName("assignee_entryform_scrollDepartments")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1236, 209))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 38, 38))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -1881,7 +1881,7 @@ class Ui_MainWindow(object):
         self.user_entryform_scrollDepartments.setWidgetResizable(True)
         self.user_entryform_scrollDepartments.setObjectName("user_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 1160, 200))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 38, 183))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.gridLayout_16 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_16.setObjectName("gridLayout_16")
@@ -2412,7 +2412,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1236, 206))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 50, 200))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
@@ -3012,28 +3012,7 @@ class Ui_MainWindow(object):
         self.gridLayout_25 = QtWidgets.QGridLayout(self.page_workorder_entryform)
         self.gridLayout_25.setObjectName("gridLayout_25")
         spacerItem16 = QtWidgets.QSpacerItem(947, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_25.addItem(spacerItem16, 2, 1, 1, 1)
-        self.label_56 = QtWidgets.QLabel(self.page_workorder_entryform)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_56.sizePolicy().hasHeightForWidth())
-        self.label_56.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Impact")
-        font.setPointSize(20)
-        self.label_56.setFont(font)
-        self.label_56.setStyleSheet("QLabel {\n"
-"    color: white;\n"
-"    background-color: #05668d;\n"
-"    border-style: outset;\n"
-"    border-radius: 10px;\n"
-"    padding: 10px;\n"
-"    margin: 0px 0px 20px 0px;\n"
-"}")
-        self.label_56.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_56.setObjectName("label_56")
-        self.gridLayout_25.addWidget(self.label_56, 0, 0, 1, 3)
+        self.gridLayout_25.addItem(spacerItem16, 3, 1, 1, 1)
         self.workorder_entryform_btnBack = QtWidgets.QPushButton(self.page_workorder_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -3055,7 +3034,7 @@ class Ui_MainWindow(object):
 "        background-color: #adb5bd;\n"
 "}")
         self.workorder_entryform_btnBack.setObjectName("workorder_entryform_btnBack")
-        self.gridLayout_25.addWidget(self.workorder_entryform_btnBack, 2, 0, 1, 1)
+        self.gridLayout_25.addWidget(self.workorder_entryform_btnBack, 3, 0, 1, 1)
         self.workorder_entryform_btnSave = QtWidgets.QPushButton(self.page_workorder_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -3078,7 +3057,28 @@ class Ui_MainWindow(object):
 "        background-color: #0582ca;\n"
 "}")
         self.workorder_entryform_btnSave.setObjectName("workorder_entryform_btnSave")
-        self.gridLayout_25.addWidget(self.workorder_entryform_btnSave, 2, 2, 1, 1)
+        self.gridLayout_25.addWidget(self.workorder_entryform_btnSave, 3, 2, 1, 1)
+        self.label_56 = QtWidgets.QLabel(self.page_workorder_entryform)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_56.sizePolicy().hasHeightForWidth())
+        self.label_56.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_56.setFont(font)
+        self.label_56.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_56.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_56.setObjectName("label_56")
+        self.gridLayout_25.addWidget(self.label_56, 0, 0, 1, 3)
         self.scrollArea = QtWidgets.QScrollArea(self.page_workorder_entryform)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -3090,181 +3090,10 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, -84, 1358, 795))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 1358, 1244))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.gridLayout_26 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_26.setObjectName("gridLayout_26")
-        self.workorder_entryform_txtTaskDescription = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_txtTaskDescription.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_txtTaskDescription.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.workorder_entryform_txtTaskDescription.setFont(font)
-        self.workorder_entryform_txtTaskDescription.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
-        self.workorder_entryform_txtTaskDescription.setStyleSheet("QPlainTextEdit {\n"
-"    background-color: white;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}\n"
-"\n"
-"QPlainTextEdit:focus {\n"
-"    border-width: 2px;\n"
-"    border-color: #028090;\n"
-"}\n"
-"")
-        self.workorder_entryform_txtTaskDescription.setMaximumBlockCount(-1)
-        self.workorder_entryform_txtTaskDescription.setBackgroundVisible(False)
-        self.workorder_entryform_txtTaskDescription.setObjectName("workorder_entryform_txtTaskDescription")
-        self.gridLayout_26.addWidget(self.workorder_entryform_txtTaskDescription, 7, 1, 1, 4)
-        self.workorder_entryform_lblPriorityLevel = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_lblPriorityLevel.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_lblPriorityLevel.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.workorder_entryform_lblPriorityLevel.setFont(font)
-        self.workorder_entryform_lblPriorityLevel.setStyleSheet("QLabel {\n"
-"    background-color: white;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}")
-        self.workorder_entryform_lblPriorityLevel.setText("")
-        self.workorder_entryform_lblPriorityLevel.setObjectName("workorder_entryform_lblPriorityLevel")
-        self.gridLayout_26.addWidget(self.workorder_entryform_lblPriorityLevel, 5, 1, 1, 4)
-        self.workorder_entryform_lblRaisedBy = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_lblRaisedBy.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_lblRaisedBy.setSizePolicy(sizePolicy)
-        self.workorder_entryform_lblRaisedBy.setStyleSheet("QLabel {\n"
-"    background-color: lightgrey;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}")
-        self.workorder_entryform_lblRaisedBy.setText("")
-        self.workorder_entryform_lblRaisedBy.setObjectName("workorder_entryform_lblRaisedBy")
-        self.gridLayout_26.addWidget(self.workorder_entryform_lblRaisedBy, 2, 1, 1, 4)
-        self.workorder_entryform_btnSelectSite = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_btnSelectSite.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_btnSelectSite.setSizePolicy(sizePolicy)
-        self.workorder_entryform_btnSelectSite.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.workorder_entryform_btnSelectSite.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.workorder_entryform_btnSelectSite.setStyleSheet("QPushButton {\n"
-"    color: white;\n"
-"    background-color: #6c757d;\n"
-"    border-style: outset;\n"
-"    border-radius: 10px;\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"        background-color: #adb5bd;\n"
-"}")
-        self.workorder_entryform_btnSelectSite.setObjectName("workorder_entryform_btnSelectSite")
-        self.gridLayout_26.addWidget(self.workorder_entryform_btnSelectSite, 3, 0, 1, 1)
-        self.workorder_entryform_lblDepartment = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_lblDepartment.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_lblDepartment.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.workorder_entryform_lblDepartment.setFont(font)
-        self.workorder_entryform_lblDepartment.setStyleSheet("QLabel {\n"
-"    background-color: white;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}")
-        self.workorder_entryform_lblDepartment.setText("")
-        self.workorder_entryform_lblDepartment.setObjectName("workorder_entryform_lblDepartment")
-        self.gridLayout_26.addWidget(self.workorder_entryform_lblDepartment, 4, 1, 1, 4)
-        self.label_58 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_58.sizePolicy().hasHeightForWidth())
-        self.label_58.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_58.setFont(font)
-        self.label_58.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
-        self.label_58.setObjectName("label_58")
-        self.gridLayout_26.addWidget(self.label_58, 8, 0, 1, 1)
-        self.workorder_entryform_lblSite = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_lblSite.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_lblSite.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.workorder_entryform_lblSite.setFont(font)
-        self.workorder_entryform_lblSite.setStyleSheet("QLabel {\n"
-"    background-color: white;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}")
-        self.workorder_entryform_lblSite.setText("")
-        self.workorder_entryform_lblSite.setObjectName("workorder_entryform_lblSite")
-        self.gridLayout_26.addWidget(self.workorder_entryform_lblSite, 3, 1, 1, 4)
-        self.workorder_entryform_dteDateAllocated = QtWidgets.QDateEdit(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_dteDateAllocated.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_dteDateAllocated.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.workorder_entryform_dteDateAllocated.setFont(font)
-        self.workorder_entryform_dteDateAllocated.setStyleSheet("QDateEdit {\n"
-"    background-color: white;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}\n"
-"\n"
-"QDateEdit:focus {\n"
-"    border-width: 2px;\n"
-"    border-color: #028090;\n"
-"}")
-        self.workorder_entryform_dteDateAllocated.setCalendarPopup(True)
-        self.workorder_entryform_dteDateAllocated.setObjectName("workorder_entryform_dteDateAllocated")
-        self.gridLayout_26.addWidget(self.workorder_entryform_dteDateAllocated, 10, 1, 1, 4)
         self.label_65 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -3283,48 +3112,59 @@ class Ui_MainWindow(object):
         self.label_65.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_65.setObjectName("label_65")
         self.gridLayout_26.addWidget(self.label_65, 2, 0, 1, 1)
-        self.workorder_entryform_lblDateCreated = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        self.workorder_entryforn_dteDateCompleted = QtWidgets.QDateEdit(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_lblDateCreated.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_lblDateCreated.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.workorder_entryforn_dteDateCompleted.sizePolicy().hasHeightForWidth())
+        self.workorder_entryforn_dteDateCompleted.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
-        self.workorder_entryform_lblDateCreated.setFont(font)
-        self.workorder_entryform_lblDateCreated.setStyleSheet("QLabel {\n"
-"    background-color: lightgrey;\n"
+        self.workorder_entryforn_dteDateCompleted.setFont(font)
+        self.workorder_entryforn_dteDateCompleted.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.workorder_entryforn_dteDateCompleted.setStyleSheet("QDateEdit {\n"
+"    background-color: white;\n"
 "    border-style: inset;\n"
 "    border-width: 1px;\n"
 "    border-radius: 5px;\n"
 "    border-color: black;\n"
 "    padding: 4px;\n"
-"}")
-        self.workorder_entryform_lblDateCreated.setText("")
-        self.workorder_entryform_lblDateCreated.setObjectName("workorder_entryform_lblDateCreated")
-        self.gridLayout_26.addWidget(self.workorder_entryform_lblDateCreated, 1, 1, 1, 4)
-        self.workorder_entryform_btnSelectDepartment = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_btnSelectDepartment.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_btnSelectDepartment.setSizePolicy(sizePolicy)
-        self.workorder_entryform_btnSelectDepartment.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.workorder_entryform_btnSelectDepartment.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.workorder_entryform_btnSelectDepartment.setStyleSheet("QPushButton {\n"
-"    color: white;\n"
-"    background-color: #6c757d;\n"
-"    border-style: outset;\n"
-"    border-radius: 10px;\n"
-"    padding: 5px;\n"
 "}\n"
 "\n"
-"QPushButton:hover {\n"
-"        background-color: #adb5bd;\n"
+"QDateEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
 "}")
-        self.workorder_entryform_btnSelectDepartment.setObjectName("workorder_entryform_btnSelectDepartment")
-        self.gridLayout_26.addWidget(self.workorder_entryform_btnSelectDepartment, 4, 0, 1, 1)
+        self.workorder_entryforn_dteDateCompleted.setButtonSymbols(QtWidgets.QAbstractSpinBox.UpDownArrows)
+        self.workorder_entryforn_dteDateCompleted.setCalendarPopup(True)
+        self.workorder_entryforn_dteDateCompleted.setObjectName("workorder_entryforn_dteDateCompleted")
+        self.gridLayout_26.addWidget(self.workorder_entryforn_dteDateCompleted, 15, 1, 1, 4)
+        self.label_63 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_63.setFont(font)
+        self.label_63.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_63.setObjectName("label_63")
+        self.gridLayout_26.addWidget(self.label_63, 7, 0, 2, 1)
+        self.label_66 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_66.sizePolicy().hasHeightForWidth())
+        self.label_66.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_66.setFont(font)
+        self.label_66.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_66.setObjectName("label_66")
+        self.gridLayout_26.addWidget(self.label_66, 15, 0, 1, 1)
         self.workorder_entryform_btnSelectPriorityLevel = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -3346,6 +3186,79 @@ class Ui_MainWindow(object):
 "}")
         self.workorder_entryform_btnSelectPriorityLevel.setObjectName("workorder_entryform_btnSelectPriorityLevel")
         self.gridLayout_26.addWidget(self.workorder_entryform_btnSelectPriorityLevel, 5, 0, 1, 1)
+        self.workorder_entryform_lblPriorityLevel = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblPriorityLevel.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblPriorityLevel.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_lblPriorityLevel.setFont(font)
+        self.workorder_entryform_lblPriorityLevel.setStyleSheet("QLabel {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.workorder_entryform_lblPriorityLevel.setText("")
+        self.workorder_entryform_lblPriorityLevel.setObjectName("workorder_entryform_lblPriorityLevel")
+        self.gridLayout_26.addWidget(self.workorder_entryform_lblPriorityLevel, 5, 1, 1, 4)
+        self.workorder_entryform_tblAssignedItems = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_tblAssignedItems.setStyleSheet("QTableWidget {\n"
+"    min-height: 200px;\n"
+"}")
+        self.workorder_entryform_tblAssignedItems.setObjectName("workorder_entryform_tblAssignedItems")
+        self.workorder_entryform_tblAssignedItems.setColumnCount(0)
+        self.workorder_entryform_tblAssignedItems.setRowCount(0)
+        self.gridLayout_26.addWidget(self.workorder_entryform_tblAssignedItems, 8, 4, 1, 1)
+        self.workorder_entryform_txtComments = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_txtComments.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_txtComments.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_txtComments.setFont(font)
+        self.workorder_entryform_txtComments.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.workorder_entryform_txtComments.setStyleSheet("QPlainTextEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"    min-height: 100px;\n"
+"}\n"
+"\n"
+"QPlainTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.workorder_entryform_txtComments.setObjectName("workorder_entryform_txtComments")
+        self.gridLayout_26.addWidget(self.workorder_entryform_txtComments, 12, 1, 1, 4)
+        self.workorder_entryform_btnUnassignAssigneeFromWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_btnUnassignAssigneeFromWorkOrder.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_entryform_btnUnassignAssigneeFromWorkOrder.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_entryform_btnUnassignAssigneeFromWorkOrder.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.workorder_entryform_btnUnassignAssigneeFromWorkOrder.setObjectName("workorder_entryform_btnUnassignAssigneeFromWorkOrder")
+        self.gridLayout_26.addWidget(self.workorder_entryform_btnUnassignAssigneeFromWorkOrder, 10, 4, 1, 1)
         self.label_67 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -3361,6 +3274,75 @@ class Ui_MainWindow(object):
         self.label_67.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_67.setObjectName("label_67")
         self.gridLayout_26.addWidget(self.label_67, 6, 0, 1, 1)
+        self.label_58 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_58.sizePolicy().hasHeightForWidth())
+        self.label_58.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_58.setFont(font)
+        self.label_58.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_58.setObjectName("label_58")
+        self.gridLayout_26.addWidget(self.label_58, 12, 0, 1, 1)
+        self.workorder_entryform_btnUnassignItemFromWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_btnUnassignItemFromWorkOrder.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_entryform_btnUnassignItemFromWorkOrder.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_entryform_btnUnassignItemFromWorkOrder.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.workorder_entryform_btnUnassignItemFromWorkOrder.setObjectName("workorder_entryform_btnUnassignItemFromWorkOrder")
+        self.gridLayout_26.addWidget(self.workorder_entryform_btnUnassignItemFromWorkOrder, 7, 4, 1, 1)
+        self.workorder_entryform_tblUnassignedItems = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_tblUnassignedItems.setStyleSheet("QTableWidget {\n"
+"    min-height: 200px;\n"
+"}")
+        self.workorder_entryform_tblUnassignedItems.setObjectName("workorder_entryform_tblUnassignedItems")
+        self.workorder_entryform_tblUnassignedItems.setColumnCount(0)
+        self.workorder_entryform_tblUnassignedItems.setRowCount(0)
+        self.gridLayout_26.addWidget(self.workorder_entryform_tblUnassignedItems, 8, 1, 1, 1)
+        self.workorder_entryform_txtTaskDescription = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_txtTaskDescription.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_txtTaskDescription.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_txtTaskDescription.setFont(font)
+        self.workorder_entryform_txtTaskDescription.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.workorder_entryform_txtTaskDescription.setStyleSheet("QPlainTextEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"    min-height: 250px;\n"
+"}\n"
+"\n"
+"QPlainTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.workorder_entryform_txtTaskDescription.setMaximumBlockCount(-1)
+        self.workorder_entryform_txtTaskDescription.setBackgroundVisible(False)
+        self.workorder_entryform_txtTaskDescription.setObjectName("workorder_entryform_txtTaskDescription")
+        self.gridLayout_26.addWidget(self.workorder_entryform_txtTaskDescription, 9, 1, 1, 4)
         self.label_60 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -3375,25 +3357,28 @@ class Ui_MainWindow(object):
         self.label_60.setFont(font)
         self.label_60.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
         self.label_60.setObjectName("label_60")
-        self.gridLayout_26.addWidget(self.label_60, 7, 0, 1, 1)
-        self.label_62 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.gridLayout_26.addWidget(self.label_60, 9, 0, 1, 1)
+        self.workorder_entryform_btnSelectDepartment = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_62.sizePolicy().hasHeightForWidth())
-        self.label_62.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_62.setFont(font)
-        self.label_62.setStyleSheet("QLabel {\n"
-"    color: grey;\n"
+        sizePolicy.setHeightForWidth(self.workorder_entryform_btnSelectDepartment.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_btnSelectDepartment.setSizePolicy(sizePolicy)
+        self.workorder_entryform_btnSelectDepartment.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_entryform_btnSelectDepartment.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_entryform_btnSelectDepartment.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
 "}")
-        self.label_62.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_62.setObjectName("label_62")
-        self.gridLayout_26.addWidget(self.label_62, 0, 0, 1, 1)
+        self.workorder_entryform_btnSelectDepartment.setObjectName("workorder_entryform_btnSelectDepartment")
+        self.gridLayout_26.addWidget(self.workorder_entryform_btnSelectDepartment, 4, 0, 1, 1)
         self.label_64 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -3408,66 +3393,51 @@ class Ui_MainWindow(object):
         self.label_64.setFont(font)
         self.label_64.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_64.setObjectName("label_64")
-        self.gridLayout_26.addWidget(self.label_64, 10, 0, 1, 1)
-        self.workorder_entryform_lblId = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        self.gridLayout_26.addWidget(self.label_64, 14, 0, 1, 1)
+        self.workorder_entryform_txtCloseOutComments = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_lblId.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_lblId.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_txtCloseOutComments.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_txtCloseOutComments.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
-        self.workorder_entryform_lblId.setFont(font)
-        self.workorder_entryform_lblId.setStyleSheet("QLabel {\n"
-"    background-color: lightgrey;\n"
+        self.workorder_entryform_txtCloseOutComments.setFont(font)
+        self.workorder_entryform_txtCloseOutComments.setStyleSheet("QPlainTextEdit {\n"
+"    background-color: white;\n"
 "    border-style: inset;\n"
 "    border-width: 1px;\n"
 "    border-radius: 5px;\n"
 "    border-color: black;\n"
 "    padding: 4px;\n"
-"}")
-        self.workorder_entryform_lblId.setText("")
-        self.workorder_entryform_lblId.setObjectName("workorder_entryform_lblId")
-        self.gridLayout_26.addWidget(self.workorder_entryform_lblId, 0, 1, 1, 4)
-        self.label_66 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+"}\n"
+"\n"
+"QPlainTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.workorder_entryform_txtCloseOutComments.setObjectName("workorder_entryform_txtCloseOutComments")
+        self.gridLayout_26.addWidget(self.workorder_entryform_txtCloseOutComments, 16, 1, 1, 4)
+        self.label_59 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_66.sizePolicy().hasHeightForWidth())
-        self.label_66.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.label_59.sizePolicy().hasHeightForWidth())
+        self.label_59.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.label_66.setFont(font)
-        self.label_66.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_66.setObjectName("label_66")
-        self.gridLayout_26.addWidget(self.label_66, 11, 0, 1, 1)
-        self.tableWidget = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_4)
-        self.tableWidget.setStyleSheet("QTableWidget {\n"
-"    min-height: 200px;\n"
+        self.label_59.setFont(font)
+        self.label_59.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
 "}")
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(0)
-        self.tableWidget.setRowCount(0)
-        self.gridLayout_26.addWidget(self.tableWidget, 14, 1, 2, 1)
-        self.label_68 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_68.sizePolicy().hasHeightForWidth())
-        self.label_68.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_68.setFont(font)
-        self.label_68.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
-        self.label_68.setObjectName("label_68")
-        self.gridLayout_26.addWidget(self.label_68, 12, 0, 1, 1)
+        self.label_59.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_59.setObjectName("label_59")
+        self.gridLayout_26.addWidget(self.label_59, 1, 0, 1, 1)
         self.workorder_entryform_txtPurchaseOrderNumber = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -3494,17 +3464,39 @@ class Ui_MainWindow(object):
 "")
         self.workorder_entryform_txtPurchaseOrderNumber.setObjectName("workorder_entryform_txtPurchaseOrderNumber")
         self.gridLayout_26.addWidget(self.workorder_entryform_txtPurchaseOrderNumber, 6, 1, 1, 4)
-        self.workorder_entryforn_dteDateCompleted = QtWidgets.QDateEdit(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        self.workorder_entryform_lblDateCreated = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryforn_dteDateCompleted.sizePolicy().hasHeightForWidth())
-        self.workorder_entryforn_dteDateCompleted.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblDateCreated.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblDateCreated.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
-        self.workorder_entryforn_dteDateCompleted.setFont(font)
-        self.workorder_entryforn_dteDateCompleted.setStyleSheet("QDateEdit {\n"
+        self.workorder_entryform_lblDateCreated.setFont(font)
+        self.workorder_entryform_lblDateCreated.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.workorder_entryform_lblDateCreated.setText("")
+        self.workorder_entryform_lblDateCreated.setObjectName("workorder_entryform_lblDateCreated")
+        self.gridLayout_26.addWidget(self.workorder_entryform_lblDateCreated, 1, 1, 1, 4)
+        self.workorder_entryform_dteDateAllocated = QtWidgets.QDateEdit(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_dteDateAllocated.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_dteDateAllocated.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_dteDateAllocated.setFont(font)
+        self.workorder_entryform_dteDateAllocated.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.workorder_entryform_dteDateAllocated.setStyleSheet("QDateEdit {\n"
 "    background-color: white;\n"
 "    border-style: inset;\n"
 "    border-width: 1px;\n"
@@ -3517,90 +3509,34 @@ class Ui_MainWindow(object):
 "    border-width: 2px;\n"
 "    border-color: #028090;\n"
 "}")
-        self.workorder_entryforn_dteDateCompleted.setCalendarPopup(True)
-        self.workorder_entryforn_dteDateCompleted.setObjectName("workorder_entryforn_dteDateCompleted")
-        self.gridLayout_26.addWidget(self.workorder_entryforn_dteDateCompleted, 11, 1, 1, 4)
-        self.workorder_entryform_txtComments = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.workorder_entryform_dteDateAllocated.setButtonSymbols(QtWidgets.QAbstractSpinBox.UpDownArrows)
+        self.workorder_entryform_dteDateAllocated.setCalendarPopup(True)
+        self.workorder_entryform_dteDateAllocated.setObjectName("workorder_entryform_dteDateAllocated")
+        self.gridLayout_26.addWidget(self.workorder_entryform_dteDateAllocated, 14, 1, 1, 4)
+        self.workorder_entryform_lblDepartment = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_txtComments.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_txtComments.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblDepartment.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblDepartment.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
-        self.workorder_entryform_txtComments.setFont(font)
-        self.workorder_entryform_txtComments.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
-        self.workorder_entryform_txtComments.setStyleSheet("QPlainTextEdit {\n"
+        self.workorder_entryform_lblDepartment.setFont(font)
+        self.workorder_entryform_lblDepartment.setStyleSheet("QLabel {\n"
 "    background-color: white;\n"
 "    border-style: inset;\n"
 "    border-width: 1px;\n"
 "    border-radius: 5px;\n"
 "    border-color: black;\n"
 "    padding: 4px;\n"
-"}\n"
-"\n"
-"QPlainTextEdit:focus {\n"
-"    border-width: 2px;\n"
-"    border-color: #028090;\n"
-"}\n"
-"")
-        self.workorder_entryform_txtComments.setObjectName("workorder_entryform_txtComments")
-        self.gridLayout_26.addWidget(self.workorder_entryform_txtComments, 8, 1, 1, 4)
-        self.label_59 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_59.sizePolicy().hasHeightForWidth())
-        self.label_59.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_59.setFont(font)
-        self.label_59.setStyleSheet("QLabel {\n"
-"    color: grey;\n"
 "}")
-        self.label_59.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_59.setObjectName("label_59")
-        self.gridLayout_26.addWidget(self.label_59, 1, 0, 1, 1)
-        self.workorder_entryform_txtCloseOutComments = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.workorder_entryform_txtCloseOutComments.sizePolicy().hasHeightForWidth())
-        self.workorder_entryform_txtCloseOutComments.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(10)
-        self.workorder_entryform_txtCloseOutComments.setFont(font)
-        self.workorder_entryform_txtCloseOutComments.setStyleSheet("QPlainTextEdit {\n"
-"    background-color: white;\n"
-"    border-style: inset;\n"
-"    border-width: 1px;\n"
-"    border-radius: 5px;\n"
-"    border-color: black;\n"
-"    padding: 4px;\n"
-"}\n"
-"\n"
-"QPlainTextEdit:focus {\n"
-"    border-width: 2px;\n"
-"    border-color: #028090;\n"
-"}\n"
-"")
-        self.workorder_entryform_txtCloseOutComments.setObjectName("workorder_entryform_txtCloseOutComments")
-        self.gridLayout_26.addWidget(self.workorder_entryform_txtCloseOutComments, 12, 1, 1, 4)
-        self.tableWidget_2 = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_4)
-        self.tableWidget_2.setStyleSheet("QTableWidget {\n"
-"    min-height: 200px;\n"
-"}")
-        self.tableWidget_2.setObjectName("tableWidget_2")
-        self.tableWidget_2.setColumnCount(0)
-        self.tableWidget_2.setRowCount(0)
-        self.gridLayout_26.addWidget(self.tableWidget_2, 14, 4, 2, 1)
+        self.workorder_entryform_lblDepartment.setText("")
+        self.workorder_entryform_lblDepartment.setObjectName("workorder_entryform_lblDepartment")
+        self.gridLayout_26.addWidget(self.workorder_entryform_lblDepartment, 4, 1, 1, 4)
         self.workorder_entryform_btnAssignItemToWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
         self.workorder_entryform_btnAssignItemToWorkOrder.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_entryform_btnAssignItemToWorkOrder.setFocusPolicy(QtCore.Qt.NoFocus)
         self.workorder_entryform_btnAssignItemToWorkOrder.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    background-color: #0db39e;\n"
@@ -3613,33 +3549,164 @@ class Ui_MainWindow(object):
 "        background-color: #16db93;\n"
 "}")
         self.workorder_entryform_btnAssignItemToWorkOrder.setObjectName("workorder_entryform_btnAssignItemToWorkOrder")
-        self.gridLayout_26.addWidget(self.workorder_entryform_btnAssignItemToWorkOrder, 13, 1, 1, 1)
-        self.workorder_entryform_btnUnassignItemFromWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
-        self.workorder_entryform_btnUnassignItemFromWorkOrder.setStyleSheet("QPushButton {\n"
+        self.gridLayout_26.addWidget(self.workorder_entryform_btnAssignItemToWorkOrder, 7, 1, 1, 1)
+        self.workorder_entryform_btnSelectSite = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_btnSelectSite.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_btnSelectSite.setSizePolicy(sizePolicy)
+        self.workorder_entryform_btnSelectSite.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_entryform_btnSelectSite.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_entryform_btnSelectSite.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
-"    background-color: #f94144;\n"
+"    background-color: #6c757d;\n"
 "    border-style: outset;\n"
 "    border-radius: 10px;\n"
 "    padding: 5px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"        background-color: #ff595e;\n"
+"        background-color: #adb5bd;\n"
 "}")
-        self.workorder_entryform_btnUnassignItemFromWorkOrder.setObjectName("workorder_entryform_btnUnassignItemFromWorkOrder")
-        self.gridLayout_26.addWidget(self.workorder_entryform_btnUnassignItemFromWorkOrder, 13, 4, 1, 1)
-        self.label_63 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_btnSelectSite.setObjectName("workorder_entryform_btnSelectSite")
+        self.gridLayout_26.addWidget(self.workorder_entryform_btnSelectSite, 3, 0, 1, 1)
+        self.workorder_entryform_lblId = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblId.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblId.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_lblId.setFont(font)
+        self.workorder_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.workorder_entryform_lblId.setText("")
+        self.workorder_entryform_lblId.setObjectName("workorder_entryform_lblId")
+        self.gridLayout_26.addWidget(self.workorder_entryform_lblId, 0, 1, 1, 4)
+        self.workorder_entryform_lblSite = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblSite.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblSite.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_lblSite.setFont(font)
+        self.workorder_entryform_lblSite.setStyleSheet("QLabel {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.workorder_entryform_lblSite.setText("")
+        self.workorder_entryform_lblSite.setObjectName("workorder_entryform_lblSite")
+        self.gridLayout_26.addWidget(self.workorder_entryform_lblSite, 3, 1, 1, 4)
+        self.workorder_entryform_lblRaisedBy = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblRaisedBy.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblRaisedBy.setSizePolicy(sizePolicy)
+        self.workorder_entryform_lblRaisedBy.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.workorder_entryform_lblRaisedBy.setText("")
+        self.workorder_entryform_lblRaisedBy.setObjectName("workorder_entryform_lblRaisedBy")
+        self.gridLayout_26.addWidget(self.workorder_entryform_lblRaisedBy, 2, 1, 1, 4)
+        self.label_68 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_68.sizePolicy().hasHeightForWidth())
+        self.label_68.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.label_63.setFont(font)
-        self.label_63.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
-        self.label_63.setObjectName("label_63")
-        self.gridLayout_26.addWidget(self.label_63, 13, 0, 3, 1)
+        self.label_68.setFont(font)
+        self.label_68.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_68.setObjectName("label_68")
+        self.gridLayout_26.addWidget(self.label_68, 16, 0, 1, 1)
+        self.label_62 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_62.sizePolicy().hasHeightForWidth())
+        self.label_62.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_62.setFont(font)
+        self.label_62.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_62.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_62.setObjectName("label_62")
+        self.gridLayout_26.addWidget(self.label_62, 0, 0, 1, 1)
+        self.workorder_entryform_btnAssignAssigneeToWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_btnAssignAssigneeToWorkOrder.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_entryform_btnAssignAssigneeToWorkOrder.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_entryform_btnAssignAssigneeToWorkOrder.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.workorder_entryform_btnAssignAssigneeToWorkOrder.setObjectName("workorder_entryform_btnAssignAssigneeToWorkOrder")
+        self.gridLayout_26.addWidget(self.workorder_entryform_btnAssignAssigneeToWorkOrder, 10, 1, 1, 1)
+        self.workorder_entryform_tblUnassignedAssignees = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_tblUnassignedAssignees.setStyleSheet("QTableWidget {\n"
+"    min-height: 200px;\n"
+"}")
+        self.workorder_entryform_tblUnassignedAssignees.setObjectName("workorder_entryform_tblUnassignedAssignees")
+        self.workorder_entryform_tblUnassignedAssignees.setColumnCount(0)
+        self.workorder_entryform_tblUnassignedAssignees.setRowCount(0)
+        self.gridLayout_26.addWidget(self.workorder_entryform_tblUnassignedAssignees, 11, 1, 1, 1)
+        self.workorder_entryform_tblAssignedAssignees = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_4)
+        self.workorder_entryform_tblAssignedAssignees.setStyleSheet("QTableWidget {\n"
+"    min-height: 200px;\n"
+"}")
+        self.workorder_entryform_tblAssignedAssignees.setObjectName("workorder_entryform_tblAssignedAssignees")
+        self.workorder_entryform_tblAssignedAssignees.setColumnCount(0)
+        self.workorder_entryform_tblAssignedAssignees.setRowCount(0)
+        self.gridLayout_26.addWidget(self.workorder_entryform_tblAssignedAssignees, 11, 4, 1, 1)
+        self.label_55 = QtWidgets.QLabel(self.scrollAreaWidgetContents_4)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_55.setFont(font)
+        self.label_55.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_55.setObjectName("label_55")
+        self.gridLayout_26.addWidget(self.label_55, 10, 0, 2, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_4)
-        self.gridLayout_25.addWidget(self.scrollArea, 1, 0, 1, 3)
+        self.gridLayout_25.addWidget(self.scrollArea, 2, 0, 1, 3)
         self.page_handler.addWidget(self.page_workorder_entryform)
         self.gridLayout.addWidget(self.page_handler, 0, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -3839,28 +3906,31 @@ class Ui_MainWindow(object):
         self.workorder_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
         self.workorder_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
         self.workorder_listingview_tblWorkOrder.setSortingEnabled(True)
-        self.label_56.setText(_translate("MainWindow", "WORK ORDER ENTRY FORM"))
         self.workorder_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
         self.workorder_entryform_btnSave.setText(_translate("MainWindow", "Save"))
-        self.workorder_entryform_txtTaskDescription.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
-        self.workorder_entryform_btnSelectSite.setText(_translate("MainWindow", "Select Site"))
-        self.label_58.setText(_translate("MainWindow", "Comments"))
+        self.label_56.setText(_translate("MainWindow", "WORK ORDER ENTRY FORM"))
         self.label_65.setText(_translate("MainWindow", "Raised By"))
-        self.workorder_entryform_btnSelectDepartment.setText(_translate("MainWindow", "Select Department"))
-        self.workorder_entryform_btnSelectPriorityLevel.setText(_translate("MainWindow", "Select Priority Level"))
-        self.label_67.setText(_translate("MainWindow", "Purchase Order Number"))
-        self.label_60.setText(_translate("MainWindow", "Task Description"))
-        self.label_62.setText(_translate("MainWindow", "ID"))
-        self.label_64.setText(_translate("MainWindow", "Date Allocated"))
-        self.label_66.setText(_translate("MainWindow", "Date Completed"))
-        self.label_68.setText(_translate("MainWindow", "Close Out Comments"))
-        self.workorder_entryform_txtPurchaseOrderNumber.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
-        self.workorder_entryform_txtComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
-        self.label_59.setText(_translate("MainWindow", "Date Created"))
-        self.workorder_entryform_txtCloseOutComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
-        self.workorder_entryform_btnAssignItemToWorkOrder.setText(_translate("MainWindow", "Assign To Work Order -->"))
-        self.workorder_entryform_btnUnassignItemFromWorkOrder.setText(_translate("MainWindow", "<--- Unassign From Work Order"))
         self.label_63.setText(_translate("MainWindow", "Items"))
+        self.label_66.setText(_translate("MainWindow", "Date Completed"))
+        self.workorder_entryform_btnSelectPriorityLevel.setText(_translate("MainWindow", "Select Priority Level"))
+        self.workorder_entryform_txtComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
+        self.workorder_entryform_btnUnassignAssigneeFromWorkOrder.setText(_translate("MainWindow", "<--- Unassign From Work Order"))
+        self.label_67.setText(_translate("MainWindow", "Purchase Order Number"))
+        self.label_58.setText(_translate("MainWindow", "Comments"))
+        self.workorder_entryform_btnUnassignItemFromWorkOrder.setText(_translate("MainWindow", "<--- Unassign From Work Order"))
+        self.workorder_entryform_txtTaskDescription.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.label_60.setText(_translate("MainWindow", "Task Description"))
+        self.workorder_entryform_btnSelectDepartment.setText(_translate("MainWindow", "Select Department"))
+        self.label_64.setText(_translate("MainWindow", "Date Allocated"))
+        self.workorder_entryform_txtCloseOutComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
+        self.label_59.setText(_translate("MainWindow", "Date Created"))
+        self.workorder_entryform_txtPurchaseOrderNumber.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
+        self.workorder_entryform_btnAssignItemToWorkOrder.setText(_translate("MainWindow", "Assign To Work Order --->"))
+        self.workorder_entryform_btnSelectSite.setText(_translate("MainWindow", "Select Site"))
+        self.label_68.setText(_translate("MainWindow", "Close Out Comments"))
+        self.label_62.setText(_translate("MainWindow", "ID"))
+        self.workorder_entryform_btnAssignAssigneeToWorkOrder.setText(_translate("MainWindow", "Assign To Work Order --->"))
+        self.label_55.setText(_translate("MainWindow", "Assignees"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.menuUser.setTitle(_translate("MainWindow", "User"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))

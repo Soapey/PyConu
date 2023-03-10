@@ -18,6 +18,7 @@ from conu.helpers import (
     selected_row_id,
     set_button_visibility,
     hash_sha512,
+    is_valid_email,
 )
 from conu.ui.components.Notification import Notification
 from conu.ui.PageEnum import Page
@@ -176,6 +177,8 @@ def user_entryform_is_valid(main_window) -> bool:
     email_address = main_window.ui.user_entryform_txtEmailAddress.text()
     if not email_address:
         error_strings.append("Email Address field cannot be blank.")
+    elif not is_valid_email(email_address):
+        error_strings.append("Email Address is not valid.")
 
     username = main_window.ui.user_entryform_txtUsername.text()
     if not username:

@@ -1,12 +1,13 @@
-import os
-import hashlib
 import configparser
 from datetime import datetime, date
-from typing import List
-from conu.ui.PageEnum import Page
+import hashlib
+import os
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
+import re
 import tkinter as tk
 from tkinter import filedialog
+from typing import List
+from conu.ui.PageEnum import Page
 
 
 def navigate(main_window, page: Page):
@@ -206,3 +207,15 @@ def clear_widget_children(widget):
         child = widget.takeAt(0)
         if child.widget():
             child.widget().deleteLater()
+
+
+def is_valid_email(email):
+
+    # A regular expression pattern for matching email addresses
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+    # Match the email address against the pattern
+    match = re.match(pattern, email)
+
+    # If the match is not None, the email is valid
+    return match is not None
