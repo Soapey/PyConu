@@ -1,6 +1,7 @@
 from datetime import date
 from conu.db.SQLiteConnection import select_by_attrs_dict
 from conu.classes.PriorityLevel import PriorityLevel
+from conu.db.SQLiteConnection import SQLiteConnection
 
 
 class WorkOrder:
@@ -59,3 +60,20 @@ class WorkOrder:
             not self.date_completed
             and (date.today() - self.date_allocated).days >= days_until_overdue
         )
+
+    @classmethod
+    def get_listingview_table_contents(cls, main_window):
+
+        with SQLiteConnection() as cur:
+            rows = cur.execute(
+                """
+            SELECT 
+                wo.id, s.name, d.name, pl.name, wo.task_description, wo.comments, wo.date_created, wo.date_allocated, CONCAT(u.first_name, u.last_name), wo.date_completed, wo.close_out_comments
+            FROM workorder wo
+            LEFT JOIN site s ON wo.site_id = s.id
+            LEFT JOIN department d ON wo.department_id = d.id
+            LEFT JOIN user u ON wo.raisedby_user_id = u.id
+            WHERE wo.department_id IN (SELECT )
+
+            ;"""
+            )

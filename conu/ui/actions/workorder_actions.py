@@ -8,10 +8,8 @@ from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.Department import Department
 from conu.db.SQLiteConnection import (
     delete_by_attrs_dict,
-    get_by_user_departments,
     save_by_list,
     select_by_attrs_dict,
-    SQLiteConnection,
 )
 from conu.helpers import (
     clear_widget_children,
@@ -31,8 +29,7 @@ def load_workorder_listingview(main_window) -> None:
 
     global global_workorders
     with SQLiteConnection() as cur:
-        rows = cur.execute("SELECT * FROM ")
-
+        rows = cur.execute("SELECT ")
 
     main_window.ui.assignee_listingview_txtSearch.clear()
 
