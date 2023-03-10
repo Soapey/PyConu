@@ -27,31 +27,33 @@ assigned_department_ids = set()
 
 def load_workorder_listingview(main_window) -> None:
 
-    global global_workorders
-    with SQLiteConnection() as cur:
-        rows = cur.execute("SELECT ")
+    WorkOrder.load_listingview_table_contents(main_window)
 
-    main_window.ui.assignee_listingview_txtSearch.clear()
+    main_window.ui.workorder_listingview_txtSearch.clear()
 
-    assignees_by_search(main_window, None)
+    workorders_by_search(main_window, None)
 
-    set_assignee_button_visibility(main_window)
+    set_workorder_button_visibility(main_window)
 
-    navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
+    navigate(main_window, Page.WORKORDER_LISTINGVIEW)
 
 
 def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
 
-    main_window.ui.assignee_entryform_lblId.clear()  # Clear assignee ID label
-    main_window.ui.assignee_entryform_txtName.clear()  # Clear assignee name text field
-    main_window.ui.assignee_entryform_txtDescription.clear()  # Clear assignee description text field
+    main_window.ui.workorder_entryform_lblId.clear()
+    main_window.ui.workorder_entryform_lblDateCreated.clear()
+    main_window.ui.workorder_entryform_lblRaisedBy.clear()
 
-    vboxDepartments = (
-        main_window.ui.assignee_entryform_vboxDepartments
-    )  # Get assignee departments vertical box layout
-    vboxDepartments.setAlignment(Qt.AlignTop)
+    main_window.ui.workorder_entryform_lblSite.clear()
+    main_window.ui.workorder_entryform_lblSite.setProperty("object", None)
 
-    clear_widget_children(vboxDepartments)
+    main_window.ui.workorder_entryform_lblDepartment.clear()
+    main_window.ui.workorder_entryform_lblDepartment.setProperty("object", None)
+
+    main_window.ui.workorder_entryform_lblPriorityLevel.clear()
+    main_window.ui.workorder_entryform_lblPriorityLevel.setProperty("object", None)
+
+    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.clear()
 
     # Retrieve global_departments and global_assigneedepartments using select_by_attrs_dict function
     global global_departments
