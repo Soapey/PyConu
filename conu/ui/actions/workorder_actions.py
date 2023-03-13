@@ -1,16 +1,24 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QCheckBox
+from PyQt5.QtCore import QDate
 from tkinter.messagebox import askyesno
+from datetime import datetime
 
 from conu.classes.WorkOrder import WorkOrder
 from conu.classes.UserDepartment import UserDepartment
 from conu.classes.WorkOrderAssignee import WorkOrderAssignee
 from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.Department import Department
+from conu.classes.Site import Site
+from conu.classes.PriorityLevel import PriorityLevel
+
+from conu.classes.User import User
+from conu.classes.Item import Item
+from conu.classes.Assignee import Assignee
+
 from conu.db.helpers import (
     delete_by_attrs_dict,
     save_by_list,
     select_by_attrs_dict,
+    get_by_user_departments,
 )
 from conu.helpers import (
     clear_widget_children,
@@ -18,6 +26,7 @@ from conu.helpers import (
     selected_row_id,
     set_button_visibility,
     load_query_rows_into_table,
+    load_entities_into_table,
 )
 from conu.ui.components.Notification import Notification
 from conu.ui.PageEnum import Page
@@ -25,8 +34,17 @@ from conu.ui.PageEnum import Page
 
 def load_workorder_listingview(main_window) -> None:
 
+    global global_users
+    global global_sites
+    global global_departments
+    global global_prioritylevels
     global global_workorders
     global workorder_table_data
+
+    global_users = select_by_attrs_dict(User)
+    global_sites = select_by_attrs_dict(Site)
+    global_departments = select_by_attrs_dict(Department)
+    global_prioritylevels = select_by_attrs_dict(PriorityLevel)
 
     user_department_ids = [
         e.department_id
@@ -34,10 +52,12 @@ def load_workorder_listingview(main_window) -> None:
             UserDepartment, {"user_id": main_window.current_user.id}
         ).values()
     ]
+
     global_workorders = filter(
         lambda _, e: e.department_id in user_department_ids,
         select_by_attrs_dict(WorkOrder).items(),
     )
+
     workorder_table_data = WorkOrder.get_listingview_table_data(main_window)
 
     main_window.ui.workorder_listingview_txtSearch.clear()
@@ -49,11 +69,55 @@ def load_workorder_listingview(main_window) -> None:
     navigate(main_window, Page.WORKORDER_LISTINGVIEW)
 
 
-def clear_workorder_entryform(main_window, workorder_id: int = None) -> None:
+def clear_workorder_entryform(main_window) -> None:
 
-    # TODO - Clear WorkOrder entry form
+    global global_items
+    global global_assignees
 
-    pass
+    global_items = get_by_user_departments(Item, main_window.current_user.id)
+    global_assignees = get_by_user_departments(Assignee, main_window.current_user.id)
+
+    main_window.ui.workorder_entryform_lblId.clear()
+    main_window.ui.workorder_entryform_lblDateCreated.clear()
+
+    main_window.ui.workorder_entryform_lblRaisedBy.clear()
+    main_window.ui.workorder_entryform_lblRaisedBy.setProperty("object", None)
+
+    main_window.ui.workorder_entryform_lblSite.clear()
+    main_window.ui.workorder_entryform_lblSite.setProperty("object", None)
+
+    main_window.ui.workorder_entryform_lblDepartment.clear()
+    main_window.ui.workorder_entryform_lblDepartment.setProperty("object", None)
+
+    main_window.ui.workorder_entryform_lblPriorityLevel.clear()
+    main_window.ui.workorder_entryform_lblPriorityLevel.setProperty("object", None)
+
+    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.clear()
+    main_window.ui.workorder_entryform_txtTaskDescription.clear()
+    main_window.ui.workorder_entryform_txtComments.clear()
+
+    main_window.ui.workorder_entryform_dteDateAllocated.setDate(QDate(2000, 1, 1))
+    main_window.ui.workorder_entryform_chkIsComplete.setChecked(False)
+
+    main_window.ui.workorder_entryform_dteDateCompleted.setDate(QDate(2000, 1, 1))
+    main_window.ui.workorder_entryform_dteDateCompleted.setEnabled(False)
+
+    main_window.ui.workorder_entryform_txtCloseOutComments.clear()
+    main_window.ui.workorder_entryform_txtCloseOutComments.setEnabled(False)
+
+    load_entities_into_table(
+        main_window.ui.workorder_entryform_tblUnassignedItems,
+        global_items,
+        {"id": "ID", "name": "Name"},
+    )
+    main_window.ui.workorder_entryform_tblAssignedItems.clear()
+
+    load_entities_into_table(
+        main_window.ui.workorder_entryform_tblUnassignedAssignees,
+        global_assignees,
+        {"id": "ID", "name": "Name"},
+    )
+    main_window.ui.workorder_entryform_tblAssignedAssignees.clear()
 
 
 def new_workorder(main_window) -> None:
@@ -67,15 +131,100 @@ def new_workorder(main_window) -> None:
 
 def edit_workorder(main_window) -> None:
 
-    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
     global global_workorders
+    global global_users
+    global global_sites
+    global global_departments
+    global global_prioritylevels
+    global global_items
+    global global_assignees
+
+    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
     entity = global_workorders[selected_id]
+
+    workorder_site = global_sites[entity.site_id]
+    workorder_department = global_departments[entity.department_id]
+    workorder_prioritylevel = global_prioritylevels[entity.prioritylevel_id]
+    workorder_raisedby_user = global_users[entity.raisedby_user_id]
 
     clear_workorder_entryform(main_window, selected_id)
 
-    # TODO - CLEAR FIELDS
+    main_window.ui.workorder_entryform_lblId.setText(str(entity.id))
+
+    main_window.ui.workorder_entryform_lblDateCreated.setText(
+        datetime.strftime(entity.date_created, "%d-%m-%Y")
+    )
+
+    main_window.ui.workorder_entryform_lblRaisedBy.setText(
+        f"{workorder_raisedby_user.first_name} {workorder_raisedby_user.last_name}"
+    )
+    main_window.ui.workorder_entryform_lblRaisedBy.setProperty(
+        "object", workorder_raisedby_user
+    )
+
+    main_window.ui.workorder_entryform_lblSite.setText(workorder_site.name)
+    main_window.ui.workorder_entryform_lblSite.setProperty("object", workorder_site)
+
+    main_window.ui.workorder_entryform_lblDepartment.setText(workorder_department.name)
+    main_window.ui.workorder_entryform_lblDepartment.setProperty(
+        "object", workorder_department
+    )
+
+    main_window.ui.workorder_entryform_lblPriorityLevel.setText(
+        workorder_prioritylevel.name
+    )
+    main_window.ui.workorder_entryform_lblPriorityLevel.setProperty(
+        "object", workorder_prioritylevel
+    )
 
     main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setFocus()
+
+    workorderitem_itemids = [
+        woi.item_id
+        for woi in select_by_attrs_dict(
+            WorkOrderItem, {"workorder_id", entity.id}
+        ).values()
+    ]
+    assigned_items = {
+        item.id: item for item in global_items if item.id in workorderitem_itemids
+    }
+    load_entities_into_table(
+        main_window.ui.workorder_entryform_tblUnassignedItems,
+        dict(filter(lambda _, item: item not in assigned_items.values(), global_items)),
+        {"id": "ID", "name": "Name"},
+    )
+    load_entities_into_table(
+        main_window.ui.workorder_entryform_tblAssignedItems,
+        assigned_items,
+        {"id": "ID", "name": "Name"},
+    )
+
+    workorderassignee_assigneeids = [
+        woa.assignee_id
+        for woa in select_by_attrs_dict(
+            WorkOrderAssignee, {"workorder_id", entity.id}
+        ).values()
+    ]
+    assigned_assignees = {
+        assignee.id: assignee
+        for assignee in global_assignees
+        if assignee.id in workorderassignee_assigneeids
+    }
+    load_entities_into_table(
+        main_window.ui.workorder_entryform_tblUnassignedAssignees,
+        dict(
+            filter(
+                lambda _, assignee: assignee not in assigned_assignees.values(),
+                global_assignees,
+            )
+        ),
+        {"id": "ID", "name": "Name"},
+    )
+    load_entities_into_table(
+        main_window.ui.workorder_entryform_tblAssignedAssignees,
+        assigned_assignees,
+        {"id": "ID", "name": "Name"},
+    )
 
     navigate(main_window, Page.WORKORDER_ENTRYFORM)
 
@@ -104,7 +253,23 @@ def workorder_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    # TODO - Work Order entry form validation
+    if not main_window.ui.workorder_entryform_lblSite.text():
+        error_strings.append("A site must be selected.")
+
+    if not main_window.ui.workorder_entryform_lblDepartment.text():
+        error_strings.append("A department must be selected.")
+
+    if not main_window.ui.workorder_entryform_lblPriorityLevel.text():
+        error_strings.append("A priority level must be selected.")
+
+    if not main_window.ui.workorder_entryform_tblAssignedItems.rowCount() >= 1:
+        error_strings.append("At least one item must be assigned.")
+
+    if not main_window.ui.workorder_entryform_txtTaskDescription.toPlainText():
+        error_strings.append("Task Description field cannot be blank.")
+
+    if not main_window.ui.workorder_entryform_tblAssignedAssignees.rowCount() >= 1:
+        error_strings.append("At least one assignee must be assigned.")
 
     if error_strings:
         Notification("Cannot Save Work Order", error_strings).show()
