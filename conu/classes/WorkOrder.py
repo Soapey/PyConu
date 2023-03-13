@@ -1,7 +1,6 @@
-from datetime import datetime, date
-from conu.db.SQLiteConnection import SQLiteConnection, select_by_attrs_dict
+from datetime import date
 from conu.classes.PriorityLevel import PriorityLevel
-from PyQt5.QtWidgets import QTableWidgetItem
+from conu.db.SQLiteConnection import SQLiteConnection, select_by_attrs_dict
 
 
 class WorkOrder:
@@ -62,7 +61,7 @@ class WorkOrder:
         )
 
     @classmethod
-    def load_listingview_table_contents(cls, main_window):
+    def get_listingview_table_data(cls, main_window):
 
         current_user = main_window.current_user
 
@@ -107,52 +106,6 @@ class WorkOrder:
             ORDER BY
                 workorder.id ASC;""",
                 (current_user.id,),
-            )
+            ).fetchall()
 
-        table = main_window.ui.workorder_listingview_tblWorkOrder
-        table.clear()
-        table.setRowCount(len(rows))
-        table.setColumnCount(13)
-        table.setHorizontalHeaderLabels(
-            [
-                "ID",
-                "Site",
-                "Department",
-                "Priority Level",
-                "Task Description",
-                "Items",
-                "Assignees",
-                "Comments",
-                "Date Allocated",
-                "Date Completed",
-                "Close Out Comments",
-                "Raised By",
-                "Date Created",
-            ]
-        )
-        for row_index, row_values in enumerate(rows):
-            table.setItem(row_index, 0, QTableWidgetItem(str(row_values[0])))  # ID
-            table.setItem(row_index, 1, QTableWidgetItem(row_values[1]))  # Site
-            table.setItem(row_index, 2, QTableWidgetItem(row_values[2]))  # Department
-            table.setItem(
-                row_index, 3, QTableWidgetItem(row_values[3])
-            )  # Priority Level
-            table.setItem(
-                row_index, 4, QTableWidgetItem(row_values[4])
-            )  # Task Description
-            table.setItem(row_index, 5, QTableWidgetItem(row_values[5]))  # Items
-            table.setItem(row_index, 6, QTableWidgetItem(row_values[6]))  # Assignees
-            table.setItem(row_index, 7, QTableWidgetItem(row_values[7]))  # Comments
-            table.setItem(
-                row_index, 8, QTableWidgetItem(row_values[8])
-            )  # Date Allocated
-            table.setItem(
-                row_index, 9, QTableWidgetItem(row_values[9])
-            )  # Date Completed
-            table.setItem(
-                row_index, 10, QTableWidgetItem(row_values[10])
-            )  # Close Out Comments
-            table.setItem(row_index, 11, QTableWidgetItem(row_values[11]))  # Raised By
-            table.setItem(
-                row_index, 12, QTableWidgetItem(row_values[12])
-            )  # Date Created
+        return rows

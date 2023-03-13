@@ -230,13 +230,18 @@ def load_query_rows_into_table(table, rows, column_parameters_dict):
     table.setHorizontalHeaderLabels(list(column_parameters_dict.keys()))
     header = table.horizontalHeader()
 
-    for _, column_parameters in column_parameters_dict.items():
-        column_index = column_parameters[1]
+    for column_index, column_parameters in enumerate(column_parameters_dict.values()):
         formatting_function = column_parameters[2]
         header.setSectionResizeMode(column_index, QHeaderView.ResizeToContents)
         for row_index, row in enumerate(rows):
+
+            value = row[column_index]
+
+            if formatting_function:
+                value = formatting_function(value)
+
             table.setItem(
                 row_index,
                 column_index,
-                QTableWidgetItem(formatting_function(row[1])),
+                QTableWidgetItem(value),
             )

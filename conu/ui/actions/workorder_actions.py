@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QCheckBox
 from tkinter.messagebox import askyesno
 
 from conu.classes.WorkOrder import WorkOrder
+from conu.classes.UserDepartment import UserDepartment
 from conu.classes.WorkOrderAssignee import WorkOrderAssignee
 from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.Department import Department
@@ -13,21 +14,31 @@ from conu.db.SQLiteConnection import (
 )
 from conu.helpers import (
     clear_widget_children,
-    load_entities_into_table,
     navigate,
     selected_row_id,
     set_button_visibility,
+    load_query_rows_into_table,
 )
 from conu.ui.components.Notification import Notification
 from conu.ui.PageEnum import Page
 
 
-assigned_department_ids = set()
-
-
 def load_workorder_listingview(main_window) -> None:
 
-    WorkOrder.load_listingview_table_contents(main_window)
+    global global_workorders
+    global workorder_table_data
+
+    user_department_ids = [
+        e.department_id
+        for e in select_by_attrs_dict(
+            UserDepartment, {"user_id": main_window.current_user.id}
+        ).values()
+    ]
+    global_workorders = filter(
+        lambda _, e: e.department_id in user_department_ids,
+        select_by_attrs_dict(WorkOrder).items(),
+    )
+    workorder_table_data = WorkOrder.get_listingview_table_data(main_window)
 
     main_window.ui.workorder_listingview_txtSearch.clear()
 
@@ -38,153 +49,110 @@ def load_workorder_listingview(main_window) -> None:
     navigate(main_window, Page.WORKORDER_LISTINGVIEW)
 
 
-def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
+def clear_workorder_entryform(main_window, workorder_id: int = None) -> None:
 
-    main_window.ui.workorder_entryform_lblId.clear()
-    main_window.ui.workorder_entryform_lblDateCreated.clear()
-    main_window.ui.workorder_entryform_lblRaisedBy.clear()
+    # TODO - Clear WorkOrder entry form
 
-    main_window.ui.workorder_entryform_lblSite.clear()
-    main_window.ui.workorder_entryform_lblSite.setProperty("object", None)
-
-    main_window.ui.workorder_entryform_lblDepartment.clear()
-    main_window.ui.workorder_entryform_lblDepartment.setProperty("object", None)
-
-    main_window.ui.workorder_entryform_lblPriorityLevel.clear()
-    main_window.ui.workorder_entryform_lblPriorityLevel.setProperty("object", None)
-
-    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.clear()
-
-    # Retrieve global_departments and global_assigneedepartments using select_by_attrs_dict function
-    global global_departments
-    global global_assigneedepartments
-    global_departments = select_by_attrs_dict(Department)
-    global_assigneedepartments = select_by_attrs_dict(AssigneeDepartment)
-
-    # Create a set to store the IDs of departments assigned to the assignee, if an assignee ID has been provided
-    global assigned_department_ids
-    if assignee_id:
-        assigned_department_ids = {
-            ad.department_id
-            for ad in global_assigneedepartments.values()
-            if ad.assignee_id == assignee_id
-        }
-    else:
-        assigned_department_ids = set()
-
-    # Loop through each department and create a QCheckBox widget for it
-    for department in list(global_departments.values()):
-
-        # Create a QCheckBox widget with the department name and add it to the vbox_departments layout
-        checkbox = QCheckBox(department.name, main_window.ui.page_assignee_entryform)
-        checkbox.setProperty("object", department)
-        checkbox.setChecked(False)  # Set the checkbox to unchecked by default
-
-        # Check if the department is assigned to the assignee, and if so, set the checkbox to checked
-        if department.id in assigned_department_ids:
-            checkbox.setChecked(True)
-
-        # Add the checkbox widget to the vbox_departments layout
-        vboxDepartments.addWidget(checkbox)
+    pass
 
 
-def new_assignee(main_window) -> None:
+def new_workorder(main_window) -> None:
 
-    clear_assignee_entryform(main_window)
+    clear_workorder_entryform(main_window)
 
-    main_window.ui.assignee_entryform_txtName.setFocus()
+    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setFocus()
 
-    navigate(main_window, Page.ASSIGNEE_ENTRYFORM)
-
-
-def edit_assignee(main_window) -> None:
-
-    selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
-    global global_assignees
-    entity = global_assignees[selected_id]
-
-    clear_assignee_entryform(main_window, selected_id)
-
-    main_window.ui.assignee_entryform_lblId.setText(str(entity.id))
-    main_window.ui.assignee_entryform_txtName.setText(entity.name)
-    main_window.ui.assignee_entryform_txtDescription.setPlainText(entity.description)
-    main_window.ui.assignee_entryform_txtName.setFocus()
-
-    navigate(main_window, Page.ASSIGNEE_ENTRYFORM)
+    navigate(main_window, Page.WORKORDER_ENTRYFORM)
 
 
-def delete_assignee(main_window) -> None:
+def edit_workorder(main_window) -> None:
+
+    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
+    global global_workorders
+    entity = global_workorders[selected_id]
+
+    clear_workorder_entryform(main_window, selected_id)
+
+    # TODO - CLEAR FIELDS
+
+    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setFocus()
+
+    navigate(main_window, Page.WORKORDER_ENTRYFORM)
+
+
+def delete_workorder(main_window) -> None:
 
     if not askyesno(
         "Confirm delete", "Are you sure you would like to delete the selected record?"
     ):
         return
 
-    selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
-    global global_assignees
-    entity = global_assignees[selected_id]
+    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
+    global global_workorders
+    entity = global_workorders[selected_id]
 
-    delete_by_attrs_dict(Assignee, {"id": entity.id})
+    delete_by_attrs_dict(WorkOrder, {"id": entity.id})
 
     Notification(
-        "Delete Successful", [f"Successfully deleted assignee: {entity.name}"]
+        "Delete Successful", [f"Successfully deleted work order: {entity.id}"]
     ).show()
 
-    load_assignee_listingview(main_window)
+    load_workorder_listingview(main_window)
 
 
-def assignee_entryform_is_valid(main_window) -> bool:
+def workorder_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    if not main_window.ui.assignee_entryform_txtName.text():
-        error_strings.append("Name field cannot be blank.")
-
-    vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
-    if not any(
-        [
-            vboxDepartments.itemAt(i).widget().isChecked()
-            for i in range(vboxDepartments.count())
-        ]
-    ):
-        error_strings.append("At least one department must be selected.")
+    # TODO - Work Order entry form validation
 
     if error_strings:
-        Notification("Cannot Save Assignee", error_strings).show()
+        Notification("Cannot Save Work Order", error_strings).show()
 
     return not bool(error_strings)
 
 
-def save_and_delete_assigneedepartments(main_window, entity_id):
+def save_and_delete_workorderitems(main_window, entity_id):
 
-    assigneedepartments_to_save = list()
-    vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
-    for i in range(vboxDepartments.count()):
-        widget = vboxDepartments.itemAt(i).widget()
-        if isinstance(widget, QCheckBox):
-            department = widget.property("object")
+    # TODO - Save and Delete attached WorkOrder items
 
-            if widget.isChecked():
+    # assigneedepartments_to_save = list()
+    # vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
+    # for i in range(vboxDepartments.count()):
+    #     widget = vboxDepartments.itemAt(i).widget()
+    #     if isinstance(widget, QCheckBox):
+    #         department = widget.property("object")
 
-                if department.id not in assigned_department_ids:
-                    assigneedepartments_to_save.append(
-                        AssigneeDepartment(None, entity_id, department.id)
-                    )
+    #         if widget.isChecked():
 
-            else:
+    #             if department.id not in assigned_department_ids:
+    #                 assigneedepartments_to_save.append(
+    #                     AssigneeDepartment(None, entity_id, department.id)
+    #                 )
 
-                if department.id in assigned_department_ids:
-                    delete_by_attrs_dict(
-                        AssigneeDepartment,
-                        {"assignee_id": entity_id, "department_id": department.id},
-                    )
+    #         else:
 
-    save_by_list(assigneedepartments_to_save)
+    #             if department.id in assigned_department_ids:
+    #                 delete_by_attrs_dict(
+    #                     AssigneeDepartment,
+    #                     {"assignee_id": entity_id, "department_id": department.id},
+    #                 )
+
+    # save_by_list(assigneedepartments_to_save)
+
+    pass
 
 
-def save_assignee(main_window) -> None:
+def save_and_delete_workorderassignees(main_window, entity_id):
 
-    if not assignee_entryform_is_valid(main_window):
+    # TODO - Save and Delete attached WorkOrder assignees
+
+    pass
+
+
+def save_workorder(main_window) -> None:
+
+    if not workorder_entryform_is_valid(main_window):
         return
 
     if not askyesno(
@@ -192,102 +160,131 @@ def save_assignee(main_window) -> None:
     ):
         return
 
-    entity = Assignee(
+    entity = WorkOrder(
         None
-        if len(main_window.ui.assignee_entryform_lblId.text()) == 0
-        else int(main_window.ui.assignee_entryform_lblId.text()),
-        main_window.ui.assignee_entryform_txtName.text(),
-        main_window.ui.assignee_entryform_txtDescription.toPlainText(),
+        if len(main_window.ui.workorder_entryform_lblId.text()) == 0
+        else int(main_window.ui.workorder_entryform_lblId.text()),
+        main_window.ui.workorder_entryform_txtName.text(),
+        main_window.ui.workorder_entryform_txtDescription.toPlainText(),
     )
 
     entity_id = sorted(save_by_list([entity]), key=lambda e: e.id, reverse=True)[0].id
 
-    save_and_delete_assigneedepartments(main_window, entity_id)
+    save_and_delete_workorderitems(main_window, entity_id)
+
+    save_and_delete_workorderassignees(main_window, entity_id)
 
     Notification(
-        "Safe Successful", [f"Successfully saved assignee: {entity.name}"]
+        "Safe Successful", [f"Successfully saved work order: {entity_id}"]
     ).show()
 
-    load_assignee_listingview(main_window)
+    load_workorder_listingview(main_window)
 
-    clear_assignee_entryform(main_window)
-
-
-def back_to_assignee_listingview(main_window) -> None:
-
-    clear_assignee_entryform(main_window)
-
-    navigate(main_window, Page.ASSIGNEE_LISTINGVIEW)
+    clear_workorder_entryform(main_window)
 
 
-def assignees_by_search(main_window, search_text: str) -> None:
+def back_to_workorder_listingview(main_window) -> None:
 
-    global global_assignees
+    clear_workorder_entryform(main_window)
+
+    navigate(main_window, Page.WORKORDER_LISTINGVIEW)
+
+
+def workorders_by_search(main_window, search_text: str) -> None:
+
+    global workorder_table_data
 
     if not search_text:
-        matches = list(global_assignees.values())
+        matches = workorder_table_data
     else:
         matches = list(
             filter(
-                lambda e: search_text in "".join([str(e.id), e.name.lower()]),
-                global_assignees.values(),
+                lambda tup: search_text
+                in "".join(
+                    [
+                        str(tup[0]),
+                        tup[1],
+                        tup[2],
+                        tup[4],
+                        tup[5],
+                        tup[6],
+                        tup[11],
+                    ]
+                ).lower(),
+                workorder_table_data,
             )
         )
 
-    load_entities_into_table(
-        main_window.ui.assignee_listingview_tblAssignee,
+    load_query_rows_into_table(
+        main_window.ui.workorder_listingview_tblWorkOrder,
         matches,
-        {"id": "ID", "name": "Name", "description": "Description"},
+        {
+            "ID": (0, str),
+            "Site": (1, None),
+            "Department": (2, None),
+            "Priority Level": (3, None),
+            "Task Description": (4, None),
+            "Items": (5, None),
+            "Assignees": (6, None),
+            "Comments": (7, None),
+            "Date Allocated": (8, None),
+            "Date Completed": (9, None),
+            "Close Out Comments": (10, None),
+            "Raised By": (11, None),
+            "Date Created": (12, None),
+        },
     )
 
 
-def set_assignee_button_visibility(main_window):
+def set_workorder_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
         set_button_visibility(
             [
-                main_window.ui.assignee_listingview_btnNew,
-                main_window.ui.assignee_listingview_btnEdit,
-                main_window.ui.assignee_listingview_btnDelete,
+                main_window.ui.workorder_listingview_btnNew,
+                main_window.ui.workorder_listingview_btnEdit,
+                main_window.ui.workorder_listingview_btnDelete,
             ],
             is_visible=False,
         )
     else:
         set_button_visibility(
-            [main_window.ui.assignee_listingview_btnNew], is_visible=True
+            [main_window.ui.workorder_listingview_btnNew], is_visible=True
         )
         set_button_visibility(
             [
-                main_window.ui.assignee_listingview_btnEdit,
-                main_window.ui.assignee_listingview_btnDelete,
+                main_window.ui.workorder_listingview_btnEdit,
+                main_window.ui.workorder_listingview_btnDelete,
             ],
-            is_visible=selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
+            is_visible=selected_row_id(
+                main_window.ui.workorder_listingview_tblWorkOrder
+            )
             is not None,
         )
 
 
 def connect_workorder_actions(main_window) -> None:
 
-    main_window.ui.assignee_listingview_btnNew.clicked.connect(
-        lambda: new_assignee(main_window)
+    main_window.ui.workorder_listingview_btnNew.clicked.connect(
+        lambda: new_workorder(main_window)
     )
-    main_window.ui.assignee_listingview_btnEdit.clicked.connect(
-        lambda: edit_assignee(main_window)
+    main_window.ui.workorder_listingview_btnEdit.clicked.connect(
+        lambda: edit_workorder(main_window)
     )
-    main_window.ui.assignee_listingview_btnDelete.clicked.connect(
-        lambda: delete_assignee(main_window)
+    main_window.ui.workorder_listingview_btnDelete.clicked.connect(
+        lambda: delete_workorder(main_window)
     )
-    main_window.ui.assignee_entryform_btnSave.clicked.connect(
-        lambda: save_assignee(main_window)
+    main_window.ui.workorder_entryform_btnSave.clicked.connect(
+        lambda: save_workorder(main_window)
     )
-    main_window.ui.assignee_entryform_btnBack.clicked.connect(
-        lambda: back_to_assignee_listingview(main_window)
+    main_window.ui.workorder_entryform_btnBack.clicked.connect(
+        lambda: back_to_workorder_listingview(main_window)
     )
-    main_window.ui.assignee_listingview_txtSearch.textChanged.connect(
-        lambda: assignees_by_search(
-            main_window, main_window.ui.assignee_listingview_txtSearch.text().lower()
+    main_window.ui.workorder_listingview_txtSearch.textChanged.connect(
+        lambda: workorders_by_search(
+            main_window, main_window.ui.workorder_listingview_txtSearch.text().lower()
         )
     )
-    main_window.ui.assignee_listingview_tblAssignee.itemSelectionChanged.connect(
-        lambda: set_assignee_button_visibility(main_window)
+    main_window.ui.workorder_listingview_tblWorkOrder.itemSelectionChanged.connect(
+        lambda: set_workorder_button_visibility(main_window)
     )
