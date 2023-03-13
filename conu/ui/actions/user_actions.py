@@ -5,7 +5,7 @@ from tkinter.messagebox import askyesno
 from conu.classes.User import User
 from conu.classes.UserDepartment import UserDepartment
 from conu.classes.Department import Department
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     get_by_user_departments,
     save_by_list,
@@ -385,6 +385,15 @@ def set_user_button_visibility(main_window):
 
 def connect_user_actions(main_window) -> None:
 
+    main_window.ui.action_users.triggered.connect(
+        lambda: load_user_listingview(main_window)
+    )
+    main_window.ui.action_logout.triggered.connect(
+        lambda: main_window.login_window.log_out_user()
+    )
+    main_window.ui.action_changepassword.triggered.connect(
+        lambda: print("Change Password clicked placeholder.")
+    )
     main_window.ui.user_listingview_btnNew.clicked.connect(
         lambda: new_user(main_window)
     )

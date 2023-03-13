@@ -5,7 +5,7 @@ from tkinter.messagebox import askyesno
 from conu.classes.Assignee import Assignee
 from conu.classes.AssigneeDepartment import AssigneeDepartment
 from conu.classes.Department import Department
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     get_by_user_departments,
     save_by_list,
@@ -45,7 +45,9 @@ def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
     main_window.ui.assignee_entryform_txtName.clear()  # Clear assignee name text field
     main_window.ui.assignee_entryform_txtDescription.clear()  # Clear assignee description text field
 
-    vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments # Get assignee departments vertical box layout
+    vboxDepartments = (
+        main_window.ui.assignee_entryform_vboxDepartments
+    )  # Get assignee departments vertical box layout
     vboxDepartments.setAlignment(Qt.AlignTop)
 
     clear_widget_children(vboxDepartments)
@@ -71,7 +73,7 @@ def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
     for department in list(global_departments.values()):
 
         # Create a QCheckBox widget with the department name and add it to the vbox_departments layout
-        checkbox = QCheckBox(department.name, main_window.ui.page_assignee_entryform)  
+        checkbox = QCheckBox(department.name, main_window.ui.page_assignee_entryform)
         checkbox.setProperty("object", department)
         checkbox.setChecked(False)  # Set the checkbox to unchecked by default
 
@@ -80,7 +82,7 @@ def clear_assignee_entryform(main_window, assignee_id: int = None) -> None:
             checkbox.setChecked(True)
 
         # Add the checkbox widget to the vbox_departments layout
-        vboxDepartments.addWidget(checkbox)  
+        vboxDepartments.addWidget(checkbox)
 
 
 def new_assignee(main_window) -> None:
@@ -114,14 +116,16 @@ def delete_assignee(main_window) -> None:
         "Confirm delete", "Are you sure you would like to delete the selected record?"
     ):
         return
-    
+
     selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
     global global_assignees
     entity = global_assignees[selected_id]
 
     delete_by_attrs_dict(Assignee, {"id": entity.id})
 
-    Notification("Delete Successful", [f"Successfully deleted assignee: {entity.name}"]).show()
+    Notification(
+        "Delete Successful", [f"Successfully deleted assignee: {entity.name}"]
+    ).show()
 
     load_assignee_listingview(main_window)
 
@@ -134,7 +138,12 @@ def assignee_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
 
     vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
-    if not any([vboxDepartments.itemAt(i).widget().isChecked() for i in range(vboxDepartments.count())]):
+    if not any(
+        [
+            vboxDepartments.itemAt(i).widget().isChecked()
+            for i in range(vboxDepartments.count())
+        ]
+    ):
         error_strings.append("At least one department must be selected.")
 
     if error_strings:
@@ -175,7 +184,9 @@ def save_assignee(main_window) -> None:
     if not assignee_entryform_is_valid(main_window):
         return
 
-    if not askyesno("Confirm save", "Are you sure you would like to save the current record?"):
+    if not askyesno(
+        "Confirm save", "Are you sure you would like to save the current record?"
+    ):
         return
 
     entity = Assignee(
@@ -190,7 +201,9 @@ def save_assignee(main_window) -> None:
 
     save_and_delete_assigneedepartments(main_window, entity_id)
 
-    Notification("Safe Successful", [f"Successfully saved assignee: {entity.name}"]).show()
+    Notification(
+        "Safe Successful", [f"Successfully saved assignee: {entity.name}"]
+    ).show()
 
     load_assignee_listingview(main_window)
 
@@ -228,24 +241,33 @@ def assignees_by_search(main_window, search_text: str) -> None:
 def set_assignee_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
-        set_button_visibility([
-            main_window.ui.assignee_listingview_btnNew,
-            main_window.ui.assignee_listingview_btnEdit,
-            main_window.ui.assignee_listingview_btnDelete,
+        set_button_visibility(
+            [
+                main_window.ui.assignee_listingview_btnNew,
+                main_window.ui.assignee_listingview_btnEdit,
+                main_window.ui.assignee_listingview_btnDelete,
             ],
-            is_visible=False)
+            is_visible=False,
+        )
     else:
-        set_button_visibility([main_window.ui.assignee_listingview_btnNew], is_visible=True)
-        set_button_visibility([
-            main_window.ui.assignee_listingview_btnEdit,
-            main_window.ui.assignee_listingview_btnDelete
+        set_button_visibility(
+            [main_window.ui.assignee_listingview_btnNew], is_visible=True
+        )
+        set_button_visibility(
+            [
+                main_window.ui.assignee_listingview_btnEdit,
+                main_window.ui.assignee_listingview_btnDelete,
             ],
-            is_visible=selected_row_id(main_window.ui.assignee_listingview_tblAssignee) is not None,
+            is_visible=selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
+            is not None,
         )
 
 
 def connect_assignee_actions(main_window) -> None:
 
+    main_window.ui.action_assignees.triggered.connect(
+        lambda: load_assignee_listingview(main_window)
+    )
     main_window.ui.assignee_listingview_btnNew.clicked.connect(
         lambda: new_assignee(main_window)
     )

@@ -3,7 +3,7 @@ from tkinter.messagebox import askyesno
 from conu.classes.Department import Department
 from conu.ui.components.Notification import Notification
 
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     select_by_attrs_dict,
     save_by_list,
@@ -57,16 +57,20 @@ def edit_department(main_window) -> None:
 
 def delete_department(main_window) -> None:
 
-    if not askyesno("Confirm delete", "Are you sure you would like to delete the selected record?"):
+    if not askyesno(
+        "Confirm delete", "Are you sure you would like to delete the selected record?"
+    ):
         return
-    
+
     selected_id = selected_row_id(main_window.ui.department_listingview_tblDepartment)
     global global_departments
     entity = global_departments[selected_id]
 
     delete_by_attrs_dict(Department, {"id": entity.id})
 
-    Notification("Delete Successful", [f"Successfully deleted department: {entity.name}"]).show()
+    Notification(
+        "Delete Successful", [f"Successfully deleted department: {entity.name}"]
+    ).show()
 
     load_department_listingview(main_window)
 
@@ -105,7 +109,9 @@ def save_department(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification("Save Successful", [f"Successfully saved department: {entity.name}"]).show()
+    Notification(
+        "Save Successful", [f"Successfully saved department: {entity.name}"]
+    ).show()
 
     load_department_listingview(main_window)
 
@@ -143,24 +149,35 @@ def departments_by_search(main_window, search_text: str) -> None:
 def set_department_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
-        set_button_visibility([
-            main_window.ui.department_listingview_btnNew,
-            main_window.ui.department_listingview_btnEdit,
-            main_window.ui.department_listingview_btnDelete,
+        set_button_visibility(
+            [
+                main_window.ui.department_listingview_btnNew,
+                main_window.ui.department_listingview_btnEdit,
+                main_window.ui.department_listingview_btnDelete,
             ],
-            is_visible=False)
+            is_visible=False,
+        )
     else:
-        set_button_visibility([main_window.ui.department_listingview_btnNew], is_visible=True)
-        set_button_visibility([
-            main_window.ui.department_listingview_btnEdit,
-            main_window.ui.department_listingview_btnDelete
+        set_button_visibility(
+            [main_window.ui.department_listingview_btnNew], is_visible=True
+        )
+        set_button_visibility(
+            [
+                main_window.ui.department_listingview_btnEdit,
+                main_window.ui.department_listingview_btnDelete,
             ],
-            is_visible=selected_row_id(main_window.ui.department_listingview_tblDepartment) is not None,
+            is_visible=selected_row_id(
+                main_window.ui.department_listingview_tblDepartment
+            )
+            is not None,
         )
 
 
 def connect_department_actions(main_window) -> None:
 
+    main_window.ui.action_departments.triggered.connect(
+        lambda: load_department_listingview(main_window)
+    )
     main_window.ui.department_listingview_btnNew.clicked.connect(
         lambda: new_department(main_window)
     )

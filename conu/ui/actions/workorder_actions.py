@@ -7,7 +7,7 @@ from conu.classes.UserDepartment import UserDepartment
 from conu.classes.WorkOrderAssignee import WorkOrderAssignee
 from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.Department import Department
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     save_by_list,
     select_by_attrs_dict,
@@ -265,6 +265,9 @@ def set_workorder_button_visibility(main_window):
 
 def connect_workorder_actions(main_window) -> None:
 
+    main_window.ui.action_workorders.triggered.connect(
+        lambda: load_workorder_listingview(main_window)
+    )
     main_window.ui.workorder_listingview_btnNew.clicked.connect(
         lambda: new_workorder(main_window)
     )

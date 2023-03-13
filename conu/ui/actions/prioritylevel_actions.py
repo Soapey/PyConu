@@ -3,7 +3,7 @@ from tkinter.messagebox import askyesno
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.ui.components.Notification import Notification
 
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     select_by_attrs_dict,
     save_by_list,
@@ -49,13 +49,17 @@ def new_prioritylevel(main_window) -> None:
 
 def edit_prioritylevel(main_window) -> None:
 
-    selected_id = selected_row_id(main_window.ui.prioritylevel_listingview_tblPriorityLevel)
+    selected_id = selected_row_id(
+        main_window.ui.prioritylevel_listingview_tblPriorityLevel
+    )
     global global_prioritylevels
     entity = global_prioritylevels[selected_id]
 
     main_window.ui.prioritylevel_entryform_lblId.setText(str(entity.id))
     main_window.ui.prioritylevel_entryform_txtName.setText(entity.name)
-    main_window.ui.prioritylevel_entryform_spnDaysUntilOverdue.setValue(entity.days_until_overdue)
+    main_window.ui.prioritylevel_entryform_spnDaysUntilOverdue.setValue(
+        entity.days_until_overdue
+    )
     main_window.ui.prioritylevel_entryform_txtName.setFocus()
 
     navigate(main_window, Page.PRIORITYLEVEL_ENTRYFORM)
@@ -63,16 +67,22 @@ def edit_prioritylevel(main_window) -> None:
 
 def delete_prioritylevel(main_window) -> None:
 
-    if not askyesno("Confirm delete", "Are you sure you would like to delete the selected record?"):
+    if not askyesno(
+        "Confirm delete", "Are you sure you would like to delete the selected record?"
+    ):
         return
-    
-    selected_id = selected_row_id(main_window.ui.prioritylevel_listingview_tblPriorityLevel)
+
+    selected_id = selected_row_id(
+        main_window.ui.prioritylevel_listingview_tblPriorityLevel
+    )
     global global_prioritylevels
     entity = global_prioritylevels[selected_id]
 
     delete_by_attrs_dict(PriorityLevel, {"id": entity.id})
 
-    Notification("Delete Successful",[f"Successfully deleted priority level: {entity.name}"]).show()
+    Notification(
+        "Delete Successful", [f"Successfully deleted priority level: {entity.name}"]
+    ).show()
 
     load_prioritylevel_listingview(main_window)
 
@@ -95,20 +105,24 @@ def save_prioritylevel(main_window) -> None:
     if not prioritylevel_entryform_is_valid(main_window):
         return
 
-    if not askyesno("Confirm save", "Are you sure you would like to save the current record?"):
+    if not askyesno(
+        "Confirm save", "Are you sure you would like to save the current record?"
+    ):
         return
 
     entity = PriorityLevel(
         None
         if len(main_window.ui.prioritylevel_entryform_lblId.text()) == 0
         else int(main_window.ui.prioritylevel_entryform_lblId.text()),
-        main_window.ui.prioritylevel_entryform_txtName.text(), 
+        main_window.ui.prioritylevel_entryform_txtName.text(),
         main_window.ui.prioritylevel_entryform_spnDaysUntilOverdue.value(),
     )
 
     save_by_list([entity])
 
-    Notification("Save Successful", [f"Successfully saved priority level: {entity.name}"]).show()
+    Notification(
+        "Save Successful", [f"Successfully saved priority level: {entity.name}"]
+    ).show()
 
     load_prioritylevel_listingview(main_window)
 
@@ -146,24 +160,35 @@ def prioritylevels_by_search(main_window, search_text: str) -> None:
 def set_prioritylevel_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
-        set_button_visibility([
-            main_window.ui.prioritylevel_listingview_btnNew,
-            main_window.ui.prioritylevel_listingview_btnEdit,
-            main_window.ui.prioritylevel_listingview_btnDelete,
+        set_button_visibility(
+            [
+                main_window.ui.prioritylevel_listingview_btnNew,
+                main_window.ui.prioritylevel_listingview_btnEdit,
+                main_window.ui.prioritylevel_listingview_btnDelete,
             ],
-            is_visible=False)
+            is_visible=False,
+        )
     else:
-        set_button_visibility([main_window.ui.prioritylevel_listingview_btnNew], is_visible=True)
-        set_button_visibility([
-            main_window.ui.prioritylevel_listingview_btnEdit,
-            main_window.ui.prioritylevel_listingview_btnDelete
+        set_button_visibility(
+            [main_window.ui.prioritylevel_listingview_btnNew], is_visible=True
+        )
+        set_button_visibility(
+            [
+                main_window.ui.prioritylevel_listingview_btnEdit,
+                main_window.ui.prioritylevel_listingview_btnDelete,
             ],
-            is_visible=selected_row_id(main_window.ui.prioritylevel_listingview_tblPriorityLevel) is not None,
+            is_visible=selected_row_id(
+                main_window.ui.prioritylevel_listingview_tblPriorityLevel
+            )
+            is not None,
         )
 
 
 def connect_prioritylevel_actions(main_window) -> None:
 
+    main_window.ui.action_prioritylevels.triggered.connect(
+        lambda: load_prioritylevel_listingview(main_window)
+    )
     main_window.ui.prioritylevel_listingview_btnNew.clicked.connect(
         lambda: new_prioritylevel(main_window)
     )
@@ -181,7 +206,8 @@ def connect_prioritylevel_actions(main_window) -> None:
     )
     main_window.ui.prioritylevel_listingview_txtSearch.textChanged.connect(
         lambda: prioritylevels_by_search(
-            main_window, main_window.ui.prioritylevel_listingview_txtSearch.text().lower()
+            main_window,
+            main_window.ui.prioritylevel_listingview_txtSearch.text().lower(),
         )
     )
     main_window.ui.prioritylevel_listingview_tblPriorityLevel.itemSelectionChanged.connect(

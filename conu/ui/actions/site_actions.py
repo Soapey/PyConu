@@ -3,7 +3,7 @@ from tkinter.messagebox import askyesno
 from conu.classes.Site import Site
 from conu.ui.components.Notification import Notification
 
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     select_by_attrs_dict,
     save_by_list,
@@ -65,16 +65,20 @@ def edit_site(main_window) -> None:
 
 def delete_site(main_window) -> None:
 
-    if not askyesno("Confirm delete", "Are you sure you would like to delete the selected record?"):
+    if not askyesno(
+        "Confirm delete", "Are you sure you would like to delete the selected record?"
+    ):
         return
-    
+
     selected_id = selected_row_id(main_window.ui.site_listingview_tblSite)
     global global_sites
     entity = global_sites[selected_id]
 
     delete_by_attrs_dict(Site, {"id": entity.id})
 
-    Notification("Delete Successful",[f"Successfully deleted site: {entity.name}"]).show()
+    Notification(
+        "Delete Successful", [f"Successfully deleted site: {entity.name}"]
+    ).show()
 
     load_site_listingview(main_window)
 
@@ -97,7 +101,9 @@ def save_site(main_window) -> None:
     if not site_entryform_is_valid(main_window):
         return
 
-    if not askyesno("Confirm save", "Are you sure you would like to save the current record?"):
+    if not askyesno(
+        "Confirm save", "Are you sure you would like to save the current record?"
+    ):
         return
 
     entity = Site(
@@ -111,7 +117,7 @@ def save_site(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification("Save Successful",[f"Successfully saved site: {entity.name}"]).show()
+    Notification("Save Successful", [f"Successfully saved site: {entity.name}"]).show()
 
     load_site_listingview(main_window)
 
@@ -134,7 +140,10 @@ def sites_by_search(main_window, search_text: str) -> None:
     else:
         matches = list(
             filter(
-                lambda e: search_text in "".join([str(e.id), e.name.lower(), e.address.lower(), e.suburb.lower()]),
+                lambda e: search_text
+                in "".join(
+                    [str(e.id), e.name.lower(), e.address.lower(), e.suburb.lower()]
+                ),
                 global_sites.values(),
             )
         )
@@ -149,24 +158,31 @@ def sites_by_search(main_window, search_text: str) -> None:
 def set_site_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
-        set_button_visibility([
-            main_window.ui.site_listingview_btnNew,
-            main_window.ui.site_listingview_btnEdit,
-            main_window.ui.site_listingview_btnDelete,
+        set_button_visibility(
+            [
+                main_window.ui.site_listingview_btnNew,
+                main_window.ui.site_listingview_btnEdit,
+                main_window.ui.site_listingview_btnDelete,
             ],
-            is_visible=False)
+            is_visible=False,
+        )
     else:
         set_button_visibility([main_window.ui.site_listingview_btnNew], is_visible=True)
-        set_button_visibility([
-            main_window.ui.site_listingview_btnEdit,
-            main_window.ui.site_listingview_btnDelete
+        set_button_visibility(
+            [
+                main_window.ui.site_listingview_btnEdit,
+                main_window.ui.site_listingview_btnDelete,
             ],
-            is_visible=selected_row_id(main_window.ui.site_listingview_tblSite) is not None,
+            is_visible=selected_row_id(main_window.ui.site_listingview_tblSite)
+            is not None,
         )
 
 
 def connect_site_actions(main_window) -> None:
 
+    main_window.ui.action_sites.triggered.connect(
+        lambda: load_site_listingview(main_window)
+    )
     main_window.ui.site_listingview_btnNew.clicked.connect(
         lambda: new_site(main_window)
     )

@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
 from conu.ui.components.Ui_MainWindow import Ui_MainWindow
-from conu.ui.actions.menu_actions import connect_menu_actions
 from conu.ui.actions.assignee_actions import connect_assignee_actions
 from conu.ui.actions.department_actions import connect_department_actions
 from conu.ui.actions.form_actions import connect_form_actions
@@ -20,9 +19,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.current_user = None
         self._connect_window_actions()
+        self._connect_menu_actions()
 
     def _connect_window_actions(self):
-        connect_menu_actions(self)
         connect_assignee_actions(self)
         connect_department_actions(self)
         connect_form_actions(self)

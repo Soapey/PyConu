@@ -2,7 +2,7 @@ from tkinter.messagebox import askyesno
 
 from conu.classes.Form import Form
 from conu.ui.components.Notification import Notification
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     save_by_list,
     select_by_attrs_dict,
@@ -63,16 +63,20 @@ def edit_form(main_window) -> None:
 
 def delete_form(main_window) -> None:
 
-    if not askyesno("Confirm delete", "Are you sure you would like to delete the selected record?"):
+    if not askyesno(
+        "Confirm delete", "Are you sure you would like to delete the selected record?"
+    ):
         return
-    
+
     selected_id = selected_row_id(main_window.ui.form_listingview_tblForm)
     global global_forms
     entity = global_forms[selected_id]
 
     delete_by_attrs_dict(Form, {"id": entity.id})
 
-    Notification("Delete Successful", [f"Successfully deleted form: {entity.name}"]).show()
+    Notification(
+        "Delete Successful", [f"Successfully deleted form: {entity.name}"]
+    ).show()
 
     load_form_listingview(main_window)
 
@@ -166,24 +170,31 @@ def select_form_filepath(main_window):
 def set_form_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
-        set_button_visibility([
-            main_window.ui.form_listingview_btnNew,
-            main_window.ui.form_listingview_btnEdit,
-            main_window.ui.form_listingview_btnDelete,
+        set_button_visibility(
+            [
+                main_window.ui.form_listingview_btnNew,
+                main_window.ui.form_listingview_btnEdit,
+                main_window.ui.form_listingview_btnDelete,
             ],
-            is_visible=False)
+            is_visible=False,
+        )
     else:
         set_button_visibility([main_window.ui.form_listingview_btnNew], is_visible=True)
-        set_button_visibility([
-            main_window.ui.form_listingview_btnEdit,
-            main_window.ui.form_listingview_btnDelete
+        set_button_visibility(
+            [
+                main_window.ui.form_listingview_btnEdit,
+                main_window.ui.form_listingview_btnDelete,
             ],
-            is_visible=selected_row_id(main_window.ui.form_listingview_tblForm) is not None,
+            is_visible=selected_row_id(main_window.ui.form_listingview_tblForm)
+            is not None,
         )
 
 
 def connect_form_actions(main_window) -> None:
 
+    main_window.ui.action_forms.triggered.connect(
+        lambda: load_form_listingview(main_window)
+    )
     main_window.ui.form_listingview_btnNew.clicked.connect(
         lambda: new_form(main_window)
     )

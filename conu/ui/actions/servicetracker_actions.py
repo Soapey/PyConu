@@ -6,7 +6,7 @@ from conu.classes.Item import Item
 from conu.ui.components.Notification import Notification
 from conu.ui.components.SelectWindow import SelectWindow
 
-from conu.db.SQLiteConnection import (
+from conu.db.helpers import (
     delete_by_attrs_dict,
     select_by_attrs_dict,
     save_by_list,
@@ -249,6 +249,9 @@ def select_item(main_window):
 
 def connect_servicetracker_actions(main_window) -> None:
 
+    main_window.ui.action_servicetrackers.triggered.connect(
+        lambda: load_servicetracker_listingview(main_window)
+    )
     main_window.ui.servicetracker_listingview_btnNew.clicked.connect(
         lambda: new_servicetracker(main_window)
     )
