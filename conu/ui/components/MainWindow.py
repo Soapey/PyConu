@@ -19,7 +19,6 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.current_user = None
         self._connect_window_actions()
-        self._connect_menu_actions()
 
     def _connect_window_actions(self):
         connect_assignee_actions(self)

@@ -1,6 +1,7 @@
+from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtCore import QDate
 from tkinter.messagebox import askyesno
-from datetime import datetime
+from datetime import datetime, date
 
 from conu.classes.WorkOrder import WorkOrder
 from conu.classes.UserDepartment import UserDepartment
@@ -16,12 +17,12 @@ from conu.classes.Assignee import Assignee
 
 from conu.db.helpers import (
     delete_by_attrs_dict,
+    delete_entities_by_ids,
     save_by_list,
     select_by_attrs_dict,
     get_by_user_departments,
 )
 from conu.helpers import (
-    clear_widget_children,
     navigate,
     selected_row_id,
     set_button_visibility,
@@ -177,8 +178,26 @@ def edit_workorder(main_window) -> None:
         "object", workorder_prioritylevel
     )
 
-    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setFocus()
+    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setText(entity.purchase_order_number)
 
+    main_window.ui.workorder_entryform_txtTaskDescription.setPlainText(entity.task_description)
+
+    if comments:=entity.comments:
+        main_window.ui.workorder_entryform_txtComments.setPlainText(comments)
+
+    date_allocated = entity.date_allocated
+    main_window.ui.workorder_entryform_dteDateAllocated.setDate(QDate(date_allocated.year, date_allocated.month, date_allocated.day))
+
+    date_completed = entity.date_completed
+    main_window.ui.workorder_entryform_chkIsComplete.setChecked(date_completed is not None)
+
+    if date_completed:
+        main_window.ui.workorder_entryform_dteDateCompleted.setDate(QDate(date_completed.year, date_completed.month, date_completed.day))
+
+        if close_out_comments:=entity.close_out_comments:
+            main_window.ui.workorder_entryform_txtCloseOutComments.setPlainText(close_out_comments)
+
+    # Item tables
     workorderitem_itemids = [
         woi.item_id
         for woi in select_by_attrs_dict(
@@ -199,6 +218,7 @@ def edit_workorder(main_window) -> None:
         {"id": "ID", "name": "Name"},
     )
 
+    # Assignee tables
     workorderassignee_assigneeids = [
         woa.assignee_id
         for woa in select_by_attrs_dict(
@@ -226,6 +246,8 @@ def edit_workorder(main_window) -> None:
         {"id": "ID", "name": "Name"},
     )
 
+    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setFocus()
+
     navigate(main_window, Page.WORKORDER_ENTRYFORM)
 
 
@@ -240,7 +262,7 @@ def delete_workorder(main_window) -> None:
     global global_workorders
     entity = global_workorders[selected_id]
 
-    delete_by_attrs_dict(WorkOrder, {"id": entity.id})
+    delete_entities_by_ids(WorkOrder, [entity.id])
 
     Notification(
         "Delete Successful", [f"Successfully deleted work order: {entity.id}"]
@@ -279,40 +301,51 @@ def workorder_entryform_is_valid(main_window) -> bool:
 
 def save_and_delete_workorderitems(main_window, entity_id):
 
-    # TODO - Save and Delete attached WorkOrder items
+    existing_item_ids = [woi.item_id for woi in select_by_attrs_dict(WorkOrderItem, {"workorder_id": entity_id}).values()]
 
-    # assigneedepartments_to_save = list()
-    # vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
-    # for i in range(vboxDepartments.count()):
-    #     widget = vboxDepartments.itemAt(i).widget()
-    #     if isinstance(widget, QCheckBox):
-    #         department = widget.property("object")
+    assigned_item_ids = list()
+    workorderitems_to_save = list()
 
-    #         if widget.isChecked():
+    tbl = main_window.ui.workorder_entryform_tblAssignedItems
+    id_column_index = 0
 
-    #             if department.id not in assigned_department_ids:
-    #                 assigneedepartments_to_save.append(
-    #                     AssigneeDepartment(None, entity_id, department.id)
-    #                 )
+    for row_index in tbl.rowCount():
+        _cell = tbl.item(row_index, id_column_index)
+        _id = int(_cell.text())
+        assigned_item_ids.append(_id)
 
-    #         else:
+        if _id not in list(existing_item_ids.keys()):
+            workorderitems_to_save.append(WorkOrderItem(None, entity_id, _id))
 
-    #             if department.id in assigned_department_ids:
-    #                 delete_by_attrs_dict(
-    #                     AssigneeDepartment,
-    #                     {"assignee_id": entity_id, "department_id": department.id},
-    #                 )
+    for item_id in existing_item_ids:
+        if item_id not in assigned_item_ids:
+            delete_by_attrs_dict(WorkOrderItem, {"workorder_id": entity_id, "item_id": item_id})
 
-    # save_by_list(assigneedepartments_to_save)
-
-    pass
-
+    save_by_list(workorderitems_to_save)
 
 def save_and_delete_workorderassignees(main_window, entity_id):
 
-    # TODO - Save and Delete attached WorkOrder assignees
+    existing_assignee_ids = [woa.assignee_id for woa in select_by_attrs_dict(WorkOrderAssignee, {"workorder_id": entity_id}).values()]
 
-    pass
+    assigned_assignee_ids = list()
+    workorderassignees_to_save = list()
+
+    tbl = main_window.ui.workorder_entryform_tblAssignedAssignees
+    id_column_index = 0
+
+    for row_index in tbl.rowCount():
+        _cell = tbl.item(row_index, id_column_index)
+        _id = int(_cell.text())
+        assigned_assignee_ids.append(_id)
+
+        if _id not in list(existing_assignee_ids.keys()):
+            workorderassignees_to_save.append(WorkOrderAssignee(None, entity_id, _id))
+
+    for assignee_id in existing_assignee_ids:
+        if assignee_id not in assigned_assignee_ids:
+            delete_by_attrs_dict(WorkOrderAssignee, {"workorder_id": entity_id, "assignee_id": assignee_id})
+
+    save_by_list(workorderassignees_to_save)
 
 
 def save_workorder(main_window) -> None:
@@ -325,12 +358,31 @@ def save_workorder(main_window) -> None:
     ):
         return
 
+    entity_id = None if len(main_window.ui.workorder_entryform_lblId.text()) == 0 else int(main_window.ui.workorder_entryform_lblId.text())
+    date_created = datetime.strptime(main_window.ui.workorder_entryform_lblDateCreated.text(), "%d-%m-%Y").date() if entity_id else date.today()
+    raisedby_user_id = main_window.ui.workorder_entryform_lblRaisedBy.property("object").id if entity_id else main_window.current_user.id
+    selected_site = main_window.ui.workorder_entryform_lblSite.property("object")
+    selected_department = main_window.ui.workorder_entryform_lblDepartment.property("object")
+    selected_prioritylevel = main_window.ui.workorder_entryform_lblPriorityLevel.property("object")
+    selected_date_allocated_qdate = main_window.ui.workorder_entryform_dteDateAllocated.date()
+    selected_date_allocated = date(selected_date_allocated_qdate.year(), selected_date_allocated_qdate.month(), selected_date_allocated_qdate.day())
+    selected_date_completed_qdate = main_window.ui.workorder_entryform_dteDateCompleted.date()
+    selected_date_completed = None if not main_window.ui.workorder_entryform_chkIsComplete.isChecked() else date(selected_date_completed_qdate.year(), selected_date_completed_qdate.month(), selected_date_completed_qdate.day())
+    close_out_comments = None if not main_window.ui.workorder_entryform_chkIsComplete.isChecked() else main_window.ui.workorder_entryform_txtCloseOutComments.toPlainText() 
+
     entity = WorkOrder(
-        None
-        if len(main_window.ui.workorder_entryform_lblId.text()) == 0
-        else int(main_window.ui.workorder_entryform_lblId.text()),
-        main_window.ui.workorder_entryform_txtName.text(),
-        main_window.ui.workorder_entryform_txtDescription.toPlainText(),
+        entity_id,
+        selected_site.id,
+        selected_department.id,
+        selected_prioritylevel.id,
+        main_window.ui.workorder_entryform_txtTaskDescription.toPlainText(),
+        main_window.ui.workorder_entryform_txtComments.toPlainText(),
+        date_created,
+        selected_date_allocated,
+        raisedby_user_id,
+        selected_date_completed,
+        main_window.ui.workorder_entryform_txtPurchaseOrderNumber.text(),
+        close_out_comments        
     )
 
     entity_id = sorted(save_by_list([entity]), key=lambda e: e.id, reverse=True)[0].id
@@ -428,6 +480,101 @@ def set_workorder_button_visibility(main_window):
         )
 
 
+def assign_item_to_workorder(main_window):
+
+    unassigned_tbl = main_window.ui.workorder_entryform_tblUnassignedItems
+    selected_items = unassigned_tbl.selectedItems()
+    
+    if not selected_items:
+        return
+
+    selected_row = selected_items[0].row()
+    selected_id = int(selected_items[0].text())   
+
+    global global_items
+    selected_entity = global_items[selected_id]
+
+    unassigned_tbl.removeRow(selected_row)
+
+    assigned_tbl = main_window.ui.workorder_entryform_tblAssignedItems
+    new_last_row_index = assigned_tbl.rowCount()
+    assigned_tbl.setRowCount(new_last_row_index + 1)
+
+    assigned_tbl.setItem(new_last_row_index, 0, QTableWidgetItem(str(selected_entity.id)))
+    assigned_tbl.setItem(new_last_row_index, 1, QTableWidgetItem(selected_entity.name))
+
+def unassign_item_from_workorder(main_window):
+
+    assigned_tbl = main_window.ui.workorder_entryform_tblAssignedItems
+    selected_items = assigned_tbl.selectedItems()
+    
+    if not selected_items:
+        return
+
+    selected_row = selected_items[0].row()
+    selected_id = int(selected_items[0].text())   
+
+    global global_items
+    selected_entity = global_items[selected_id]
+
+    assigned_tbl.removeRow(selected_row)
+
+    unassigned_tbl = main_window.ui.workorder_entryform_tblUnassignedItems
+    new_last_row_index = unassigned_tbl.rowCount()
+    unassigned_tbl.setRowCount(new_last_row_index + 1)
+
+    unassigned_tbl.setItem(new_last_row_index, 0, QTableWidgetItem(str(selected_entity.id)))
+    unassigned_tbl.setItem(new_last_row_index, 1, QTableWidgetItem(selected_entity.name))
+
+
+def assign_assignee_to_workorder(main_window):
+    
+    unassigned_tbl = main_window.ui.workorder_entryform_tblUnassignedAssignees
+    selected_items = unassigned_tbl.selectedItems()
+    
+    if not selected_items:
+        return
+
+    selected_row = selected_items[0].row()
+    selected_id = int(selected_items[0].text())   
+
+    global global_assignees
+    selected_entity = global_assignees[selected_id]
+
+    unassigned_tbl.removeRow(selected_row)
+
+    assigned_tbl = main_window.ui.workorder_entryform_tblAssignedAssignees
+    new_last_row_index = assigned_tbl.rowCount()
+    assigned_tbl.setRowCount(new_last_row_index + 1)
+
+    assigned_tbl.setItem(new_last_row_index, 0, QTableWidgetItem(str(selected_entity.id)))
+    assigned_tbl.setItem(new_last_row_index, 1, QTableWidgetItem(selected_entity.name))
+
+
+def unassign_assignee_from_workorder(main_window):
+
+    assigned_tbl = main_window.ui.workorder_entryform_tblAssignedAssignees
+    selected_items = assigned_tbl.selectedItems()
+    
+    if not selected_items:
+        return
+
+    selected_row = selected_items[0].row()
+    selected_id = int(selected_items[0].text())   
+
+    global global_assignees
+    selected_entity = global_assignees[selected_id]
+
+    assigned_tbl.removeRow(selected_row)
+
+    unassigned_tbl = main_window.ui.workorder_entryform_tblUnassignedAssignees
+    new_last_row_index = unassigned_tbl.rowCount()
+    unassigned_tbl.setRowCount(new_last_row_index + 1)
+
+    unassigned_tbl.setItem(new_last_row_index, 0, QTableWidgetItem(str(selected_entity.id)))
+    unassigned_tbl.setItem(new_last_row_index, 1, QTableWidgetItem(selected_entity.name))
+
+
 def connect_workorder_actions(main_window) -> None:
 
     main_window.ui.action_workorders.triggered.connect(
@@ -448,6 +595,12 @@ def connect_workorder_actions(main_window) -> None:
     main_window.ui.workorder_entryform_btnBack.clicked.connect(
         lambda: back_to_workorder_listingview(main_window)
     )
+
+    main_window.ui.workorder_entryform_btnAssignItemToWorkOrder.clicked.connect(lambda: assign_item_to_workorder(main_window))
+    main_window.ui.workorder_entryform_btnUnassignItemFromWorkOrder.clicked.connect(lambda: unassign_item_from_workorder(main_window))
+    main_window.ui.workorder_entryform_btnAssignAssigneeToWorkOrder.clicked.connect(lambda: assign_assignee_to_workorder(main_window))
+    main_window.ui.workorder_entryform_btnUnassignAssigneeFromWorkOrder.clicked.connect(lambda: unassign_assignee_from_workorder(main_window))
+
     main_window.ui.workorder_listingview_txtSearch.textChanged.connect(
         lambda: workorders_by_search(
             main_window, main_window.ui.workorder_listingview_txtSearch.text().lower()
@@ -456,3 +609,4 @@ def connect_workorder_actions(main_window) -> None:
     main_window.ui.workorder_listingview_tblWorkOrder.itemSelectionChanged.connect(
         lambda: set_workorder_button_visibility(main_window)
     )
+    

@@ -73,6 +73,18 @@ def save_by_list(entities: list) -> list:
     return return_entities
 
 
+def delete_entities_by_ids(class_type, ids):
+
+    table_name = class_type.__name__.lower()
+    query = f"DELETE FROM {table_name} WHERE id IN ({','.join(['?']*len(ids))}) RETURNING *;"
+    params = tuple(ids)
+
+    with SQLiteConnection() as cur:
+        deleted_entity_tuples = cur.execute(query, params).fetchall()
+        deleted_entities = [class_type(*t) for t in deleted_entity_tuples]
+
+    print("Deleted entities:", deleted_entities)
+
 def add_test_data(file_path: str = None):
 
     if not file_path:

@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow
 from conu.ui.components.Ui_Login import Ui_MainWindow
 from conu.ui.components.MainWindow import MainWindow
 from conu.classes.User import User
-from conu.db.SQLiteConnection import select_by_attrs_dict
+from conu.db.helpers import select_by_attrs_dict
 from conu.helpers import hash_sha512
 from conu.ui.actions.assignee_actions import load_assignee_listingview
 from conu.ui.components.Notification import Notification

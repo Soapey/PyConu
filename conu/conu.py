@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from conu.ui.components.LoginWindow import LoginWindow
-from conu.db.SQLiteConnection import init_db, add_test_data
+from conu.db.helpers import init_db, add_test_data
 
 
 def start_app():

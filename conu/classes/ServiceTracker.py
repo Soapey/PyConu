@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, date
 from conu.db.SQLiteConnection import SQLiteConnection
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem
-from conu.db.SQLiteConnection import select_by_attrs_dict
+from conu.db.helpers import select_by_attrs_dict
 from conu.classes.Item import Item
 
 

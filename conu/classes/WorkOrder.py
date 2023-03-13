@@ -1,6 +1,7 @@
 from datetime import date
 from conu.classes.PriorityLevel import PriorityLevel
-from conu.db.SQLiteConnection import SQLiteConnection, select_by_attrs_dict
+from conu.db.SQLiteConnection import SQLiteConnection
+from conu.db.helpers import select_by_attrs_dict
 
 
 class WorkOrder:
@@ -83,7 +84,7 @@ class WorkOrder:
                 workorder.date_allocated,
                 workorder.date_completed,
                 workorder.close_out_comments,
-                CONCAT(user.first_name, ' ', user.last_name),
+                user.first_name || ' ' || user.last_name,
                 workorder.date_created
             FROM
                 workorder
@@ -94,7 +95,7 @@ class WorkOrder:
                 LEFT JOIN workorderitem ON workorder.id = workorderitem.workorder_id
                 LEFT JOIN item ON workorderitem.item_id = item.id
                 LEFT JOIN workorderassignee ON workorder.id = workorderassignee.workorder_id
-                LEFT JOIN user AS assignee ON workorderassignee.assignee_id = assignee.id
+                LEFT JOIN assignee ON workorderassignee.assignee_id = assignee.id
             WHERE
                 workorder.department_id IN (
                     SELECT department_id
