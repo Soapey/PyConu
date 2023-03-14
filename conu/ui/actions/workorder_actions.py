@@ -29,6 +29,7 @@ from conu.helpers import (
     load_query_rows_into_table,
     load_entities_into_table,
 )
+from conu.db.SQLiteConnection import SQLiteConnection
 from conu.ui.components.Notification import Notification
 from conu.ui.PageEnum import Page
 from conu.ui.components.SelectWindow import SelectWindow
@@ -659,8 +660,7 @@ def load_selection_tables(main_window):
         main_window.ui.workorder_entryform_tblAssignedAssignees.clear()
         return
 
-    global global_items
-    global global_assignees
+    # TODO - load selection tables
 
 
 def connect_workorder_actions(main_window) -> None:
