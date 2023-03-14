@@ -231,7 +231,7 @@ def load_query_rows_into_table(table, rows, column_parameters_dict):
     header = table.horizontalHeader()
 
     for column_index, column_parameters in enumerate(column_parameters_dict.values()):
-        formatting_function = column_parameters[2]
+        formatting_function = column_parameters[1]
         header.setSectionResizeMode(column_index, QHeaderView.ResizeToContents)
         for row_index, row in enumerate(rows):
 

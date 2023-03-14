@@ -535,7 +535,7 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
+             <width>98</width>
              <height>38</height>
             </rect>
            </property>
@@ -3049,8 +3049,8 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
-             <height>200</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -3891,8 +3891,8 @@ QTextEdit:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>50</width>
-             <height>200</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_21">
@@ -4959,7 +4959,7 @@ QPushButton:hover {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-533</y>
+             <y>-308</y>
              <width>1358</width>
              <height>1270</height>
             </rect>
@@ -5166,6 +5166,24 @@ QPlainTextEdit:focus {
 	min-height: 200px;
 }</string>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
              </widget>
             </item>
             <item row="14" column="1" colspan="4">
@@ -5435,6 +5453,24 @@ QPushButton:hover {
 	min-height: 200px;
 }</string>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
              </widget>
             </item>
             <item row="6" column="0">
@@ -5573,7 +5609,7 @@ QPushButton:hover {
              </widget>
             </item>
             <item row="17" column="1" colspan="4">
-             <widget class="QDateEdit" name="workorder_entryforn_dteDateCompleted">
+             <widget class="QDateEdit" name="workorder_entryform_dteDateCompleted">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -5844,6 +5880,21 @@ QPlainTextEdit:focus {
 	min-height: 200px;
 }</string>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
              </widget>
             </item>
             <item row="7" column="0" rowspan="2">
@@ -5871,6 +5922,24 @@ QPlainTextEdit:focus {
 	min-height: 200px;
 }</string>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
              </widget>
             </item>
             <item row="16" column="0">
