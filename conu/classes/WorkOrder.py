@@ -1,7 +1,7 @@
-from datetime import date
+from datetime import datetime, date
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.db.SQLiteConnection import SQLiteConnection
-from conu.db.helpers import select_by_attrs_dict
+from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 
 
 class WorkOrder:
@@ -78,8 +78,8 @@ class WorkOrder:
                 department.name,
                 prioritylevel.name,
                 workorder.task_description,
-                GROUP_CONCAT(item.name, ', '),
-                GROUP_CONCAT(assignee.name, ', '),
+                GROUP_CONCAT(DISTINCT item.name),
+                GROUP_CONCAT(DISTINCT assignee.name),
                 workorder.comments,
                 workorder.date_allocated,
                 workorder.date_completed,
@@ -110,3 +110,28 @@ class WorkOrder:
             ).fetchall()
 
         return rows
+
+    @classmethod
+    def get(cls):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute("SELECT * FROM workorder;").fetchall()
+
+        return {
+            row[0]: cls(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                format_nullable_database_date(row[6]),
+                format_nullable_database_date(row[7]),
+                row[8],
+                format_nullable_database_date(row[9]),
+                row[10],
+                row[11],
+            )
+            for row in rows
+        }

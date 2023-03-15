@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from conu.classes.Department import Department
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.User import User
@@ -84,6 +85,7 @@ def delete_entities_by_ids(class_type, ids):
         deleted_entities = [class_type(*t) for t in deleted_entity_tuples]
 
     print("Deleted entities:", deleted_entities)
+
 
 def add_test_data(file_path: str = None):
 
@@ -254,3 +256,11 @@ def get_by_user_departments(cls: type, user_id: int):
             objects[entity.id] = entity
 
         return objects
+
+
+def format_nullable_database_date(returned_value):
+
+    if not returned_value:
+        return None
+
+    return datetime.strptime(returned_value, "%Y-%m-%d")

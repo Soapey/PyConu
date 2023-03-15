@@ -9,6 +9,7 @@ from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.Department import Department
 from conu.classes.Site import Site
 from conu.classes.ItemDepartment import ItemDepartment
+from conu.classes.AssigneeDepartment import AssigneeDepartment
 from conu.classes.PriorityLevel import PriorityLevel
 
 from conu.classes.User import User
@@ -61,10 +62,11 @@ def load_workorder_listingview(main_window) -> None:
         ).values()
     ]
 
-    global_workorders = filter(
-        lambda _, e: e.department_id in user_department_ids,
-        select_by_attrs_dict(WorkOrder).items(),
-    )
+    global_workorders = {
+        wo.id: wo
+        for wo in WorkOrder.get().values()
+        if wo.department_id in user_department_ids
+    }
 
     workorder_table_data = WorkOrder.get_listingview_table_data(main_window)
 
@@ -131,7 +133,7 @@ def clear_workorder_entryform(main_window) -> None:
     unassigned_items_tbl.clear()
     assigned_items_tbl.clear()
     unassigned_assignees_tbl.clear()
-    assigned_items_tbl.clear()
+    assigned_assignees_tbl.clear()
 
 
 def new_workorder(main_window) -> None:
@@ -163,7 +165,7 @@ def edit_workorder(main_window) -> None:
     workorder_prioritylevel = global_prioritylevels[entity.prioritylevel_id]
     workorder_raisedby_user = global_users[entity.raisedby_user_id]
 
-    clear_workorder_entryform(main_window, selected_id)
+    clear_workorder_entryform(main_window)
 
     main_window.ui.workorder_entryform_lblId.setText(str(entity.id))
 
@@ -178,13 +180,13 @@ def edit_workorder(main_window) -> None:
         "object", workorder_raisedby_user
     )
 
-    main_window.ui.workorder_entryform_lblSite.setText(workorder_site.name)
     main_window.ui.workorder_entryform_lblSite.setProperty("object", workorder_site)
+    main_window.ui.workorder_entryform_lblSite.setText(workorder_site.name)
 
-    main_window.ui.workorder_entryform_lblDepartment.setText(workorder_department.name)
     main_window.ui.workorder_entryform_lblDepartment.setProperty(
         "object", workorder_department
     )
+    main_window.ui.workorder_entryform_lblDepartment.setText(workorder_department.name)
 
     main_window.ui.workorder_entryform_lblPriorityLevel.setText(
         workorder_prioritylevel.name
@@ -294,12 +296,12 @@ def save_and_delete_workorderitems(main_window, entity_id):
     tbl = main_window.ui.workorder_entryform_tblAssignedItems
     id_column_index = 0
 
-    for row_index in tbl.rowCount():
+    for row_index in range(tbl.rowCount()):
         _cell = tbl.item(row_index, id_column_index)
         _id = int(_cell.text())
         assigned_item_ids.append(_id)
 
-        if _id not in list(existing_item_ids.keys()):
+        if _id not in list(existing_item_ids):
             workorderitems_to_save.append(WorkOrderItem(None, entity_id, _id))
 
     for item_id in existing_item_ids:
@@ -326,12 +328,12 @@ def save_and_delete_workorderassignees(main_window, entity_id):
     tbl = main_window.ui.workorder_entryform_tblAssignedAssignees
     id_column_index = 0
 
-    for row_index in tbl.rowCount():
+    for row_index in range(tbl.rowCount()):
         _cell = tbl.item(row_index, id_column_index)
         _id = int(_cell.text())
         assigned_assignee_ids.append(_id)
 
-        if _id not in list(existing_assignee_ids.keys()):
+        if _id not in list(existing_assignee_ids):
             workorderassignees_to_save.append(WorkOrderAssignee(None, entity_id, _id))
 
     for assignee_id in existing_assignee_ids:
@@ -651,9 +653,65 @@ def load_item_selection_table(main_window):
     )
 
 
+def load_assignee_selection_table(main_window):
+
+    id = main_window.ui.workorder_entryform_lblId.text()
+
+    department = main_window.ui.workorder_entryform_lblDepartment.property("object")
+
+    global unassigned_assignees_tbl, assigned_assignees_tbl
+    unassigned_assignees_tbl.clear()
+    assigned_assignees_tbl.clear()
+
+    if department is None:
+        return
+
+    all_assignees = select_by_attrs_dict(Assignee)
+
+    assignee_departments = select_by_attrs_dict(
+        AssigneeDepartment, {"department_id": department.id}
+    ).values()
+
+    assignees = [
+        all_assignees[assignee_id]
+        for assignee_id in {ad.assignee_id for ad in assignee_departments}
+    ]
+
+    assignees = sorted(assignees, key=lambda e: e.name)
+
+    if id is None or len(id) == 0:
+        load_entities_into_table(
+            unassigned_assignees_tbl.table, assignees, {"id": "ID", "name": "Name"}
+        )
+        return
+
+    id = int(id)
+
+    workorder_assignees = select_by_attrs_dict(WorkOrderAssignee, {"workorder_id": id})
+    assigned_assignee_ids = [woa.assignee_id for woa in workorder_assignees.values()]
+
+    unassigned_assignees = [
+        assignee for assignee in assignees if assignee.id not in assigned_assignee_ids
+    ]
+    assigned_assignees = [
+        all_assignees[assignee_id] for assignee_id in assigned_assignee_ids
+    ]
+
+    load_entities_into_table(
+        unassigned_assignees_tbl.table,
+        unassigned_assignees,
+        {"id": "ID", "name": "Name"},
+    )
+    load_entities_into_table(
+        assigned_assignees_tbl.table, assigned_assignees, {"id": "ID", "name": "Name"}
+    )
+
+
 def load_selection_tables(main_window):
 
     load_item_selection_table(main_window)
+
+    load_assignee_selection_table(main_window)
 
 
 def connect_workorder_actions(main_window) -> None:
