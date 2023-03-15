@@ -3724,6 +3724,576 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_4)
         self.gridLayout_25.addWidget(self.scrollArea, 2, 0, 1, 3)
         self.page_handler.addWidget(self.page_workorder_entryform)
+        self.page_recurringworkorder_listingview = QtWidgets.QWidget()
+        self.page_recurringworkorder_listingview.setObjectName("page_recurringworkorder_listingview")
+        self.gridLayout_27 = QtWidgets.QGridLayout(self.page_recurringworkorder_listingview)
+        self.gridLayout_27.setObjectName("gridLayout_27")
+        self.label_57 = QtWidgets.QLabel(self.page_recurringworkorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_57.setFont(font)
+        self.label_57.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_57.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_57.setObjectName("label_57")
+        self.gridLayout_27.addWidget(self.label_57, 0, 0, 1, 3)
+        self.recurringworkorder_listingview_btnNew = QtWidgets.QPushButton(self.page_recurringworkorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.recurringworkorder_listingview_btnNew.setFont(font)
+        self.recurringworkorder_listingview_btnNew.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_listingview_btnNew.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_listingview_btnNew.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.recurringworkorder_listingview_btnNew.setObjectName("recurringworkorder_listingview_btnNew")
+        self.gridLayout_27.addWidget(self.recurringworkorder_listingview_btnNew, 1, 0, 1, 1)
+        self.recurringworkorder_listingview_btnEdit = QtWidgets.QPushButton(self.page_recurringworkorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.recurringworkorder_listingview_btnEdit.setFont(font)
+        self.recurringworkorder_listingview_btnEdit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_listingview_btnEdit.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_listingview_btnEdit.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f8961e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #f9c74f;\n"
+"}")
+        self.recurringworkorder_listingview_btnEdit.setObjectName("recurringworkorder_listingview_btnEdit")
+        self.gridLayout_27.addWidget(self.recurringworkorder_listingview_btnEdit, 1, 1, 1, 1)
+        self.recurringworkorder_listingview_btnDelete = QtWidgets.QPushButton(self.page_recurringworkorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.recurringworkorder_listingview_btnDelete.setFont(font)
+        self.recurringworkorder_listingview_btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_listingview_btnDelete.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_listingview_btnDelete.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.recurringworkorder_listingview_btnDelete.setObjectName("recurringworkorder_listingview_btnDelete")
+        self.gridLayout_27.addWidget(self.recurringworkorder_listingview_btnDelete, 1, 2, 1, 1)
+        self.recurringworkorder_listingview_txtSearch = QtWidgets.QLineEdit(self.page_recurringworkorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.recurringworkorder_listingview_txtSearch.setFont(font)
+        self.recurringworkorder_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.recurringworkorder_listingview_txtSearch.setClearButtonEnabled(True)
+        self.recurringworkorder_listingview_txtSearch.setObjectName("recurringworkorder_listingview_txtSearch")
+        self.gridLayout_27.addWidget(self.recurringworkorder_listingview_txtSearch, 2, 0, 1, 3)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder = QtWidgets.QTableWidget(self.page_recurringworkorder_listingview)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setTabKeyNavigation(False)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setAlternatingRowColors(False)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setCornerButtonEnabled(False)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setObjectName("recurringworkorder_listingview_tblRecurringWorkOrder")
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setColumnCount(0)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setRowCount(0)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.horizontalHeader().setStretchLastSection(True)
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.verticalHeader().setVisible(False)
+        self.gridLayout_27.addWidget(self.recurringworkorder_listingview_tblRecurringWorkOrder, 3, 0, 1, 3)
+        self.page_handler.addWidget(self.page_recurringworkorder_listingview)
+        self.page_recurringworkorder_entryform = QtWidgets.QWidget()
+        self.page_recurringworkorder_entryform.setObjectName("page_recurringworkorder_entryform")
+        self.gridLayout_29 = QtWidgets.QGridLayout(self.page_recurringworkorder_entryform)
+        self.gridLayout_29.setObjectName("gridLayout_29")
+        self.label_79 = QtWidgets.QLabel(self.page_recurringworkorder_entryform)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_79.sizePolicy().hasHeightForWidth())
+        self.label_79.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_79.setFont(font)
+        self.label_79.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_79.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_79.setObjectName("label_79")
+        self.gridLayout_29.addWidget(self.label_79, 0, 0, 1, 3)
+        self.scrollArea_2 = QtWidgets.QScrollArea(self.page_recurringworkorder_entryform)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollArea_2.sizePolicy().hasHeightForWidth())
+        self.scrollArea_2.setSizePolicy(sizePolicy)
+        self.scrollArea_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.scrollArea_2.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName("scrollArea_2")
+        self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, -80, 1358, 791))
+        self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
+        self.gridLayout_28 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_5)
+        self.gridLayout_28.setObjectName("gridLayout_28")
+        self.recurringworkorder_entryform_btnSelectPriorityLevel = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.recurringworkorder_entryform_btnSelectPriorityLevel.sizePolicy().hasHeightForWidth())
+        self.recurringworkorder_entryform_btnSelectPriorityLevel.setSizePolicy(sizePolicy)
+        self.recurringworkorder_entryform_btnSelectPriorityLevel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnSelectPriorityLevel.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnSelectPriorityLevel.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.recurringworkorder_entryform_btnSelectPriorityLevel.setObjectName("recurringworkorder_entryform_btnSelectPriorityLevel")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_btnSelectPriorityLevel, 4, 0, 1, 1)
+        self.recurringworkorder_entryform_lblDepartment = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.recurringworkorder_entryform_lblDepartment.setFont(font)
+        self.recurringworkorder_entryform_lblDepartment.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.recurringworkorder_entryform_lblDepartment.setText("")
+        self.recurringworkorder_entryform_lblDepartment.setObjectName("recurringworkorder_entryform_lblDepartment")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_lblDepartment, 3, 1, 1, 2)
+        self.recurringworkorder_entryform_tblUnassignedItems = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_5)
+        self.recurringworkorder_entryform_tblUnassignedItems.setStyleSheet("QTableWidget {\n"
+"    min-height: 200px;\n"
+"}")
+        self.recurringworkorder_entryform_tblUnassignedItems.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.recurringworkorder_entryform_tblUnassignedItems.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.recurringworkorder_entryform_tblUnassignedItems.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.recurringworkorder_entryform_tblUnassignedItems.setObjectName("recurringworkorder_entryform_tblUnassignedItems")
+        self.recurringworkorder_entryform_tblUnassignedItems.setColumnCount(0)
+        self.recurringworkorder_entryform_tblUnassignedItems.setRowCount(0)
+        self.recurringworkorder_entryform_tblUnassignedItems.horizontalHeader().setStretchLastSection(True)
+        self.recurringworkorder_entryform_tblUnassignedItems.verticalHeader().setVisible(False)
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_tblUnassignedItems, 6, 1, 1, 1)
+        self.recurringworkorder_entryform_lblId = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.recurringworkorder_entryform_lblId.sizePolicy().hasHeightForWidth())
+        self.recurringworkorder_entryform_lblId.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.recurringworkorder_entryform_lblId.setFont(font)
+        self.recurringworkorder_entryform_lblId.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.recurringworkorder_entryform_lblId.setText("")
+        self.recurringworkorder_entryform_lblId.setObjectName("recurringworkorder_entryform_lblId")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_lblId, 0, 1, 1, 2)
+        self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
+        self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #f94144;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #ff595e;\n"
+"}")
+        self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder.setObjectName("recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder, 5, 2, 1, 1)
+        self.label_77 = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_77.sizePolicy().hasHeightForWidth())
+        self.label_77.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_77.setFont(font)
+        self.label_77.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_77.setObjectName("label_77")
+        self.gridLayout_28.addWidget(self.label_77, 7, 0, 1, 1)
+        self.recurringworkorder_entryform_txtTaskDescription = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.recurringworkorder_entryform_txtTaskDescription.sizePolicy().hasHeightForWidth())
+        self.recurringworkorder_entryform_txtTaskDescription.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.recurringworkorder_entryform_txtTaskDescription.setFont(font)
+        self.recurringworkorder_entryform_txtTaskDescription.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.recurringworkorder_entryform_txtTaskDescription.setStyleSheet("QPlainTextEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"    min-height: 250px;\n"
+"}\n"
+"\n"
+"QPlainTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.recurringworkorder_entryform_txtTaskDescription.setMaximumBlockCount(-1)
+        self.recurringworkorder_entryform_txtTaskDescription.setBackgroundVisible(False)
+        self.recurringworkorder_entryform_txtTaskDescription.setObjectName("recurringworkorder_entryform_txtTaskDescription")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_txtTaskDescription, 7, 1, 1, 2)
+        self.label_61 = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_61.sizePolicy().hasHeightForWidth())
+        self.label_61.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_61.setFont(font)
+        self.label_61.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_61.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_61.setObjectName("label_61")
+        self.gridLayout_28.addWidget(self.label_61, 1, 0, 1, 1)
+        self.recurringworkorder_entryform_btnSelectSite = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.recurringworkorder_entryform_btnSelectSite.sizePolicy().hasHeightForWidth())
+        self.recurringworkorder_entryform_btnSelectSite.setSizePolicy(sizePolicy)
+        self.recurringworkorder_entryform_btnSelectSite.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnSelectSite.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnSelectSite.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.recurringworkorder_entryform_btnSelectSite.setObjectName("recurringworkorder_entryform_btnSelectSite")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_btnSelectSite, 2, 0, 1, 1)
+        self.workorder_entryform_lblLastRaisedDate = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.workorder_entryform_lblLastRaisedDate.sizePolicy().hasHeightForWidth())
+        self.workorder_entryform_lblLastRaisedDate.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.workorder_entryform_lblLastRaisedDate.setFont(font)
+        self.workorder_entryform_lblLastRaisedDate.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.workorder_entryform_lblLastRaisedDate.setText("")
+        self.workorder_entryform_lblLastRaisedDate.setObjectName("workorder_entryform_lblLastRaisedDate")
+        self.gridLayout_28.addWidget(self.workorder_entryform_lblLastRaisedDate, 1, 1, 1, 2)
+        self.label_70 = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_70.setFont(font)
+        self.label_70.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_70.setObjectName("label_70")
+        self.gridLayout_28.addWidget(self.label_70, 5, 0, 2, 1)
+        self.label_76 = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_76.sizePolicy().hasHeightForWidth())
+        self.label_76.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_76.setFont(font)
+        self.label_76.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
+        self.label_76.setObjectName("label_76")
+        self.gridLayout_28.addWidget(self.label_76, 8, 0, 1, 1)
+        self.recurringworkorder_entryform_lblSite = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.recurringworkorder_entryform_lblSite.setFont(font)
+        self.recurringworkorder_entryform_lblSite.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.recurringworkorder_entryform_lblSite.setText("")
+        self.recurringworkorder_entryform_lblSite.setObjectName("recurringworkorder_entryform_lblSite")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_lblSite, 2, 1, 1, 2)
+        self.recurringworkorder_entryform_btnSelectDepartment = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.recurringworkorder_entryform_btnSelectDepartment.sizePolicy().hasHeightForWidth())
+        self.recurringworkorder_entryform_btnSelectDepartment.setSizePolicy(sizePolicy)
+        self.recurringworkorder_entryform_btnSelectDepartment.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnSelectDepartment.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnSelectDepartment.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.recurringworkorder_entryform_btnSelectDepartment.setObjectName("recurringworkorder_entryform_btnSelectDepartment")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_btnSelectDepartment, 3, 0, 1, 1)
+        self.recurringworkorder_entryform_lblPriorityLevel = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.recurringworkorder_entryform_lblPriorityLevel.setFont(font)
+        self.recurringworkorder_entryform_lblPriorityLevel.setStyleSheet("QLabel {\n"
+"    background-color: lightgrey;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.recurringworkorder_entryform_lblPriorityLevel.setText("")
+        self.recurringworkorder_entryform_lblPriorityLevel.setObjectName("recurringworkorder_entryform_lblPriorityLevel")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_lblPriorityLevel, 4, 1, 1, 2)
+        self.label_74 = QtWidgets.QLabel(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_74.sizePolicy().hasHeightForWidth())
+        self.label_74.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_74.setFont(font)
+        self.label_74.setStyleSheet("QLabel {\n"
+"    color: grey;\n"
+"}")
+        self.label_74.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_74.setObjectName("label_74")
+        self.gridLayout_28.addWidget(self.label_74, 0, 0, 1, 1)
+        self.recurringworkorder_entryform_txtComments = QtWidgets.QPlainTextEdit(self.scrollAreaWidgetContents_5)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.recurringworkorder_entryform_txtComments.sizePolicy().hasHeightForWidth())
+        self.recurringworkorder_entryform_txtComments.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.recurringworkorder_entryform_txtComments.setFont(font)
+        self.recurringworkorder_entryform_txtComments.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.recurringworkorder_entryform_txtComments.setStyleSheet("QPlainTextEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"    min-height: 100px;\n"
+"}\n"
+"\n"
+"QPlainTextEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}\n"
+"")
+        self.recurringworkorder_entryform_txtComments.setObjectName("recurringworkorder_entryform_txtComments")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_txtComments, 8, 1, 1, 2)
+        self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
+        self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder.setObjectName("recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder")
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder, 5, 1, 1, 1)
+        self.recurringworkorder_entryform_tblAssignedItems = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_5)
+        self.recurringworkorder_entryform_tblAssignedItems.setStyleSheet("QTableWidget {\n"
+"    min-height: 200px;\n"
+"}")
+        self.recurringworkorder_entryform_tblAssignedItems.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.recurringworkorder_entryform_tblAssignedItems.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.recurringworkorder_entryform_tblAssignedItems.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.recurringworkorder_entryform_tblAssignedItems.setObjectName("recurringworkorder_entryform_tblAssignedItems")
+        self.recurringworkorder_entryform_tblAssignedItems.setColumnCount(0)
+        self.recurringworkorder_entryform_tblAssignedItems.setRowCount(0)
+        self.recurringworkorder_entryform_tblAssignedItems.horizontalHeader().setStretchLastSection(True)
+        self.recurringworkorder_entryform_tblAssignedItems.verticalHeader().setVisible(False)
+        self.gridLayout_28.addWidget(self.recurringworkorder_entryform_tblAssignedItems, 6, 2, 1, 1)
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_5)
+        self.gridLayout_29.addWidget(self.scrollArea_2, 1, 0, 1, 3)
+        self.recurringworkorder_entryform_btnBack = QtWidgets.QPushButton(self.page_recurringworkorder_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.recurringworkorder_entryform_btnBack.setFont(font)
+        self.recurringworkorder_entryform_btnBack.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnBack.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnBack.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #6c757d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #adb5bd;\n"
+"}")
+        self.recurringworkorder_entryform_btnBack.setObjectName("recurringworkorder_entryform_btnBack")
+        self.gridLayout_29.addWidget(self.recurringworkorder_entryform_btnBack, 2, 0, 1, 1)
+        spacerItem17 = QtWidgets.QSpacerItem(1159, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_29.addItem(spacerItem17, 2, 1, 1, 1)
+        self.recurringworkorder_entryform_btnSave = QtWidgets.QPushButton(self.page_recurringworkorder_entryform)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.recurringworkorder_entryform_btnSave.setFont(font)
+        self.recurringworkorder_entryform_btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.recurringworkorder_entryform_btnSave.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.recurringworkorder_entryform_btnSave.setStyleSheet("QPushButton {\n"
+"    width: 60px;\n"
+"    color: white;\n"
+"    background-color: #006494;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #0582ca;\n"
+"}")
+        self.recurringworkorder_entryform_btnSave.setObjectName("recurringworkorder_entryform_btnSave")
+        self.gridLayout_29.addWidget(self.recurringworkorder_entryform_btnSave, 2, 2, 1, 1)
+        self.page_handler.addWidget(self.page_recurringworkorder_entryform)
         self.gridLayout.addWidget(self.page_handler, 0, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -3751,8 +4321,8 @@ class Ui_MainWindow(object):
         self.action_sites.setObjectName("action_sites")
         self.action_logout = QtWidgets.QAction(MainWindow)
         self.action_logout.setObjectName("action_logout")
-        self.action_changepassword = QtWidgets.QAction(MainWindow)
-        self.action_changepassword.setObjectName("action_changepassword")
+        self.action_myaccount = QtWidgets.QAction(MainWindow)
+        self.action_myaccount.setObjectName("action_myaccount")
         self.action_users = QtWidgets.QAction(MainWindow)
         self.action_users.setObjectName("action_users")
         self.action_items = QtWidgets.QAction(MainWindow)
@@ -3771,12 +4341,12 @@ class Ui_MainWindow(object):
         self.menuChange_View.addAction(self.action_servicetrackers)
         self.menuChange_View.addAction(self.action_workorders)
         self.menuUser.addAction(self.action_logout)
-        self.menuUser.addAction(self.action_changepassword)
+        self.menuUser.addAction(self.action_myaccount)
         self.menubar.addAction(self.menuChange_View.menuAction())
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(17)
+        self.page_handler.setCurrentIndex(19)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
         MainWindow.setTabOrder(self.assignee_entryform_txtName, self.assignee_entryform_txtDescription)
@@ -3951,6 +4521,28 @@ class Ui_MainWindow(object):
         self.label_58.setText(_translate("MainWindow", "Comments"))
         self.label_60.setText(_translate("MainWindow", "Task Description"))
         self.label_64.setText(_translate("MainWindow", "Date Allocated"))
+        self.label_57.setText(_translate("MainWindow", "RECURRING WORK ORDERS"))
+        self.recurringworkorder_listingview_btnNew.setText(_translate("MainWindow", "New"))
+        self.recurringworkorder_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
+        self.recurringworkorder_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
+        self.recurringworkorder_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
+        self.recurringworkorder_listingview_tblRecurringWorkOrder.setSortingEnabled(True)
+        self.label_79.setText(_translate("MainWindow", "RECURRING WORK ORDER ENTRY FORM"))
+        self.recurringworkorder_entryform_btnSelectPriorityLevel.setText(_translate("MainWindow", "Select Priority Level"))
+        self.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder.setText(_translate("MainWindow", "<--- Unassign From Work Order"))
+        self.label_77.setText(_translate("MainWindow", "Task Description"))
+        self.recurringworkorder_entryform_txtTaskDescription.setPlaceholderText(_translate("MainWindow", "REQUIRED"))
+        self.label_61.setText(_translate("MainWindow", "Date Last Raised"))
+        self.recurringworkorder_entryform_btnSelectSite.setText(_translate("MainWindow", "Select Site"))
+        self.label_70.setText(_translate("MainWindow", "Items"))
+        self.label_76.setText(_translate("MainWindow", "Comments"))
+        self.recurringworkorder_entryform_btnSelectDepartment.setText(_translate("MainWindow", "Select Department"))
+        self.label_74.setText(_translate("MainWindow", "ID"))
+        self.recurringworkorder_entryform_txtComments.setPlaceholderText(_translate("MainWindow", "OPTIONAL"))
+        self.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder.setText(_translate("MainWindow", "Assign To Work Order --->"))
+        self.recurringworkorder_entryform_tblAssignedItems.setSortingEnabled(True)
+        self.recurringworkorder_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
+        self.recurringworkorder_entryform_btnSave.setText(_translate("MainWindow", "Save"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.menuUser.setTitle(_translate("MainWindow", "User"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))
@@ -3960,7 +4552,7 @@ class Ui_MainWindow(object):
         self.action_prioritylevels.setText(_translate("MainWindow", "Priority Levels"))
         self.action_sites.setText(_translate("MainWindow", "Sites"))
         self.action_logout.setText(_translate("MainWindow", "Log Out"))
-        self.action_changepassword.setText(_translate("MainWindow", "Change Password"))
+        self.action_myaccount.setText(_translate("MainWindow", "My Account"))
         self.action_users.setText(_translate("MainWindow", "Users"))
         self.action_items.setText(_translate("MainWindow", "Items"))
         self.action_servicetrackers.setText(_translate("MainWindow", "Service Trackers"))

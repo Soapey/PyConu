@@ -109,15 +109,18 @@ def new_user(main_window) -> None:
     navigate(main_window, Page.USER_ENTRYFORM)
 
 
-def edit_user(main_window) -> None:
+def edit_user(main_window, user_id: int) -> None:
 
-    selected_id = selected_row_id(main_window.ui.user_listingview_tblUser)
+    if not user_id:
+        user_id = selected_row_id(main_window.ui.user_listingview_tblUser)
+
     global global_users
-    entity = global_users[selected_id]
+    global_users = select_by_attrs_dict(User)
+    entity = global_users[user_id]
 
-    clear_user_entryform(main_window, selected_id)
+    clear_user_entryform(main_window, user_id)
 
-    main_window.ui.user_entryform_lblId.setText(str(entity.id))
+    main_window.ui.user_entryform_lblId.setText(str(user_id))
     main_window.ui.user_entryform_txtFirstName.setText(entity.first_name)
     main_window.ui.user_entryform_txtLastName.setText(entity.last_name)
     main_window.ui.user_entryform_txtJobTitle.setText(entity.job_title)
@@ -391,8 +394,8 @@ def connect_user_actions(main_window) -> None:
     main_window.ui.action_logout.triggered.connect(
         lambda: main_window.login_window.log_out_user()
     )
-    main_window.ui.action_changepassword.triggered.connect(
-        lambda: print("Change Password clicked placeholder.")
+    main_window.ui.action_myaccount.triggered.connect(
+        lambda: edit_user(main_window, main_window.current_user.id)
     )
     main_window.ui.user_listingview_btnNew.clicked.connect(
         lambda: new_user(main_window)

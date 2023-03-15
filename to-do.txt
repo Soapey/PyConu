@@ -1,7 +1,19 @@
-* Finish Work Order Entry Form
-* Add export buttons to each table that creates a csv file for the table
-* Add image capability for Work Order
-* Make a screen that shows all overdue services, recurring work orders and work orders past their priority level date
+Must Have
 * Add uniqueness validators for all the various classes and their attributes
-* Add email address validation on user email address field
-* Hook up change password functionality
+* Fix bug to do with old and new password validation for changing passwords
+* RecurringWorkOrder listingview actions
+* RecurringWorkOrder entryform
+* RecurringWorkOrder entryform actions
+* Due listingview (for ServiceTracker, WorkOrder, RecurringWorkOrder)
+* Due listingview actions
+* Add is_due() function to ServiceTracker, WorkOrder and RecurringWorkOrder
+* Add raise() function to ServiceTracker, WorkOrder and RecurringWorkOrder
+* Add print() function to WorkOrder
+* Functionality to save WorkOrder as pdf
+* Functionality to offer Forms to be able to be printed (from option checklist) upon printing a WorkOrder
+
+
+Could Have
+* Add export buttons to each table that creates a csv file for the table
+* Functionality to auto-open email with pdf WorkOrder attached
+* Add image capability for Work Order

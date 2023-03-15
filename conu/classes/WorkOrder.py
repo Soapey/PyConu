@@ -78,14 +78,14 @@ class WorkOrder:
                 department.name,
                 prioritylevel.name,
                 workorder.task_description,
+                workorder.comments,
                 GROUP_CONCAT(DISTINCT item.name),
                 GROUP_CONCAT(DISTINCT assignee.name),
-                workorder.comments,
-                workorder.date_allocated,
-                workorder.date_completed,
+                strftime('%d-%m-%Y', workorder.date_allocated),
+                strftime('%d-%m-%Y', workorder.date_completed),
                 workorder.close_out_comments,
                 user.first_name || ' ' || user.last_name,
-                workorder.date_created
+                strftime('%d-%m-%Y', workorder.date_created)
             FROM
                 workorder
                 JOIN site ON workorder.site_id = site.id
