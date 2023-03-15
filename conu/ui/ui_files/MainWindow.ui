@@ -21,7 +21,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>17</number>
+       <number>19</number>
       </property>
       <widget class="QWidget" name="page_assignee_listingview">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -5947,6 +5947,1274 @@ QPushButton:hover {
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="page_recurringworkorder_listingview">
+       <layout class="QGridLayout" name="gridLayout_27">
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_57">
+          <property name="font">
+           <font>
+            <family>Impact</family>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: white;
+    background-color: #05668d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 10px;
+	margin: 0px 0px 20px 0px;
+}</string>
+          </property>
+          <property name="text">
+           <string>RECURRING WORK ORDERS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="recurringworkorder_listingview_btnNew">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #0db39e;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #16db93;
+}</string>
+          </property>
+          <property name="text">
+           <string>New</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="recurringworkorder_listingview_btnEdit">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #f8961e;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #f9c74f;
+}</string>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="recurringworkorder_listingview_btnDelete">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #f94144;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #ff595e;
+}</string>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QLineEdit" name="recurringworkorder_listingview_txtSearch">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QLineEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="placeholderText">
+           <string>Search</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="3">
+         <widget class="QTableWidget" name="recurringworkorder_listingview_tblRecurringWorkOrder">
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QTableWidget:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>false</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_recurringworkorder_entryform">
+       <layout class="QGridLayout" name="gridLayout_28">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_77">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: grey;
+}</string>
+          </property>
+          <property name="text">
+           <string>ID</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" colspan="3">
+         <widget class="QLabel" name="workorder_entryform_lblId_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_71">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: grey;
+}</string>
+          </property>
+          <property name="text">
+           <string>Date Created</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="3">
+         <widget class="QLabel" name="workorder_entryform_lblDateCreated_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_74">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: grey;
+}</string>
+          </property>
+          <property name="text">
+           <string>Raised By</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="3">
+         <widget class="QLabel" name="workorder_entryform_lblRaisedBy_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="workorder_entryform_btnSelectSite_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #6c757d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #adb5bd;
+}</string>
+          </property>
+          <property name="text">
+           <string>Select Site</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" colspan="3">
+         <widget class="QLabel" name="workorder_entryform_lblSite_2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="workorder_entryform_btnSelectDepartment_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #6c757d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #adb5bd;
+}</string>
+          </property>
+          <property name="text">
+           <string>Select Department</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="3">
+         <widget class="QLabel" name="workorder_entryform_lblDepartment_2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QPushButton" name="workorder_entryform_btnSelectPriorityLevel_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #6c757d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #adb5bd;
+}</string>
+          </property>
+          <property name="text">
+           <string>Select Priority Level</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" colspan="3">
+         <widget class="QLabel" name="workorder_entryform_lblPriorityLevel_2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background-color: lightgrey;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_76">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Purchase Order Number</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="3">
+         <widget class="QLineEdit" name="workorder_entryform_txtPurchaseOrderNumber_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QLineEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>OPTIONAL</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" rowspan="2">
+         <widget class="QLabel" name="label_69">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Items</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QPushButton" name="workorder_entryform_btnAssignItemToWorkOrder_2">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #0db39e;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #16db93;
+}</string>
+          </property>
+          <property name="text">
+           <string>Assign To Work Order ---&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2" colspan="2">
+         <widget class="QPushButton" name="workorder_entryform_btnUnassignItemFromWorkOrder_2">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #f94144;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #ff595e;
+}</string>
+          </property>
+          <property name="text">
+           <string>&lt;--- Unassign From Work Order</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QTableWidget" name="workorder_entryform_tblUnassignedItems_2">
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	min-height: 200px;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="8" column="2" colspan="2">
+         <widget class="QTableWidget" name="workorder_entryform_tblAssignedItems_2">
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	min-height: 200px;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="label_72">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Task Description</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1" colspan="3">
+         <widget class="QPlainTextEdit" name="workorder_entryform_txtTaskDescription_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPlainTextEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+	min-height: 250px;
+}
+
+QPlainTextEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
+          </property>
+          <property name="maximumBlockCount">
+           <number>-1</number>
+          </property>
+          <property name="backgroundVisible">
+           <bool>false</bool>
+          </property>
+          <property name="placeholderText">
+           <string>REQUIRED</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0" rowspan="3">
+         <widget class="QLabel" name="label_61">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Assignees</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QPushButton" name="workorder_entryform_btnAssignAssigneeToWorkOrder_2">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #0db39e;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #16db93;
+}</string>
+          </property>
+          <property name="text">
+           <string>Assign To Work Order ---&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="2" colspan="2">
+         <widget class="QPushButton" name="workorder_entryform_btnUnassignAssigneeFromWorkOrder_2">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #f94144;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #ff595e;
+}</string>
+          </property>
+          <property name="text">
+           <string>&lt;--- Unassign From Work Order</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1" rowspan="2">
+         <widget class="QTableWidget" name="workorder_entryform_tblUnassignedAssignees_2">
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	min-height: 200px;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="11" column="2" rowspan="2" colspan="2">
+         <widget class="QTableWidget" name="workorder_entryform_tblAssignedAssignees_2">
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	min-height: 200px;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="12" column="3">
+         <widget class="QPushButton" name="workorder_entryform_btnSave_2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	width: 60px;
+	color: white;
+    background-color: #006494;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #0582ca;
+}</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="0">
+         <widget class="QLabel" name="label_75">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Comments</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="1" colspan="3">
+         <widget class="QPlainTextEdit" name="workorder_entryform_txtComments_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPlainTextEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+	min-height: 100px;
+}
+
+QPlainTextEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>OPTIONAL</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="0">
+         <widget class="QLabel" name="label_78">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Date Allocated</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1" colspan="3">
+         <widget class="QDateEdit" name="workorder_entryform_dteDateAllocated_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::WheelFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QDateEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QDateEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="0">
+         <widget class="QCheckBox" name="workorder_entryform_chkIsComplete_2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>Is Complete</string>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="0">
+         <widget class="QLabel" name="label_70">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Date Completed</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="1" colspan="3">
+         <widget class="QDateEdit" name="workorder_entryform_dteDateCompleted_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::WheelFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QDateEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QDateEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="showGroupSeparator" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="0">
+         <widget class="QLabel" name="label_73">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Close Out Comments</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="1" colspan="3">
+         <widget class="QPlainTextEdit" name="workorder_entryform_txtCloseOutComments_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPlainTextEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QPlainTextEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>OPTIONAL</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+       <widget class="QPushButton" name="workorder_entryform_btnBack_2">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>1559</y>
+          <width>133</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	color: white;
+    background-color: #6c757d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #adb5bd;
+}</string>
+        </property>
+        <property name="text">
+         <string>Back to listing view</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

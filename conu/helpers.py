@@ -245,11 +245,3 @@ def load_query_rows_into_table(table, rows, column_parameters_dict):
                 column_index,
                 QTableWidgetItem(value),
             )
-
-
-def format_nullable_database_date(returned_value):
-
-    if not returned_value:
-        return None
-
-    return datetime.strptime(returned_value, "%Y-%m-%d")
