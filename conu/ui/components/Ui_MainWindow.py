@@ -1881,7 +1881,7 @@ class Ui_MainWindow(object):
         self.user_entryform_scrollDepartments.setWidgetResizable(True)
         self.user_entryform_scrollDepartments.setObjectName("user_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 98, 38))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 1160, 200))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.gridLayout_16 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_16.setObjectName("gridLayout_16")
@@ -2095,6 +2095,7 @@ class Ui_MainWindow(object):
 "    border-color: #028090;\n"
 "}\n"
 "")
+        self.user_entryform_txtNewPassword.setEchoMode(QtWidgets.QLineEdit.Password)
         self.user_entryform_txtNewPassword.setObjectName("user_entryform_txtNewPassword")
         self.gridLayout_15.addWidget(self.user_entryform_txtNewPassword, 8, 1, 1, 2)
         self.page_handler.addWidget(self.page_user_entryform)
@@ -2412,7 +2413,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 98, 38))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1236, 206))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
@@ -4346,7 +4347,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(19)
+        self.page_handler.setCurrentIndex(11)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
         MainWindow.setTabOrder(self.assignee_entryform_txtName, self.assignee_entryform_txtDescription)
