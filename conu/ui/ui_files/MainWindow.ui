@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1413</width>
-    <height>902</height>
+    <height>904</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -535,8 +535,8 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1236</width>
-             <height>209</height>
+             <width>38</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -3049,8 +3049,8 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1160</width>
-             <height>200</height>
+             <width>38</width>
+             <height>183</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -3894,8 +3894,8 @@ QTextEdit:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1236</width>
-             <height>206</height>
+             <width>50</width>
+             <height>200</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_21">
@@ -4962,8 +4962,8 @@ QPushButton:hover {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-559</y>
-             <width>1358</width>
+             <y>0</y>
+             <width>483</width>
              <height>1270</height>
             </rect>
            </property>
@@ -6218,9 +6218,9 @@ QTableWidget:focus {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-222</y>
+             <y>-246</y>
              <width>1358</width>
-             <height>933</height>
+             <height>959</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_28">
@@ -6768,6 +6768,7 @@ QPushButton:hover {
 	border-radius: 5px;
 	border-color: black;
 	padding: 5px;
+	height: 150px;
 }</string>
               </property>
               <property name="title">
@@ -6792,10 +6793,538 @@ QPushButton:hover {
                   <string notr="true"/>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>3</number>
                  </property>
-                 <widget class="QWidget" name="recurringworkorder_entryform_pageDaily"/>
-                 <widget class="QWidget" name="recurringworkorder_entryform_pageWeekly"/>
+                 <widget class="QWidget" name="recurringworkorder_entryform_pageDaily">
+                  <layout class="QGridLayout" name="gridLayout_33">
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform_daily_groupOption2">
+                     <property name="styleSheet">
+                      <string notr="true">min-height: 20px;</string>
+                     </property>
+                     <property name="title">
+                      <string>Option 2</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_35">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_3">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform_daily_radOption2">
+                          <property name="text">
+                           <string>Every weekday</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="2">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform__daily_groupOption1">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="title">
+                      <string>Option 1</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_34">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_2">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform__daily_radOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Every</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_daily_spnOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform__daily_lblOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>days</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="recurringworkorder_entryform_pageWeekly">
+                  <layout class="QGridLayout" name="gridLayout_36">
+                   <item row="0" column="0">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform_weekly_groupOption1">
+                     <property name="title">
+                      <string>Option1</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_37">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform_weekly_radOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Recur every</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_weekly_spnOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_weekly_lblOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>week(s) on:</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item row="1" column="0">
+                       <layout class="QGridLayout" name="gridLayout_38">
+                        <item row="0" column="0">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_monday">
+                          <property name="text">
+                           <string>Monday</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_tuesday">
+                          <property name="text">
+                           <string>Tuesday</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="2">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_wednesday">
+                          <property name="text">
+                           <string>Wednesday</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="3">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_thursday">
+                          <property name="text">
+                           <string>Thursday</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_friday">
+                          <property name="text">
+                           <string>Friday</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_saturday">
+                          <property name="text">
+                           <string>Saturday</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="2">
+                         <widget class="QCheckBox" name="recurringworkorder_entryform_weekly_chkOption1_sunday">
+                          <property name="text">
+                           <string>Sunday</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="recurringworkorder_entryform_pageMonthly">
+                  <layout class="QGridLayout" name="gridLayout_39">
+                   <item row="0" column="0">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform_monthly_groupOption1">
+                     <property name="title">
+                      <string>Option 1</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_40">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_4">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform_monthly_radOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Day</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_monthly_spnOption1_day">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_monthly_lblOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>of every</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_monthly_spnOption1_month">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_monthly_lblOption1_2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>month(s)</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform_monthly_groupOption2">
+                     <property name="title">
+                      <string>Option 2</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_41">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_5">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform_monthly_radOption2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>The</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="recurringworkorder_entryform_monthly_cmbOption2_occurrence">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="recurringworkorder_entryform_cmbOption2_weekday">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_lblOption2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>of every</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_spnOption2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_lblOption2_2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>month(s)</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="recurringworkorder_entryform_pageYearly">
+                  <layout class="QGridLayout" name="gridLayout_42">
+                   <item row="0" column="0">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform_yearly_groupOption1">
+                     <property name="title">
+                      <string>Option 1</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_43">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_6">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform_yearly_radOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Recur every</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_yearly_spnOption1_year">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_yearly_lblOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>year(s) on</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="recurringworkorder_entryform_yearly_cmbOption1">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_yearly_spnOption1_day"/>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QGroupBox" name="recurringworkorder_entryform_yearly_groupOption2">
+                     <property name="title">
+                      <string>Option 2</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_44">
+                      <item row="0" column="0">
+                       <layout class="QHBoxLayout" name="horizontalLayout_7">
+                        <item>
+                         <widget class="QRadioButton" name="recurringworkorder_entryform_yearly_radOption2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Recur every</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_yearly_spnOption2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_yearly_lblOption2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>year(s) on the</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="recurringworkorder_entryform_yearly_cmbOption2_occurrence">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="recurringworkorder_entryform_yearly_cmbOption2_weekday">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="recurringworkorder_entryform_yearly_lblOption2_2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>of</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="recurringworkorder_entryform_yearly_cmbOption2_month">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_2">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
                <item row="0" column="0">
@@ -7065,6 +7594,7 @@ QPushButton:hover {
     <addaction name="action_items"/>
     <addaction name="action_servicetrackers"/>
     <addaction name="action_workorders"/>
+    <addaction name="action_recurringworkorders"/>
    </widget>
    <widget class="QMenu" name="menuUser">
     <property name="title">
@@ -7135,6 +7665,11 @@ QPushButton:hover {
   <action name="action_workorders">
    <property name="text">
     <string>Work Orders</string>
+   </property>
+  </action>
+  <action name="action_recurringworkorders">
+   <property name="text">
+    <string>Recurring Work Orders</string>
    </property>
   </action>
  </widget>
