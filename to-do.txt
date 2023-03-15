@@ -1,19 +1,27 @@
 Must Have
-* Add uniqueness validators for all the various classes and their attributes
-* Fix bug to do with old and new password validation for changing passwords
+16/3/23 - Thursday
 * RecurringWorkOrder listingview actions
 * RecurringWorkOrder entryform
 * RecurringWorkOrder entryform actions
+
+17/3/23 - Friday
 * Due listingview (for ServiceTracker, WorkOrder, RecurringWorkOrder)
 * Due listingview actions
 * Add is_due() function to ServiceTracker, WorkOrder and RecurringWorkOrder
 * Add raise() function to ServiceTracker, WorkOrder and RecurringWorkOrder
+
+18/3/23 - Saturday
+* Add uniqueness validators for all the various classes and their attributes
+* Fix bug to do with old and new password validation for changing passwords
+
+19/3/23 - Sunday
+* Add save() function to WorkOrder
 * Add print() function to WorkOrder
-* Functionality to save WorkOrder as pdf
 * Functionality to offer Forms to be able to be printed (from option checklist) upon printing a WorkOrder
 
-
-Could Have
+Will Have
 * Add export buttons to each table that creates a csv file for the table
 * Functionality to auto-open email with pdf WorkOrder attached
+
+Could Have
 * Add image capability for Work Order
