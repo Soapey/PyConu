@@ -428,7 +428,7 @@ def save_workorder(main_window) -> None:
     save_and_delete_workorderassignees(main_window, entity_id)
 
     Notification(
-        "Safe Successful", [f"Successfully saved work order: {entity_id}"]
+        "Save Successful", [f"Successfully saved work order: {entity_id}"]
     ).show()
 
     load_workorder_listingview(main_window)

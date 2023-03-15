@@ -201,7 +201,7 @@ def save_item(main_window) -> None:
 
     save_and_delete_itemdepartments(main_window, entity_id)
 
-    Notification("Safe Successful", [f"Successfully saved item: {entity.name}"]).show()
+    Notification("Save Successful", [f"Successfully saved item: {entity.name}"]).show()
 
     load_item_listingview(main_window)
 

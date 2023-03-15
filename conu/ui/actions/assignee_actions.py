@@ -202,7 +202,7 @@ def save_assignee(main_window) -> None:
     save_and_delete_assigneedepartments(main_window, entity_id)
 
     Notification(
-        "Safe Successful", [f"Successfully saved assignee: {entity.name}"]
+        "Save Successful", [f"Successfully saved assignee: {entity.name}"]
     ).show()
 
     load_assignee_listingview(main_window)

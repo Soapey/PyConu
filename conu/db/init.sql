@@ -171,3 +171,15 @@ CREATE TABLE IF NOT EXISTS recurringworkorder (
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+
+CREATE TABLE IF NOT EXISTS recurringworkorderitem (
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [recurringworkorder_id] INTEGER NOT NULL,
+    [item_id] INTEGER NOT NULL,
+    FOREIGN KEY (recurringworkorder_id) REFERENCES recurringworkorder(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES item(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);

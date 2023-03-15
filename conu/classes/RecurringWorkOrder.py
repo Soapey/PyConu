@@ -2,6 +2,11 @@ from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 from dataclasses import dataclass
 import calendar
+from conu.db.SQLiteConnection import SQLiteConnection
+from conu.db.helpers import format_nullable_database_date, select_by_attrs_dict
+from conu.classes.Site import Site
+from conu.classes.Department import Department
+from conu.classes.PriorityLevel import PriorityLevel
 
 
 @dataclass
@@ -205,3 +210,86 @@ class RecurringWorkOrder:
             print(occurrences)
             return todays_date >= occurrences[-1]
         return False
+
+    @classmethod
+    def convert_rows_to_instances(cls, rows):
+
+        return {
+            row[0]: cls(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                row[6],
+                format_nullable_database_date(row[7]),
+                format_nullable_database_date(row[8]),
+                row[9],
+                row[10],
+                row[11],
+                row[12],
+                row[13],
+            )
+            for row in rows
+        }
+
+    @classmethod
+    def get(cls):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute("SELECT * FROM recurringworkorder;").fetchall()
+
+        return cls.convert_rows_to_instances(rows)
+
+    @classmethod
+    def get_by_user_departments(cls, user_id):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+                SELECT 
+                    * 
+                FROM 
+                    recurringworkorder 
+                WHERE 
+                    recurringworkorder.department_id IN 
+                        (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?);""",
+                (user_id,),
+            )
+
+        return cls.convert_rows_to_instances(rows)
+
+    @classmethod
+    def get_listingview_table_data(cls, main_window):
+
+        current_user = main_window.current_user
+
+        if not current_user:
+            return
+
+        recurringworkorders = cls.get_by_user_departments(current_user.id)
+
+        sites = select_by_attrs_dict(Site)
+
+        departments = select_by_attrs_dict(Department)
+
+        prioritylevels = select_by_attrs_dict(PriorityLevel)
+
+        data = [
+            (
+                rwo.id,
+                sites[rwo.site_id].name,
+                departments[rwo.department_id].name,
+                prioritylevels[rwo.prioritylevel_id].name,
+                rwo.task_description,
+                rwo.comments,
+                rwo.__repr__(),
+                rwo.is_due(),
+            )
+            for rwo in recurringworkorders
+        ]
+
+        return data

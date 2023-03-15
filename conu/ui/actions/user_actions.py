@@ -306,7 +306,7 @@ def save_user(main_window) -> None:
     save_and_delete_userdepartments(main_window, entity_id)
 
     Notification(
-        "Safe Successful",
+        "Save Successful",
         [f"Successfully saved user: {entity.first_name} {entity.last_name}"],
     ).show()
 
