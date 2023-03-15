@@ -1,12 +1,12 @@
 CREATE TABLE IF NOT EXISTS [assignee] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL,
+    [name] TEXT UNIQUE NOT NULL,
     [description] TEXT
 );
 
 CREATE TABLE IF NOT EXISTS [department] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL
+    [name] TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS [assigneedepartment] (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS [form] (
 
 CREATE TABLE IF NOT EXISTS [item] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL,
+    [name] TEXT UNIQUE NOT NULL,
     [comments] TEXT
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS [itemdepartment] (
 
 CREATE TABLE IF NOT EXISTS [prioritylevel] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL,
+    [name] TEXT UNIQUE NOT NULL,
     [days_until_overdue] INTEGER NOT NULL
 );
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS [servicetracker] (
 
 CREATE TABLE IF NOT EXISTS [site] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL,
+    [name] TEXT UNIQUE NOT NULL,
     [address] TEXT,
     [suburb] TEXT
 );
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS [user] (
     [last_name] TEXT NOT  NULL,
     [job_title] TEXT,
     [email_address] TEXT NOT NULL,
-    [username] TEXT NOT NULL,
+    [username] TEXT UNIQUE NOT NULL,
     [password] TEXT NOT NULL,
     [permission_level] INTEGER NOT NULL,
     [available] INTEGER NOT NULL
