@@ -11,6 +11,7 @@ class SelectWindow(QMainWindow):
         entity_attribute_name_to_set_value,
         set_property_func,
         headers_dict: dict,
+        func_on_exit=None,
         selection_mode: QAbstractItemView.SelectionMode = QAbstractItemView.SelectionMode.SingleSelection,
     ) -> None:
         super().__init__()
@@ -20,6 +21,7 @@ class SelectWindow(QMainWindow):
         self.set_property_func = set_property_func
         self.headers_dict = headers_dict
         self.selection_mode = selection_mode
+        self.func_on_exit = func_on_exit
         self.ui = Ui_SelectWindow()
         self.ui.setupUi(self)
         self._connect_select_actions()
@@ -72,6 +74,9 @@ class SelectWindow(QMainWindow):
     def _select(self):
 
         self._get_selected_entities()
+
+        if self.func_on_exit:
+            self.func_on_exit()
 
         self.close()
 
