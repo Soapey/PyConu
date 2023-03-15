@@ -33,6 +33,16 @@ from conu.ui.components.Notification import Notification
 from conu.ui.components.TableManager import TableManager
 from conu.ui.PageEnum import Page
 from conu.ui.components.SelectWindow import SelectWindow
+from enum import Enum
+
+
+class SelectionWidgetPage(Enum):
+
+    DAILY = 0
+    WEEKLY = 1
+    MONTHLY = 2
+    YEARLY = 3
+
 
 unassigned_items_tbl: TableManager = None
 assigned_items_tbl: TableManager = None
@@ -84,7 +94,7 @@ def clear_recurringworkorder_entryform(main_window) -> None:
     unassigned_items_tbl.clear()
     assigned_items_tbl.clear()
 
-    # TODO - recurrence selection widget clear logic
+    clear_selection_widget(main_window)
 
 
 def new_recurringworkorder(main_window) -> None:
@@ -486,7 +496,140 @@ def load_selection_tables(main_window):
     load_item_selection_table(main_window)
 
 
-def connect_workorder_actions(main_window) -> None:
+def clear_selection_widget(main_window):
+
+    # Daily
+    ##### Option 1
+    main_window.ui.recurringworkorder_entryfrom_daily_radOption1.setChecked(False)
+    main_window.ui.recurringworkorder_entryfrom_daily_spnOption1.setValue(1)
+    ##### Option 2
+    main_window.ui.recurringworkorder_entryfrom_daily_radOption2.setChecked(False)
+
+    # Weekly
+    ##### Option 1
+    main_window.ui.recurringworkorder_entryfrom_weekly_radOption1.setChecked(False)
+    main_window.ui.recurringworkorder_entryfrom_weekly_spnOption1.setValue(1)
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_monday.setChecked(
+        False
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_tuesday.setChecked(
+        False
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_wednesday.setChecked(
+        False
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_thursday.setChecked(
+        False
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_friday.setChecked(
+        False
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_saturday.setChecked(
+        False
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_chkOption1_sunday.setChecked(
+        False
+    )
+
+    # Monthly
+    ##### Option 1
+    main_window.ui.recurringworkorder_entryform_monthly_radOption1.setChecked(False)
+    main_window.ui.recurringworkorder_entryform_monthly_spnOption1_day.setValue(1)
+    main_window.ui.recurringworkorder_entryform_monthly_spnOption1_month.setValue(1)
+    ##### Option 2
+    main_window.ui.recurringworkorder_entryform_monthly_radOption2.setChecked(False)
+    monthly_cmbOption2_occurrence = (
+        main_window.ui.recurringworkorder_entryform_monthly_cmbOption2_occurrence
+    )
+    monthly_cmbOption2_occurrence.clear()
+    monthly_cmbOption2_occurrence.addItem("first")
+    monthly_cmbOption2_occurrence.addItem("second")
+    monthly_cmbOption2_occurrence.addItem("third")
+    monthly_cmbOption2_occurrence.addItem("last")
+    monthly_cmbOption2_occurrence.setCurrentIndex(0)
+    monthly_cmbOption2_weekday = (
+        main_window.ui.recurringworkorder_entryform_cmbOption2_weekday
+    )
+    monthly_cmbOption2_weekday.clear()
+    monthly_cmbOption2_weekday.addItem("Monday")
+    monthly_cmbOption2_weekday.addItem("Tuesday")
+    monthly_cmbOption2_weekday.addItem("Wednesday")
+    monthly_cmbOption2_weekday.addItem("Thursday")
+    monthly_cmbOption2_weekday.addItem("Friday")
+    monthly_cmbOption2_weekday.addItem("Saturday")
+    monthly_cmbOption2_weekday.addItem("Sunday")
+    monthly_cmbOption2_weekday.setCurrentIndex(0)
+    main_window.ui.recurringworkorder_entryform_spnOption2.setValue(1)
+
+    # Yearly
+    ##### Option 1
+    main_window.ui.recurringworkorder_entryform_yearly_radOption1.setChecked(False)
+    main_window.ui.recurringworkorder_entryform_yearly_spnOption1_year.setValue(1)
+    yearly_cmbOption1 = main_window.ui.recurringworkorder_entryform_yearly_cmbOption1
+    yearly_cmbOption1.clear()
+    yearly_cmbOption1.addItem("January")
+    yearly_cmbOption1.addItem("February")
+    yearly_cmbOption1.addItem("March")
+    yearly_cmbOption1.addItem("April")
+    yearly_cmbOption1.addItem("May")
+    yearly_cmbOption1.addItem("June")
+    yearly_cmbOption1.addItem("July")
+    yearly_cmbOption1.addItem("August")
+    yearly_cmbOption1.addItem("September")
+    yearly_cmbOption1.addItem("October")
+    yearly_cmbOption1.addItem("November")
+    yearly_cmbOption1.addItem("December")
+    yearly_cmbOption1.setCurrentIndex(0)
+    ##### Option 2
+    main_window.ui.recurringworkorder_entryform_yearly_radOption2.setChecked(False)
+    main_window.ui.recurringworkorder_entryform_yearly_spnOption2.setValue(1)
+    yearly_cmbOption2_occurence = (
+        main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_occurrence
+    )
+    yearly_cmbOption2_occurence.clear()
+    yearly_cmbOption2_occurence.addItem("first")
+    yearly_cmbOption2_occurence.addItem("second")
+    yearly_cmbOption2_occurence.addItem("third")
+    yearly_cmbOption2_occurence.addItem("last")
+    yearly_cmbOption2_occurence.setCurrentIndex(0)
+    yearly_cmbOption2_weekday = (
+        main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_weekday
+    )
+    yearly_cmbOption2_weekday.clear()
+    yearly_cmbOption2_weekday.addItem("Monday")
+    yearly_cmbOption2_weekday.addItem("Tuesday")
+    yearly_cmbOption2_weekday.addItem("Wednesday")
+    yearly_cmbOption2_weekday.addItem("Thursday")
+    yearly_cmbOption2_weekday.addItem("Friday")
+    yearly_cmbOption2_weekday.addItem("Saturday")
+    yearly_cmbOption2_weekday.addItem("Sunday")
+    yearly_cmbOption2_weekday.setCurrentIndex(0)
+    yearly_cmbOption2_month = (
+        main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_month
+    )
+    yearly_cmbOption2_month.clear()
+    yearly_cmbOption2_month.addItem("January")
+    yearly_cmbOption2_month.addItem("February")
+    yearly_cmbOption2_month.addItem("March")
+    yearly_cmbOption2_month.addItem("April")
+    yearly_cmbOption2_month.addItem("May")
+    yearly_cmbOption2_month.addItem("June")
+    yearly_cmbOption2_month.addItem("July")
+    yearly_cmbOption2_month.addItem("August")
+    yearly_cmbOption2_month.addItem("September")
+    yearly_cmbOption2_month.addItem("October")
+    yearly_cmbOption2_month.addItem("November")
+    yearly_cmbOption2_month.addItem("December")
+    yearly_cmbOption2_month.setCurrentIndex(0)
+
+    # Page Selection
+    main_window.ui.recurringworkorder_entryform_radDaily.setChecked(True)
+    main_window.ui.recurringworkorder_entryform_page_handler.setCurrentIndex(
+        SelectionWidgetPage.DAILY.value
+    )
+
+
+def connect_recurringworkorder_actions(main_window) -> None:
 
     global unassigned_items_tbl, assigned_items_tbl
 

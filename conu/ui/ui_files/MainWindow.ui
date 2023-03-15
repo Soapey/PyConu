@@ -535,7 +535,7 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
+             <width>98</width>
              <height>38</height>
             </rect>
            </property>
@@ -3049,8 +3049,8 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
-             <height>183</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -3894,8 +3894,8 @@ QTextEdit:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>50</width>
-             <height>200</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_21">
@@ -6362,7 +6362,7 @@ QPushButton:hover {
              </widget>
             </item>
             <item row="1" column="1" colspan="2">
-             <widget class="QLabel" name="workorder_entryform_lblLastRaisedDate">
+             <widget class="QLabel" name="recurringworkorder_entryform_lblLastRaisedDate">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -6855,6 +6855,12 @@ QPushButton:hover {
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>999</number>
+                          </property>
                          </widget>
                         </item>
                         <item>
@@ -6907,6 +6913,12 @@ QPushButton:hover {
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
+                          </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>52</number>
                           </property>
                          </widget>
                         </item>
@@ -7014,6 +7026,12 @@ QPushButton:hover {
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>31</number>
+                          </property>
                          </widget>
                         </item>
                         <item>
@@ -7036,6 +7054,12 @@ QPushButton:hover {
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
+                          </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>999</number>
                           </property>
                          </widget>
                         </item>
@@ -7119,6 +7143,12 @@ QPushButton:hover {
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>999</number>
+                          </property>
                          </widget>
                         </item>
                         <item>
@@ -7172,6 +7202,12 @@ QPushButton:hover {
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>999</number>
+                          </property>
                          </widget>
                         </item>
                         <item>
@@ -7198,7 +7234,14 @@ QPushButton:hover {
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="recurringworkorder_entryform_yearly_spnOption1_day"/>
+                         <widget class="QSpinBox" name="recurringworkorder_entryform_yearly_spnOption1_day">
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>31</number>
+                          </property>
+                         </widget>
                         </item>
                         <item>
                          <spacer name="horizontalSpacer">
@@ -7246,6 +7289,12 @@ QPushButton:hover {
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
+                          </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>999</number>
                           </property>
                          </widget>
                         </item>
