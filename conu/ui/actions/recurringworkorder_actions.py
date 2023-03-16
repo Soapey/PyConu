@@ -85,8 +85,10 @@ def clear_recurringworkorder_entryform(main_window) -> None:
         "object", None
     )
 
-    main_window.ui.workorder_entryform_txtTaskDescription.clear()
-    main_window.ui.workorder_entryform_txtComments.clear()
+    main_window.ui.recurringworkorder_entryform_txtTaskDescription.clear()
+    main_window.ui.recurringworkorder_entryform_txtComments.clear()
+
+    main_window.ui.recurringworkorder_entryform_dteStartDate.setDate(QDate(2000, 1, 1))
 
     global unassigned_items_tbl, assigned_items_tbl
 
@@ -138,15 +140,7 @@ def get_recurringworkingorder_from_entryform(main_window):
         if len(main_window.ui.recurringworkorder_entryform_lblId.text()) == 0
         else int(main_window.ui.recurringworkorder_entryform_lblId.text())
     )
-    recurringworkorder_lastraised_date = (
-        date.today()
-        if len(main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.text())
-        == 0
-        else datetime.strptime(
-            main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.text(),
-            "%d-%m-%Y",
-        ).date()
-    )
+
     recurringworkorder_site = (
         main_window.ui.recurringworkorder_entryform_lblSite.property("object")
     )
@@ -165,7 +159,25 @@ def get_recurringworkingorder_from_entryform(main_window):
         == 0
         else main_window.ui.recurringworkorder_entryform_txtComments.toPlainText()
     )
-    recurringworkorder_start_date = recurringworkorder_lastraised_date
+
+    recurringworkorder_start_date_qdate = (
+        main_window.ui.recurringworkorder_entryform_dteStartDate.date()
+    )
+    recurringworkorder_start_date = date(
+        recurringworkorder_start_date_qdate.year(),
+        recurringworkorder_start_date_qdate.month(),
+        recurringworkorder_start_date_qdate.day(),
+    )
+
+    recurringworkorder_lastraised_date = (
+        recurringworkorder_start_date
+        if not recurringworkorder_id
+        else datetime.strptime(
+            main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.text(),
+            "%d-%m-%Y",
+        ).date()
+    )
+
     recurringworkorder_interval = None
     recurringworkorder_weekdays = None
     recurringworkorder_day = None
@@ -328,7 +340,7 @@ def load_recurrence_selection_widget(
 
     if recurringworkorder.weekdays:
         weekdays = [
-            calendar.day_name(int(wd) - 1).lower()
+            calendar.day_name[int(wd) - 1].lower()
             for wd in recurringworkorder.weekdays.split(";")
         ]
 
@@ -358,12 +370,12 @@ def load_recurrence_selection_widget(
             recurringworkorder.interval
         )
 
-        all_lowered_weekday_names = [calendar.day_name(i).lower() for i in range(7)]
+        all_lowered_weekday_names = [calendar.day_name[i].lower() for i in range(7)]
 
         for weekday_name in all_lowered_weekday_names:
-            weekday_checkbox = main_window.ui.findChild(
+            weekday_checkbox = main_window.ui.recurringworkorder_entryform_weekly_groupOption1.findChild(
                 QCheckBox,
-                f"recurringworkorder_entryform_weekly_cmbOption1_{weekday_name}",
+                f"recurringworkorder_entryform_weekly_chkOption1_{weekday_name}",
             )
 
             if weekday_name in weekdays:
@@ -511,6 +523,11 @@ def edit_recurringworkorder(main_window) -> None:
 
     if comments := entity.comments:
         main_window.ui.recurringworkorder_entryform_txtComments.setPlainText(comments)
+
+    start_date = entity.start_date
+    main_window.ui.recurringworkorder_entryform_dteStartDate.setDate(
+        QDate(start_date.year, start_date.month, start_date.day)
+    )
 
     load_selection_tables(main_window)
 
