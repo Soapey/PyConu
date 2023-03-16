@@ -55,7 +55,12 @@ def load_recurringworkorder_listingview(main_window) -> None:
 
     main_window.ui.recurringworkorder_listingview_txtSearch.clear()
 
-    recurringworkorders_by_search(main_window, None)
+    global recurringworkorder_table_data
+    recurringworkorder_table_data = RecurringWorkOrder.get_listingview_table_data(
+        main_window
+    )
+
+    recurringworkorders_by_search(main_window)
 
     set_recurringworkorder_button_visibility(main_window)
 
@@ -721,26 +726,28 @@ def back_to_recurringworkorder_listingview(main_window) -> None:
     navigate(main_window, Page.RECURRINGWORKORDER_LISTINGVIEW)
 
 
-def recurringworkorders_by_search(main_window, search_text: str) -> None:
+def recurringworkorders_by_search(main_window) -> None:
 
-    recurringworkorder_table_data = RecurringWorkOrder.get_listingview_table_data(
-        main_window
-    )
+    search_text = main_window.ui.recurringworkorder_listingview_txtSearch.text().lower()
+
+    global recurringworkorder_table_data
 
     if not search_text:
         matches = recurringworkorder_table_data
     else:
+        print("recurringworkorders_by_search called.")
+
         matches = list(
             filter(
                 lambda tup: search_text
                 in "".join(
                     [
                         str(tup[0]),
-                        tup[1],
-                        tup[2],
-                        tup[4],
-                        tup[5],
-                        tup[7],
+                        str(tup[1]),
+                        str(tup[2]),
+                        str(tup[4]),
+                        str(tup[5]),
+                        str(tup[7]),
                     ]
                 ).lower(),
                 recurringworkorder_table_data,
@@ -1112,9 +1119,7 @@ def connect_recurringworkorder_actions(main_window) -> None:
         lambda: transfer_item_to_table(assigned_items_tbl, unassigned_items_tbl)
     )
     main_window.ui.recurringworkorder_listingview_txtSearch.textChanged.connect(
-        lambda: recurringworkorders_by_search(
-            main_window, main_window.ui.workorder_listingview_txtSearch.text().lower()
-        )
+        lambda: recurringworkorders_by_search(main_window)
     )
     main_window.ui.recurringworkorder_listingview_tblRecurringWorkOrder.itemSelectionChanged.connect(
         lambda: set_recurringworkorder_button_visibility(main_window)
