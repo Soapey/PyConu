@@ -4,6 +4,8 @@ from dataclasses import dataclass
 import calendar
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import format_nullable_database_date, select_by_attrs_dict
+from conu.classes.Item import Item
+from conu.classes.Assignee import Assignee
 from conu.classes.Site import Site
 from conu.classes.Department import Department
 from conu.classes.PriorityLevel import PriorityLevel
@@ -65,6 +67,49 @@ class RecurringWorkOrder:
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.__str__()})"
+
+    def due_listingview_items(self):
+
+        global global_items
+        global global_recurringworkorderitems
+
+        relevant_recurringworkorderitems = {
+            recurringworkorderitem.id: recurringworkorderitem
+            for recurringworkorderitem in global_recurringworkorderitems.values()
+            if recurringworkorderitem.recurringworkorder_id == self.id
+        }
+
+        item_list = list()
+        for recurringworkorderitem in relevant_recurringworkorderitems.values():
+            if recurringworkorderitem.item_id not in global_items.keys():
+                global_items = select_by_attrs_dict(Item)
+            item = global_items[recurringworkorderitem.item_id]
+            item_list.append(item.name)
+
+        return ", ".join(item_list)
+
+    def due_listingview_assignees(self):
+
+        global global_assignees
+        global global_recurringworkorderassignees
+
+        relevant_recurringworkorderassignees = {
+            recurringworkorderassignee.id: recurringworkorderassignee
+            for recurringworkorderassignee in global_recurringworkorderassignees.values()
+            if recurringworkorderassignee.recurringworkorder_id == self.id
+        }
+
+        assignee_list = list()
+        for recurringworkorderassignee in relevant_recurringworkorderassignees.values():
+            if recurringworkorderassignee.assignee_id not in global_assignees.keys():
+                global_assignees = select_by_attrs_dict(Assignee)
+            assignee = global_assignees[recurringworkorderassignee.assignee_id]
+            assignee_list.append(assignee.name)
+
+        return ", ".join(assignee_list)
+
+    def summary(self):
+        return self.task_description
 
     def is_due(self):
 

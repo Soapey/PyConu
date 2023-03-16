@@ -24,6 +24,23 @@ class ServiceTracker:
         )
         return estimated_current_units >= self.service_due_units
 
+    def due_listingview_items(self):
+
+        global global_items
+
+        if self.item_id not in global_items.keys():
+            global_items = select_by_attrs_dict(Item)
+
+        item = global_items[self.item_id]
+
+        return item.name
+
+    def due_listingview_assignees(self):
+        return str()
+
+    def due_listingview_summary(self):
+        return f"{self.service_due_units} unit service."
+
     @classmethod
     def select_by_attr_dict(cls, attrs: dict = None) -> dict:
 

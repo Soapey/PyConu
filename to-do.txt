@@ -2,6 +2,8 @@
 Must Have
 -------------------------------------------------------------------------------------------------------------------
 17/3/23 - Friday
+* Add summary() function for ServiceTracker, WorkOrder, RecurringWorkOrder so that on the due listing view I have one
+function that I can call for a single column across all types as a description to show.
 * Due listingview (for ServiceTracker, WorkOrder, RecurringWorkOrder)
 * Due listingview actions
 * Add is_due() function to ServiceTracker, WorkOrder and RecurringWorkOrder

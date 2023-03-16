@@ -1,5 +1,8 @@
 from datetime import datetime, date
 from conu.classes.PriorityLevel import PriorityLevel
+from conu.classes.WorkOrderItem import WorkOrderItem
+from conu.classes.Item import Item
+from conu.classes.Assignee import Assignee
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 
@@ -39,6 +42,49 @@ class WorkOrder:
 
     def __str__(self) -> str:
         return self.__repr__()
+
+    def due_listingview_items(self):
+
+        global global_items
+        global global_workorderitems
+
+        relevant_workorderitems = {
+            workorderitem.id: workorderitem
+            for workorderitem in global_workorderitems.values()
+            if workorderitem.workorder_id == self.id
+        }
+
+        item_list = list()
+        for workorderitem in relevant_workorderitems.values():
+            if workorderitem.item_id not in global_items.keys():
+                global_items = select_by_attrs_dict(Item)
+            item = global_items[workorderitem.item_id]
+            item_list.append(item.name)
+
+        return ", ".join(item_list)
+
+    def due_listingview_assignees(self):
+
+        global global_assignees
+        global global_workorderassignees
+
+        relevant_workorderassignees = {
+            workorderassignee.id: workorderassignee
+            for workorderassignee in global_workorderassignees.values()
+            if workorderassignee.workorder_id == self.id
+        }
+
+        assignee_list = list()
+        for workorderassignee in relevant_workorderassignees.values():
+            if workorderassignee.assignee_id not in global_assignees.keys():
+                global_assignees = select_by_attrs_dict(Assignee)
+            assignee = global_assignees[workorderassignee.assignee_id]
+            assignee_list.append(assignee.name)
+
+        return ", ".join(assignee_list)
+
+    def summary(self):
+        return self.task_description
 
     def is_due(self, priority_levels: list = None) -> bool:
 
