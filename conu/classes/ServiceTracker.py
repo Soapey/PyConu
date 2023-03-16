@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, date
 from conu.db.SQLiteConnection import SQLiteConnection
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem
-from conu.db.helpers import select_by_attrs_dict
+from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 from conu.classes.Item import Item
 
 
@@ -142,3 +142,42 @@ class ServiceTracker:
             table.setItem(row_index, 5, QTableWidgetItem(str(entity.service_due_units)))
             table.setItem(row_index, 6, QTableWidgetItem(str(entity.service_interval)))
             table.setItem(row_index, 7, QTableWidgetItem(str(entity.is_due())))
+
+    @classmethod
+    def convert_rows_to_instances(cls, rows):
+
+        return {
+            row[0]: cls(
+                row[0],
+                row[1],
+                format_nullable_database_date(row[2]).date(),
+                row[3],
+                row[4],
+                row[5],
+                row[6],
+            )
+            for row in rows
+        }
+
+    @classmethod
+    def get_by_user_departments(cls, user_id):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+                SELECT 
+                    * 
+                FROM 
+                    servicetracker 
+                WHERE 
+                    item.department_id IN (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?)
+                LEFT JOIN 
+                    item 
+                ON 
+                    servicetracker.item_id = item.id
+                """,
+                (user_id,),
+            ).fetchall()
+
+        return cls.convert_rows_to_instances(rows)

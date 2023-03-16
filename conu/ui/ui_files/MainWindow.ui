@@ -21,7 +21,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>19</number>
+       <number>20</number>
       </property>
       <widget class="QWidget" name="page_assignee_listingview">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -3894,8 +3894,8 @@ QTextEdit:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>38</height>
+             <width>1081</width>
+             <height>207</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_21">
@@ -4962,7 +4962,7 @@ QPushButton:hover {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-557</y>
+             <y>0</y>
              <width>1203</width>
              <height>1270</height>
             </rect>
@@ -6218,7 +6218,7 @@ QTableWidget:focus {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-278</y>
+             <y>0</y>
              <width>1203</width>
              <height>991</height>
             </rect>
@@ -7658,6 +7658,159 @@ QPushButton:hover {
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_due_listingview">
+       <layout class="QGridLayout" name="gridLayout_38">
+        <item row="2" column="0" colspan="2">
+         <widget class="QLineEdit" name="due_listingview_txtSearch">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QLineEdit:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="placeholderText">
+           <string>Search</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_71">
+          <property name="font">
+           <font>
+            <family>Impact</family>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: white;
+    background-color: #05668d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 10px;
+	margin: 0px 0px 20px 0px;
+}</string>
+          </property>
+          <property name="text">
+           <string>DUE ITEMS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QTableWidget" name="due_listingview_tblDue">
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}
+
+QTableWidget:focus {
+	border-width: 2px;
+	border-color: #028090;
+}</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>false</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="due_listingview_btnRaise">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #0db39e;
+    border-style: outset;
+    border-radius: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    padding-left: 30px;
+	padding-right: 30px
+}
+
+QPushButton:hover {
+	    background-color: #16db93;
+}</string>
+          </property>
+          <property name="text">
+           <string>Raise</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -7685,6 +7838,7 @@ QPushButton:hover {
     <addaction name="action_servicetrackers"/>
     <addaction name="action_workorders"/>
     <addaction name="action_recurringworkorders"/>
+    <addaction name="action_dueitems"/>
    </widget>
    <widget class="QMenu" name="menuUser">
     <property name="title">
@@ -7760,6 +7914,11 @@ QPushButton:hover {
   <action name="action_recurringworkorders">
    <property name="text">
     <string>Recurring Work Orders</string>
+   </property>
+  </action>
+  <action name="action_dueitems">
+   <property name="text">
+    <string>Due Items</string>
    </property>
   </action>
  </widget>

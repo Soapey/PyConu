@@ -86,19 +86,13 @@ class WorkOrder:
     def summary(self):
         return self.task_description
 
-    def is_due(self, priority_levels: list = None) -> bool:
+    def is_due(self) -> bool:
 
-        if not priority_levels:
-            global global_prioritylevels
-            if (
-                not global_prioritylevels
-                or self.prioritylevel_id not in global_prioritylevels
-            ):
-                global_prioritylevels = select_by_attrs_dict(PriorityLevel)
+        global global_prioritylevels
 
-            priority_levels = global_prioritylevels
-
-        priority_level = priority_levels[self.prioritylevel_id]
+        if self.prioritylevel_id not in global_prioritylevels.keys():
+            global_prioritylevels = select_by_attrs_dict(PriorityLevel)
+        priority_level = global_prioritylevels[self.prioritylevel_id]
 
         days_until_overdue = priority_level.days_until_overdue
 
@@ -106,6 +100,46 @@ class WorkOrder:
             not self.date_completed
             and (date.today() - self.date_allocated).days >= days_until_overdue
         )
+
+    @classmethod
+    def convert_rows_to_instances(cls, rows):
+
+        return {
+            row[0]: cls(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                format_nullable_database_date(row[6]).date(),
+                format_nullable_database_date(row[7]).date(),
+                row[8],
+                format_nullable_database_date(row[9]).date(),
+                row[10],
+                row[11],
+            )
+            for row in rows
+        }
+
+    @classmethod
+    def get_by_user_departments(cls, user_id):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+                SELECT 
+                    * 
+                FROM 
+                    workorder 
+                WHERE 
+                    workorder.department_id IN 
+                        (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?);""",
+                (user_id,),
+            ).fetchall()
+
+        return cls.convert_rows_to_instances(rows)
 
     @classmethod
     def get_listingview_table_data(cls, main_window):

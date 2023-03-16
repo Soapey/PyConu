@@ -2413,7 +2413,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 98, 38))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1081, 207))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
@@ -3091,7 +3091,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, -557, 1203, 1270))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 1203, 1270))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.gridLayout_26 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_26.setObjectName("gridLayout_26")
@@ -3896,7 +3896,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, -278, 1203, 991))
+        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 1203, 991))
         self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
         self.gridLayout_28 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_28.setObjectName("gridLayout_28")
@@ -4764,6 +4764,105 @@ class Ui_MainWindow(object):
         self.recurringworkorder_entryform_btnSave.setObjectName("recurringworkorder_entryform_btnSave")
         self.gridLayout_29.addWidget(self.recurringworkorder_entryform_btnSave, 2, 2, 1, 1)
         self.page_handler.addWidget(self.page_recurringworkorder_entryform)
+        self.page_due_listingview = QtWidgets.QWidget()
+        self.page_due_listingview.setObjectName("page_due_listingview")
+        self.gridLayout_38 = QtWidgets.QGridLayout(self.page_due_listingview)
+        self.gridLayout_38.setObjectName("gridLayout_38")
+        self.due_listingview_txtSearch = QtWidgets.QLineEdit(self.page_due_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.due_listingview_txtSearch.setFont(font)
+        self.due_listingview_txtSearch.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.due_listingview_txtSearch.setClearButtonEnabled(True)
+        self.due_listingview_txtSearch.setObjectName("due_listingview_txtSearch")
+        self.gridLayout_38.addWidget(self.due_listingview_txtSearch, 2, 0, 1, 2)
+        self.label_71 = QtWidgets.QLabel(self.page_due_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_71.setFont(font)
+        self.label_71.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_71.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_71.setObjectName("label_71")
+        self.gridLayout_38.addWidget(self.label_71, 0, 0, 1, 2)
+        self.due_listingview_tblDue = QtWidgets.QTableWidget(self.page_due_listingview)
+        self.due_listingview_tblDue.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.due_listingview_tblDue.setStyleSheet("QTableWidget {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
+        self.due_listingview_tblDue.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.due_listingview_tblDue.setTabKeyNavigation(False)
+        self.due_listingview_tblDue.setAlternatingRowColors(False)
+        self.due_listingview_tblDue.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.due_listingview_tblDue.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.due_listingview_tblDue.setCornerButtonEnabled(False)
+        self.due_listingview_tblDue.setObjectName("due_listingview_tblDue")
+        self.due_listingview_tblDue.setColumnCount(0)
+        self.due_listingview_tblDue.setRowCount(0)
+        self.due_listingview_tblDue.horizontalHeader().setStretchLastSection(True)
+        self.due_listingview_tblDue.verticalHeader().setVisible(False)
+        self.gridLayout_38.addWidget(self.due_listingview_tblDue, 3, 0, 1, 2)
+        self.due_listingview_btnRaise = QtWidgets.QPushButton(self.page_due_listingview)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.due_listingview_btnRaise.sizePolicy().hasHeightForWidth())
+        self.due_listingview_btnRaise.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.due_listingview_btnRaise.setFont(font)
+        self.due_listingview_btnRaise.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.due_listingview_btnRaise.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.due_listingview_btnRaise.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #0db39e;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding-top: 5px;\n"
+"    padding-bottom: 5px;\n"
+"    padding-left: 30px;\n"
+"    padding-right: 30px\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #16db93;\n"
+"}")
+        self.due_listingview_btnRaise.setObjectName("due_listingview_btnRaise")
+        self.gridLayout_38.addWidget(self.due_listingview_btnRaise, 1, 0, 1, 1)
+        self.page_handler.addWidget(self.page_due_listingview)
         self.gridLayout.addWidget(self.page_handler, 0, 0, 2, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -4803,6 +4902,8 @@ class Ui_MainWindow(object):
         self.action_workorders.setObjectName("action_workorders")
         self.action_recurringworkorders = QtWidgets.QAction(MainWindow)
         self.action_recurringworkorders.setObjectName("action_recurringworkorders")
+        self.action_dueitems = QtWidgets.QAction(MainWindow)
+        self.action_dueitems.setObjectName("action_dueitems")
         self.menuChange_View.addAction(self.action_assignees)
         self.menuChange_View.addAction(self.action_departments)
         self.menuChange_View.addAction(self.action_forms)
@@ -4813,13 +4914,14 @@ class Ui_MainWindow(object):
         self.menuChange_View.addAction(self.action_servicetrackers)
         self.menuChange_View.addAction(self.action_workorders)
         self.menuChange_View.addAction(self.action_recurringworkorders)
+        self.menuChange_View.addAction(self.action_dueitems)
         self.menuUser.addAction(self.action_logout)
         self.menuUser.addAction(self.action_myaccount)
         self.menubar.addAction(self.menuChange_View.menuAction())
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(19)
+        self.page_handler.setCurrentIndex(20)
         self.recurringworkorder_entryform_page_handler.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
@@ -5052,6 +5154,10 @@ class Ui_MainWindow(object):
         self.label_69.setText(_translate("MainWindow", "Starting From"))
         self.recurringworkorder_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))
         self.recurringworkorder_entryform_btnSave.setText(_translate("MainWindow", "Save"))
+        self.due_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
+        self.label_71.setText(_translate("MainWindow", "DUE ITEMS"))
+        self.due_listingview_tblDue.setSortingEnabled(True)
+        self.due_listingview_btnRaise.setText(_translate("MainWindow", "Raise"))
         self.menuChange_View.setTitle(_translate("MainWindow", "Change View"))
         self.menuUser.setTitle(_translate("MainWindow", "User"))
         self.action_departments.setText(_translate("MainWindow", "Departments"))
@@ -5067,6 +5173,7 @@ class Ui_MainWindow(object):
         self.action_servicetrackers.setText(_translate("MainWindow", "Service Trackers"))
         self.action_workorders.setText(_translate("MainWindow", "Work Orders"))
         self.action_recurringworkorders.setText(_translate("MainWindow", "Recurring Work Orders"))
+        self.action_dueitems.setText(_translate("MainWindow", "Due Items"))
 
 
 if __name__ == "__main__":
