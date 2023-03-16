@@ -2,9 +2,8 @@
 Must Have
 -------------------------------------------------------------------------------------------------------------------
 16/3/23 - Thursday
-* RecurringWorkOrder listingview actions
-* RecurringWorkOrder entryform
-* RecurringWorkOrder entryform actions
+* RecurringWorkOrder search not working
+* RecurringWorkOrder be able to set start from date in UI and throughout actions
 -------------------------------------------------------------------------------------------------------------------
 17/3/23 - Friday
 * Due listingview (for ServiceTracker, WorkOrder, RecurringWorkOrder)
@@ -26,7 +25,7 @@ Must Have
 Will Have
 * Add export buttons to each table that creates a csv file for the table
 * Functionality to auto-open email with pdf WorkOrder attached
-
+* Improve toast notifications
 
 ===================================================================================================================
 Could Have
