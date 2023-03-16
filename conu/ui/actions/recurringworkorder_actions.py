@@ -1,6 +1,8 @@
+from PyQt5.QtWidgets import QCheckBox
 from PyQt5.QtCore import QDate
 from tkinter.messagebox import askyesno
 from datetime import datetime, date
+import calendar
 
 from conu.classes.RecurringWorkOrder import RecurringWorkOrder
 from conu.classes.UserDepartment import UserDepartment
@@ -105,6 +107,352 @@ def new_recurringworkorder(main_window) -> None:
     main_window.ui.recurringworkorder_entryform_txtTaskDescription.setFocus()
 
     navigate(main_window, Page.RECURRINGWORKORDER_ENTRYFORM)
+
+
+def get_recurringworkingorder_from_entryform(main_window):
+
+    global options
+
+    selected_option_name = None
+    recurringworkorder_type = None
+
+    for option in options.keys():
+        if option.isChecked():
+            selected_option_name = option.objectName()
+            recurringworkorder_type = selected_option_name.split("_")[2]
+            break
+
+    selected_option = None
+    if "option2" in selected_option_name.lower():
+        selected_option = 2
+    else:
+        selected_option = 1
+
+    recurringworkorder_id = (
+        None
+        if len(main_window.ui.recurringworkorder_entryform_lblId.text()) == 0
+        else int(main_window.ui.recurringworkorder_entryform_lblId.text())
+    )
+    recurringworkorder_lastraised_date = (
+        date.today()
+        if len(main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.text())
+        == 0
+        else datetime.strptime(
+            main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.text(),
+            "%d-%m-%Y",
+        )
+    )
+    recurringworkorder_site = (
+        main_window.ui.recurringworkorder_entryform_lblSite.property("object")
+    )
+    recurringworkorder_department = (
+        main_window.ui.recurringworkorder_entryform_lblDepartment.property("object")
+    )
+    recurringworkorder_prioritylevel = (
+        main_window.ui.recurringworkorder_entryform_lblPriorityLevel.property("object")
+    )
+    recurringworkorder_taskdescription = (
+        main_window.ui.recurringworkorder_entryform_txtTaskDescription.toPlainText()
+    )
+    recurringworkorder_comments = (
+        None
+        if len(main_window.ui.recurringworkorder_entryform_txtComments.toPlainText())
+        == 0
+        else main_window.ui.recurringworkorder_entryform_txtComments.toPlainText()
+    )
+    recurringworkorder_start_date = recurringworkorder_lastraised_date
+    recurringworkorder_interval = None
+    recurringworkorder_weekdays = None
+    recurringworkorder_day = None
+    recurringworkorder_month = None
+    recurringworkorder_month_weekday_occurrence = None
+
+    if recurringworkorder_type == "daily":
+
+        if selected_option == 1:
+            recurringworkorder_interval = (
+                main_window.ui.recurringworkorder_entryform_daily_spnOption1.value()
+            )
+
+        elif selected_option == 2:
+            recurringworkorder_weekdays = "1;2;3;4;5"
+
+    elif recurringworkorder_type == "weekly":
+        recurringworkorder_interval = (
+            main_window.ui.recurringworkorder_entryform_weekly_spnOption1
+        )
+
+        checked_weekday_indexes = list()
+
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_monday.isChecked()
+        ):
+            checked_weekday_indexes.append("1")
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_tuesday.isChecked()
+        ):
+            checked_weekday_indexes.append("2")
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_wednesday.isChecked()
+        ):
+            checked_weekday_indexes.append("3")
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_thursday.isChecked()
+        ):
+            checked_weekday_indexes.append("4")
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_friday.isChecked()
+        ):
+            checked_weekday_indexes.append("5")
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_saturday.isChecked()
+        ):
+            checked_weekday_indexes.append("6")
+        if (
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_sunday.isChecked()
+        ):
+            checked_weekday_indexes.append("7")
+
+        recurringworkorder_weekdays = ";".join(checked_weekday_indexes)
+
+    elif recurringworkorder_type == "monthly":
+
+        if selected_option == 1:
+            recurringworkorder_day = (
+                main_window.ui.recurringworkorder_entryform_monthly_spnOption1_day.value()
+            )
+            recurringworkorder_interval = (
+                main_window.ui.recurringworkorder_entryform_monthly_spnOption1_month.value()
+            )
+
+        elif selected_option == 2:
+
+            occurrence_text = (
+                main_window.ui.recurringworkorder_entryform_monthly_cmbOption2_occurrence.currentText()
+            )
+            if occurrence_text == "first":
+                recurringworkorder_month_weekday_occurrence = 1
+            elif occurrence_text == "second":
+                recurringworkorder_month_weekday_occurrence = 2
+            elif occurrence_text == "third":
+                recurringworkorder_month_weekday_occurrence = 3
+            elif occurrence_text == "last":
+                recurringworkorder_month_weekday_occurrence = -1
+
+            recurringworkorder_weekdays = str(
+                list(calendar.day_name).index(
+                    main_window.ui.recurringworkorder_entryform_cmbOption2_weekday.currentText()
+                )
+                + 1
+            )
+
+            recurringworkorder_interval = (
+                main_window.ui.recurringworkorder_entryform_spnOption2.value()
+            )
+
+    elif recurringworkorder_type == "yearly":
+
+        if selected_option == 1:
+            recurringworkorder_interval = (
+                main_window.ui.recurringworkorder_entryform_yearly_spnOption1_year.value()
+            )
+            recurringworkorder_month = (
+                list(calendar.month_name).index(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption1.currentText()
+                )
+                + 1
+            )
+            recurringworkorder_day = (
+                main_window.ui.recurringworkorder_entryform_yearly_spnOption1_day.value()
+            )
+
+        elif selected_option == 2:
+            recurringworkorder_interval = (
+                main_window.ui.recurringworkorder_entryform_yearly_spnOption2.value()
+            )
+
+            occurrence_text = (
+                main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_occurrence.currentText()
+            )
+            if occurrence_text == "first":
+                recurringworkorder_month_weekday_occurrence = 1
+            elif occurrence_text == "second":
+                recurringworkorder_month_weekday_occurrence = 2
+            elif occurrence_text == "third":
+                recurringworkorder_month_weekday_occurrence = 3
+            elif occurrence_text == "last":
+                recurringworkorder_month_weekday_occurrence = -1
+
+            recurringworkorder_weekdays = str(
+                list(calendar.day_name).index(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_weekday.currentText()
+                )
+                + 1
+            )
+
+            recurringworkorder_month = (
+                list(calendar.month_name).index(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_month.currentText()
+                )
+                + 1
+            )
+
+    return RecurringWorkOrder(
+        recurringworkorder_id,
+        recurringworkorder_site.id,
+        recurringworkorder_department.id,
+        recurringworkorder_prioritylevel.id,
+        recurringworkorder_taskdescription,
+        recurringworkorder_comments,
+        recurringworkorder_type,
+        recurringworkorder_start_date,
+        recurringworkorder_lastraised_date,
+        recurringworkorder_interval,
+        recurringworkorder_weekdays,
+        recurringworkorder_day,
+        recurringworkorder_month,
+        recurringworkorder_month_weekday_occurrence,
+    )
+
+
+def load_recurrence_selection_widget(
+    main_window, recurringworkorder: RecurringWorkOrder
+):
+
+    weekday_occurrences = {1: "first", 2: "second", 3: "third", -1: "last"}
+
+    if recurringworkorder.weekdays:
+        weekdays = [
+            calendar.day_name(int(wd) - 1).lower()
+            for wd in recurringworkorder.weekdays.split(";")
+        ]
+
+    if recurringworkorder.type == "daily":
+
+        if recurringworkorder.interval:
+            main_window.ui.recurringworkorder_entryform_daily_radOption1.setChecked(
+                True
+            )
+            main_window.ui.recurringworkorder_entryform_daily_spnOption1.setValue(
+                recurringworkorder.interval
+            )
+            select_option(main_window.ui.recurringworkorder_entryform_daily_radOption1)
+
+        elif recurringworkorder.weekdays:
+            main_window.ui.recurringworkorder_entryform_daily_radOption2.setChecked(
+                True
+            )
+            select_option(main_window.ui.recurringworkorder_entryform_daily_radOption2)
+
+        main_window.ui.recurringworkorder_entryform_radDaily.setChecked(True)
+
+    elif recurringworkorder.type == "weekly" and recurringworkorder.weekdays:
+
+        main_window.ui.recurringworkorder_entryform_weekly_radOption1.setChecked(True)
+        main_window.ui.recurringworkorder_entryform_weekly_spnOption1.setValue(
+            recurringworkorder.interval
+        )
+
+        all_lowered_weekday_names = [calendar.day_name(i).lower() for i in range(7)]
+
+        for weekday_name in all_lowered_weekday_names:
+            weekday_checkbox = main_window.ui.findChild(
+                QCheckBox,
+                f"recurringworkorder_entryform_weekly_cmbOption1_{weekday_name}",
+            )
+
+            if weekday_name in weekdays:
+                weekday_checkbox.setChecked(True)
+            else:
+                weekday_checkbox.setChecked(False)
+
+        select_option(main_window.ui.recurringworkorder_entryform_weekly_radOption1)
+
+        main_window.ui.recurringworkorder_entryform_radWeekly.setChecked(True)
+
+    elif recurringworkorder.type == "monthly":
+
+        if recurringworkorder.day and recurringworkorder.interval:
+
+            main_window.ui.recurringworkorder_entryform_monthly_radOption1.setChecked(
+                True
+            )
+            main_window.ui.recurringworkorder_entryform_monthly_spnOption1_day.setValue(
+                recurringworkorder.day
+            )
+            main_window.ui.recurringworkorder_entryform_monthly_spnOption1_month.setValue(
+                recurringworkorder.interval
+            )
+            select_option(
+                main_window.ui.recurringworkorder_entryform_monthly_radOption1
+            )
+
+        elif (
+            recurringworkorder.month_weekday_occurrence
+            and recurringworkorder.weekdays
+            and recurringworkorder.interval
+        ):
+
+            main_window.ui.recurringworkorder_entryform_monthly_radOption2.setChecked(
+                True
+            )
+            main_window.ui.recurringworkorder_entryform_monthly_cmbOption2_occurrence.setCurrentText(
+                weekday_occurrences[recurringworkorder.month_weekday_occurrence]
+            )
+            main_window.ui.recurringworkorder_entryform_cmbOption2_weekday.setCurrentText(
+                weekdays[0].title()
+            )
+            main_window.ui.recurringworkorder_entryform_spnOption2.setValue(
+                recurringworkorder.interval
+            )
+            select_option(
+                main_window.ui.recurringworkorder_entryform_monthly_radOption2
+            )
+
+        main_window.ui.recurringworkorder_entryform_radMonthly.setChecked(True)
+
+    elif recurringworkorder.type == "yearly":
+
+        if recurringworkorder.month and recurringworkorder.day:
+
+            main_window.ui.recurringworkorder_entryform_yearly_radOption1.setChecked(
+                True
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_spnOption1_year.setValue(
+                recurringworkorder.interval
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption1.setCurrentText(
+                calendar.month_name[recurringworkorder.month]
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_spnOption1_day.setValue(
+                recurringworkorder.day
+            )
+            select_option(main_window.ui.recurringworkorder_entryform_yearly_radOption1)
+
+        elif (
+            recurringworkorder.month_weekday_occurrence
+            and recurringworkorder.weekdays
+            and recurringworkorder.month
+        ):
+
+            main_window.ui.recurringworkorder_entryform_yearly_radOption2.setChecked(
+                True
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_spnOption2.setValue(
+                recurringworkorder.interval
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_occurrence(
+                weekday_occurrences[recurringworkorder.month_weekday_occurrence]
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_weekday.setCurrentText(
+                weekdays[0].title()
+            )
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_month.setCurrentText(
+                calendar.month_name[recurringworkorder.month]
+            )
+            select_option(main_window.ui.recurringworkorder_entryform_yearly_radOption2)
+
+        main_window.ui.recurringworkorder_entryform_radYearly.setChecked(True)
 
 
 def edit_recurringworkorder(main_window) -> None:
@@ -214,18 +562,91 @@ def recurringworkorder_entryform_is_valid(main_window) -> bool:
     if not main_window.ui.recurringworkorder_entryform_txtTaskDescription.toPlainText():
         error_strings.append("Task Description field cannot be blank.")
 
-    if not any(
-        [
-            main_window.ui.recurringworkorder_entryform_daily_radOption1.isChecked(),
-            main_window.ui.recurringworkorder_entryform_daily_radOption2.isChecked(),
-            main_window.ui.recurringworkorder_entryform_weekly_radOption1.isChecked(),
-            main_window.ui.recurringworkorder_entryform_monthly_radOption1.isChecked(),
-            main_window.ui.recurringworkorder_entryform_monthly_radOption2.isChecked(),
-            main_window.ui.recurringworkorder_entryform_yearly_radOption1.isChecked(),
-            main_window.ui.recurringworkorder_entryform_yearly_radOption2.isChecked(),
-        ]
-    ):
-        error_strings.append("A recurrence must be set.")
+    global options
+
+    selected_option_name = None
+    recurringworkorder_type = None
+
+    for option in options.keys():
+        if option.isChecked():
+            selected_option_name = option.objectName()
+            recurringworkorder_type = selected_option_name.split("_")[2]
+            break
+
+    selected_option = None
+    if "option2" in selected_option_name.lower():
+        selected_option = 2
+    else:
+        selected_option = 1
+
+    if recurringworkorder_type == "weekly":
+
+        if not any(
+            [
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_monday.isChecked(),
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_tuesday.isChecked(),
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_wednesday.isChecked(),
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_thursday.isChecked(),
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_friday.isChecked(),
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_saturday.isChecked(),
+                main_window.ui.recurringworkorder_entryform_weekly_chkOption1_sunday.isChecked(),
+            ]
+        ):
+            error_strings.append(
+                "At least weekday for a weekly recurrence must be selected."
+            )
+
+    elif recurringworkorder_type == "monthly":
+
+        if selected_option == 2:
+
+            if (
+                len(
+                    main_window.ui.recurringworkorder_entryform_monthly_cmbOption2_occurrence.currentText()
+                )
+                == 0
+                or len(
+                    main_window.ui.recurringworkorder_entryform_cmbOption2_weekday.currentText()
+                )
+                == 0
+            ):
+                error_strings.append(
+                    "All fields must be filled out for the selected monthly recurrence option."
+                )
+
+    elif recurringworkorder_type == "yearly":
+
+        if selected_option == 1:
+
+            if (
+                len(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption1.currentText()
+                )
+                == 0
+            ):
+                error_strings.append(
+                    "All fields must be filled out for the selected yearly recurrence option."
+                )
+
+        elif selected_option == 2:
+
+            if (
+                len(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_occurrence.currentText()
+                )
+                == 0
+                or len(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_weekday.currentText()
+                )
+                == 0
+                or len(
+                    main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_month.currentText()
+                )
+                == 0
+            ):
+                error_strings.append(
+                    "All fields must be filled out for the selected yearly recurrence option."
+                )
 
     if error_strings:
         Notification("Cannot Save Recurring Work Order", error_strings).show()
@@ -278,29 +699,7 @@ def save_recurringworkorder(main_window) -> None:
     ):
         return
 
-    entity_id = (
-        None
-        if len(main_window.ui.recurringworkorder_entryform_lblId.text()) == 0
-        else int(main_window.ui.recurringworkorder_entryform_lblId.text())
-    )
-
-    selected_site = main_window.ui.recurringworkorder_entryform_lblSite.property(
-        "object"
-    )
-    selected_department = (
-        main_window.ui.recurringworkorder_entryform_lblDepartment.property("object")
-    )
-    selected_prioritylevel = (
-        main_window.ui.recurringworkorder_entryform_lblPriorityLevel.property("object")
-    )
-    close_out_comments = (
-        None
-        if not main_window.ui.workorder_entryform_chkIsComplete.isChecked()
-        else main_window.ui.workorder_entryform_txtCloseOutComments.toPlainText()
-    )
-
-    # TODO - Instantiate entity = RecurringWorkOrder()
-    entity = RecurringWorkOrder()
+    entity = get_recurringworkingorder_from_entryform(main_window)
 
     entity_id = sorted(save_by_list([entity]), key=lambda e: e.id, reverse=True)[0].id
 
