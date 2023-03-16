@@ -1,9 +1,6 @@
 ===================================================================================================================
 Must Have
 -------------------------------------------------------------------------------------------------------------------
-16/3/23 - Thursday
-* RecurringWorkOrder be able to set start from date in UI and throughout actions
--------------------------------------------------------------------------------------------------------------------
 17/3/23 - Friday
 * Due listingview (for ServiceTracker, WorkOrder, RecurringWorkOrder)
 * Due listingview actions
