@@ -29,7 +29,7 @@ class RecurringWorkOrder:
     month: int
     month_weekday_occurrence: int
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         type = self.type.strip().lower()
         weekdays = (
             [int(wd) for wd in self.weekdays.split(";")] if self.weekdays else list()
@@ -37,34 +37,34 @@ class RecurringWorkOrder:
 
         if type == "daily":
             if self.interval:
-                return f"{self.__class__.__name__}(Occur every {self.interval} days)"
+                return f"Occur every {self.interval} days"
             else:
-                return f"{self.__class__.__name__}(Occur on every {', '.join(calendar.day_name[wd-1] for wd in weekdays)})"
+                return f"Occur on every {', '.join(calendar.day_name[wd-1] for wd in weekdays)}"
         elif type == "weekly":
-            return f"{self.__class__.__name__}(Occur every {self.interval} week(s) on {', '.join(calendar.day_name[wd-1] for wd in weekdays)})"
+            return f"Occur every {self.interval} week(s) on {', '.join(calendar.day_name[wd-1] for wd in weekdays)}"
         elif type == "monthly":
             if self.day and self.interval:
-                return f"{self.__class__.__name__}(Occur on day {self.day} of every {self.interval} month(s))"
+                return f"Occur on day {self.day} of every {self.interval} month(s)"
             else:
                 month_weekday_occurrence = (
                     "last"
                     if self.month_weekday_occurrence > 3
                     else self.month_weekday_occurrence
                 )
-                return f"{self.__class__.__name__}(Occur on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]}, every {self.interval} month(s))"
+                return f"Occur on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]}, every {self.interval} month(s)"
         elif type == "yearly":
             if self.month and self.day:
-                return f"{self.__class__.__name__}(Occur every {self.interval} year(s) on {calendar.month_name[self.month - 1]} {self.day})"
+                return f"Occur every {self.interval} year(s) on {calendar.month_name[self.month - 1]} {self.day}"
             else:
                 month_weekday_occurrence = (
                     "last"
                     if self.month_weekday_occurrence > 3
                     else self.month_weekday_occurrence
                 )
-                return f"{self.__class__.__name__}(Occur every {self.interval} year(s) on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]} in {calendar.month_name[self.month-1]})"
+                return f"Occur every {self.interval} year(s) on the {month_weekday_occurrence} occurrence of {calendar.day_name[weekdays[0]-1]} in {calendar.month_name[self.month-1]}"
 
-    def __str__(self) -> str:
-        return self.__repr__()
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.__str__()})"
 
     def is_due(self):
 
@@ -223,8 +223,8 @@ class RecurringWorkOrder:
                 row[4],
                 row[5],
                 row[6],
-                format_nullable_database_date(row[7]),
-                format_nullable_database_date(row[8]),
+                format_nullable_database_date(row[7]).date(),
+                format_nullable_database_date(row[8]).date(),
                 row[9],
                 row[10],
                 row[11],
@@ -286,10 +286,10 @@ class RecurringWorkOrder:
                 prioritylevels[rwo.prioritylevel_id].name,
                 rwo.task_description,
                 rwo.comments,
-                rwo.__repr__(),
+                rwo.__str__(),
                 rwo.is_due(),
             )
-            for rwo in recurringworkorders
+            for rwo in recurringworkorders.values()
         ]
 
         return data

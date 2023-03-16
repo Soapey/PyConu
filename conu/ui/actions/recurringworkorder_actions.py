@@ -140,7 +140,7 @@ def get_recurringworkingorder_from_entryform(main_window):
         else datetime.strptime(
             main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.text(),
             "%d-%m-%Y",
-        )
+        ).date()
     )
     recurringworkorder_site = (
         main_window.ui.recurringworkorder_entryform_lblSite.property("object")
@@ -179,7 +179,7 @@ def get_recurringworkingorder_from_entryform(main_window):
 
     elif recurringworkorder_type == "weekly":
         recurringworkorder_interval = (
-            main_window.ui.recurringworkorder_entryform_weekly_spnOption1
+            main_window.ui.recurringworkorder_entryform_weekly_spnOption1.value()
         )
 
         checked_weekday_indexes = list()
@@ -489,7 +489,7 @@ def edit_recurringworkorder(main_window) -> None:
     main_window.ui.recurringworkorder_entryform_lblDepartment.setProperty(
         "object", recurringworkorder_department
     )
-    main_window.ui.workorder_entryform_lblDepartment.setText(
+    main_window.ui.recurringworkorder_entryform_lblDepartment.setText(
         recurringworkorder_department.name
     )
 
@@ -509,7 +509,7 @@ def edit_recurringworkorder(main_window) -> None:
 
     load_selection_tables(main_window)
 
-    # TODO - recurrence selection widget edit logic.
+    load_recurrence_selection_widget(main_window, entity)
 
     main_window.ui.recurringworkorder_entryform_txtTaskDescription.setFocus()
 
@@ -659,7 +659,7 @@ def save_and_delete_recurringworkorderitems(main_window, entity_id):
     existing_item_ids = [
         rwoi.item_id
         for rwoi in select_by_attrs_dict(
-            RecurringWorkOrderItem, {"workorder_id": entity_id}
+            RecurringWorkOrderItem, {"recurringworkorder_id": entity_id}
         ).values()
     ]
 
@@ -748,7 +748,7 @@ def recurringworkorders_by_search(main_window, search_text: str) -> None:
         )
 
     load_query_rows_into_table(
-        main_window.ui.workorder_listingview_tblWorkOrder,
+        main_window.ui.recurringworkorder_listingview_tblRecurringWorkOrder,
         matches,
         {
             "ID": (0, str),
