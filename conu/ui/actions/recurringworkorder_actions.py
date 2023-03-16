@@ -46,6 +46,7 @@ class SelectionWidgetPage(Enum):
 
 unassigned_items_tbl: TableManager = None
 assigned_items_tbl: TableManager = None
+options = None
 
 
 def load_recurringworkorder_listingview(main_window) -> None:
@@ -60,8 +61,6 @@ def load_recurringworkorder_listingview(main_window) -> None:
 
 
 def clear_recurringworkorder_entryform(main_window) -> None:
-
-    items = get_by_user_departments(Item, main_window.current_user.id)
 
     main_window.ui.recurringworkorder_entryform_lblId.clear()
     main_window.ui.recurringworkorder_entryform_lblLastRaisedDate.clear()
@@ -103,7 +102,7 @@ def new_recurringworkorder(main_window) -> None:
 
     load_selection_tables(main_window)
 
-    main_window.ui.reccurringworkorder_entryform_txtTaskDescription.setFocus()
+    main_window.ui.recurringworkorder_entryform_txtTaskDescription.setFocus()
 
     navigate(main_window, Page.RECURRINGWORKORDER_ENTRYFORM)
 
@@ -215,7 +214,18 @@ def recurringworkorder_entryform_is_valid(main_window) -> bool:
     if not main_window.ui.recurringworkorder_entryform_txtTaskDescription.toPlainText():
         error_strings.append("Task Description field cannot be blank.")
 
-    # TODO - recurrence selection widget check if an option has been selected logic
+    if not any(
+        [
+            main_window.ui.recurringworkorder_entryform_daily_radOption1.isChecked(),
+            main_window.ui.recurringworkorder_entryform_daily_radOption2.isChecked(),
+            main_window.ui.recurringworkorder_entryform_weekly_radOption1.isChecked(),
+            main_window.ui.recurringworkorder_entryform_monthly_radOption1.isChecked(),
+            main_window.ui.recurringworkorder_entryform_monthly_radOption2.isChecked(),
+            main_window.ui.recurringworkorder_entryform_yearly_radOption1.isChecked(),
+            main_window.ui.recurringworkorder_entryform_yearly_radOption2.isChecked(),
+        ]
+    ):
+        error_strings.append("A recurrence must be set.")
 
     if error_strings:
         Notification("Cannot Save Recurring Work Order", error_strings).show()
@@ -500,15 +510,15 @@ def clear_selection_widget(main_window):
 
     # Daily
     ##### Option 1
-    main_window.ui.recurringworkorder_entryfrom_daily_radOption1.setChecked(False)
-    main_window.ui.recurringworkorder_entryfrom_daily_spnOption1.setValue(1)
+    main_window.ui.recurringworkorder_entryform_daily_radOption1.setChecked(False)
+    main_window.ui.recurringworkorder_entryform_daily_spnOption1.setValue(1)
     ##### Option 2
-    main_window.ui.recurringworkorder_entryfrom_daily_radOption2.setChecked(False)
+    main_window.ui.recurringworkorder_entryform_daily_radOption2.setChecked(False)
 
     # Weekly
     ##### Option 1
-    main_window.ui.recurringworkorder_entryfrom_weekly_radOption1.setChecked(False)
-    main_window.ui.recurringworkorder_entryfrom_weekly_spnOption1.setValue(1)
+    main_window.ui.recurringworkorder_entryform_weekly_radOption1.setChecked(False)
+    main_window.ui.recurringworkorder_entryform_weekly_spnOption1.setValue(1)
     main_window.ui.recurringworkorder_entryform_weekly_chkOption1_monday.setChecked(
         False
     )
@@ -629,6 +639,42 @@ def clear_selection_widget(main_window):
     )
 
 
+def select_option(option_radiobutton):
+
+    if not option_radiobutton.isChecked():
+        return
+
+    global options
+
+    for option, children_widgets in options.items():
+
+        if option != option_radiobutton:
+
+            option.setChecked(False)
+
+            for child_widget in children_widgets:
+                child_widget.setEnabled(False)
+
+        else:
+
+            option.setChecked(True)
+
+            for child_widget in children_widgets:
+                child_widget.setEnabled(True)
+
+
+def navigate_recurrence_selection_widget(
+    main_window, page_selection_radiobutton, selection_widget_page
+):
+
+    if not page_selection_radiobutton.isChecked():
+        return
+
+    main_window.ui.recurringworkorder_entryform_page_handler.setCurrentIndex(
+        selection_widget_page.value
+    )
+
+
 def connect_recurringworkorder_actions(main_window) -> None:
 
     global unassigned_items_tbl, assigned_items_tbl
@@ -660,10 +706,10 @@ def connect_recurringworkorder_actions(main_window) -> None:
     main_window.ui.recurringworkorder_entryform_btnSelectPriorityLevel.clicked.connect(
         lambda: select_prioritylevel(main_window)
     )
-    main_window.ui.recurringworkorder_entryform_btnAssignItemToWorkOrder.clicked.connect(
+    main_window.ui.recurringworkorder_entryform_btnAssignItemToRecurringWorkOrder.clicked.connect(
         lambda: transfer_item_to_table(unassigned_items_tbl, assigned_items_tbl)
     )
-    main_window.ui.recurringworkorder_entryform_btnUnassignItemFromWorkOrder.clicked.connect(
+    main_window.ui.recurringworkorder_entryform_btnUnassignItemFromRecurringWorkOrder.clicked.connect(
         lambda: transfer_item_to_table(assigned_items_tbl, unassigned_items_tbl)
     )
     main_window.ui.recurringworkorder_listingview_txtSearch.textChanged.connect(
@@ -673,4 +719,107 @@ def connect_recurringworkorder_actions(main_window) -> None:
     )
     main_window.ui.recurringworkorder_listingview_tblRecurringWorkOrder.itemSelectionChanged.connect(
         lambda: set_recurringworkorder_button_visibility(main_window)
+    )
+
+    global options
+    options = {
+        main_window.ui.recurringworkorder_entryform_daily_radOption1: [
+            main_window.ui.recurringworkorder_entryform_daily_spnOption1
+        ],
+        main_window.ui.recurringworkorder_entryform_daily_radOption2: list(),
+        main_window.ui.recurringworkorder_entryform_weekly_radOption1: [
+            main_window.ui.recurringworkorder_entryform_weekly_spnOption1,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_monday,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_tuesday,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_wednesday,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_thursday,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_friday,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_saturday,
+            main_window.ui.recurringworkorder_entryform_weekly_chkOption1_sunday,
+        ],
+        main_window.ui.recurringworkorder_entryform_monthly_radOption1: [
+            main_window.ui.recurringworkorder_entryform_monthly_spnOption1_day,
+            main_window.ui.recurringworkorder_entryform_monthly_spnOption1_month,
+        ],
+        main_window.ui.recurringworkorder_entryform_monthly_radOption2: [
+            main_window.ui.recurringworkorder_entryform_monthly_cmbOption2_occurrence,
+            main_window.ui.recurringworkorder_entryform_cmbOption2_weekday,
+            main_window.ui.recurringworkorder_entryform_spnOption2,
+        ],
+        main_window.ui.recurringworkorder_entryform_yearly_radOption1: [
+            main_window.ui.recurringworkorder_entryform_yearly_spnOption1_year,
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption1,
+            main_window.ui.recurringworkorder_entryform_yearly_spnOption1_day,
+        ],
+        main_window.ui.recurringworkorder_entryform_yearly_radOption2: [
+            main_window.ui.recurringworkorder_entryform_yearly_spnOption2,
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_occurrence,
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_weekday,
+            main_window.ui.recurringworkorder_entryform_yearly_cmbOption2_month,
+        ],
+    }
+
+    main_window.ui.recurringworkorder_entryform_daily_radOption1.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_daily_radOption1
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_daily_radOption2.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_daily_radOption2
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_weekly_radOption1.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_weekly_radOption1
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_monthly_radOption1.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_monthly_radOption1
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_monthly_radOption2.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_monthly_radOption2
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_yearly_radOption1.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_yearly_radOption1
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_yearly_radOption2.toggled.connect(
+        lambda: select_option(
+            main_window.ui.recurringworkorder_entryform_yearly_radOption2
+        )
+    )
+
+    main_window.ui.recurringworkorder_entryform_radDaily.toggled.connect(
+        lambda: navigate_recurrence_selection_widget(
+            main_window,
+            main_window.ui.recurringworkorder_entryform_radDaily,
+            SelectionWidgetPage.DAILY,
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_radWeekly.toggled.connect(
+        lambda: navigate_recurrence_selection_widget(
+            main_window,
+            main_window.ui.recurringworkorder_entryform_radWeekly,
+            SelectionWidgetPage.WEEKLY,
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_radMonthly.toggled.connect(
+        lambda: navigate_recurrence_selection_widget(
+            main_window,
+            main_window.ui.recurringworkorder_entryform_radMonthly,
+            SelectionWidgetPage.MONTHLY,
+        )
+    )
+    main_window.ui.recurringworkorder_entryform_radYearly.toggled.connect(
+        lambda: navigate_recurrence_selection_widget(
+            main_window,
+            main_window.ui.recurringworkorder_entryform_radYearly,
+            SelectionWidgetPage.YEARLY,
+        )
     )

@@ -258,7 +258,7 @@ class RecurringWorkOrder:
                     recurringworkorder.department_id IN 
                         (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?);""",
                 (user_id,),
-            )
+            ).fetchall()
 
         return cls.convert_rows_to_instances(rows)
 
