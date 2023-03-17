@@ -92,6 +92,8 @@ def clear_workorder_entryform(main_window) -> None:
     global_items = get_by_user_departments(Item, main_window.current_user.id)
     global_assignees = get_by_user_departments(Assignee, main_window.current_user.id)
 
+    todays_date = date.today()
+
     main_window.ui.workorder_entryform_lblId.clear()
     main_window.ui.workorder_entryform_lblDateCreated.clear()
 
@@ -111,14 +113,28 @@ def clear_workorder_entryform(main_window) -> None:
     main_window.ui.workorder_entryform_txtTaskDescription.clear()
     main_window.ui.workorder_entryform_txtComments.clear()
 
-    main_window.ui.workorder_entryform_dteDateAllocated.setDate(QDate(2000, 1, 1))
+    main_window.ui.workorder_entryform_dteDateAllocated.setDate(
+        QDate(todays_date.year, todays_date.month, todays_date.day)
+    )
     main_window.ui.workorder_entryform_chkIsComplete.setChecked(False)
 
-    main_window.ui.workorder_entryform_dteDateCompleted.setDate(QDate(2000, 1, 1))
+    main_window.ui.workorder_entryform_dteDateCompleted.setDate(
+        QDate(todays_date.year, todays_date.month, todays_date.day)
+    )
     main_window.ui.workorder_entryform_dteDateCompleted.setEnabled(False)
 
     main_window.ui.workorder_entryform_txtCloseOutComments.clear()
     main_window.ui.workorder_entryform_txtCloseOutComments.setEnabled(False)
+
+    main_window.ui.workorder_entryform_lblCurrentUnits.setVisible(False)
+    main_window.ui.workorder_entryform_spnCurrentUnits.setValue(1)
+    main_window.ui.workorder_entryform_spnCurrentUnits.setVisible(False)
+
+    main_window.ui.workorder_entryform_lblCalibrationDate.setVisible(False)
+    main_window.ui.workorder_entryform_dteCalibrationDate.setDate(
+        QDate(todays_date.year, todays_date.month, todays_date.day)
+    )
+    main_window.ui.workorder_entryform_dteCalibrationDate.setVisible(False)
 
     global unassigned_items_tbl, assigned_items_tbl, unassigned_assignees_tbl, assigned_assignees_tbl
 
@@ -252,6 +268,27 @@ def edit_workorder(
             main_window.ui.workorder_entryform_txtCloseOutComments.setPlainText(
                 close_out_comments
             )
+
+    if servicetracker_id:
+        servicetrackers = ServiceTracker.get()
+        servicetracker = servicetrackers[servicetracker_id]
+
+        calibration_date = servicetracker.units_calibration_date
+        main_window.ui.workorder_entryform_lblCalibrationDate.setVisible(True)
+        main_window.ui.workorder_entryform_dteCalibrationDate.setVisible(True)
+        main_window.ui.workorder_entryform_dteCalibrationDate.setDate(
+            QDate(
+                calibration_date.year,
+                calibration_date.month,
+                calibration_date.day,
+            )
+        )
+
+        main_window.ui.workorder_entryform_lblCurrentUnits.setVisible(True)
+        main_window.ui.workorder_entryform_spnCurrentUnits.setVisible(True)
+        main_window.ui.workorder_entryform_spnCurrentUnits.setValue(
+            servicetracker.current_units
+        )
 
     load_selection_tables(main_window)
 
@@ -482,14 +519,23 @@ def save_workorder(main_window) -> None:
     if servicetracker_id:
         servicetrackers = select_by_attrs_dict(ServiceTracker)
         servicetracker = servicetrackers[servicetracker_id]
+        new_calibration_qdate = (
+            main_window.ui.workorder_entryform_dteCalibrationDate.date()
+        )
+        new_calibrationdate = date(
+            new_calibration_qdate.year(),
+            new_calibration_qdate.month(),
+            new_calibration_qdate.day(),
+        )
+        new_currentunits = main_window.ui.workorder_entryform_spnCurrentUnits.value()
 
         new_servicetracker = ServiceTracker(
             servicetracker.id,
             servicetracker.item_id,
-            servicetracker.units_calibration_date,
-            servicetracker.current_units,
+            new_calibrationdate,
+            new_currentunits,
             servicetracker.average_units_per_day,
-            servicetracker.service_due_units + servicetracker.service_interval,
+            new_currentunits + servicetracker.service_interval,
             servicetracker.service_interval,
         )
 

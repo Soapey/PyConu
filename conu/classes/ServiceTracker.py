@@ -162,6 +162,22 @@ class ServiceTracker:
         }
 
     @classmethod
+    def get(cls):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+                SELECT 
+                    * 
+                FROM 
+                    servicetracker;
+                """
+            ).fetchall()
+
+        return cls.convert_rows_to_instances(rows)
+
+    @classmethod
     def get_by_user_departments(cls, user_id):
 
         with SQLiteConnection() as cur:

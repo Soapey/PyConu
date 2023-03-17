@@ -58,6 +58,8 @@ def load_due_listingview(main_window) -> None:
 
     due_items_by_search(main_window)
 
+    set_due_button_visibility(main_window)
+
     navigate(main_window, Page.DUE_LISTINGVIEW)
 
 
@@ -112,9 +114,6 @@ def set_due_button_visibility(main_window):
         )
     else:
         set_button_visibility(
-            [main_window.ui.due_listingview_btnRaise], is_visible=True
-        )
-        set_button_visibility(
             [
                 main_window.ui.due_listingview_btnRaise,
             ],
@@ -159,10 +158,6 @@ def raise_servicetracker(main_window, servicetracker_id):
         main_window.current_user.id
     )
     entity = servicetrackers[servicetracker_id]
-
-    items = select_by_attrs_dict(Item)
-
-    item = items[entity.item_id]
 
     workorder_entity = WorkOrder(
         None,
