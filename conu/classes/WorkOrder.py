@@ -1,10 +1,12 @@
 from datetime import datetime, date
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.WorkOrderItem import WorkOrderItem
+from conu.classes.WorkOrderAssignee import WorkOrderAssignee
 from conu.classes.Item import Item
 from conu.classes.Assignee import Assignee
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
+from conu.ui.global_entities import global_workorderitems, global_workorderassignees
 
 
 class WorkOrder:
@@ -45,54 +47,47 @@ class WorkOrder:
 
     def due_listingview_items(self):
 
-        global global_items
-        global global_workorderitems
+        items = select_by_attrs_dict(Item)
+        workorderitems = select_by_attrs_dict(WorkOrderItem)
 
         relevant_workorderitems = {
             workorderitem.id: workorderitem
-            for workorderitem in global_workorderitems.values()
+            for workorderitem in workorderitems.values()
             if workorderitem.workorder_id == self.id
         }
 
         item_list = list()
         for workorderitem in relevant_workorderitems.values():
-            if workorderitem.item_id not in global_items.keys():
-                global_items = select_by_attrs_dict(Item)
-            item = global_items[workorderitem.item_id]
+            item = items[workorderitem.item_id]
             item_list.append(item.name)
 
         return ", ".join(item_list)
 
     def due_listingview_assignees(self):
 
-        global global_assignees
-        global global_workorderassignees
+        assignees = select_by_attrs_dict(Assignee)
+        workorderassignees = select_by_attrs_dict(WorkOrderAssignee)
 
         relevant_workorderassignees = {
             workorderassignee.id: workorderassignee
-            for workorderassignee in global_workorderassignees.values()
+            for workorderassignee in workorderassignees.values()
             if workorderassignee.workorder_id == self.id
         }
 
         assignee_list = list()
         for workorderassignee in relevant_workorderassignees.values():
-            if workorderassignee.assignee_id not in global_assignees.keys():
-                global_assignees = select_by_attrs_dict(Assignee)
-            assignee = global_assignees[workorderassignee.assignee_id]
+            assignee = assignees[workorderassignee.assignee_id]
             assignee_list.append(assignee.name)
 
         return ", ".join(assignee_list)
 
-    def summary(self):
+    def due_listingview_summary(self):
         return self.task_description
 
     def is_due(self) -> bool:
 
-        global global_prioritylevels
-
-        if self.prioritylevel_id not in global_prioritylevels.keys():
-            global_prioritylevels = select_by_attrs_dict(PriorityLevel)
-        priority_level = global_prioritylevels[self.prioritylevel_id]
+        prioritylevels = select_by_attrs_dict(PriorityLevel)
+        priority_level = prioritylevels[self.prioritylevel_id]
 
         days_until_overdue = priority_level.days_until_overdue
 
@@ -112,10 +107,10 @@ class WorkOrder:
                 row[3],
                 row[4],
                 row[5],
-                format_nullable_database_date(row[6]).date(),
-                format_nullable_database_date(row[7]).date(),
+                format_nullable_database_date(row[6]),
+                format_nullable_database_date(row[7]),
                 row[8],
-                format_nullable_database_date(row[9]).date(),
+                format_nullable_database_date(row[9]),
                 row[10],
                 row[11],
             )

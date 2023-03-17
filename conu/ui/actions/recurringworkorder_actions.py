@@ -472,17 +472,18 @@ def load_recurrence_selection_widget(
         main_window.ui.recurringworkorder_entryform_radYearly.setChecked(True)
 
 
-def edit_recurringworkorder(main_window) -> None:
+def edit_recurringworkorder(main_window, entity_id=None) -> None:
 
     sites = select_by_attrs_dict(Site)
     departments = select_by_attrs_dict(Department)
     prioritylevels = select_by_attrs_dict(PriorityLevel)
 
-    selected_id = selected_row_id(
-        main_window.ui.recurringworkorder_listingview_tblRecurringWorkOrder
-    )
+    if not entity_id:
+        entity_id = selected_row_id(
+            main_window.ui.recurringworkorder_listingview_tblRecurringWorkOrder
+        )
     recurringworkorders = RecurringWorkOrder.get()
-    entity = recurringworkorders[selected_id]
+    entity = recurringworkorders[entity_id]
 
     recurringworkorder_site = sites[entity.site_id]
     recurringworkorder_department = departments[entity.department_id]

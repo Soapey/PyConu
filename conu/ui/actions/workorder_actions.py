@@ -10,7 +10,9 @@ from conu.classes.Department import Department
 from conu.classes.Site import Site
 from conu.classes.ItemDepartment import ItemDepartment
 from conu.classes.AssigneeDepartment import AssigneeDepartment
+from conu.classes.RecurringWorkOrderItem import RecurringWorkOrderItem
 from conu.classes.PriorityLevel import PriorityLevel
+from conu.classes.RecurringWorkOrder import RecurringWorkOrder
 
 from conu.classes.User import User
 from conu.classes.Item import Item
@@ -35,6 +37,7 @@ from conu.ui.components.TableManager import TableManager
 from conu.ui.PageEnum import Page
 from conu.ui.components.SelectWindow import SelectWindow
 
+recurringworkorder_id: int = None
 unassigned_items_tbl: TableManager = None
 assigned_items_tbl: TableManager = None
 unassigned_assignees_tbl: TableManager = None
@@ -138,6 +141,9 @@ def clear_workorder_entryform(main_window) -> None:
 
 def new_workorder(main_window) -> None:
 
+    global recurringworkorder_id
+    recurringworkorder_id = None
+
     clear_workorder_entryform(main_window)
 
     load_selection_tables(main_window)
@@ -147,38 +153,46 @@ def new_workorder(main_window) -> None:
     navigate(main_window, Page.WORKORDER_ENTRYFORM)
 
 
-def edit_workorder(main_window) -> None:
+def edit_workorder(main_window, entity=None, _recurringworkorder_id=None) -> None:
 
-    global global_workorders
-    global global_users
-    global global_sites
-    global global_departments
-    global global_prioritylevels
-    global global_items
-    global global_assignees
+    global recurringworkorder_id
+    recurringworkorder_id = _recurringworkorder_id
 
-    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
-    entity = global_workorders[selected_id]
+    users = select_by_attrs_dict(User)
+    sites = select_by_attrs_dict(Site)
+    departments = select_by_attrs_dict(Department)
+    prioritylevels = select_by_attrs_dict(PriorityLevel)
 
-    workorder_site = global_sites[entity.site_id]
-    workorder_department = global_departments[entity.department_id]
-    workorder_prioritylevel = global_prioritylevels[entity.prioritylevel_id]
-    workorder_raisedby_user = global_users[entity.raisedby_user_id]
+    if not entity:
+        workorders = WorkOrder.get()
+        entity_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
+        entity = workorders[entity_id]
+
+    workorder_site = sites[entity.site_id]
+    workorder_department = departments[entity.department_id]
+    workorder_prioritylevel = prioritylevels[entity.prioritylevel_id]
+
+    workorder_raisedby_user = None
+    if entity.raisedby_user_id:
+        workorder_raisedby_user = users[entity.raisedby_user_id]
 
     clear_workorder_entryform(main_window)
 
-    main_window.ui.workorder_entryform_lblId.setText(str(entity.id))
+    if entity.id:
+        main_window.ui.workorder_entryform_lblId.setText(str(entity.id))
 
-    main_window.ui.workorder_entryform_lblDateCreated.setText(
-        datetime.strftime(entity.date_created, "%d-%m-%Y")
-    )
+    if entity.date_created:
+        main_window.ui.workorder_entryform_lblDateCreated.setText(
+            datetime.strftime(entity.date_created, "%d-%m-%Y")
+        )
 
-    main_window.ui.workorder_entryform_lblRaisedBy.setText(
-        f"{workorder_raisedby_user.first_name} {workorder_raisedby_user.last_name}"
-    )
-    main_window.ui.workorder_entryform_lblRaisedBy.setProperty(
-        "object", workorder_raisedby_user
-    )
+    if entity.raisedby_user_id:
+        main_window.ui.workorder_entryform_lblRaisedBy.setText(
+            f"{workorder_raisedby_user.first_name} {workorder_raisedby_user.last_name}"
+        )
+        main_window.ui.workorder_entryform_lblRaisedBy.setProperty(
+            "object", workorder_raisedby_user
+        )
 
     main_window.ui.workorder_entryform_lblSite.setProperty("object", workorder_site)
     main_window.ui.workorder_entryform_lblSite.setText(workorder_site.name)
@@ -195,9 +209,10 @@ def edit_workorder(main_window) -> None:
         "object", workorder_prioritylevel
     )
 
-    main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setText(
-        entity.purchase_order_number
-    )
+    if entity.purchase_order_number:
+        main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setText(
+            entity.purchase_order_number
+        )
 
     main_window.ui.workorder_entryform_txtTaskDescription.setPlainText(
         entity.task_description
@@ -206,17 +221,20 @@ def edit_workorder(main_window) -> None:
     if comments := entity.comments:
         main_window.ui.workorder_entryform_txtComments.setPlainText(comments)
 
-    date_allocated = entity.date_allocated
-    main_window.ui.workorder_entryform_dteDateAllocated.setDate(
-        QDate(date_allocated.year, date_allocated.month, date_allocated.day)
-    )
+    if entity.date_allocated:
+        date_allocated = entity.date_allocated
+        main_window.ui.workorder_entryform_dteDateAllocated.setDate(
+            QDate(date_allocated.year, date_allocated.month, date_allocated.day)
+        )
 
-    date_completed = entity.date_completed
-    main_window.ui.workorder_entryform_chkIsComplete.setChecked(
-        date_completed is not None
-    )
+    if entity.date_completed:
 
-    if date_completed:
+        date_completed = entity.date_completed
+
+        main_window.ui.workorder_entryform_chkIsComplete.setChecked(
+            date_completed is not None
+        )
+
         main_window.ui.workorder_entryform_dteDateCompleted.setDate(
             QDate(date_completed.year, date_completed.month, date_completed.day)
         )
@@ -241,8 +259,9 @@ def delete_workorder(main_window) -> None:
         return
 
     selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
-    global global_workorders
-    entity = global_workorders[selected_id]
+
+    workorders = select_by_attrs_dict(WorkOrder)
+    entity = workorders[selected_id]
 
     delete_entities_by_ids(WorkOrder, [entity.id])
 
@@ -427,6 +446,30 @@ def save_workorder(main_window) -> None:
 
     save_and_delete_workorderassignees(main_window, entity_id)
 
+    recurringworkorder = None
+    if recurringworkorder_id:
+        recurringworkorders = RecurringWorkOrder.get()
+        recurringworkorder = recurringworkorders[recurringworkorder_id]
+
+        new_recurringworkorder = RecurringWorkOrder(
+            recurringworkorder.id,
+            recurringworkorder.site_id,
+            recurringworkorder.department_id,
+            recurringworkorder.prioritylevel_id,
+            recurringworkorder.task_description,
+            recurringworkorder.comments,
+            recurringworkorder.type,
+            recurringworkorder.start_date,
+            date.today(),
+            recurringworkorder.interval,
+            recurringworkorder.weekdays,
+            recurringworkorder.day,
+            recurringworkorder.month,
+            recurringworkorder.month_weekday_occurrence,
+        )
+
+        save_by_list([new_recurringworkorder])
+
     Notification(
         "Save Successful", [f"Successfully saved work order: {entity_id}"]
     ).show()
@@ -526,8 +569,8 @@ def transfer_item_to_table(from_table: TableManager, to_table: TableManager):
     selected_row = selected_item.row()
     selected_id = int(selected_item.text())
 
-    global global_items
-    selected_entity = global_items[selected_id]
+    items = select_by_attrs_dict(Item)
+    selected_entity = items[selected_id]
 
     from_table.remove_row(selected_row)
 
@@ -547,8 +590,8 @@ def transfer_assignee_to_table(from_table: TableManager, to_table: TableManager)
     selected_row = selected_item.row()
     selected_id = int(selected_item.text())
 
-    global global_assignees
-    selected_entity = global_assignees[selected_id]
+    assignees = select_by_attrs_dict(Assignee)
+    selected_entity = assignees[selected_id]
 
     from_table.remove_row(selected_row)
 
@@ -560,11 +603,10 @@ def transfer_assignee_to_table(from_table: TableManager, to_table: TableManager)
 
 def select_site(main_window):
 
-    global global_sites
-    global_sites = select_by_attrs_dict(Site)
+    sites = select_by_attrs_dict(Site)
 
     SelectWindow(
-        global_sites,
+        sites,
         main_window.ui.workorder_entryform_lblSite.setText,
         "name",
         main_window.ui.workorder_entryform_lblSite.setProperty,
@@ -574,11 +616,10 @@ def select_site(main_window):
 
 def select_department(main_window):
 
-    global global_departments
-    global_departments = main_window.current_user.get_departments()
+    departments = main_window.current_user.get_departments()
 
     SelectWindow(
-        global_departments,
+        departments,
         main_window.ui.workorder_entryform_lblDepartment.setText,
         "name",
         main_window.ui.workorder_entryform_lblDepartment.setProperty,
@@ -589,11 +630,10 @@ def select_department(main_window):
 
 def select_prioritylevel(main_window):
 
-    global global_prioritylevels
-    global_prioritylevels = select_by_attrs_dict(PriorityLevel)
+    prioritylevels = select_by_attrs_dict(PriorityLevel)
 
     SelectWindow(
-        global_prioritylevels,
+        prioritylevels,
         main_window.ui.workorder_entryform_lblPriorityLevel.setText,
         "name",
         main_window.ui.workorder_entryform_lblPriorityLevel.setProperty,
@@ -626,21 +666,31 @@ def load_item_selection_table(main_window):
     item_departments = select_by_attrs_dict(
         ItemDepartment, {"department_id": department.id}
     ).values()
-
     items = [all_items[item_id] for item_id in {id.item_id for id in item_departments}]
-
     items = sorted(items, key=lambda e: e.name)
 
-    if id is None or len(id) == 0:
+    if (id is None or len(id) == 0) and not recurringworkorder_id:
         load_entities_into_table(
             unassigned_items_tbl.table, items, {"id": "ID", "name": "Name"}
         )
         return
 
-    id = int(id)
-
-    workorder_items = select_by_attrs_dict(WorkOrderItem, {"workorder_id": id})
-    assigned_item_ids = [woi.item_id for woi in workorder_items.values()]
+    assigned_item_ids = None
+    if recurringworkorder_id:
+        assigned_item_ids = [
+            rwoi.item_id
+            for rwoi in select_by_attrs_dict(
+                RecurringWorkOrderItem, {"recurringworkorder_id": recurringworkorder_id}
+            ).values()
+        ]
+    else:
+        id = int(id)
+        assigned_item_ids = [
+            woi.item_id
+            for woi in select_by_attrs_dict(
+                WorkOrderItem, {"workorder_id": id}
+            ).values()
+        ]
 
     unassigned_items = [item for item in items if item.id not in assigned_item_ids]
     assigned_items = [all_items[item_id] for item_id in assigned_item_ids]
@@ -671,15 +721,14 @@ def load_assignee_selection_table(main_window):
     assignee_departments = select_by_attrs_dict(
         AssigneeDepartment, {"department_id": department.id}
     ).values()
-
     assignees = [
         all_assignees[assignee_id]
         for assignee_id in {ad.assignee_id for ad in assignee_departments}
     ]
-
     assignees = sorted(assignees, key=lambda e: e.name)
 
-    if id is None or len(id) == 0:
+    global recurringworkorder_id
+    if id is None or len(id) == 0 or recurringworkorder_id:
         load_entities_into_table(
             unassigned_assignees_tbl.table, assignees, {"id": "ID", "name": "Name"}
         )
@@ -689,21 +738,21 @@ def load_assignee_selection_table(main_window):
 
     workorder_assignees = select_by_attrs_dict(WorkOrderAssignee, {"workorder_id": id})
     assigned_assignee_ids = [woa.assignee_id for woa in workorder_assignees.values()]
-
-    unassigned_assignees = [
-        assignee for assignee in assignees if assignee.id not in assigned_assignee_ids
-    ]
     assigned_assignees = [
         all_assignees[assignee_id] for assignee_id in assigned_assignee_ids
     ]
-
+    unassigned_assignees = [
+        assignee for assignee in assignees if assignee.id not in assigned_assignee_ids
+    ]
     load_entities_into_table(
         unassigned_assignees_tbl.table,
         unassigned_assignees,
         {"id": "ID", "name": "Name"},
     )
     load_entities_into_table(
-        assigned_assignees_tbl.table, assigned_assignees, {"id": "ID", "name": "Name"}
+        assigned_assignees_tbl.table,
+        assigned_assignees,
+        {"id": "ID", "name": "Name"},
     )
 
 

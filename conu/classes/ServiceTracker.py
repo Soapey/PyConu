@@ -26,12 +26,9 @@ class ServiceTracker:
 
     def due_listingview_items(self):
 
-        global global_items
+        items = select_by_attrs_dict(Item)
 
-        if self.item_id not in global_items.keys():
-            global_items = select_by_attrs_dict(Item)
-
-        item = global_items[self.item_id]
+        item = items[self.item_id]
 
         return item.name
 
@@ -150,7 +147,7 @@ class ServiceTracker:
             row[0]: cls(
                 row[0],
                 row[1],
-                format_nullable_database_date(row[2]).date(),
+                format_nullable_database_date(row[2]),
                 row[3],
                 row[4],
                 row[5],
@@ -171,11 +168,7 @@ class ServiceTracker:
                 FROM 
                     servicetracker 
                 WHERE 
-                    item.department_id IN (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?)
-                LEFT JOIN 
-                    item 
-                ON 
-                    servicetracker.item_id = item.id
+                    servicetracker.item_id IN (SELECT itemdepartment.item_id FROM itemdepartment WHERE itemdepartment.department_id IN (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?))
                 """,
                 (user_id,),
             ).fetchall()

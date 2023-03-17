@@ -6,6 +6,7 @@ Must Have
 * Add raise() function to ServiceTracker, WorkOrder and RecurringWorkOrder
 -------------------------------------------------------------------------------------------------------------------
 18/3/23 - Saturday
+* Recurring work order item selection table is not listing items that belong only to that selected department
 * Add uniqueness validators for all the various classes and their attributes
 * Fix bug to do with old and new password validation for changing passwords
 -------------------------------------------------------------------------------------------------------------------
@@ -13,7 +14,7 @@ Must Have
 * Add save() function to WorkOrder
 * Add print() function to WorkOrder
 * Functionality to offer Forms to be able to be printed (from option checklist) upon printing a WorkOrder
-
+* Work Order listingview should show "Is Due" column
 
 ===================================================================================================================
 Will Have

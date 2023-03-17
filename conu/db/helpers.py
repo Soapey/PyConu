@@ -263,4 +263,4 @@ def format_nullable_database_date(returned_value):
     if not returned_value:
         return None
 
-    return datetime.strptime(returned_value, "%Y-%m-%d")
+    return datetime.strptime(returned_value, "%Y-%m-%d").date()

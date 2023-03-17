@@ -12,6 +12,7 @@ from conu.ui.actions.workorder_actions import connect_workorder_actions
 from conu.ui.actions.recurringworkorder_actions import (
     connect_recurringworkorder_actions,
 )
+from conu.ui.actions.due_actions import connect_due_actions
 
 
 class MainWindow(QMainWindow):
@@ -34,3 +35,4 @@ class MainWindow(QMainWindow):
         connect_servicetracker_actions(self)
         connect_workorder_actions(self)
         connect_recurringworkorder_actions(self)
+        connect_due_actions(self)
