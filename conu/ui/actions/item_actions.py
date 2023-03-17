@@ -134,8 +134,14 @@ def item_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    if not main_window.ui.item_entryform_txtName.text():
+    name = main_window.ui.item_entryform_txtName.text()
+    if not name:
         error_strings.append("Name field cannot be blank.")
+    else:
+        existing_items = select_by_attrs_dict(Item, {"name": name})
+
+        if existing_items:
+            error_strings.append(f"Item: {name}, already exists.")
 
     vboxDepartments = main_window.ui.item_entryform_vboxDepartments
     if not any(

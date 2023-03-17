@@ -85,13 +85,17 @@ def form_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    entered_name = main_window.ui.form_entryform_txtName.text()
-    entered_path = main_window.ui.form_entryform_txtPath.text()
-
-    if not entered_name:
+    name = main_window.ui.form_entryform_txtName.text()
+    if not name:
         error_strings.append("Name field cannot be blank.")
+    else:
+        existing_forms = select_by_attrs_dict(Form, {"name": name})
 
-    if not entered_path:
+        if existing_forms:
+            error_strings.append(f"Form: {name}, already exists.")
+
+    path = main_window.ui.form_entryform_txtPath.text()
+    if not path:
         error_strings.append("Path field cannot be blank.")
 
     if error_strings:

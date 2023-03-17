@@ -134,8 +134,14 @@ def assignee_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    if not main_window.ui.assignee_entryform_txtName.text():
+    name = main_window.ui.assignee_entryform_txtName.text()
+    if not name:
         error_strings.append("Name field cannot be blank.")
+    else:
+        existing_assignees = select_by_attrs_dict(Assignee, {"name": name})
+
+        if existing_assignees:
+            error_strings.append(f"Assignee: {name}, already exists.")
 
     vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
     if not any(

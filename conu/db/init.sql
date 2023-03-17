@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS [assigneedepartment] (
 
 CREATE TABLE IF NOT EXISTS [form] (
     [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-    [name] TEXT NOT NULL,
+    [name] TEXT UNIQUE NOT NULL,
     [path] TEXT NOT NULL
 );
 

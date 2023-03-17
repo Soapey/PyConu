@@ -79,10 +79,14 @@ def department_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    entered_name = main_window.ui.department_entryform_txtName.text()
-
-    if not entered_name:
+    name = main_window.ui.department_entryform_txtName.text()
+    if not name:
         error_strings.append("Name field cannot be blank.")
+    else:
+        existing_departments = select_by_attrs_dict(Department, {"name": name})
+
+        if existing_departments:
+            error_strings.append(f"Department: {name}, already exists.")
 
     if error_strings:
         Notification("Cannot Save Department", error_strings).show()

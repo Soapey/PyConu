@@ -186,6 +186,11 @@ def user_entryform_is_valid(main_window) -> bool:
     username = main_window.ui.user_entryform_txtUsername.text()
     if not username:
         error_strings.append("Username field cannot be blank.")
+    else:
+        existing_users = select_by_attrs_dict(User, {"username": username})
+
+        if existing_users:
+            error_strings.append(f"Username: {username} already taken.")
 
     entities_with_username = list(
         filter(

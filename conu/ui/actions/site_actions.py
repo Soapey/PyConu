@@ -87,8 +87,14 @@ def site_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    if not main_window.ui.site_entryform_txtName.text():
+    name = main_window.ui.site_entryform_txtName.text()
+    if not name:
         error_strings.append("Name field cannot be blank.")
+    else:
+        existing_sites = select_by_attrs_dict(Site, {"name": name})
+
+        if existing_sites:
+            error_strings.append(f"Site: {name}, already exists.")
 
     if error_strings:
         Notification("Cannot Save Site", error_strings).show()
