@@ -1,12 +1,14 @@
-from datetime import datetime, date
+from datetime import date
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.WorkOrderAssignee import WorkOrderAssignee
 from conu.classes.Item import Item
 from conu.classes.Assignee import Assignee
+from conu.classes.Site import Site
+from conu.classes.Department import Department
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
-from conu.ui.global_entities import global_workorderitems, global_workorderassignees
+from fpdf import FPDF
 
 
 class WorkOrder:
@@ -210,3 +212,81 @@ class WorkOrder:
             )
             for row in rows
         }
+
+    def items(self):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+            SELECT 
+                * 
+            FROM 
+                item 
+            WHERE item.id IN (
+                SELECT 
+                    workorderitem.item_id 
+                FROM 
+                    workorderitem 
+                WHERE 
+                    workorderitem.workorder_id = ?
+                );
+            """,
+                (self.id,),
+            ).fetchall()
+
+        return Item.convert_rows_to_instances(rows)
+
+    def assignees(self):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+            SELECT 
+                * 
+            FROM 
+                assignee 
+            WHERE assignee.id IN (
+                SELECT 
+                    workorderassignee.assignee_id 
+                FROM 
+                    workorderassignee
+                WHERE 
+                    workorderassignee.workorder_id = ?
+                );
+            """,
+                (self.id,),
+            ).fetchall()
+
+        return Assignee.convert_rows_to_instances(rows)
+
+    def save_to_pdf(self):
+
+        CELL_WIDTH = 40
+        CELL_HEIGHT = 14
+
+        site = select_by_attrs_dict(Site)[self.site_id]
+        department = select_by_attrs_dict(Department)[self.department_id]
+        prioritylevel = select_by_attrs_dict(PriorityLevel)[self.prioritylevel_id]
+        items = self.items()
+        assignees = self.assignees()
+
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Helvetica", size=12)
+
+        for i in range(5):
+            for j in range(5):
+                pdf.cell(CELL_WIDTH, CELL_HEIGHT, f"Cell {i}, {j}")
+            pdf.ln(CELL_HEIGHT)
+
+        pdf.output("example.pdf")
+
+
+if __name__ == "__main__":
+
+    wo = WorkOrder(
+        None, None, None, None, None, None, None, None, None, None, None, None
+    )
+    wo.save_to_pdf()
