@@ -25,3 +25,4 @@ Will Have
 ===================================================================================================================
 Could Have
 * Add image capability for Work Order
+* Cache SQL queries in MainWindow "cache" attribute

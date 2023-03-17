@@ -13,6 +13,7 @@ from conu.classes.AssigneeDepartment import AssigneeDepartment
 from conu.classes.RecurringWorkOrderItem import RecurringWorkOrderItem
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.RecurringWorkOrder import RecurringWorkOrder
+from conu.classes.ServiceTracker import ServiceTracker
 
 from conu.classes.User import User
 from conu.classes.Item import Item
@@ -38,6 +39,7 @@ from conu.ui.PageEnum import Page
 from conu.ui.components.SelectWindow import SelectWindow
 
 recurringworkorder_id: int = None
+servicetracker_id: int = None
 unassigned_items_tbl: TableManager = None
 assigned_items_tbl: TableManager = None
 unassigned_assignees_tbl: TableManager = None
@@ -141,8 +143,9 @@ def clear_workorder_entryform(main_window) -> None:
 
 def new_workorder(main_window) -> None:
 
-    global recurringworkorder_id
+    global recurringworkorder_id, servicetracker_id
     recurringworkorder_id = None
+    servicetracker_id = None
 
     clear_workorder_entryform(main_window)
 
@@ -153,10 +156,13 @@ def new_workorder(main_window) -> None:
     navigate(main_window, Page.WORKORDER_ENTRYFORM)
 
 
-def edit_workorder(main_window, entity=None, _recurringworkorder_id=None) -> None:
+def edit_workorder(
+    main_window, entity=None, _recurringworkorder_id=None, _servicetracker_id=None
+) -> None:
 
-    global recurringworkorder_id
+    global recurringworkorder_id, servicetracker_id
     recurringworkorder_id = _recurringworkorder_id
+    servicetracker_id = _servicetracker_id
 
     users = select_by_attrs_dict(User)
     sites = select_by_attrs_dict(Site)
@@ -167,10 +173,6 @@ def edit_workorder(main_window, entity=None, _recurringworkorder_id=None) -> Non
         workorders = WorkOrder.get()
         entity_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
         entity = workorders[entity_id]
-
-    workorder_site = sites[entity.site_id]
-    workorder_department = departments[entity.department_id]
-    workorder_prioritylevel = prioritylevels[entity.prioritylevel_id]
 
     workorder_raisedby_user = None
     if entity.raisedby_user_id:
@@ -193,21 +195,28 @@ def edit_workorder(main_window, entity=None, _recurringworkorder_id=None) -> Non
         main_window.ui.workorder_entryform_lblRaisedBy.setProperty(
             "object", workorder_raisedby_user
         )
+    if entity.site_id:
+        workorder_site = sites[entity.site_id]
+        main_window.ui.workorder_entryform_lblSite.setProperty("object", workorder_site)
+        main_window.ui.workorder_entryform_lblSite.setText(workorder_site.name)
 
-    main_window.ui.workorder_entryform_lblSite.setProperty("object", workorder_site)
-    main_window.ui.workorder_entryform_lblSite.setText(workorder_site.name)
+    if entity.department_id:
+        workorder_department = departments[entity.department_id]
+        main_window.ui.workorder_entryform_lblDepartment.setProperty(
+            "object", workorder_department
+        )
+        main_window.ui.workorder_entryform_lblDepartment.setText(
+            workorder_department.name
+        )
 
-    main_window.ui.workorder_entryform_lblDepartment.setProperty(
-        "object", workorder_department
-    )
-    main_window.ui.workorder_entryform_lblDepartment.setText(workorder_department.name)
-
-    main_window.ui.workorder_entryform_lblPriorityLevel.setText(
-        workorder_prioritylevel.name
-    )
-    main_window.ui.workorder_entryform_lblPriorityLevel.setProperty(
-        "object", workorder_prioritylevel
-    )
+    if entity.prioritylevel_id:
+        workorder_prioritylevel = prioritylevels[entity.prioritylevel_id]
+        main_window.ui.workorder_entryform_lblPriorityLevel.setText(
+            workorder_prioritylevel.name
+        )
+        main_window.ui.workorder_entryform_lblPriorityLevel.setProperty(
+            "object", workorder_prioritylevel
+        )
 
     if entity.purchase_order_number:
         main_window.ui.workorder_entryform_txtPurchaseOrderNumber.setText(
@@ -470,6 +479,22 @@ def save_workorder(main_window) -> None:
 
         save_by_list([new_recurringworkorder])
 
+    if servicetracker_id:
+        servicetrackers = select_by_attrs_dict(ServiceTracker)
+        servicetracker = servicetrackers[servicetracker_id]
+
+        new_servicetracker = ServiceTracker(
+            servicetracker.id,
+            servicetracker.item_id,
+            servicetracker.units_calibration_date,
+            servicetracker.current_units,
+            servicetracker.average_units_per_day,
+            servicetracker.service_due_units + servicetracker.service_interval,
+            servicetracker.service_interval,
+        )
+
+        save_by_list([new_servicetracker])
+
     Notification(
         "Save Successful", [f"Successfully saved work order: {entity_id}"]
     ).show()
@@ -616,7 +641,20 @@ def select_site(main_window):
 
 def select_department(main_window):
 
-    departments = main_window.current_user.get_departments()
+    global servicetracker_id
+
+    departments = dict()
+    if servicetracker_id:
+        servicetrackers = select_by_attrs_dict(ServiceTracker)
+        servicetracker = servicetrackers[servicetracker_id]
+        itemdepartments = select_by_attrs_dict(
+            ItemDepartment, {"item_id": servicetracker.item_id}
+        ).values()
+        department_ids = {id.department_id for id in itemdepartments}
+        all_departments = select_by_attrs_dict(Department).values()
+        departments = {d.id: d for d in all_departments if d.id in department_ids}
+    else:
+        departments = main_window.current_user.get_departments()
 
     SelectWindow(
         departments,
@@ -669,7 +707,11 @@ def load_item_selection_table(main_window):
     items = [all_items[item_id] for item_id in {id.item_id for id in item_departments}]
     items = sorted(items, key=lambda e: e.name)
 
-    if (id is None or len(id) == 0) and not recurringworkorder_id:
+    if (
+        (id is None or len(id) == 0)
+        and not recurringworkorder_id
+        and not servicetracker_id
+    ):
         load_entities_into_table(
             unassigned_items_tbl.table, items, {"id": "ID", "name": "Name"}
         )
@@ -683,6 +725,10 @@ def load_item_selection_table(main_window):
                 RecurringWorkOrderItem, {"recurringworkorder_id": recurringworkorder_id}
             ).values()
         ]
+    elif servicetracker_id:
+        servicetrackers = select_by_attrs_dict(ServiceTracker)
+        servicetracker = servicetrackers[servicetracker_id]
+        assigned_item_ids = [servicetracker.item_id]
     else:
         id = int(id)
         assigned_item_ids = [
@@ -728,7 +774,7 @@ def load_assignee_selection_table(main_window):
     assignees = sorted(assignees, key=lambda e: e.name)
 
     global recurringworkorder_id
-    if id is None or len(id) == 0 or recurringworkorder_id:
+    if id is None or len(id) == 0 or recurringworkorder_id or servicetracker_id:
         load_entities_into_table(
             unassigned_assignees_tbl.table, assignees, {"id": "ID", "name": "Name"}
         )

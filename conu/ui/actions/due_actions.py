@@ -3,6 +3,7 @@ from tkinter.messagebox import askyesno
 from conu.classes.ServiceTracker import ServiceTracker
 from conu.classes.WorkOrder import WorkOrder
 from conu.classes.RecurringWorkOrder import RecurringWorkOrder
+from conu.classes.Item import Item
 from conu.ui.components.Notification import Notification
 from conu.ui.actions.workorder_actions import edit_workorder
 
@@ -152,6 +153,35 @@ def raise_recurringworkorder(main_window, recurringworkorder_id):
     edit_workorder(main_window, workorder_entity, recurringworkorder_id)
 
 
+def raise_servicetracker(main_window, servicetracker_id):
+
+    servicetrackers = ServiceTracker.get_by_user_departments(
+        main_window.current_user.id
+    )
+    entity = servicetrackers[servicetracker_id]
+
+    items = select_by_attrs_dict(Item)
+
+    item = items[entity.item_id]
+
+    workorder_entity = WorkOrder(
+        None,
+        None,
+        None,
+        None,
+        entity.__str__(),
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    )
+
+    edit_workorder(main_window, workorder_entity, None, servicetracker_id)
+
+
 def raise_due_item(main_window):
 
     tbl = main_window.ui.due_listingview_tblDue
@@ -169,7 +199,7 @@ def raise_due_item(main_window):
     elif selected_type == "recurringworkorder":
         raise_recurringworkorder(main_window, selected_id)
     elif selected_type == "servicetracker":
-        print("service tracker raised!")
+        raise_servicetracker(main_window, selected_id)
 
 
 def connect_due_actions(main_window) -> None:

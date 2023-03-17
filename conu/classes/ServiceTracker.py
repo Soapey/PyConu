@@ -16,6 +16,11 @@ class ServiceTracker:
     service_due_units: int
     service_interval: int
 
+    def __str__(self) -> str:
+        items = select_by_attrs_dict(Item)
+        item = items[self.item_id]
+        return f"{item.name} {self.service_due_units} unit service. Due every {self.service_interval} units."
+
     def is_due(self) -> bool:
 
         days_since_calibration = (date.today() - self.units_calibration_date).days
