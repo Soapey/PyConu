@@ -98,13 +98,11 @@ class SelectWindow(QMainWindow):
                         word = win32.Dispatch("Word.Application")
                         rest = selected_form.path.split("/")[1:]
                         word_path = os.path.join("C:", os.sep, *rest)
-                        print("Trying to open", word_path, "in word.")
                         doc = word.Documents.Open(word_path)
                         doc.PrintOut()
                         doc.Close()
                     elif ".xls" in selected_form.path:
                         excel = win32.Dispatch("Excel.Application")
-                        print("Trying to open", selected_form.path, "in excel.")
                         workbook = excel.Workbooks.Open(selected_form.path)
                         workbook.PrintOut()
                         workbook.Close()

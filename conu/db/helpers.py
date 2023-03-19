@@ -57,19 +57,15 @@ def save_by_list(entities: list) -> list:
             values = [getattr(entity, col) for col in columns]
 
             if entity.id:
-                print("Updating entity", entity)
                 update_query = f"UPDATE {table_name} SET {', '.join([f'{col} = ?' for col in columns])} WHERE id = ? RETURNING *;"
                 updated_entity = cur.execute(
                     update_query, (*values, entity.id)
                 ).fetchone()
                 return_entities.append(cls(*updated_entity))
             else:
-                print("Inserting entity", entity)
                 insert_query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['?' for col in columns])}) RETURNING *;"
                 inserted_entity = cur.execute(insert_query, values).fetchone()
                 return_entities.append(cls(*inserted_entity))
-
-    print("Returning entities:", return_entities)
 
     return return_entities
 
@@ -81,10 +77,7 @@ def delete_entities_by_ids(class_type, ids):
     params = tuple(ids)
 
     with SQLiteConnection() as cur:
-        deleted_entity_tuples = cur.execute(query, params).fetchall()
-        deleted_entities = [class_type(*t) for t in deleted_entity_tuples]
-
-    print("Deleted entities:", deleted_entities)
+        cur.execute(query, params)
 
 
 def add_test_data(file_path: str = None):
@@ -192,7 +185,6 @@ def delete_by_attrs_dict(cls: type, attrs: dict) -> None:
             delete_query, tuple(attrs.values())
         ).fetchall()
         deleted_entities = [cls(*t) for t in deleted_entity_tuples]
-        print("Deleted entities:", deleted_entities)
 
 
 def select_by_attrs_dict(cls: type, attrs: dict = None) -> dict:
