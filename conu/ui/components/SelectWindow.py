@@ -1,8 +1,10 @@
-from PyQt5.QtWidgets import QMainWindow, QAbstractItemView
+from PyQt5.QtWidgets import QMainWindow, QAbstractItemView, QDialog
+from PyQt5.QtPrintSupport import QPrinter, QPrintDialog
 from conu.ui.components.Ui_SelectWindow import Ui_SelectWindow
 from conu.helpers import selected_row_id, load_entities_into_table
 from conu.classes.Form import Form
 import win32com.client as win32
+import win32print
 import os
 
 
@@ -85,29 +87,45 @@ class SelectWindow(QMainWindow):
 
         if self.printing_workorder:
 
+            default_printer = win32print.GetDefaultPrinter()
+            printer = QPrinter(QPrinter.PrinterMode.ScreenResolution)
+            print_dialog = QPrintDialog(printer, self)
+
+            printer_name = None
+            if print_dialog.exec_() == QDialog.Accepted:
+                printer = print_dialog.printer()
+                printer_name = printer.printerName()
+
+            win32print.SetDefaultPrinter(printer_name)
+
             self.printing_workorder.save(print_on_save=True)
 
             selected_form: Form
             word = None
             excel = None
-            for selected_form in self._get_selected_entities():
+            selected_entities = self._get_selected_entities()
 
-                if os.path.exists(selected_form.path):
-                    if ".doc" in selected_form.path:
-                        # Open Word application
-                        word = win32.Dispatch("Word.Application")
-                        path_sections = selected_form.path.split("/")
-                        drive = path_sections[0]
-                        directories = selected_form.path.split("/")[1:]
-                        word_path = os.path.join(drive, os.sep, *directories)
-                        doc = word.Documents.Open(word_path)
-                        doc.PrintOut()
-                        doc.Close()
-                    elif ".xls" in selected_form.path:
-                        excel = win32.Dispatch("Excel.Application")
-                        workbook = excel.Workbooks.Open(selected_form.path)
-                        workbook.PrintOut()
-                        workbook.Close()
+            if selected_entities:
+                for selected_form in selected_entities:
+
+                    if os.path.exists(selected_form.path):
+                        if ".doc" in selected_form.path:
+                            # Open Word application
+                            word = win32.Dispatch("Word.Application")
+                            path_sections = selected_form.path.split("/")
+                            drive = path_sections[0]
+                            directories = selected_form.path.split("/")[1:]
+                            word_path = os.path.join(drive, os.sep, *directories)
+                            doc = word.Documents.Open(word_path)
+                            doc.PrintOut()
+                            doc.Close()
+                        elif ".xls" in selected_form.path:
+                            excel = win32.Dispatch("Excel.Application")
+                            workbook = excel.Workbooks.Open(selected_form.path)
+                            workbook.PrintOut()
+                            workbook.Close()
+
+            win32print.SetDefaultPrinter(default_printer)
 
             if word:
                 if word.Documents.Count == 0:
