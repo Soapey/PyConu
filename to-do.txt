@@ -1,12 +1,8 @@
 ===================================================================================================================
 Must Have
 -------------------------------------------------------------------------------------------------------------------
-19/3/23 - Sunday
-* Add print() function to WorkOrder
-* Functionality to offer Forms to be able to be printed (from option checklist) upon printing a WorkOrder
-* Work Order listingview should show "Is Due" column
-===================================================================================================================
 Will Have
+* Work Order listingview should show "Is Due" column
 * Add export buttons to each table that creates a csv file for the table
 * Functionality to auto-open email with pdf WorkOrder attached
 * Improve toast notifications

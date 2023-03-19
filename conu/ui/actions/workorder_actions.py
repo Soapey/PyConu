@@ -1,4 +1,5 @@
 from PyQt5.QtCore import QDate
+from PyQt5.QtWidgets import QAbstractItemView
 from tkinter.messagebox import askyesno
 from datetime import datetime, date
 
@@ -11,6 +12,7 @@ from conu.classes.Site import Site
 from conu.classes.ItemDepartment import ItemDepartment
 from conu.classes.AssigneeDepartment import AssigneeDepartment
 from conu.classes.RecurringWorkOrderItem import RecurringWorkOrderItem
+from conu.classes.Form import Form
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.RecurringWorkOrder import RecurringWorkOrder
 from conu.classes.ServiceTracker import ServiceTracker
@@ -615,6 +617,28 @@ def save_workorder_as_excel(main_window):
     selected_entity.save()
 
 
+def print_workorder(main_window):
+
+    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
+
+    if not selected_id:
+        return
+
+    selected_entity = WorkOrder.get()[selected_id]
+
+    forms = select_by_attrs_dict(Form)
+    SelectWindow(
+        forms,
+        None,
+        None,
+        None,
+        {"id": "ID", "name": "Name", "path": "Path"},
+        None,
+        QAbstractItemView.SelectionMode.MultiSelection,
+        selected_entity,
+    )
+
+
 def set_workorder_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
@@ -635,6 +659,7 @@ def set_workorder_button_visibility(main_window):
                 main_window.ui.workorder_listingview_btnEdit,
                 main_window.ui.workorder_listingview_btnDelete,
                 main_window.ui.workorder_listingview_btnSaveAsExcel,
+                main_window.ui.workorder_listingview_btnPrint,
             ],
             is_visible=selected_row_id(
                 main_window.ui.workorder_listingview_tblWorkOrder
@@ -928,4 +953,7 @@ def connect_workorder_actions(main_window) -> None:
     )
     main_window.ui.workorder_listingview_btnSaveAsExcel.clicked.connect(
         lambda: save_workorder_as_excel(main_window)
+    )
+    main_window.ui.workorder_listingview_btnPrint.clicked.connect(
+        lambda: print_workorder(main_window)
     )

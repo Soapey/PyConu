@@ -15,6 +15,8 @@ from conu.ui.components.Notification import Notification
 import openpyxl
 from openpyxl.styles import Alignment, Border, Side, Font
 from openpyxl.utils import range_boundaries
+import win32com.client as win32
+import os
 
 
 class WorkOrder:
@@ -532,7 +534,7 @@ class WorkOrder:
                     "Error saving work order to specified path.",
                 )
 
-    def save(self):
+    def save(self, print_on_save: bool = False):
 
         A4_WIDTH_MM = 210
         A4_MARGIN_MM = 10
@@ -853,3 +855,18 @@ class WorkOrder:
                     f"Save failed, check if file with same name ({excel_file_name}) is already open."
                 ],
             ).show()
+        finally:
+            workbook.close()
+
+        if print_on_save:
+            excel = win32.Dispatch("Excel.Application")
+            _print_workbook = excel.Workbooks.Open(excel_file_path)
+            _print_worksheet = _print_workbook.ActiveSheet
+            _print_worksheet.PrintOut()
+            if excel.Workbooks.Count == 1:
+                _print_workbook.Close(False)
+                excel.Quit()
+            else:
+                _print_workbook.Close(False)
+            os.remove(excel_file_path)
+

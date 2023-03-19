@@ -187,10 +187,14 @@ def selected_row_id(tbl):
     return id
 
 
-def select_file_path() -> str:
+def select_file_path(file_types=None) -> str:
+
+    if not file_types:
+        file_types = [("Excel and Word files", "*.xlsx;*.xls;*.docx;*.doc")]
+
     root = tk.Tk()
     root.withdraw()
-    file_path = filedialog.askopenfilename()
+    file_path = filedialog.askopenfilename(filetypes=file_types)
     if file_path:
         return file_path
     else:
