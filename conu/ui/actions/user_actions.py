@@ -109,7 +109,7 @@ def new_user(main_window) -> None:
     navigate(main_window, Page.USER_ENTRYFORM)
 
 
-def edit_user(main_window, user_id: int) -> None:
+def edit_user(main_window, user_id: int = None) -> None:
 
     if not user_id:
         user_id = selected_row_id(main_window.ui.user_listingview_tblUser)
@@ -273,13 +273,6 @@ def save_user(main_window) -> None:
     ):
         return
 
-    global global_users
-    selected_id = selected_row_id(main_window.ui.user_listingview_tblUser)
-    matches = list(select_by_attrs_dict(User, {"id": selected_id}).values())
-    match = None
-    if matches:
-        match = matches[0]
-
     old_password = main_window.ui.user_entryform_txtOldPassword.text()
     new_password = main_window.ui.user_entryform_txtNewPassword.text()
 
@@ -296,8 +289,13 @@ def save_user(main_window) -> None:
         main_window.ui.user_entryform_spnPermissionLevel.value(),
         main_window.ui.user_entryform_chkAvailable.isChecked(),
     )
+
     if not old_password or not new_password:
-        entity.password = match.password
+        if id_text := main_window.ui.user_entryform_lblId.text():
+            _id = int(id_text)
+            if matches := list(select_by_attrs_dict(User, {"id": _id}).values()):
+                match = matches[0]
+                entity.password = match.password
     else:
         entity.password = hash_sha512(
             main_window.ui.user_entryform_txtNewPassword.text()
