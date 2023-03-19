@@ -2,7 +2,6 @@
 Must Have
 -------------------------------------------------------------------------------------------------------------------
 19/3/23 - Sunday
-* Add save() function to WorkOrder
 * Add print() function to WorkOrder
 * Functionality to offer Forms to be able to be printed (from option checklist) upon printing a WorkOrder
 * Work Order listingview should show "Is Due" column

@@ -11,9 +11,4 @@ class Notification(winotify.Notification):
         else:
             message = "\n".join(f"• {message}" for message in message_list)
 
-        super().__init__(
-            app_id="Conu",
-            title=title,
-            msg=message,
-            icon=str()
-        )
+        super().__init__(app_id="Conu", title=title, msg=message, icon=str())

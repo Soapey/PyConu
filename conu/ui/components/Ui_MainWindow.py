@@ -2938,16 +2938,16 @@ class Ui_MainWindow(object):
 "}")
         self.workorder_listingview_btnDelete.setObjectName("workorder_listingview_btnDelete")
         self.gridLayout_24.addWidget(self.workorder_listingview_btnDelete, 1, 2, 1, 1)
-        self.workorder_listingview_btnPDF = QtWidgets.QPushButton(self.page_workorder_listingview)
+        self.workorder_listingview_btnSaveAsExcel = QtWidgets.QPushButton(self.page_workorder_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.workorder_listingview_btnPDF.setFont(font)
-        self.workorder_listingview_btnPDF.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.workorder_listingview_btnPDF.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.workorder_listingview_btnPDF.setStyleSheet("QPushButton {\n"
+        self.workorder_listingview_btnSaveAsExcel.setFont(font)
+        self.workorder_listingview_btnSaveAsExcel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_listingview_btnSaveAsExcel.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_listingview_btnSaveAsExcel.setStyleSheet("QPushButton {\n"
 "    color: white;\n"
 "    background-color: #3a86ff;\n"
 "    border-style: outset;\n"
@@ -2958,8 +2958,8 @@ class Ui_MainWindow(object):
 "QPushButton:hover {\n"
 "        background-color: #457b9d;\n"
 "}")
-        self.workorder_listingview_btnPDF.setObjectName("workorder_listingview_btnPDF")
-        self.gridLayout_24.addWidget(self.workorder_listingview_btnPDF, 1, 3, 1, 1)
+        self.workorder_listingview_btnSaveAsExcel.setObjectName("workorder_listingview_btnSaveAsExcel")
+        self.gridLayout_24.addWidget(self.workorder_listingview_btnSaveAsExcel, 1, 3, 1, 1)
         self.label_54 = QtWidgets.QLabel(self.page_workorder_listingview)
         font = QtGui.QFont()
         font.setFamily("Impact")
@@ -3113,7 +3113,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 1203, 1338))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 568, 1338))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.gridLayout_26 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_26.setObjectName("gridLayout_26")
@@ -5155,7 +5155,7 @@ class Ui_MainWindow(object):
         self.workorder_listingview_btnNew.setText(_translate("MainWindow", "New"))
         self.workorder_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
         self.workorder_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
-        self.workorder_listingview_btnPDF.setText(_translate("MainWindow", "PDF"))
+        self.workorder_listingview_btnSaveAsExcel.setText(_translate("MainWindow", "Save As Excel"))
         self.label_54.setText(_translate("MainWindow", "WORK ORDERS"))
         self.workorder_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
         self.workorder_listingview_tblWorkOrder.setSortingEnabled(True)

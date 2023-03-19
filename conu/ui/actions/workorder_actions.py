@@ -603,7 +603,7 @@ def workorders_by_search(main_window, search_text: str) -> None:
     )
 
 
-def save_workorder_to_pdf(main_window):
+def save_workorder_as_excel(main_window):
 
     selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
 
@@ -612,7 +612,7 @@ def save_workorder_to_pdf(main_window):
 
     selected_entity = WorkOrder.get()[selected_id]
 
-    selected_entity.save_to_pdf()
+    selected_entity.save()
 
 
 def set_workorder_button_visibility(main_window):
@@ -926,6 +926,6 @@ def connect_workorder_actions(main_window) -> None:
     main_window.ui.workorder_entryform_chkIsComplete.stateChanged.connect(
         lambda: toggle_completed_section(main_window)
     )
-    main_window.ui.workorder_listingview_btnPDF.clicked.connect(
-        lambda: save_workorder_to_pdf(main_window)
+    main_window.ui.workorder_listingview_btnSaveAsExcel.clicked.connect(
+        lambda: save_workorder_as_excel(main_window)
     )

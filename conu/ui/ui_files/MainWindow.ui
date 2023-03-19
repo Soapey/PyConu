@@ -4712,7 +4712,7 @@ QPushButton:hover {
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QPushButton" name="workorder_listingview_btnPDF">
+         <widget class="QPushButton" name="workorder_listingview_btnSaveAsExcel">
           <property name="font">
            <font>
             <family>Arial</family>
@@ -4741,7 +4741,7 @@ QPushButton:hover {
 }</string>
           </property>
           <property name="text">
-           <string>PDF</string>
+           <string>Save As Excel</string>
           </property>
          </widget>
         </item>
@@ -4997,7 +4997,7 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1203</width>
+             <width>568</width>
              <height>1338</height>
             </rect>
            </property>

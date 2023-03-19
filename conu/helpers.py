@@ -8,6 +8,8 @@ import tkinter as tk
 from tkinter import filedialog
 from typing import List
 from conu.ui.PageEnum import Page
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 
 def navigate(main_window, page: Page):
