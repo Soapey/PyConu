@@ -20,13 +20,13 @@ if __name__ == "__main__":
         clean = bool(int(sys.argv[1]))
     except:
         print("First parameter must be database 'clean' boolean.")
-        sys.exit()
+        clean = False
 
     try:
         add_data = bool(int(sys.argv[2]))
     except:
         print("Second parameter must be 'add_test_data' boolean.")
-        sys.exit()
+        add_data = False
 
     init_db(clean=clean)
 

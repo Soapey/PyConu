@@ -1,15 +1,12 @@
 ===================================================================================================================
 Must Have
--------------------------------------------------------------------------------------------------------------------
+===================================================================================================================
 Will Have
-* Work Order listingview should show "Is Due" column
 * Add export buttons to each table that creates a csv file for the table
 * Functionality to auto-open email with pdf WorkOrder attached
 * Improve toast notifications
-* Fix bug to do with old and new password validation for changing passwords
-* Cache SQL queries in MainWindow "cache" attribute
-* Levenshtein formula to check for similar names
-* When names of entities are entered, trim them before saving
+* Allow user to select what printer to print from
 ===================================================================================================================
 Could Have
 * Add image capability for Work Order
+* Cache SQL queries in MainWindow "cache" attribute

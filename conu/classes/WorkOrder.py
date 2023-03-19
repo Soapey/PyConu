@@ -549,7 +549,7 @@ class WorkOrder:
         column_range = sheet.iter_cols(min_col=1, max_col=6)
         for column in column_range:
             column_letter = column[0].column_letter
-            sheet.column_dimensions[column_letter].width = 17.71
+            sheet.column_dimensions[column_letter].width = 17.00
 
         border_style = Side(style="thin", color="000000")
         border = Border(
@@ -680,7 +680,7 @@ class WorkOrder:
 
         lines = taskdescription_value.value.count("\n")
         row_height = (lines * 17) + 6
-        sheet.row_dimensions[13].height = row_height
+        sheet.row_dimensions[13].height = max(15.00, row_height)
 
         start_col, start_row, end_col, end_row = range_boundaries("A13:F13")
         for row in sheet.iter_rows(
@@ -757,7 +757,7 @@ class WorkOrder:
 
             lines = comments_value.value.count("\n")
             row_height = (lines * 17) + 6
-            sheet.row_dimensions[row].height = row_height
+            sheet.row_dimensions[row].height = max(15.00, row_height)
 
             start_col, start_row, end_col, end_row = range_boundaries(f"A{row}:F{row}")
             for _row in sheet.iter_rows(
@@ -791,7 +791,7 @@ class WorkOrder:
 
                 lines = closeoutcomments_value.value.count("\n")
                 row_height = (lines * 17) + 6
-                sheet.row_dimensions[row].height = row_height
+                sheet.row_dimensions[row].height = max(15.00, row_height)
 
                 start_col, start_row, end_col, end_row = range_boundaries(
                     f"A{row}:F{row}"
@@ -829,18 +829,26 @@ class WorkOrder:
         sheet.page_margins.top = margin_size
         sheet.page_margins.bottom = margin_size
         sheet.page_margins.footer = 0
-        sheet.page_setup.fitToWidth = False
         sheet.page_setup.fitToPage = True
 
         sheet.title = f"Work Order {self.id}"
 
-        file_directory = select_directory()
+        file_directory = None
+        excel_file_name = None
+        excel_file_path = None
 
-        if not file_directory:
-            return
+        if not print_on_save:
+            file_directory = select_directory()
 
-        excel_file_name = f"{site.name} Work Order ({self.id}).xlsx"
-        excel_file_path = rf"{file_directory}/{excel_file_name}"
+            if not file_directory:
+                return
+
+            excel_file_name = f"{site.name} Work Order ({self.id}).xlsx"
+            excel_file_path = rf"{file_directory}/{excel_file_name}"
+        else:
+            file_directory = os.path.expanduser("~/Documents")
+            excel_file_name = f"TEMP{site.name} Work Order ({self.id}).xlsx"
+            excel_file_path = rf"{file_directory}/{excel_file_name}"
 
         try:
             workbook.save(excel_file_path)
@@ -869,4 +877,3 @@ class WorkOrder:
             else:
                 _print_workbook.Close(False)
             os.remove(excel_file_path)
-

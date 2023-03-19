@@ -96,8 +96,10 @@ class SelectWindow(QMainWindow):
                     if ".doc" in selected_form.path:
                         # Open Word application
                         word = win32.Dispatch("Word.Application")
-                        rest = selected_form.path.split("/")[1:]
-                        word_path = os.path.join("C:", os.sep, *rest)
+                        path_sections = selected_form.path.split("/")
+                        drive = path_sections[0]
+                        directories = selected_form.path.split("/")[1:]
+                        word_path = os.path.join(drive, os.sep, *directories)
                         doc = word.Documents.Open(word_path)
                         doc.PrintOut()
                         doc.Close()
