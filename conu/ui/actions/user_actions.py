@@ -164,13 +164,6 @@ def user_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
 
-    selected_id = selected_row_id(main_window.ui.user_listingview_tblUser)
-    all_entities = list(select_by_attrs_dict(User).values())
-    selected_entities = list(filter(lambda e: e.id == selected_id, all_entities))
-    selected_entity: User = None
-    if selected_entities:
-        selected_entity = selected_entities[0]
-
     if not main_window.ui.user_entryform_txtFirstName.text():
         error_strings.append("First Name field cannot be blank.")
 
@@ -184,27 +177,19 @@ def user_entryform_is_valid(main_window) -> bool:
         error_strings.append("Email Address is not valid.")
 
     username = main_window.ui.user_entryform_txtUsername.text()
+    existing_users = None
+    existing_user = None
     if not username:
         error_strings.append("Username field cannot be blank.")
     else:
         existing_users = select_by_attrs_dict(User, {"username": username})
 
         if existing_users:
-            error_strings.append(f"Username: {username} already taken.")
 
-    entities_with_username = list(
-        filter(
-            lambda e: e.username == username,
-            all_entities,
-        )
-    )
+            existing_user = list(existing_users.values())[0]
 
-    if (
-        entities_with_username
-        and selected_entity
-        and selected_entity.username != username
-    ):
-        error_strings.append("Username already taken.")
+            if existing_user.id != main_window.current_user.id:
+                error_strings.append(f"Username: {username} already taken.")
 
     if main_window.current_user.permission_level <= 2:
         old_password = main_window.ui.user_entryform_txtOldPassword.text()
@@ -217,10 +202,14 @@ def user_entryform_is_valid(main_window) -> bool:
             error_strings.append("New Password field cannot be blank.")
 
         if old_password and new_password:
-            if selected_id:
-                if selected_entity:
-                    if hash_sha512(old_password) != selected_entity.password:
-                        error_strings.append("Old Password is not correct.")
+            selected_id = None
+            if id_text := main_window.ui.user_entryform_lblId.text():
+                all_entities = select_by_attrs_dict(User)
+                selected_id = int(id_text)
+                selected_entity = all_entities[selected_id]
+
+                if hash_sha512(old_password) != selected_entity.password:
+                    error_strings.append("Old Password is not correct.")
             else:
                 if old_password != new_password:
                     error_strings.append("Old Password does not match New Password.")
