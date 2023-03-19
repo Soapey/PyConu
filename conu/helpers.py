@@ -195,6 +195,13 @@ def select_file_path() -> str:
         return None
 
 
+def select_directory():
+    root = tk.Tk()
+    root.withdraw()
+    folder_path = filedialog.askdirectory()
+    return folder_path
+
+
 def set_button_visibility(buttons: list, is_visible: bool):
 
     for button in buttons:

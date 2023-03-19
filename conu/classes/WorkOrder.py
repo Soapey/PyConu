@@ -10,8 +10,8 @@ from conu.classes.User import User
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 from fpdf import FPDF
-from conu.helpers import select_file_path, get_max_height
-import math
+from conu.helpers import select_directory, get_max_height
+from conu.ui.components.Notification import Notification
 
 
 class WorkOrder:
@@ -116,7 +116,7 @@ class WorkOrder:
                 format_nullable_database_date(row[7]),
                 row[8],
                 format_nullable_database_date(row[9]),
-                row[CELL_HEIGHT_MM],
+                row[10],
                 row[11],
             )
             for row in rows
@@ -364,11 +364,12 @@ class WorkOrder:
             border=1,
             ln=1,
         )
+        site = self.site()
         pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Site", align="R", border=1)
         pdf.cell(
             CELL_WIDTH_MM * (COLUMNS - 2),
             CELL_HEIGHT_MM,
-            self.site().name,
+            site.name,
             border=1,
             ln=1,
         )
@@ -508,13 +509,25 @@ class WorkOrder:
         pdf.ln()
         pdf.ln()
 
-        file_path = select_file_path()
+        file_directory = select_directory()
+
+        if not file_directory:
+            return
+
+        file_path = f"{file_directory}\\{site.name} Work Order ({self.id}).pdf"
 
         if file_path:
-            pdf.output(file_path, "F")
-            print("Work order document created and saved successfully!")
-        else:
-            print("No file path selected, work order document not created.")
+            try:
+                pdf.output(file_path, "F")
+                Notification(
+                    "Work Order PDF Created Successfully",
+                    [f"Work order saved to path: {file_path}"],
+                ).show()
+            except:
+                Notification(
+                    "Work Order PDF Creation Failed",
+                    "Error saving work order to specified path.",
+                )
 
 
 if __name__ == "__main__":

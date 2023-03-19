@@ -21,7 +21,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>17</number>
+       <number>16</number>
       </property>
       <widget class="QWidget" name="page_assignee_listingview">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -535,7 +535,7 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
+             <width>98</width>
              <height>38</height>
             </rect>
            </property>
@@ -3049,8 +3049,8 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
-             <height>183</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -3894,8 +3894,8 @@ QTextEdit:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1081</width>
-             <height>207</height>
+             <width>98</width>
+             <height>38</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_21">
@@ -4609,32 +4609,6 @@ QPushButton:hover {
       </widget>
       <widget class="QWidget" name="page_workorder_listingview">
        <layout class="QGridLayout" name="gridLayout_24">
-        <item row="0" column="0" colspan="3">
-         <widget class="QLabel" name="label_54">
-          <property name="font">
-           <font>
-            <family>Impact</family>
-            <pointsize>20</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-	color: white;
-    background-color: #05668d;
-    border-style: outset;
-    border-radius: 10px;
-    padding: 10px;
-	margin: 0px 0px 20px 0px;
-}</string>
-          </property>
-          <property name="text">
-           <string>WORK ORDERS</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="workorder_listingview_btnNew">
           <property name="font">
@@ -4737,7 +4711,67 @@ QPushButton:hover {
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="3">
+        <item row="1" column="3">
+         <widget class="QPushButton" name="workorder_listingview_btnPDF">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: white;
+    background-color: #3a86ff;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+	    background-color: #457b9d;
+}</string>
+          </property>
+          <property name="text">
+           <string>PDF</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QLabel" name="label_54">
+          <property name="font">
+           <font>
+            <family>Impact</family>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	color: white;
+    background-color: #05668d;
+    border-style: outset;
+    border-radius: 10px;
+    padding: 10px;
+	margin: 0px 0px 20px 0px;
+}</string>
+          </property>
+          <property name="text">
+           <string>WORK ORDERS</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="4">
          <widget class="QLineEdit" name="workorder_listingview_txtSearch">
           <property name="font">
            <font>
@@ -4768,7 +4802,7 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="3" column="0" colspan="3">
+        <item row="3" column="0" colspan="4">
          <widget class="QTableWidget" name="workorder_listingview_tblWorkOrder">
           <property name="focusPolicy">
            <enum>Qt::ClickFocus</enum>
@@ -4962,7 +4996,7 @@ QPushButton:hover {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-579</y>
+             <y>0</y>
              <width>1203</width>
              <height>1338</height>
             </rect>
@@ -6318,7 +6352,7 @@ QTableWidget:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1203</width>
+             <width>739</width>
              <height>991</height>
             </rect>
            </property>

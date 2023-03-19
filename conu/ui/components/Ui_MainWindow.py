@@ -334,7 +334,7 @@ class Ui_MainWindow(object):
         self.assignee_entryform_scrollDepartments.setWidgetResizable(True)
         self.assignee_entryform_scrollDepartments.setObjectName("assignee_entryform_scrollDepartments")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 38, 38))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -1881,7 +1881,7 @@ class Ui_MainWindow(object):
         self.user_entryform_scrollDepartments.setWidgetResizable(True)
         self.user_entryform_scrollDepartments.setObjectName("user_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 38, 183))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.gridLayout_16 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_16.setObjectName("gridLayout_16")
@@ -2413,7 +2413,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1081, 207))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
@@ -2872,22 +2872,6 @@ class Ui_MainWindow(object):
         self.page_workorder_listingview.setObjectName("page_workorder_listingview")
         self.gridLayout_24 = QtWidgets.QGridLayout(self.page_workorder_listingview)
         self.gridLayout_24.setObjectName("gridLayout_24")
-        self.label_54 = QtWidgets.QLabel(self.page_workorder_listingview)
-        font = QtGui.QFont()
-        font.setFamily("Impact")
-        font.setPointSize(20)
-        self.label_54.setFont(font)
-        self.label_54.setStyleSheet("QLabel {\n"
-"    color: white;\n"
-"    background-color: #05668d;\n"
-"    border-style: outset;\n"
-"    border-radius: 10px;\n"
-"    padding: 10px;\n"
-"    margin: 0px 0px 20px 0px;\n"
-"}")
-        self.label_54.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_54.setObjectName("label_54")
-        self.gridLayout_24.addWidget(self.label_54, 0, 0, 1, 3)
         self.workorder_listingview_btnNew = QtWidgets.QPushButton(self.page_workorder_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -2954,6 +2938,44 @@ class Ui_MainWindow(object):
 "}")
         self.workorder_listingview_btnDelete.setObjectName("workorder_listingview_btnDelete")
         self.gridLayout_24.addWidget(self.workorder_listingview_btnDelete, 1, 2, 1, 1)
+        self.workorder_listingview_btnPDF = QtWidgets.QPushButton(self.page_workorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.workorder_listingview_btnPDF.setFont(font)
+        self.workorder_listingview_btnPDF.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.workorder_listingview_btnPDF.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.workorder_listingview_btnPDF.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    background-color: #3a86ff;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"        background-color: #457b9d;\n"
+"}")
+        self.workorder_listingview_btnPDF.setObjectName("workorder_listingview_btnPDF")
+        self.gridLayout_24.addWidget(self.workorder_listingview_btnPDF, 1, 3, 1, 1)
+        self.label_54 = QtWidgets.QLabel(self.page_workorder_listingview)
+        font = QtGui.QFont()
+        font.setFamily("Impact")
+        font.setPointSize(20)
+        self.label_54.setFont(font)
+        self.label_54.setStyleSheet("QLabel {\n"
+"    color: white;\n"
+"    background-color: #05668d;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    margin: 0px 0px 20px 0px;\n"
+"}")
+        self.label_54.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_54.setObjectName("label_54")
+        self.gridLayout_24.addWidget(self.label_54, 0, 0, 1, 4)
         self.workorder_listingview_txtSearch = QtWidgets.QLineEdit(self.page_workorder_listingview)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -2974,7 +2996,7 @@ class Ui_MainWindow(object):
 "}")
         self.workorder_listingview_txtSearch.setClearButtonEnabled(True)
         self.workorder_listingview_txtSearch.setObjectName("workorder_listingview_txtSearch")
-        self.gridLayout_24.addWidget(self.workorder_listingview_txtSearch, 2, 0, 1, 3)
+        self.gridLayout_24.addWidget(self.workorder_listingview_txtSearch, 2, 0, 1, 4)
         self.workorder_listingview_tblWorkOrder = QtWidgets.QTableWidget(self.page_workorder_listingview)
         self.workorder_listingview_tblWorkOrder.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.workorder_listingview_tblWorkOrder.setStyleSheet("QTableWidget {\n"
@@ -3001,7 +3023,7 @@ class Ui_MainWindow(object):
         self.workorder_listingview_tblWorkOrder.setRowCount(0)
         self.workorder_listingview_tblWorkOrder.horizontalHeader().setStretchLastSection(True)
         self.workorder_listingview_tblWorkOrder.verticalHeader().setVisible(False)
-        self.gridLayout_24.addWidget(self.workorder_listingview_tblWorkOrder, 3, 0, 1, 3)
+        self.gridLayout_24.addWidget(self.workorder_listingview_tblWorkOrder, 3, 0, 1, 4)
         self.page_handler.addWidget(self.page_workorder_listingview)
         self.page_workorder_entryform = QtWidgets.QWidget()
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Preferred)
@@ -3091,7 +3113,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, -579, 1203, 1338))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 1203, 1338))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.gridLayout_26 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_4)
         self.gridLayout_26.setObjectName("gridLayout_26")
@@ -3964,7 +3986,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 1203, 991))
+        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 739, 991))
         self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
         self.gridLayout_28 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_28.setObjectName("gridLayout_28")
@@ -4989,7 +5011,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(17)
+        self.page_handler.setCurrentIndex(16)
         self.recurringworkorder_entryform_page_handler.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)
@@ -5130,10 +5152,11 @@ class Ui_MainWindow(object):
         self.label_51.setText(_translate("MainWindow", "Service Due Units"))
         self.label_53.setText(_translate("MainWindow", "Item"))
         self.servicetracker_entryform_btnSelectItem.setText(_translate("MainWindow", "Select Item"))
-        self.label_54.setText(_translate("MainWindow", "WORK ORDERS"))
         self.workorder_listingview_btnNew.setText(_translate("MainWindow", "New"))
         self.workorder_listingview_btnEdit.setText(_translate("MainWindow", "Edit"))
         self.workorder_listingview_btnDelete.setText(_translate("MainWindow", "Delete"))
+        self.workorder_listingview_btnPDF.setText(_translate("MainWindow", "PDF"))
+        self.label_54.setText(_translate("MainWindow", "WORK ORDERS"))
         self.workorder_listingview_txtSearch.setPlaceholderText(_translate("MainWindow", "Search"))
         self.workorder_listingview_tblWorkOrder.setSortingEnabled(True)
         self.workorder_entryform_btnBack.setText(_translate("MainWindow", "Back to listing view"))

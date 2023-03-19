@@ -603,6 +603,18 @@ def workorders_by_search(main_window, search_text: str) -> None:
     )
 
 
+def save_workorder_to_pdf(main_window):
+
+    selected_id = selected_row_id(main_window.ui.workorder_listingview_tblWorkOrder)
+
+    if not selected_id:
+        return
+
+    selected_entity = WorkOrder.get()[selected_id]
+
+    selected_entity.save_to_pdf()
+
+
 def set_workorder_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
@@ -622,6 +634,7 @@ def set_workorder_button_visibility(main_window):
             [
                 main_window.ui.workorder_listingview_btnEdit,
                 main_window.ui.workorder_listingview_btnDelete,
+                main_window.ui.workorder_listingview_btnPDF,
             ],
             is_visible=selected_row_id(
                 main_window.ui.workorder_listingview_tblWorkOrder
@@ -912,4 +925,7 @@ def connect_workorder_actions(main_window) -> None:
     )
     main_window.ui.workorder_entryform_chkIsComplete.stateChanged.connect(
         lambda: toggle_completed_section(main_window)
+    )
+    main_window.ui.workorder_listingview_btnPDF.clicked.connect(
+        lambda: save_workorder_to_pdf(main_window)
     )
