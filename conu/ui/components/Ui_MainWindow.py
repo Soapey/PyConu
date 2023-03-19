@@ -334,7 +334,7 @@ class Ui_MainWindow(object):
         self.assignee_entryform_scrollDepartments.setWidgetResizable(True)
         self.assignee_entryform_scrollDepartments.setObjectName("assignee_entryform_scrollDepartments")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 38, 38))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -1874,31 +1874,6 @@ class Ui_MainWindow(object):
         self.label_16.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
         self.label_16.setObjectName("label_16")
         self.gridLayout_15.addWidget(self.label_16, 11, 0, 1, 1)
-        self.user_entryform_scrollDepartments = QtWidgets.QScrollArea(self.page_user_entryform)
-        self.user_entryform_scrollDepartments.setStyleSheet("QScrollArea {\n"
-"    min-height: 200px;\n"
-"}")
-        self.user_entryform_scrollDepartments.setWidgetResizable(True)
-        self.user_entryform_scrollDepartments.setObjectName("user_entryform_scrollDepartments")
-        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 38, 183))
-        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-        self.gridLayout_16 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_2)
-        self.gridLayout_16.setObjectName("gridLayout_16")
-        self.user_entryform_groupDepartments = QtWidgets.QGroupBox(self.scrollAreaWidgetContents_2)
-        self.user_entryform_groupDepartments.setStyleSheet("QGroupBox {\n"
-"    border: none;\n"
-"}")
-        self.user_entryform_groupDepartments.setTitle("")
-        self.user_entryform_groupDepartments.setObjectName("user_entryform_groupDepartments")
-        self.gridLayout_17 = QtWidgets.QGridLayout(self.user_entryform_groupDepartments)
-        self.gridLayout_17.setObjectName("gridLayout_17")
-        self.user_entryform_vboxDepartments = QtWidgets.QVBoxLayout()
-        self.user_entryform_vboxDepartments.setObjectName("user_entryform_vboxDepartments")
-        self.gridLayout_17.addLayout(self.user_entryform_vboxDepartments, 0, 0, 1, 1)
-        self.gridLayout_16.addWidget(self.user_entryform_groupDepartments, 0, 0, 1, 1)
-        self.user_entryform_scrollDepartments.setWidget(self.scrollAreaWidgetContents_2)
-        self.gridLayout_15.addWidget(self.user_entryform_scrollDepartments, 11, 1, 1, 1)
         self.user_entryform_spnPermissionLevel = QtWidgets.QSpinBox(self.page_user_entryform)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -2098,6 +2073,37 @@ class Ui_MainWindow(object):
         self.user_entryform_txtNewPassword.setEchoMode(QtWidgets.QLineEdit.Password)
         self.user_entryform_txtNewPassword.setObjectName("user_entryform_txtNewPassword")
         self.gridLayout_15.addWidget(self.user_entryform_txtNewPassword, 8, 1, 1, 2)
+        self.user_entryform_scrollDepartments = QtWidgets.QScrollArea(self.page_user_entryform)
+        self.user_entryform_scrollDepartments.setStyleSheet("QScrollArea {\n"
+"    min-height: 200px;\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 4px;\n"
+"}")
+        self.user_entryform_scrollDepartments.setWidgetResizable(True)
+        self.user_entryform_scrollDepartments.setObjectName("user_entryform_scrollDepartments")
+        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 1073, 200))
+        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        self.gridLayout_16 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_2)
+        self.gridLayout_16.setObjectName("gridLayout_16")
+        self.user_entryform_groupDepartments = QtWidgets.QGroupBox(self.scrollAreaWidgetContents_2)
+        self.user_entryform_groupDepartments.setStyleSheet("QGroupBox {\n"
+"    border: none;\n"
+"}")
+        self.user_entryform_groupDepartments.setTitle("")
+        self.user_entryform_groupDepartments.setObjectName("user_entryform_groupDepartments")
+        self.gridLayout_17 = QtWidgets.QGridLayout(self.user_entryform_groupDepartments)
+        self.gridLayout_17.setObjectName("gridLayout_17")
+        self.user_entryform_vboxDepartments = QtWidgets.QVBoxLayout()
+        self.user_entryform_vboxDepartments.setObjectName("user_entryform_vboxDepartments")
+        self.gridLayout_17.addLayout(self.user_entryform_vboxDepartments, 0, 0, 1, 1)
+        self.gridLayout_16.addWidget(self.user_entryform_groupDepartments, 0, 0, 1, 1)
+        self.user_entryform_scrollDepartments.setWidget(self.scrollAreaWidgetContents_2)
+        self.gridLayout_15.addWidget(self.user_entryform_scrollDepartments, 11, 1, 1, 2)
         self.page_handler.addWidget(self.page_user_entryform)
         self.page_item_listingview = QtWidgets.QWidget()
         self.page_item_listingview.setObjectName("page_item_listingview")
@@ -2413,7 +2419,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 50, 200))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1081, 207))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
@@ -5033,7 +5039,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.page_handler.setCurrentIndex(16)
+        self.page_handler.setCurrentIndex(11)
         self.recurringworkorder_entryform_page_handler.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.assignee_listingview_txtSearch, self.assignee_entryform_txtName)

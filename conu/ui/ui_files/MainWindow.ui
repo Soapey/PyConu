@@ -21,7 +21,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>16</number>
+       <number>11</number>
       </property>
       <widget class="QWidget" name="page_assignee_listingview">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -535,7 +535,7 @@ QPushButton:hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>38</width>
+             <width>98</width>
              <height>38</height>
             </rect>
            </property>
@@ -3034,47 +3034,6 @@ QPushButton:hover {
           </property>
          </widget>
         </item>
-        <item row="11" column="1">
-         <widget class="QScrollArea" name="user_entryform_scrollDepartments">
-          <property name="styleSheet">
-           <string notr="true">QScrollArea {
-	min-height: 200px;
-}</string>
-          </property>
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>38</width>
-             <height>183</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_16">
-            <item row="0" column="0">
-             <widget class="QGroupBox" name="user_entryform_groupDepartments">
-              <property name="styleSheet">
-               <string notr="true">QGroupBox {
-	border: none;
-}</string>
-              </property>
-              <property name="title">
-               <string/>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_17">
-               <item row="0" column="0">
-                <layout class="QVBoxLayout" name="user_entryform_vboxDepartments"/>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
         <item row="9" column="1" colspan="2">
          <widget class="QSpinBox" name="user_entryform_spnPermissionLevel">
           <property name="font">
@@ -3376,6 +3335,53 @@ QLineEdit:focus {
           <property name="placeholderText">
            <string>REQUIRED IF NOT ADMIN</string>
           </property>
+         </widget>
+        </item>
+        <item row="11" column="1" colspan="2">
+         <widget class="QScrollArea" name="user_entryform_scrollDepartments">
+          <property name="styleSheet">
+           <string notr="true">QScrollArea {
+	min-height: 200px;
+	background-color: white;
+	border-style: inset;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: black;
+	padding: 4px;
+}</string>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>1073</width>
+             <height>200</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_16">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="user_entryform_groupDepartments">
+              <property name="styleSheet">
+               <string notr="true">QGroupBox {
+	border: none;
+}</string>
+              </property>
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_17">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="user_entryform_vboxDepartments"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -3894,8 +3900,8 @@ QTextEdit:focus {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>50</width>
-             <height>200</height>
+             <width>1081</width>
+             <height>207</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_21">
