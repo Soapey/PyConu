@@ -634,7 +634,7 @@ def set_workorder_button_visibility(main_window):
             [
                 main_window.ui.workorder_listingview_btnEdit,
                 main_window.ui.workorder_listingview_btnDelete,
-                main_window.ui.workorder_listingview_btnPDF,
+                main_window.ui.workorder_listingview_btnSaveAsExcel,
             ],
             is_visible=selected_row_id(
                 main_window.ui.workorder_listingview_tblWorkOrder
