@@ -231,26 +231,33 @@ def user_entryform_is_valid(main_window) -> bool:
 
 def save_and_delete_userdepartments(main_window, entity_id):
 
+    user_departments = select_by_attrs_dict(
+        UserDepartment, {"user_id": entity_id}
+    ).values()
+    department_ids = [ud.department_id for ud in user_departments]
+
     userdepartments_to_save = list()
     vboxDepartments = main_window.ui.user_entryform_vboxDepartments
+
     for i in range(vboxDepartments.count()):
         widget = vboxDepartments.itemAt(i).widget()
+
         if isinstance(widget, QCheckBox):
             department = widget.property("object")
 
             if widget.isChecked():
 
-                if department.id not in user_department_ids:
+                if department.id not in department_ids:
                     userdepartments_to_save.append(
                         UserDepartment(None, entity_id, department.id)
                     )
 
             else:
 
-                if department.id in user_department_ids:
+                if department.id in department_ids:
                     delete_by_attrs_dict(
                         UserDepartment,
-                        {"assignee_id": entity_id, "department_id": department.id},
+                        {"user_id": entity_id, "department_id": department.id},
                     )
 
     save_by_list(userdepartments_to_save)
@@ -269,6 +276,7 @@ def save_user(main_window) -> None:
     global global_users
     selected_id = selected_row_id(main_window.ui.user_listingview_tblUser)
     matches = list(select_by_attrs_dict(User, {"id": selected_id}).values())
+    match = None
     if matches:
         match = matches[0]
 

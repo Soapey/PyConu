@@ -1,19 +1,29 @@
-from dataclasses import dataclass
 from conu.classes.Department import Department
 from conu.db.SQLiteConnection import SQLiteConnection
 
 
-@dataclass
 class User:
-    id: int
-    first_name: str
-    last_name: str
-    job_title: str
-    email_address: str
-    username: str
-    password: str
-    permission_level: int
-    available: bool
+    def __init__(
+        self,
+        _id: int,
+        _first_name: str,
+        _last_name: str,
+        _job_title: str,
+        _email_address: str,
+        _username: str,
+        _password: str,
+        _permission_level: int,
+        _available: bool,
+    ) -> None:
+        self.id = _id
+        self.first_name = _first_name
+        self.last_name = _last_name
+        self.job_title = _job_title
+        self.email_address = _email_address
+        self.username = _username
+        self.password = _password
+        self.permission_level = _permission_level
+        self.available = _available
 
     def get_departments(self) -> dict:
 
