@@ -245,3 +245,11 @@ def load_query_rows_into_table(table, rows, column_parameters_dict):
                 column_index,
                 QTableWidgetItem(value),
             )
+
+
+def get_max_height(string, pdf, max_width):
+
+    width = pdf.get_string_width(string)
+    lines = int(width / max_width) + 1
+    height = pdf.font_size * 0.3528
+    return lines * height + 3

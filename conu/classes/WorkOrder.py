@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime, date
 from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.WorkOrderItem import WorkOrderItem
 from conu.classes.WorkOrderAssignee import WorkOrderAssignee
@@ -6,9 +6,12 @@ from conu.classes.Item import Item
 from conu.classes.Assignee import Assignee
 from conu.classes.Site import Site
 from conu.classes.Department import Department
+from conu.classes.User import User
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 from fpdf import FPDF
+from conu.helpers import select_file_path, get_max_height
+import math
 
 
 class WorkOrder:
@@ -113,7 +116,7 @@ class WorkOrder:
                 format_nullable_database_date(row[7]),
                 row[8],
                 format_nullable_database_date(row[9]),
-                row[10],
+                row[CELL_HEIGHT_MM],
                 row[11],
             )
             for row in rows
@@ -213,6 +216,35 @@ class WorkOrder:
             for row in rows
         }
 
+    def site(self):
+
+        sites = select_by_attrs_dict(Site, {"id": self.site_id})
+
+        if sites:
+            return sites[self.site_id]
+
+        return None
+
+    def department(self):
+
+        departments = select_by_attrs_dict(Department, {"id": self.department_id})
+
+        if departments:
+            return departments[self.department_id]
+
+        return None
+
+    def prioritylevel(self):
+
+        prioritylevels = select_by_attrs_dict(
+            PriorityLevel, {"id": self.prioritylevel_id}
+        )
+
+        if prioritylevels:
+            return prioritylevels[self.prioritylevel_id]
+
+        return None
+
     def items(self):
 
         with SQLiteConnection() as cur:
@@ -261,32 +293,231 @@ class WorkOrder:
 
         return Assignee.convert_rows_to_instances(rows)
 
+    def raisedby(self):
+
+        users = select_by_attrs_dict(User, {"id": self.raisedby_user_id})
+
+        if users:
+            return users[self.raisedby_user_id]
+
+        return None
+
     def save_to_pdf(self):
 
-        CELL_WIDTH = 40
-        CELL_HEIGHT = 14
-
-        site = select_by_attrs_dict(Site)[self.site_id]
-        department = select_by_attrs_dict(Department)[self.department_id]
-        prioritylevel = select_by_attrs_dict(PriorityLevel)[self.prioritylevel_id]
-        items = self.items()
-        assignees = self.assignees()
+        A4_WIDTH_MM = 210
+        A4_HEIGHT_MM = 297
+        A4_MARGIN_MM = 10
+        A4_WORKAREA_WIDTH_MM = A4_WIDTH_MM - (A4_MARGIN_MM * 2)
+        A4_WORKAREA_HEIGHT_MM = A4_HEIGHT_MM - (A4_MARGIN_MM * 2)
+        COLUMNS = 6
+        CELL_WIDTH_MM = A4_WORKAREA_WIDTH_MM // COLUMNS
+        CELL_HEIGHT_MM = 5
 
         pdf = FPDF()
+        pdf.set_margins(A4_MARGIN_MM, A4_MARGIN_MM, A4_MARGIN_MM)
         pdf.add_page()
-        pdf.set_font("Helvetica", size=12)
+        pdf.set_font("Arial", size=10)
 
-        for i in range(5):
-            for j in range(5):
-                pdf.cell(CELL_WIDTH, CELL_HEIGHT, f"Cell {i}, {j}")
-            pdf.ln(CELL_HEIGHT)
+        pdf.cell(
+            CELL_WIDTH_MM * COLUMNS,
+            CELL_HEIGHT_MM,
+            f"WORK ORDER",
+            align="C",
+            border=1,
+            ln=1,
+        )
+        pdf.ln()
 
-        pdf.output("example.pdf")
+        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Number", align="R", border=1)
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            str(self.id),
+            border=1,
+            ln=1,
+        )
+        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Date Created", align="R", border=1)
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            datetime.strftime(self.date_created, "%d-%m-%Y"),
+            border=1,
+            ln=1,
+        )
+
+        raisedby = self.raisedby()
+        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Raised By", align="R", border=1)
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            f"{raisedby.first_name} {raisedby.last_name}",
+            border=1,
+            ln=1,
+        )
+        pdf.cell(
+            CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Date Allocated", align="R", border=1
+        )
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            datetime.strftime(self.date_allocated, "%d-%m-%Y"),
+            border=1,
+            ln=1,
+        )
+        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Site", align="R", border=1)
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            self.site().name,
+            border=1,
+            ln=1,
+        )
+        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Department", align="R", border=1)
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            self.department().name,
+            border=1,
+            ln=1,
+        )
+        pdf.cell(
+            CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Priority Level", align="R", border=1
+        )
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            self.prioritylevel().name,
+            border=1,
+            ln=1,
+        )
+        pdf.cell(
+            CELL_WIDTH_MM * 2,
+            CELL_HEIGHT_MM,
+            "Purchase Order Number",
+            align="R",
+            border=1,
+        )
+        pdf.cell(
+            CELL_WIDTH_MM * (COLUMNS - 2),
+            CELL_HEIGHT_MM,
+            self.purchase_order_number,
+            border=1,
+            ln=1,
+        )
+        pdf.ln()
+
+        pdf.cell(
+            CELL_WIDTH_MM * COLUMNS,
+            CELL_HEIGHT_MM,
+            "TASK DESCRIPTION",
+            border=1,
+            align="C",
+            ln=1,
+        )
+        pdf.multi_cell(
+            CELL_WIDTH_MM * COLUMNS,
+            get_max_height(self.task_description, pdf, CELL_WIDTH_MM * COLUMNS),
+            self.task_description,
+            border=1,
+        )
+        pdf.ln()
+        pdf.ln()
+
+        sections = 3
+
+        pdf.cell(CELL_WIDTH_MM * COLUMNS, CELL_HEIGHT_MM, "ITEMS", border=1, align="C")
+        pdf.ln()
+        for index, item in enumerate(self.items().values()):
+            pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, item.name, border=1)
+            if (index + 1) % sections == 0:
+                pdf.ln()
+        pdf.ln()
+        pdf.ln()
+
+        pdf.cell(
+            CELL_WIDTH_MM * COLUMNS, CELL_HEIGHT_MM, "ASSIGNEES", border=1, align="C"
+        )
+        pdf.ln()
+        for index, assignee in enumerate(self.assignees().values()):
+            pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, assignee.name, border=1)
+            if (index + 1) % sections == 0:
+                pdf.ln()
+        pdf.ln()
+        pdf.ln()
+
+        pdf.cell(
+            CELL_WIDTH_MM * COLUMNS,
+            CELL_HEIGHT_MM,
+            "COMMENTS",
+            border=1,
+            align="C",
+            ln=1,
+        )
+        pdf.multi_cell(
+            CELL_WIDTH_MM * COLUMNS,
+            get_max_height(self.comments, pdf, CELL_WIDTH_MM * COLUMNS),
+            self.comments,
+            border=1,
+        )
+        pdf.ln()
+        pdf.ln()
+
+        pdf.cell(
+            CELL_WIDTH_MM * COLUMNS,
+            CELL_HEIGHT_MM,
+            "CLOSE OUT COMMENTS",
+            border=1,
+            align="C",
+            ln=1,
+        )
+        if self.date_completed and self.close_out_comments:
+            pdf.multi_cell(
+                CELL_WIDTH_MM * COLUMNS,
+                get_max_height(self.close_out_comments, pdf, CELL_WIDTH_MM * COLUMNS),
+                self.close_out_comments,
+                border=1,
+            )
+        else:
+            pdf.cell(CELL_WIDTH_MM * COLUMNS, CELL_HEIGHT_MM, border=1)
+        pdf.ln()
+
+        pdf.cell(
+            CELL_WIDTH_MM * 2,
+            CELL_HEIGHT_MM,
+            "Date Completed",
+            align="R",
+            border=1,
+        )
+
+        if self.date_completed:
+            pdf.cell(
+                CELL_WIDTH_MM * (COLUMNS - 2),
+                CELL_HEIGHT_MM,
+                datetime.strftime(self.date_completed, "%d-%m-%Y"),
+                border=1,
+                ln=1,
+            )
+        else:
+            pdf.cell(
+                CELL_WIDTH_MM * (COLUMNS - 2),
+                CELL_HEIGHT_MM,
+                border=1,
+                ln=1,
+            )
+
+        pdf.ln()
+        pdf.ln()
+
+        file_path = select_file_path()
+
+        if file_path:
+            pdf.output(file_path, "F")
+            print("Work order document created and saved successfully!")
+        else:
+            print("No file path selected, work order document not created.")
 
 
 if __name__ == "__main__":
 
-    wo = WorkOrder(
-        None, None, None, None, None, None, None, None, None, None, None, None
-    )
+    wo = list(WorkOrder.get().values())[0]
     wo.save_to_pdf()
