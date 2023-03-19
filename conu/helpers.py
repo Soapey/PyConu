@@ -26,7 +26,7 @@ def read_config_file(file_path: str = None) -> configparser.ConfigParser:
     Returns:
         dict: A dictionary containing the configuration values.
     """
-    CONFIG_PATH: str = "conu/config.ini"
+    CONFIG_PATH: str = "conu\\config.ini"
 
     # If file_path is None, use the default config path
     if file_path is None:
