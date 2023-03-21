@@ -15,6 +15,9 @@ class Ui_SelectWindow(object):
     def setupUi(self, SelectWindow):
         SelectWindow.setObjectName("SelectWindow")
         SelectWindow.resize(944, 600)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("conu/ui/ui_files\\../../assets/conu_logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        SelectWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(SelectWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)

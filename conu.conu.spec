@@ -41,7 +41,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon="conu/assets/conu_logo.ico
+    icon="conu/assets/conu_logo.ico"
 )
 
 import os
@@ -49,6 +49,5 @@ import shutil
 from conu.helpers import join_to_project_folder
 os.mkdir(join_to_project_folder("dist\\conu"))
 os.mkdir(join_to_project_folder("dist\\conu\\db"))
-os.mkdir(join_to_project_folder("dist\\conu\\assets"))
 shutil.copyfile(join_to_project_folder("conu\\config.ini"), join_to_project_folder("dist\\conu\\config.ini"))
 shutil.copyfile(join_to_project_folder("conu\\db\init.sql"), join_to_project_folder("dist\\conu\\db\\init.sql"))

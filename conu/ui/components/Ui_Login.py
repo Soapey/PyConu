@@ -15,6 +15,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("conu/ui/ui_files\\../../assets/conu_logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -26,14 +29,12 @@ class Ui_MainWindow(object):
         font.setBold(False)
         font.setWeight(50)
         self.label_3.setFont(font)
-        self.label_3.setStyleSheet(
-            "QLabel {\n"
-            "    background-color: #02c39a;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 10px;\n"
-            "}"
-        )
+        self.label_3.setStyleSheet("QLabel {\n"
+"    background-color: #02c39a;\n"
+"    border-style: outset;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"}")
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 1, 1, 1, 2)
@@ -44,10 +45,10 @@ class Ui_MainWindow(object):
         font.setBold(False)
         font.setWeight(50)
         self.label.setFont(font)
-        self.label.setStyleSheet("QLabel {\n" "    color: #6c757d;\n" "}")
-        self.label.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label.setStyleSheet("QLabel {\n"
+"    color: #6c757d;\n"
+"}")
+        self.label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 2, 1, 1, 1)
         self.login_txtUsername = QtWidgets.QLineEdit(self.centralwidget)
@@ -55,21 +56,19 @@ class Ui_MainWindow(object):
         font.setFamily("Arial")
         font.setPointSize(14)
         self.login_txtUsername.setFont(font)
-        self.login_txtUsername.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 6px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
+        self.login_txtUsername.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 6px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
         self.login_txtUsername.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.login_txtUsername.setObjectName("login_txtUsername")
         self.gridLayout.addWidget(self.login_txtUsername, 2, 2, 1, 1)
@@ -80,10 +79,10 @@ class Ui_MainWindow(object):
         font.setBold(False)
         font.setWeight(50)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("QLabel {\n" "    color: #6c757d;\n" "}")
-        self.label_2.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
+        self.label_2.setStyleSheet("QLabel {\n"
+"    color: #6c757d;\n"
+"}")
+        self.label_2.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 3, 1, 1, 1)
         self.login_txtPassword = QtWidgets.QLineEdit(self.centralwidget)
@@ -91,21 +90,19 @@ class Ui_MainWindow(object):
         font.setFamily("Arial")
         font.setPointSize(14)
         self.login_txtPassword.setFont(font)
-        self.login_txtPassword.setStyleSheet(
-            "QLineEdit {\n"
-            "    background-color: white;\n"
-            "    border-style: inset;\n"
-            "    border-width: 1px;\n"
-            "    border-radius: 5px;\n"
-            "    border-color: black;\n"
-            "    padding: 6px;\n"
-            "}\n"
-            "\n"
-            "QLineEdit:focus {\n"
-            "    border-width: 2px;\n"
-            "    border-color: #028090;\n"
-            "}"
-        )
+        self.login_txtPassword.setStyleSheet("QLineEdit {\n"
+"    background-color: white;\n"
+"    border-style: inset;\n"
+"    border-width: 1px;\n"
+"    border-radius: 5px;\n"
+"    border-color: black;\n"
+"    padding: 6px;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-width: 2px;\n"
+"    border-color: #028090;\n"
+"}")
         self.login_txtPassword.setEchoMode(QtWidgets.QLineEdit.Password)
         self.login_txtPassword.setObjectName("login_txtPassword")
         self.gridLayout.addWidget(self.login_txtPassword, 3, 2, 1, 1)
@@ -118,39 +115,29 @@ class Ui_MainWindow(object):
         self.login_btnLogin.setFont(font)
         self.login_btnLogin.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.login_btnLogin.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.login_btnLogin.setStyleSheet(
-            "QPushButton\n"
-            "{\n"
-            "    background-color: #05668d;\n"
-            "    color: white;\n"
-            "    border-style: outset;\n"
-            "    border-radius: 5px;\n"
-            "    padding: 5px;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover\n"
-            "{\n"
-            "    background-color: #028090;\n"
-            "}\n"
-            ""
-        )
+        self.login_btnLogin.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color: #05668d;\n"
+"    color: white;\n"
+"    border-style: outset;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: #028090;\n"
+"}\n"
+"")
         self.login_btnLogin.setObjectName("login_btnLogin")
         self.gridLayout.addWidget(self.login_btnLogin, 4, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(
-            221, 538, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-        )
+        spacerItem = QtWidgets.QSpacerItem(221, 538, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 0, 0, 6, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(
-            221, 538, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-        )
+        spacerItem1 = QtWidgets.QSpacerItem(221, 538, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem1, 0, 3, 6, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(
-            319, 161, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
-        )
+        spacerItem2 = QtWidgets.QSpacerItem(319, 161, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem2, 5, 1, 1, 2)
-        spacerItem3 = QtWidgets.QSpacerItem(
-            319, 162, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
-        )
+        spacerItem3 = QtWidgets.QSpacerItem(319, 162, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem3, 0, 1, 1, 2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -171,3 +158,13 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "USERNAME"))
         self.label_2.setText(_translate("MainWindow", "PASSWORD"))
         self.login_btnLogin.setText(_translate("MainWindow", "Log In"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

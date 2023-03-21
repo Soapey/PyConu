@@ -15,6 +15,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1258, 904)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("conu/ui/ui_files\\../../assets/conu_logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -2419,7 +2422,7 @@ class Ui_MainWindow(object):
         self.item_entryform_scrollDepartments.setWidgetResizable(True)
         self.item_entryform_scrollDepartments.setObjectName("item_entryform_scrollDepartments")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1081, 207))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 98, 38))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_21 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_21.setObjectName("gridLayout_21")
