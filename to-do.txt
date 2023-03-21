@@ -1,12 +1,28 @@
-===================================================================================================================
-Must Have
-===================================================================================================================
-Will Have
+Wednesday 22/3/23
+* Create auto-backup
+* Style work order document
+* Add icon to program
+Thursday 23/3/23
 * Add export buttons to each table that creates a csv file for the table
-* Functionality to auto-open email with pdf WorkOrder attached
-* Improve toast notifications
-* Allow user to select what printer to print from
-===================================================================================================================
-Could Have
-* Add image capability for Work Order
+* Improve toast notifications (Show in top right, same screen as application, colour for type etc.)
+* Add icon to program
+
+Later
+* Add icons to buttons in program
+* Re-style program
+* Move all CRUD operations into classes
+* Convert all classes from dataclasses
+* Insert all joining entities (eg. UserDepartment) in same transaction as the main entity (eg. User), and roll back changes if an error occurs
 * Cache SQL queries in MainWindow "cache" attribute
+* Add error handling throughout application
+* Clean up requirements.txt
+* Clean up imports in each file
+* Re-Locate and organise modules into better locations
+* Set up better production/dev toggling with databases and CLI
+* Optimise action functions
+* Add image capability for Work Order
+* Move navigation bar to the left hand side with radio buttons to select the views
+* Functionality to auto-open email with pdf WorkOrder attached
+* Write manual
+
+
