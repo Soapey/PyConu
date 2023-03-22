@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from conu.ui.components.LoginWindow import LoginWindow
-from conu.db.helpers import init_db, add_test_data
+from conu.db.helpers import init_db, add_test_data, create_db_backup
 
 
 def start_app():
@@ -16,6 +16,7 @@ def start_app():
 
 
 if __name__ == "__main__":
+
     try:
         clean = bool(int(sys.argv[1]))
     except:
@@ -30,5 +31,7 @@ if __name__ == "__main__":
 
     if add_data:
         add_test_data()
+
+    create_db_backup()
 
     start_app()
