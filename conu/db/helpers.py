@@ -6,6 +6,7 @@ from conu.classes.User import User
 from conu.classes.UserDepartment import UserDepartment
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.helpers import read_config_file, join_to_project_folder, hash_sha512
+import shutil
 
 
 def init_db(file_path: str = None, clean: bool = False):
@@ -256,3 +257,36 @@ def format_nullable_database_date(returned_value):
         return None
 
     return datetime.strptime(returned_value, "%Y-%m-%d").date()
+
+
+def create_db_backup():
+
+    try:
+        config = read_config_file()
+    except Exception as e:
+        print(e)
+        return
+
+    try:
+        db_path = config["SQLiteSettings"]["database_file"]
+    except Exception as e:
+        print(e)
+        return
+
+    try:
+        backup_directory = config["SQLiteSettings"]["backup_directory"]
+    except Exception as e:
+        print(e)
+        return
+
+    todays_date = datetime.strftime(datetime.today(), "%d-%m-%Y")
+    backup_db_path = f"{backup_directory}\\conu_{todays_date}.db"
+
+    if not backup_directory or os.path.exists(backup_db_path):
+        return
+
+    try:
+        shutil.copyfile(db_path, backup_db_path)
+    except Exception as e:
+        print(e)
+        return

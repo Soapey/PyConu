@@ -1,11 +1,10 @@
 Wednesday 22/3/23
 * Create auto-backup
 * Style work order document
-* Add icon to program
+
 Thursday 23/3/23
 * Add export buttons to each table that creates a csv file for the table
 * Improve toast notifications (Show in top right, same screen as application, colour for type etc.)
-* Add icon to program
 
 Later
 * Add icons to buttons in program
