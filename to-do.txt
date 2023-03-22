@@ -1,5 +1,4 @@
 Wednesday 22/3/23
-* Create auto-backup
 * Style work order document
 
 Thursday 23/3/23
@@ -23,5 +22,6 @@ Later
 * Move navigation bar to the left hand side with radio buttons to select the views
 * Functionality to auto-open email with pdf WorkOrder attached
 * Write manual
+* Be able to add any logo to the Work Order document (select it in settings?)
 
 
