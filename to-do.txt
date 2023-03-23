@@ -2,6 +2,7 @@ Thursday 23/3/23
 * Add export buttons to each table that creates a csv file for the table
 
 Later
+* Fix tab order for each page
 * Add icons to buttons in program
 * Re-style program
 * Move all CRUD operations into classes
@@ -19,4 +20,3 @@ Later
 * Functionality to auto-open email with pdf WorkOrder attached
 * Write manual
 * Be able to add any logo to the Work Order document (select it in settings?)
-
