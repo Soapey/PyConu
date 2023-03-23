@@ -2,7 +2,7 @@ from conu.db.SQLiteConnection import SQLiteConnection
 
 
 class Item:
-    def __init__(self, id: int, name: str, comments: str) -> None:
+    def __init__(self, id: int = None, name: str = None, comments: str = None) -> None:
         self.id = id
         self.name = name
         self.comments = comments

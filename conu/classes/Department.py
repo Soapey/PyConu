@@ -2,7 +2,7 @@ from conu.db.SQLiteConnection import SQLiteConnection
 
 
 class Department:
-    def __init__(self, id: int, name: str) -> None:
+    def __init__(self, id: int = None, name: str = None) -> None:
         self.id = id
         self.name = name
 

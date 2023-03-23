@@ -1,6 +1,5 @@
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
-from dataclasses import dataclass
 import calendar
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import format_nullable_database_date, select_by_attrs_dict
@@ -11,25 +10,38 @@ from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.RecurringWorkOrderItem import RecurringWorkOrderItem
 
 
-@dataclass
 class RecurringWorkOrder:
-    # WorkOrderBase properties
-    id: int
-    site_id: int
-    department_id: int
-    prioritylevel_id: int
-    task_description: str
-    comments: str
-
-    # RecurringWorkOrder specific properties
-    type: str
-    start_date: date
-    lastraised_date: date
-    interval: int
-    weekdays: str
-    day: int
-    month: int
-    month_weekday_occurrence: int
+    def __init__(
+        self,
+        id: int = None,
+        site_id: int = None,
+        department_id: int = None,
+        prioritylevel_id: int = None,
+        task_description: str = None,
+        comments: str = None,
+        type: str = None,
+        start_date: date = None,
+        lastraised_date: date = None,
+        interval: int = None,
+        weekdays: str = None,
+        day: int = None,
+        month: int = None,
+        month_weekday_occurrence: int = None,
+    ):
+        self.id = id
+        self.site_id = site_id
+        self.department_id = department_id
+        self.prioritylevel_id = prioritylevel_id
+        self.task_description = task_description
+        self.comments = comments
+        self.type = type
+        self.start_date = start_date
+        self.lastraised_date = lastraised_date
+        self.interval = interval
+        self.weekdays = weekdays
+        self.day = day
+        self.month = month
+        self.month_weekday_occurrence = month_weekday_occurrence
 
     def __str__(self) -> str:
         type = self.type.strip().lower()
@@ -276,13 +288,10 @@ class RecurringWorkOrder:
 
             rows = cur.execute(
                 """
-                SELECT 
-                    * 
-                FROM 
-                    recurringworkorder 
-                WHERE 
-                    recurringworkorder.department_id IN 
-                        (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?);""",
+                SELECT * 
+                FROM recurringworkorder 
+                JOIN userdepartment ON recurringworkorder.department_id = userdepartment.department_id
+                WHERE userdepartment.user_id = ?;""",
                 (user_id,),
             ).fetchall()
 
@@ -299,9 +308,7 @@ class RecurringWorkOrder:
         recurringworkorders = cls.get_by_user_departments(current_user.id)
 
         sites = select_by_attrs_dict(Site)
-
         departments = select_by_attrs_dict(Department)
-
         prioritylevels = select_by_attrs_dict(PriorityLevel)
 
         data = [

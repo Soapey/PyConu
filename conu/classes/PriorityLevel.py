@@ -2,7 +2,9 @@ from conu.db.SQLiteConnection import SQLiteConnection
 
 
 class PriorityLevel:
-    def __init__(self, id: int, name: str, days_until_overdue: int) -> None:
+    def __init__(
+        self, id: int = None, name: str = None, days_until_overdue: int = None
+    ) -> None:
         self.id = id
         self.name = name
         self.days_until_overdue = days_until_overdue

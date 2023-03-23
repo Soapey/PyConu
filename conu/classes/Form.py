@@ -2,7 +2,7 @@ from conu.db.SQLiteConnection import SQLiteConnection
 
 
 class Form:
-    def __init__(self, id: int, name: str, path: str) -> None:
+    def __init__(self, id: int = None, name: str = None, path: str = None) -> None:
         self.id = id
         self.name = name
         self.path = path
