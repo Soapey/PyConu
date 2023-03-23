@@ -1,5 +1,6 @@
 from tkinter import Tk, Label, Button
 from conu.helpers import darken_color
+import threading
 
 
 class Notification:
@@ -18,6 +19,10 @@ class Notification:
         root.quit()
 
     def show(self):
+        thread = threading.Thread(target=self._show_window)
+        thread.start()
+
+    def _show_window(self):
         root = Tk()
         root.overrideredirect(True)
 
