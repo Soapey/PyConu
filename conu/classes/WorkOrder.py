@@ -13,7 +13,7 @@ from fpdf import FPDF
 from conu.helpers import select_directory, get_max_height
 from conu.ui.components.Notification import Notification
 import openpyxl
-from openpyxl.styles import Alignment, Border, Side, Font
+from openpyxl.styles import Alignment, Border, Side, Font, PatternFill
 from openpyxl.utils import range_boundaries
 import win32com.client as win32
 import os
@@ -307,237 +307,17 @@ class WorkOrder:
 
         return None
 
-    def save_to_pdf(self):
-
-        A4_WIDTH_MM = 210
-        A4_HEIGHT_MM = 297
-        A4_MARGIN_MM = 10
-        A4_WORKAREA_WIDTH_MM = A4_WIDTH_MM - (A4_MARGIN_MM * 2)
-        A4_WORKAREA_HEIGHT_MM = A4_HEIGHT_MM - (A4_MARGIN_MM * 2)
-        COLUMNS = 6
-        CELL_WIDTH_MM = A4_WORKAREA_WIDTH_MM // COLUMNS
-        CELL_HEIGHT_MM = 5
-
-        pdf = FPDF()
-        pdf.set_margins(A4_MARGIN_MM, A4_MARGIN_MM, A4_MARGIN_MM)
-        pdf.add_page()
-        pdf.set_font("Arial", size=10)
-
-        pdf.cell(
-            CELL_WIDTH_MM * COLUMNS,
-            CELL_HEIGHT_MM,
-            f"WORK ORDER",
-            align="C",
-            border=1,
-            ln=1,
-        )
-        pdf.ln()
-
-        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Number", align="R", border=1)
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            str(self.id),
-            border=1,
-            ln=1,
-        )
-        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Date Created", align="R", border=1)
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            datetime.strftime(self.date_created, "%d-%m-%Y"),
-            border=1,
-            ln=1,
-        )
-
-        raisedby = self.raisedby()
-        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Raised By", align="R", border=1)
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            f"{raisedby.first_name} {raisedby.last_name}",
-            border=1,
-            ln=1,
-        )
-        pdf.cell(
-            CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Date Allocated", align="R", border=1
-        )
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            datetime.strftime(self.date_allocated, "%d-%m-%Y"),
-            border=1,
-            ln=1,
-        )
-        site = self.site()
-        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Site", align="R", border=1)
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            site.name,
-            border=1,
-            ln=1,
-        )
-        pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Department", align="R", border=1)
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            self.department().name,
-            border=1,
-            ln=1,
-        )
-        pdf.cell(
-            CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, "Priority Level", align="R", border=1
-        )
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            self.prioritylevel().name,
-            border=1,
-            ln=1,
-        )
-        pdf.cell(
-            CELL_WIDTH_MM * 2,
-            CELL_HEIGHT_MM,
-            "Purchase Order Number",
-            align="R",
-            border=1,
-        )
-        pdf.cell(
-            CELL_WIDTH_MM * (COLUMNS - 2),
-            CELL_HEIGHT_MM,
-            self.purchase_order_number,
-            border=1,
-            ln=1,
-        )
-        pdf.ln()
-
-        pdf.cell(
-            CELL_WIDTH_MM * COLUMNS,
-            CELL_HEIGHT_MM,
-            "TASK DESCRIPTION",
-            border=1,
-            align="C",
-            ln=1,
-        )
-        pdf.multi_cell(
-            CELL_WIDTH_MM * COLUMNS,
-            get_max_height(self.task_description, pdf, CELL_WIDTH_MM * COLUMNS),
-            self.task_description,
-            border=1,
-        )
-        pdf.ln()
-        pdf.ln()
-
-        sections = 3
-
-        pdf.cell(CELL_WIDTH_MM * COLUMNS, CELL_HEIGHT_MM, "ITEMS", border=1, align="C")
-        pdf.ln()
-        for index, item in enumerate(self.items().values()):
-            pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, item.name, border=1)
-            if (index + 1) % sections == 0:
-                pdf.ln()
-        pdf.ln()
-        pdf.ln()
-
-        pdf.cell(
-            CELL_WIDTH_MM * COLUMNS, CELL_HEIGHT_MM, "ASSIGNEES", border=1, align="C"
-        )
-        pdf.ln()
-        for index, assignee in enumerate(self.assignees().values()):
-            pdf.cell(CELL_WIDTH_MM * 2, CELL_HEIGHT_MM, assignee.name, border=1)
-            if (index + 1) % sections == 0:
-                pdf.ln()
-        pdf.ln()
-        pdf.ln()
-
-        pdf.cell(
-            CELL_WIDTH_MM * COLUMNS,
-            CELL_HEIGHT_MM,
-            "COMMENTS",
-            border=1,
-            align="C",
-            ln=1,
-        )
-        pdf.multi_cell(
-            CELL_WIDTH_MM * COLUMNS,
-            get_max_height(self.comments, pdf, CELL_WIDTH_MM * COLUMNS),
-            self.comments,
-            border=1,
-        )
-        pdf.ln()
-        pdf.ln()
-
-        pdf.cell(
-            CELL_WIDTH_MM * COLUMNS,
-            CELL_HEIGHT_MM,
-            "CLOSE OUT COMMENTS",
-            border=1,
-            align="C",
-            ln=1,
-        )
-        if self.date_completed and self.close_out_comments:
-            pdf.multi_cell(
-                CELL_WIDTH_MM * COLUMNS,
-                get_max_height(self.close_out_comments, pdf, CELL_WIDTH_MM * COLUMNS),
-                self.close_out_comments,
-                border=1,
-            )
-        else:
-            pdf.cell(CELL_WIDTH_MM * COLUMNS, CELL_HEIGHT_MM, border=1)
-        pdf.ln()
-
-        pdf.cell(
-            CELL_WIDTH_MM * 2,
-            CELL_HEIGHT_MM,
-            "Date Completed",
-            align="R",
-            border=1,
-        )
-
-        if self.date_completed:
-            pdf.cell(
-                CELL_WIDTH_MM * (COLUMNS - 2),
-                CELL_HEIGHT_MM,
-                datetime.strftime(self.date_completed, "%d-%m-%Y"),
-                border=1,
-                ln=1,
-            )
-        else:
-            pdf.cell(
-                CELL_WIDTH_MM * (COLUMNS - 2),
-                CELL_HEIGHT_MM,
-                border=1,
-                ln=1,
-            )
-
-        pdf.ln()
-        pdf.ln()
-
-        file_directory = select_directory()
-
-        if not file_directory:
-            return
-
-        file_path = f"{file_directory}\\{site.name} Work Order ({self.id}).pdf"
-
-        if file_path:
-            try:
-                pdf.output(file_path, "F")
-                Notification(
-                    "Work Order PDF Created Successfully",
-                    [f"Work order saved to path: {file_path}"],
-                ).show()
-            except:
-                Notification(
-                    "Work Order PDF Creation Failed",
-                    "Error saving work order to specified path.",
-                )
-
     def save(self, print_on_save: bool = False):
 
-        A4_WIDTH_MM = 210
-        A4_MARGIN_MM = 10
+        DARK_BLUE = "#1D3557"
+        LIGHT_BLUE = "#457B9D"
+
+        SMALL_HEADER_BACKGROUND = PatternFill(
+            start_color=DARK_BLUE, end_color=DARK_BLUE, fill_type="solid"
+        )
+        SMALL_HEADER_FONT = Font(name="Helvetica", size=10, color="#FFFFFF")
+        VALUE_FONT = Font(name="Helvetica", size=14, color="#000000")
+
         COLUMNS = 6
         DEFAULT_FONT_SIZE = 14
         HEADER_FONT_FIZE = 16
@@ -546,10 +326,10 @@ class WorkOrder:
 
         sheet = workbook.worksheets[0]
 
-        column_range = sheet.iter_cols(min_col=1, max_col=6)
+        column_range = sheet.iter_cols(min_col=1, max_col=8)
         for column in column_range:
             column_letter = column[0].column_letter
-            sheet.column_dimensions[column_letter].width = 17.00
+            sheet.column_dimensions[column_letter].width = 15.71
 
         border_style = Side(style="thin", color="000000")
         border = Border(
@@ -557,38 +337,41 @@ class WorkOrder:
         )
 
         ###################################
-        title_label = sheet.cell(1, 1)
-        title_label.value = "WORK ORDER"
-        title_label.border = border
-        title_label.alignment = Alignment(horizontal="center")
-        title_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
-        sheet.merge_cells("A1:F1")
+        row = 1
+        title_label = sheet.cell(row, 1)
+        title_label.value = "WORK ORDER FORM"
+        title_label.font = Font(name="Helvetica", size=24, italic=True, color=DARK_BLUE)
         ###################################
-        number_label = sheet.cell(3, 1)
+        row += 3
+        number_label = sheet.cell(row, 1)
         number_label.value = "Number"
-        number_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        number_label.fill = SMALL_HEADER_BACKGROUND
+        number_label.font = SMALL_HEADER_FONT
         number_label.alignment = Alignment(horizontal="right")
         number_label.border = border
-        sheet.merge_cells("A3:B3")
-        number_value = sheet.cell(3, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        number_value = sheet.cell(row, 3)
         number_value.value = self.id
         number_value.alignment = Alignment(horizontal="left")
-        number_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        number_value.font = VALUE_FONT
         number_value.border = border
-        sheet.merge_cells("C3:F3")
+        sheet.merge_cells(f"C{row}:H{row}")
 
-        date_created_label = sheet.cell(4, 1)
+        row += 1
+        date_created_label = sheet.cell(row, 1)
         date_created_label.value = "Date Created"
-        date_created_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        date_created_label.fill = SMALL_HEADER_BACKGROUND
+        date_created_label.font = SMALL_HEADER_FONT
         date_created_label.alignment = Alignment(horizontal="right")
         date_created_label.border = border
-        sheet.merge_cells("A4:B4")
-        date_created_value = sheet.cell(4, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        date_created_value = sheet.cell(row, 3)
         date_created_value.value = datetime.strftime(self.date_created, "%d-%m-%Y")
-        date_created_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        date_created_value.font = VALUE_FONT
         date_created_value.border = border
-        sheet.merge_cells("C4:F4")
+        sheet.merge_cells(f"C{row}:H{row}")
 
+        row += 1
         raisedby = self.raisedby()
         raisedby_label = sheet.cell(5, 1)
         raisedby_label.value = "Raised By"
@@ -696,7 +479,6 @@ class WorkOrder:
         items_label.alignment = Alignment(horizontal="center")
         items_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
         sheet.merge_cells("A15:F15")
-        row = 16
         sections = 3
         col = 1
         for index, item in enumerate(self.items().values()):

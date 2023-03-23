@@ -4,12 +4,11 @@ import hashlib
 import os
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 import re
-import tkinter as tk
+from tkinter import Tk, Label, Button
 from tkinter import filedialog
 from typing import List
 from conu.ui.PageEnum import Page
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+import colorsys
 
 
 def navigate(main_window, page: Page):
@@ -192,7 +191,7 @@ def select_file_path(file_types=None) -> str:
     if not file_types:
         file_types = [("Excel and Word files", "*.xlsx;*.xls;*.docx;*.doc")]
 
-    root = tk.Tk()
+    root = Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename(filetypes=file_types)
     if file_path:
@@ -202,7 +201,7 @@ def select_file_path(file_types=None) -> str:
 
 
 def select_directory():
-    root = tk.Tk()
+    root = Tk()
     root.withdraw()
     folder_path = filedialog.askdirectory()
     return folder_path
@@ -266,3 +265,87 @@ def get_max_height(string, pdf, max_width):
     lines = int(width / max_width) + 1
     height = pdf.font_size * 0.3528
     return lines * height + 3
+
+
+def hex_to_rgb(hex_value: str):
+    hex_value = hex_value.lstrip("#")
+    return tuple(int(hex_value[i : i + 2], 16) for i in (0, 2, 4))
+
+
+def darken_color(color_hex: str, percent):
+    # Convert RGB color to HLS color
+    r, g, b = hex_to_rgb(color_hex)
+    h, l, s = colorsys.rgb_to_hls(r / 255, g / 255, b / 255)
+
+    # Darken the HLS color by the given percentage
+    l = max(min(l * (1 - percent / 100), 1), 0)
+
+    # Convert the modified HLS color back to RGB color
+    r, g, b = colorsys.hls_to_rgb(h, l, s)
+    return int(r * 255), int(g * 255), int(b * 255)
+
+
+def timed_notification(title, messages, bg_color, font_color, duration):
+    root = Tk()
+    root.overrideredirect(True)
+
+    # Create a label with the title and messages
+    message = "\n".join(messages)
+    label = Label(
+        root,
+        text=f"{title}\n\n{message}",
+        font=("Arial", 12),
+        bg=bg_color,
+        fg=font_color,
+        padx=10,
+        pady=20,
+        justify="left",
+        wraplength=400,
+    )
+    label.pack()
+
+    # Create a button with "X" symbol to close the window
+    close_button_width = 20
+    close_button_height = 20
+    button_bg_color_rgb = darken_color(bg_color, 30)
+    button_bg_color = f"#{button_bg_color_rgb[0]:02x}{button_bg_color_rgb[1]:02x}{button_bg_color_rgb[2]:02x}"
+    close_button = Button(
+        root,
+        text="X",
+        bg=button_bg_color,
+        fg=font_color,
+        font=("Arial", 12),
+        relief="flat",
+        borderwidth=0,
+        command=root.destroy,
+        cursor="hand2",
+    )
+
+    # Center the window and set the title
+    root.title(title)
+    root.update_idletasks()
+    x = 0
+    y = 0
+    root.geometry(f"+{x}+{y}")
+    root_width = root.winfo_width()
+    close_button.place(
+        x=root_width - close_button_width,
+        y=0,
+        width=close_button_width,
+        height=close_button_height,
+    )
+
+    # Set the duration and close the window after the specified time
+    root.after(int(duration * 1000), root.destroy)
+    root.mainloop()
+
+
+if __name__ == "__main__":
+
+    title = "Notification Title"
+    messages = ["Message 1", "Message 2", "Message 3"]
+    bg_color = "#a7c957"
+    font_color = "#000000"
+    duration = 1 * len(messages)  # seconds
+
+    timed_notification(title, messages, bg_color, font_color, duration)

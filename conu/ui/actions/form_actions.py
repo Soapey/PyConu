@@ -91,8 +91,14 @@ def form_entryform_is_valid(main_window) -> bool:
     else:
         existing_forms = select_by_attrs_dict(Form, {"name": name})
 
-        if existing_forms:
-            error_strings.append(f"Form: {name}, already exists.")
+        editing_id = main_window.ui.form_entryform_lblId.text()
+
+        if existing_forms and editing_id:
+
+            existing_form = list(existing_forms.values())[0]
+
+            if existing_form.id != int(editing_id):
+                error_strings.append(f"Form: {name}, already exists.")
 
     path = main_window.ui.form_entryform_txtPath.text()
     if not path:

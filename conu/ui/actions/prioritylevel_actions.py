@@ -96,9 +96,14 @@ def prioritylevel_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
     else:
         existing_prioritylevels = select_by_attrs_dict(PriorityLevel, {"name": name})
+        editing_id = main_window.ui.prioritylevel_entryform_lblId.text()
 
-        if existing_prioritylevels:
-            error_strings.append(f"Priority Level: {name}, already exists.")
+        if existing_prioritylevels and editing_id:
+
+            existing_prioritylevel = list(existing_prioritylevels.values())[0]
+
+            if existing_prioritylevel.id != int(editing_id):
+                error_strings.append(f"Priority Level: {name}, already exists.")
 
     if error_strings:
         Notification("Cannot Save Priority Level", error_strings).show()

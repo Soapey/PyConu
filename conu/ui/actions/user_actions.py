@@ -183,13 +183,14 @@ def user_entryform_is_valid(main_window) -> bool:
         error_strings.append("Username field cannot be blank.")
     else:
         existing_users = select_by_attrs_dict(User, {"username": username})
+        editing_id = main_window.ui.user_entryform_lblId.text()
 
-        if existing_users:
+        if existing_users and editing_id:
 
             existing_user = list(existing_users.values())[0]
 
-            if existing_user.id != main_window.current_user.id:
-                error_strings.append(f"Username: {username} already taken.")
+            if existing_user.id != int(editing_id):
+                error_strings.append(f"Username: {username}, already exists.")
 
     if main_window.current_user.permission_level <= 2:
         old_password = main_window.ui.user_entryform_txtOldPassword.text()

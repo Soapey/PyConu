@@ -85,8 +85,14 @@ def department_entryform_is_valid(main_window) -> bool:
     else:
         existing_departments = select_by_attrs_dict(Department, {"name": name})
 
-        if existing_departments:
-            error_strings.append(f"Department: {name}, already exists.")
+        editing_id = main_window.ui.department_entryform_lblId.text()
+
+        if existing_departments and editing_id:
+
+            existing_department = list(existing_departments.values())[0]
+
+            if existing_department.id != int(editing_id):
+                error_strings.append(f"Department: {name}, already exists.")
 
     if error_strings:
         Notification("Cannot Save Department", error_strings).show()
