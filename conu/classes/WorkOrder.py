@@ -308,13 +308,13 @@ class WorkOrder:
 
     def save(self, print_on_save: bool = False):
 
+        COLUMNS = 8
         DARK_BLUE = "#1D3557"
         LIGHT_BLUE = "#457B9D"
 
         DARK_BLUE_RGB = f"FF{DARK_BLUE.lstrip('#')}"
         LIGHT_BLUE_RGB = f"FF{LIGHT_BLUE.lstrip('#')}"
 
-        print(LIGHT_BLUE_RGB)
         SMALL_HEADER_BACKGROUND = PatternFill(
             start_color=LIGHT_BLUE_RGB,
             end_color=LIGHT_BLUE_RGB,
@@ -331,10 +331,6 @@ class WorkOrder:
         SUB_HEADER_FONT = Font(
             name="Helvetica", size=16, color="FFFFFF", italic=True, bold=True
         )
-
-        COLUMNS = 8
-        DEFAULT_FONT_SIZE = 14
-        HEADER_FONT_FIZE = 16
 
         workbook = openpyxl.Workbook()
 
