@@ -3,7 +3,7 @@ from tkinter.messagebox import askyesno
 
 from conu.classes.ServiceTracker import ServiceTracker
 from conu.classes.Item import Item
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.ui.components.SelectWindow import SelectWindow
 
 from conu.db.helpers import (
@@ -111,7 +111,7 @@ def delete_servicetracker(main_window) -> None:
 
     delete_by_attrs_dict(ServiceTracker, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted service tracker for: {item.name}"]
     ).show()
 
@@ -126,7 +126,7 @@ def servicetracker_entryform_is_valid(main_window) -> bool:
         error_strings.append("An item must be selected.")
 
     if error_strings:
-        Notification("Cannot Save Service Tracker", error_strings).show()
+        ErrorNotification("Cannot Save Service Tracker", error_strings).show()
 
     return not bool(error_strings)
 
@@ -160,7 +160,7 @@ def save_servicetracker(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification(
+    SuccessNotification(
         "Save Successful",
         [f"Successfully saved service tracker for: {selected_item.name}"],
     ).show()

@@ -20,7 +20,7 @@ from conu.helpers import (
     hash_sha512,
     is_valid_email,
 )
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.ui.PageEnum import Page
 
 
@@ -152,7 +152,7 @@ def delete_user(main_window) -> None:
 
     delete_by_attrs_dict(User, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful",
         [f"Successfully deleted user: {entity.first_name} {entity.last_name}"],
     ).show()
@@ -225,7 +225,7 @@ def user_entryform_is_valid(main_window) -> bool:
         error_strings.append("At least one department must be selected.")
 
     if error_strings:
-        Notification("Cannot Save User", error_strings).show()
+        ErrorNotification("Cannot Save User", error_strings).show()
 
     return not bool(error_strings)
 
@@ -306,7 +306,7 @@ def save_user(main_window) -> None:
 
     save_and_delete_userdepartments(main_window, entity_id)
 
-    Notification(
+    SuccessNotification(
         "Save Successful",
         [f"Successfully saved user: {entity.first_name} {entity.last_name}"],
     ).show()

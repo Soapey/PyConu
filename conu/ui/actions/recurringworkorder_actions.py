@@ -31,7 +31,7 @@ from conu.helpers import (
     load_query_rows_into_table,
     load_entities_into_table,
 )
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.ui.components.TableManager import TableManager
 from conu.ui.PageEnum import Page
 from conu.ui.components.SelectWindow import SelectWindow
@@ -558,7 +558,7 @@ def delete_recurringworkorder(main_window) -> None:
 
     delete_entities_by_ids(RecurringWorkOrder, [selected_id])
 
-    Notification(
+    SuccessNotification(
         "Delete Successful",
         [f"Successfully deleted recurring work order: {selected_id}"],
     ).show()
@@ -672,7 +672,7 @@ def recurringworkorder_entryform_is_valid(main_window) -> bool:
                 )
 
     if error_strings:
-        Notification("Cannot Save Recurring Work Order", error_strings).show()
+        ErrorNotification("Cannot Save Recurring Work Order", error_strings).show()
 
     return not bool(error_strings)
 
@@ -728,7 +728,7 @@ def save_recurringworkorder(main_window) -> None:
 
     save_and_delete_recurringworkorderitems(main_window, entity_id)
 
-    Notification(
+    SuccessNotification(
         "Save Successful", [f"Successfully saved recurring work order: {entity_id}"]
     ).show()
 

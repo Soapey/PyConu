@@ -18,7 +18,7 @@ from conu.helpers import (
     selected_row_id,
     set_button_visibility,
 )
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.ui.PageEnum import Page
 
 
@@ -123,7 +123,7 @@ def delete_item(main_window) -> None:
 
     delete_by_attrs_dict(Item, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted item: {entity.name}"]
     ).show()
 
@@ -158,7 +158,7 @@ def item_entryform_is_valid(main_window) -> bool:
         error_strings.append("At least one department must be selected.")
 
     if error_strings:
-        Notification("Cannot Save Item", error_strings).show()
+        ErrorNotification("Cannot Save Item", error_strings).show()
 
     return not bool(error_strings)
 
@@ -212,7 +212,9 @@ def save_item(main_window) -> None:
 
     save_and_delete_itemdepartments(main_window, entity_id)
 
-    Notification("Save Successful", [f"Successfully saved item: {entity.name}"]).show()
+    SuccessNotification(
+        "Save Successful", [f"Successfully saved item: {entity.name}"]
+    ).show()
 
     load_item_listingview(main_window)
 

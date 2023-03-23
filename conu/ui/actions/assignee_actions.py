@@ -18,7 +18,7 @@ from conu.helpers import (
     selected_row_id,
     set_button_visibility,
 )
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.ui.PageEnum import Page
 
 
@@ -123,7 +123,7 @@ def delete_assignee(main_window) -> None:
 
     delete_by_attrs_dict(Assignee, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted assignee: {entity.name}"]
     ).show()
 
@@ -139,9 +139,14 @@ def assignee_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
     else:
         existing_assignees = select_by_attrs_dict(Assignee, {"name": name})
+        editing_id = main_window.ui.assignee_entryform_lblId.text()
 
-        if existing_assignees:
-            error_strings.append(f"Assignee: {name}, already exists.")
+        if existing_assignees and editing_id:
+
+            existing_assignee = list(existing_assignees.values())[0]
+
+            if existing_assignee.id != int(editing_id):
+                error_strings.append(f"Assignee: {name}, already exists.")
 
     vboxDepartments = main_window.ui.assignee_entryform_vboxDepartments
     if not any(
@@ -153,7 +158,7 @@ def assignee_entryform_is_valid(main_window) -> bool:
         error_strings.append("At least one department must be selected.")
 
     if error_strings:
-        Notification("Cannot Save Assignee", error_strings).show()
+        ErrorNotification("Cannot Save Assignee", error_strings).show()
 
     return not bool(error_strings)
 
@@ -207,7 +212,7 @@ def save_assignee(main_window) -> None:
 
     save_and_delete_assigneedepartments(main_window, entity_id)
 
-    Notification(
+    SuccessNotification(
         "Save Successful", [f"Successfully saved assignee: {entity.name}"]
     ).show()
 

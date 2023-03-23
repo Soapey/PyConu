@@ -9,9 +9,8 @@ from conu.classes.Department import Department
 from conu.classes.User import User
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
-from fpdf import FPDF
-from conu.helpers import select_directory, get_max_height
-from conu.ui.components.Notification import Notification
+from conu.helpers import select_directory
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 import openpyxl
 from openpyxl.styles import Alignment, Border, Side, Font, PatternFill
 from openpyxl.utils import range_boundaries
@@ -634,12 +633,12 @@ class WorkOrder:
 
         try:
             workbook.save(excel_file_path)
-            Notification(
+            SuccessNotification(
                 "Save Successful",
                 [f"Successfully saved work order to path: {excel_file_path}."],
             ).show()
         except Exception as e:
-            Notification(
+            ErrorNotification(
                 "Save Failed",
                 [
                     f"Save failed, check if file with same name ({excel_file_name}) is already open."

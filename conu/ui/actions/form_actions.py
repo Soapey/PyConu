@@ -1,7 +1,7 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Form import Form
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.db.helpers import (
     delete_by_attrs_dict,
     save_by_list,
@@ -74,7 +74,7 @@ def delete_form(main_window) -> None:
 
     delete_by_attrs_dict(Form, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted form: {entity.name}"]
     ).show()
 
@@ -90,7 +90,6 @@ def form_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
     else:
         existing_forms = select_by_attrs_dict(Form, {"name": name})
-
         editing_id = main_window.ui.form_entryform_lblId.text()
 
         if existing_forms and editing_id:
@@ -105,7 +104,7 @@ def form_entryform_is_valid(main_window) -> bool:
         error_strings.append("Path field cannot be blank.")
 
     if error_strings:
-        Notification("Cannot Save Form", error_strings).show()
+        ErrorNotification("Cannot Save Form", error_strings).show()
 
     return not bool(error_strings)
 
@@ -130,7 +129,9 @@ def save_form(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification("Save Successful", [f"Successfully saved form: {entity.name}"]).show()
+    SuccessNotification(
+        "Save Successful", [f"Successfully saved form: {entity.name}"]
+    ).show()
 
     load_form_listingview(main_window)
 

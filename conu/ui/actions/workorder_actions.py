@@ -35,7 +35,7 @@ from conu.helpers import (
     load_query_rows_into_table,
     load_entities_into_table,
 )
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 from conu.ui.components.TableManager import TableManager
 from conu.ui.PageEnum import Page
 from conu.ui.components.SelectWindow import SelectWindow
@@ -313,7 +313,7 @@ def delete_workorder(main_window) -> None:
 
     delete_entities_by_ids(WorkOrder, [entity.id])
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted work order: {entity.id}"]
     ).show()
 
@@ -343,7 +343,7 @@ def workorder_entryform_is_valid(main_window) -> bool:
         error_strings.append("At least one assignee must be assigned.")
 
     if error_strings:
-        Notification("Cannot Save Work Order", error_strings).show()
+        ErrorNotification("Cannot Save Work Order", error_strings).show()
 
     return not bool(error_strings)
 
@@ -543,7 +543,7 @@ def save_workorder(main_window) -> None:
 
         save_by_list([new_servicetracker])
 
-    Notification(
+    SuccessNotification(
         "Save Successful", [f"Successfully saved work order: {entity_id}"]
     ).show()
 

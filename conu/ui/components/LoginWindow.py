@@ -5,7 +5,7 @@ from conu.classes.User import User
 from conu.db.helpers import select_by_attrs_dict
 from conu.helpers import hash_sha512
 from conu.ui.actions.assignee_actions import load_assignee_listingview
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 
 
 class LoginWindow(QMainWindow):
@@ -59,7 +59,7 @@ class LoginWindow(QMainWindow):
             error_strings.append("Password field cannot be blank.")
 
         if error_strings:
-            Notification("Invalid Login Credentials", error_strings).show()
+            ErrorNotification("Invalid Login Credentials", error_strings).show()
 
         return not bool(error_strings)
 
@@ -99,12 +99,12 @@ class LoginWindow(QMainWindow):
 
             self.close()
 
-            Notification(
+            SuccessNotification(
                 "Log In Successful",
                 [f"Welcome {matching_user.first_name} {matching_user.last_name}"],
             ).show()
         else:
-            Notification(
+            ErrorNotification(
                 "Invalid Login Credentials", ["No user matches the given credentials."]
             ).show()
 

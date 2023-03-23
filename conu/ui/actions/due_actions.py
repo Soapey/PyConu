@@ -1,17 +1,8 @@
-from tkinter.messagebox import askyesno
-
 from conu.classes.ServiceTracker import ServiceTracker
 from conu.classes.WorkOrder import WorkOrder
 from conu.classes.RecurringWorkOrder import RecurringWorkOrder
-from conu.classes.Item import Item
-from conu.ui.components.Notification import Notification
 from conu.ui.actions.workorder_actions import edit_workorder
 
-from conu.db.helpers import (
-    delete_by_attrs_dict,
-    select_by_attrs_dict,
-    save_by_list,
-)
 from conu.helpers import (
     load_query_rows_into_table,
     navigate,

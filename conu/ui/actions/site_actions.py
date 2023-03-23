@@ -1,7 +1,7 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Site import Site
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 
 from conu.db.helpers import (
     delete_by_attrs_dict,
@@ -76,7 +76,7 @@ def delete_site(main_window) -> None:
 
     delete_by_attrs_dict(Site, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted site: {entity.name}"]
     ).show()
 
@@ -102,7 +102,7 @@ def site_entryform_is_valid(main_window) -> bool:
                 error_strings.append(f"Site: {name}, already exists.")
 
     if error_strings:
-        Notification("Cannot Save Site", error_strings).show()
+        ErrorNotification("Cannot Save Site", error_strings).show()
 
     return not bool(error_strings)
 
@@ -128,7 +128,9 @@ def save_site(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification("Save Successful", [f"Successfully saved site: {entity.name}"]).show()
+    SuccessNotification(
+        "Save Successful", [f"Successfully saved site: {entity.name}"]
+    ).show()
 
     load_site_listingview(main_window)
 

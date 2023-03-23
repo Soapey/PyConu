@@ -1,7 +1,7 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.Department import Department
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 
 from conu.db.helpers import (
     delete_by_attrs_dict,
@@ -68,7 +68,7 @@ def delete_department(main_window) -> None:
 
     delete_by_attrs_dict(Department, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted department: {entity.name}"]
     ).show()
 
@@ -84,7 +84,6 @@ def department_entryform_is_valid(main_window) -> bool:
         error_strings.append("Name field cannot be blank.")
     else:
         existing_departments = select_by_attrs_dict(Department, {"name": name})
-
         editing_id = main_window.ui.department_entryform_lblId.text()
 
         if existing_departments and editing_id:
@@ -95,7 +94,7 @@ def department_entryform_is_valid(main_window) -> bool:
                 error_strings.append(f"Department: {name}, already exists.")
 
     if error_strings:
-        Notification("Cannot Save Department", error_strings).show()
+        ErrorNotification("Cannot Save Department", error_strings).show()
 
     return not bool(error_strings)
 
@@ -119,7 +118,7 @@ def save_department(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification(
+    SuccessNotification(
         "Save Successful", [f"Successfully saved department: {entity.name}"]
     ).show()
 

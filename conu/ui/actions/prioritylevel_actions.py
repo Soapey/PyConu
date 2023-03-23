@@ -1,7 +1,7 @@
 from tkinter.messagebox import askyesno
 
 from conu.classes.PriorityLevel import PriorityLevel
-from conu.ui.components.Notification import Notification
+from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 
 from conu.db.helpers import (
     delete_by_attrs_dict,
@@ -80,7 +80,7 @@ def delete_prioritylevel(main_window) -> None:
 
     delete_by_attrs_dict(PriorityLevel, {"id": entity.id})
 
-    Notification(
+    SuccessNotification(
         "Delete Successful", [f"Successfully deleted priority level: {entity.name}"]
     ).show()
 
@@ -106,7 +106,7 @@ def prioritylevel_entryform_is_valid(main_window) -> bool:
                 error_strings.append(f"Priority Level: {name}, already exists.")
 
     if error_strings:
-        Notification("Cannot Save Priority Level", error_strings).show()
+        ErrorNotification("Cannot Save Priority Level", error_strings).show()
 
     return not bool(error_strings)
 
@@ -131,7 +131,7 @@ def save_prioritylevel(main_window) -> None:
 
     save_by_list([entity])
 
-    Notification(
+    SuccessNotification(
         "Save Successful", [f"Successfully saved priority level: {entity.name}"]
     ).show()
 
