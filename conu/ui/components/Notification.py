@@ -1,14 +1,21 @@
 from tkinter import Tk, Label, Button
-from helpers import darken_color
+from conu.helpers import darken_color
 
 
 class Notification:
-    def __init__(self, title, messages, bg_color, font_color):
+    def __init__(
+        self, title, messages, bg_color, font_color, milliseconds_per_message=1500
+    ):
 
         self.title = title
         self.messages = messages
         self.bg_color = bg_color
         self.font_color = font_color
+        self.milliseconds_per_message = milliseconds_per_message
+
+    def close_window(self, root):
+        root.destroy()
+        root.quit()
 
     def show(self):
         root = Tk()
@@ -42,7 +49,7 @@ class Notification:
             font=("Arial", 12),
             relief="flat",
             borderwidth=0,
-            command=root.destroy,
+            command=lambda: self.close_window(root),
             cursor="hand2",
         )
 
@@ -61,15 +68,18 @@ class Notification:
         )
 
         # Set the duration and close the window after the specified time
-        root.after(int(len(self.messages) * 1000), root.destroy)
+        root.after(
+            int(len(self.messages) * self.milliseconds_per_message),
+            lambda: self.close_window(root),
+        )
         root.mainloop()
 
 
 class ErrorNotification(Notification):
     def __init__(self, title, messages):
-        super().__init__(title, messages, "#e63946", "ffffff")
+        super().__init__(title, messages, "#e63946", "#ffffff")
 
 
 class SuccessNotification(Notification):
     def __init__(self, title, messages):
-        super().__init__(title, messages, "#c7f9cc", "000000")
+        super().__init__(title, messages, "#c7f9cc", "#000000")

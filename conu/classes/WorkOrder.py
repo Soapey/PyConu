@@ -9,10 +9,10 @@ from conu.classes.Department import Department
 from conu.classes.User import User
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
-from conu.helpers import select_directory
+from conu.helpers import select_directory, hex_to_rgb
 from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 import openpyxl
-from openpyxl.styles import Alignment, Border, Side, Font, PatternFill
+from openpyxl.styles import Alignment, Border, Side, Font, PatternFill, Color
 from openpyxl.utils import range_boundaries
 import win32com.client as win32
 import os
@@ -311,11 +311,24 @@ class WorkOrder:
         DARK_BLUE = "#1D3557"
         LIGHT_BLUE = "#457B9D"
 
+        DARK_BLUE_RGB = f"FF{DARK_BLUE.lstrip('#')}"
+        LIGHT_BLUE_RGB = f"FF{LIGHT_BLUE.lstrip('#')}"
+
+        print(LIGHT_BLUE_RGB)
         SMALL_HEADER_BACKGROUND = PatternFill(
-            start_color=DARK_BLUE, end_color=DARK_BLUE, fill_type="solid"
+            start_color=LIGHT_BLUE_RGB,
+            end_color=LIGHT_BLUE_RGB,
+            fill_type="solid",
         )
-        SMALL_HEADER_FONT = Font(name="Helvetica", size=10, color="#FFFFFF")
-        VALUE_FONT = Font(name="Helvetica", size=14, color="#000000")
+        SMALL_HEADER_FONT = Font(name="Helvetica", size=10, color="FFFFFF")
+        VALUE_FONT = Font(name="Helvetica", size=14, color="000000")
+
+        SUB_HEADER_BACKGROUND = PatternFill(
+            start_color=DARK_BLUE_RGB,
+            end_color=DARK_BLUE_RGB,
+            fill_type="solid",
+        )
+        SUB_HEADER_FONT = Font(name="Helvetica", size=16, color="FFFFFF", italic=True)
 
         COLUMNS = 6
         DEFAULT_FONT_SIZE = 14
@@ -372,113 +385,154 @@ class WorkOrder:
 
         row += 1
         raisedby = self.raisedby()
-        raisedby_label = sheet.cell(5, 1)
+        raisedby_label = sheet.cell(row, 1)
         raisedby_label.value = "Raised By"
-        raisedby_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        raisedby_label.fill = SMALL_HEADER_BACKGROUND
+        raisedby_label.font = SMALL_HEADER_FONT
         raisedby_label.alignment = Alignment(horizontal="right")
         raisedby_label.border = border
-        sheet.merge_cells("A5:B5")
-        raisedby_value = sheet.cell(5, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        raisedby_value = sheet.cell(row, 3)
         raisedby_value.value = f"{raisedby.first_name} {raisedby.last_name}"
-        raisedby_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        raisedby_value.font = VALUE_FONT
         raisedby_value.border = border
-        sheet.merge_cells("C5:F5")
+        sheet.merge_cells(f"C{row}:D{row}")
+        contactemail_label = sheet.cell(row, 5)
+        contactemail_label.value = "Contact Email"
+        contactemail_label.fill = SMALL_HEADER_BACKGROUND
+        contactemail_label.font = SMALL_HEADER_FONT
+        contactemail_label.alignment = Alignment(horizontal="right")
+        contactemail_label.border = border
+        sheet.merge_cells(f"E{row}:F{row}")
+        contactemail_value = sheet.cell(row, 7)
+        contactemail_value.value = f"{raisedby.email_address}"
+        contactemail_value.font = VALUE_FONT
+        contactemail_value.border = border
+        sheet.merge_cells(f"G{row}:H{row}")
 
-        dateallocated_label = sheet.cell(6, 1)
-        dateallocated_label.value = "Date Allocated"
-        dateallocated_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
-        dateallocated_label.alignment = Alignment(horizontal="right")
-        dateallocated_label.border = border
-        sheet.merge_cells("A6:B6")
-        dateallocated_value = sheet.cell(6, 3)
-        dateallocated_value.value = datetime.strftime(self.date_allocated, "%d-%m-%Y")
-        dateallocated_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
-        dateallocated_value.border = border
-        sheet.merge_cells("C6:F6")
-
+        row += 2
         site = self.site()
-        site_label = sheet.cell(7, 1)
+        site_label = sheet.cell(row, 1)
         site_label.value = "Site"
-        site_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        site_label.fill = SMALL_HEADER_BACKGROUND
+        site_label.font = SMALL_HEADER_FONT
         site_label.alignment = Alignment(horizontal="right")
         site_label.border = border
-        sheet.merge_cells("A7:B7")
-        site_value = sheet.cell(7, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        site_value = sheet.cell(row, 3)
         site_value.value = site.name
-        site_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        site_value.font = VALUE_FONT
         site_value.border = border
-        sheet.merge_cells("C7:F7")
+        sheet.merge_cells(f"C{row}:H{row}")
 
+        row += 1
         department = self.department()
-        department_label = sheet.cell(8, 1)
+        department_label = sheet.cell(row, 1)
         department_label.value = "Department"
-        department_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        department_label.fill = SMALL_HEADER_BACKGROUND
+        department_label.font = SMALL_HEADER_FONT
         department_label.alignment = Alignment(horizontal="right")
         department_label.border = border
-        sheet.merge_cells("A8:B8")
-        department_value = sheet.cell(8, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        department_value = sheet.cell(row, 3)
         department_value.value = department.name
-        department_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        department_value.font = VALUE_FONT
         department_value.border = border
-        sheet.merge_cells("C8:F8")
+        sheet.merge_cells(f"C{row}:H{row}")
 
+        row += 1
         prioritylevel = self.prioritylevel()
-        prioritylevel_label = sheet.cell(9, 1)
+        prioritylevel_label = sheet.cell(row, 1)
         prioritylevel_label.value = "Priority Level"
-        prioritylevel_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        prioritylevel_label.fill = SMALL_HEADER_BACKGROUND
+        prioritylevel_label.font = SMALL_HEADER_FONT
         prioritylevel_label.alignment = Alignment(horizontal="right")
         prioritylevel_label.border = border
-        sheet.merge_cells("A9:B9")
-        prioritylevel_value = sheet.cell(9, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        prioritylevel_value = sheet.cell(row, 3)
         prioritylevel_value.value = prioritylevel.name
-        prioritylevel_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        prioritylevel_value.font = VALUE_FONT
         prioritylevel_value.border = border
-        sheet.merge_cells("C9:F9")
+        sheet.merge_cells(f"C{row}:H{row}")
 
-        purchaseordernumber_label = sheet.cell(10, 1)
+        row += 1
+        purchaseordernumber_label = sheet.cell(row, 1)
         purchaseordernumber_label.value = "PO Number"
-        purchaseordernumber_label.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        purchaseordernumber_label.fill = SMALL_HEADER_BACKGROUND
+        purchaseordernumber_label.font = SMALL_HEADER_FONT
         purchaseordernumber_label.alignment = Alignment(horizontal="right")
         purchaseordernumber_label.border = border
-        sheet.merge_cells("A10:B10")
-        purchaseordernumber_value = sheet.cell(10, 3)
+        sheet.merge_cells(f"A{row}:B{row}")
+        purchaseordernumber_value = sheet.cell(row, 3)
         purchaseordernumber_value.value = self.purchase_order_number
-        purchaseordernumber_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+        purchaseordernumber_value.font = VALUE_FONT
         purchaseordernumber_value.border = border
-        sheet.merge_cells("C10:F10")
+        sheet.merge_cells(f"C{row}:H{row}")
+
+        row += 1
+        dateallocated_label = sheet.cell(row, 1)
+        dateallocated_label.value = "Date Allocated"
+        date_created_label.fill = SMALL_HEADER_BACKGROUND
+        dateallocated_label.font = SMALL_HEADER_FONT
+        dateallocated_label.alignment = Alignment(horizontal="right")
+        dateallocated_label.border = border
+        sheet.merge_cells(f"A{row}:B{row}")
+        dateallocated_value = sheet.cell(row, 3)
+        dateallocated_value.value = datetime.strftime(self.date_allocated, "%d-%m-%Y")
+        dateallocated_value.font = VALUE_FONT
+        dateallocated_value.border = border
+        sheet.merge_cells(f"C{row}:D{row}")
+        overduefrom_label = sheet.cell(row, 5)
+        overduefrom_label.value = "Overdue From"
+        date_created_label.fill = SMALL_HEADER_BACKGROUND
+        overduefrom_label.font = SMALL_HEADER_FONT
+        overduefrom_label.alignment = Alignment(horizontal="right")
+        overduefrom_label.border = border
+        sheet.merge_cells(f"E{row}:F{row}")
+        overduefrom_value = sheet.cell(row, 7)
+        overduefrom_value.value = datetime.strftime(self.date_allocated, "%d-%m-%Y")
+        overduefrom_value.font = VALUE_FONT
+        overduefrom_value.border = border
+        sheet.merge_cells(f"G{row}:H{row}")
+
         ###################################
-        taskdescription_label = sheet.cell(12, 1)
+        row += 2
+        taskdescription_label = sheet.cell(row, 1)
         taskdescription_label.value = "TASK DESCRIPTION"
         taskdescription_label.border = border
         taskdescription_label.alignment = Alignment(horizontal="center")
-        taskdescription_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
-        sheet.merge_cells("A12:F12")
-
-        taskdescription_value = sheet.cell(13, 1)
+        taskdescription_label.fill = SUB_HEADER_BACKGROUND
+        taskdescription_label.font = SUB_HEADER_FONT
+        sheet.merge_cells(f"A{row}:H{row}")
+        row += 1
+        taskdescription_value = sheet.cell(row, 1)
         taskdescription_value.value = self.task_description
         taskdescription_value.font = Font(name="Helvetica", size=12)
         taskdescription_value.alignment = Alignment(horizontal="left", wrap_text=True)
-        sheet.merge_cells("A13:F13")
+        sheet.merge_cells(f"A{row}:H{row}")
 
         lines = taskdescription_value.value.count("\n")
         row_height = (lines * 17) + 6
-        sheet.row_dimensions[13].height = max(15.00, row_height)
+        sheet.row_dimensions[row].height = max(15.00, row_height)
 
-        start_col, start_row, end_col, end_row = range_boundaries("A13:F13")
-        for row in sheet.iter_rows(
+        start_col, start_row, end_col, end_row = range_boundaries(f"A{row}:H{row}")
+        for _row in sheet.iter_rows(
             min_row=start_row, min_col=start_col, max_row=end_row, max_col=end_col
         ):
-            for cell in row:
+            for cell in _row:
                 cell.border = border
 
         ###################################
-        items_label = sheet.cell(15, 1)
+        row += 2
+        items_label = sheet.cell(row, 1)
         items_label.value = "ITEMS"
         items_label.border = border
         items_label.alignment = Alignment(horizontal="center")
-        items_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
-        sheet.merge_cells("A15:F15")
-        sections = 3
+        items_label.fill = SUB_HEADER_BACKGROUND
+        items_label.font = SUB_HEADER_FONT
+        sheet.merge_cells(f"A{row}:H{row}")
+        sections = 4
+        row += 1
         col = 1
         for index, item in enumerate(self.items().values()):
             item_cell = sheet.cell(row, col)
@@ -501,8 +555,9 @@ class WorkOrder:
         assignees_label.value = "ASSIGNEES"
         assignees_label.border = border
         assignees_label.alignment = Alignment(horizontal="center")
-        assignees_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
-        sheet.merge_cells(f"A{row}:F{row}")
+        assignees_label.fill = SUB_HEADER_BACKGROUND
+        assignees_label.font = SUB_HEADER_FONT
+        sheet.merge_cells(f"A{row}:H{row}")
         row += 1
         col = 1
         for index, assignee in enumerate(self.assignees().values()):
@@ -521,61 +576,60 @@ class WorkOrder:
                 col = 1
                 row += 1
         ##################################
-        row += 2
-        comments_label = sheet.cell(row, 1)
-        comments_label.value = "COMMENTS"
-        comments_label.border = border
-        comments_label.alignment = Alignment(horizontal="center")
-        comments_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
-        sheet.merge_cells(f"A{row}:F{row}")
-        row += 1
         if self.comments:
+            row += 2
+            comments_label = sheet.cell(row, 1)
+            comments_label.value = "COMMENTS"
+            comments_label.border = border
+            comments_label.alignment = Alignment(horizontal="center")
+            comments_label.fill = SUB_HEADER_BACKGROUND
+            comments_label.font = SUB_HEADER_FONT
+            sheet.merge_cells(f"A{row}:H{row}")
+            row += 1
             comments_value = sheet.cell(row, 1)
             comments_value.value = self.comments
             comments_value.font = Font(name="Helvetica", size=12)
             comments_value.alignment = Alignment(horizontal="left", wrap_text=True)
-            sheet.merge_cells(f"A{row}:F{row}")
+            sheet.merge_cells(f"A{row}:H{row}")
 
             lines = comments_value.value.count("\n")
             row_height = (lines * 17) + 6
             sheet.row_dimensions[row].height = max(15.00, row_height)
 
-            start_col, start_row, end_col, end_row = range_boundaries(f"A{row}:F{row}")
+            start_col, start_row, end_col, end_row = range_boundaries(f"A{row}:H{row}")
             for _row in sheet.iter_rows(
                 min_row=start_row, min_col=start_col, max_row=end_row, max_col=end_col
             ):
                 for cell in _row:
                     cell.border = border
 
-        row += 2
-        ##################################
-        if self.date_completed:
+            ##################################
             if self.close_out_comments:
 
+                row += 2
                 closeoutcomments_label = sheet.cell(row, 1)
                 closeoutcomments_label.value = "CLOSE OUT COMMENTS"
                 closeoutcomments_label.border = border
                 closeoutcomments_label.alignment = Alignment(horizontal="center")
-                closeoutcomments_label.font = Font(
-                    name="Helvetica", size=HEADER_FONT_FIZE
-                )
-                sheet.merge_cells(f"A{row}:F{row}")
-                row += 1
+                closeoutcomments_label.fill = SUB_HEADER_BACKGROUND
+                closeoutcomments_label.font = SUB_HEADER_FONT
+                sheet.merge_cells(f"A{row}:H{row}")
 
+                row += 1
                 closeoutcomments_value = sheet.cell(row, 1)
                 closeoutcomments_value.value = self.close_out_comments
                 closeoutcomments_value.font = Font(name="Helvetica", size=12)
                 closeoutcomments_value.alignment = Alignment(
                     horizontal="left", wrap_text=True
                 )
-                sheet.merge_cells(f"A{row}:F{row}")
+                sheet.merge_cells(f"A{row}:H{row}")
 
                 lines = closeoutcomments_value.value.count("\n")
                 row_height = (lines * 17) + 6
                 sheet.row_dimensions[row].height = max(15.00, row_height)
 
                 start_col, start_row, end_col, end_row = range_boundaries(
-                    f"A{row}:F{row}"
+                    f"A{row}:H{row}"
                 )
                 for _row in sheet.iter_rows(
                     min_row=start_row,
@@ -586,11 +640,13 @@ class WorkOrder:
                     for cell in _row:
                         cell.border = border
 
-                row += 1
-            ##################################
+        ##################################
+        if self.date_completed:
+            row += 2
             datecompleted_label = sheet.cell(row, 1)
             datecompleted_label.value = "Date Completed"
-            datecompleted_label.font = Font(name="Helvetica", size=HEADER_FONT_FIZE)
+            datecompleted_label.fill = SMALL_HEADER_BACKGROUND
+            datecompleted_label.font = SMALL_HEADER_FONT
             datecompleted_label.alignment = Alignment(horizontal="right")
             datecompleted_label.border = border
             sheet.merge_cells(f"A{row}:B{row}")
@@ -598,9 +654,9 @@ class WorkOrder:
             datecompleted_value.value = datetime.strftime(
                 self.date_completed, "%d-%m-%Y"
             )
-            datecompleted_value.font = Font(name="Helvetica", size=DEFAULT_FONT_SIZE)
+            datecompleted_value.font = VALUE_FONT
             datecompleted_value.border = border
-            sheet.merge_cells(f"C{row}:F{row}")
+            sheet.merge_cells(f"C{row}:H{row}")
 
         # Page Setup
         margin_size = 1 / 2.54
