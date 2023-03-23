@@ -320,7 +320,7 @@ class WorkOrder:
             end_color=LIGHT_BLUE_RGB,
             fill_type="solid",
         )
-        SMALL_HEADER_FONT = Font(name="Helvetica", size=10, color="FFFFFF")
+        SMALL_HEADER_FONT = Font(name="Helvetica", size=10, color="FFFFFF", bold=True)
         VALUE_FONT = Font(name="Helvetica", size=14, color="000000")
 
         SUB_HEADER_BACKGROUND = PatternFill(
@@ -328,9 +328,11 @@ class WorkOrder:
             end_color=DARK_BLUE_RGB,
             fill_type="solid",
         )
-        SUB_HEADER_FONT = Font(name="Helvetica", size=16, color="FFFFFF", italic=True)
+        SUB_HEADER_FONT = Font(
+            name="Helvetica", size=16, color="FFFFFF", italic=True, bold=True
+        )
 
-        COLUMNS = 6
+        COLUMNS = 8
         DEFAULT_FONT_SIZE = 14
         HEADER_FONT_FIZE = 16
 
@@ -352,7 +354,9 @@ class WorkOrder:
         row = 1
         title_label = sheet.cell(row, 1)
         title_label.value = "WORK ORDER FORM"
-        title_label.font = Font(name="Helvetica", size=24, italic=True, color=DARK_BLUE)
+        title_label.font = Font(
+            name="Helvetica", size=24, italic=True, bold=True, color=DARK_BLUE
+        )
         ###################################
         row += 3
         number_label = sheet.cell(row, 1)
@@ -472,7 +476,7 @@ class WorkOrder:
         row += 1
         dateallocated_label = sheet.cell(row, 1)
         dateallocated_label.value = "Date Allocated"
-        date_created_label.fill = SMALL_HEADER_BACKGROUND
+        dateallocated_label.fill = SMALL_HEADER_BACKGROUND
         dateallocated_label.font = SMALL_HEADER_FONT
         dateallocated_label.alignment = Alignment(horizontal="right")
         dateallocated_label.border = border
@@ -484,7 +488,7 @@ class WorkOrder:
         sheet.merge_cells(f"C{row}:D{row}")
         overduefrom_label = sheet.cell(row, 5)
         overduefrom_label.value = "Overdue From"
-        date_created_label.fill = SMALL_HEADER_BACKGROUND
+        overduefrom_label.fill = SMALL_HEADER_BACKGROUND
         overduefrom_label.font = SMALL_HEADER_FONT
         overduefrom_label.alignment = Alignment(horizontal="right")
         overduefrom_label.border = border
