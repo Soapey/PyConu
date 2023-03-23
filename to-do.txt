@@ -1,9 +1,5 @@
-Wednesday 22/3/23
-* Style work order document
-
 Thursday 23/3/23
 * Add export buttons to each table that creates a csv file for the table
-* Improve toast notifications (Show in top right, same screen as application, colour for type etc.)
 
 Later
 * Add icons to buttons in program
