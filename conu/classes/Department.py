@@ -17,7 +17,7 @@ class Department:
         with SQLiteConnection() as cur:
             rows = cur.execute(
                 """
-                SELECT department.id, department.name
+                SELECT DISTINCT department.id, department.name
                 FROM department
                 JOIN userdepartment ON department.id = userdepartment.department_id
                 WHERE userdepartment.user_id = ?;

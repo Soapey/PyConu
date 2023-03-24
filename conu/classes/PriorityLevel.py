@@ -20,7 +20,7 @@ class PriorityLevel:
         with SQLiteConnection() as cur:
             rows = cur.execute(
                 """
-                SELECT prioritylevel.id, prioritylevel.name, prioritylevel.days_until_overdue
+                SELECT DISTINCT prioritylevel.id, prioritylevel.name, prioritylevel.days_until_overdue
                 FROM prioritylevel;
                 """
             ).fetchall()

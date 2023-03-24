@@ -158,7 +158,7 @@ class WorkOrder:
 
             rows = cur.execute(
                 """
-                SELECT * 
+                SELECT DISTINCT * 
                 FROM workorder 
                 JOIN userdepartment ON workorder.department_id = userdepartment.department_id
                 WHERE userdepartment.user_id = ?;
@@ -179,7 +179,7 @@ class WorkOrder:
         with SQLiteConnection() as cur:
             rows = cur.execute(
                 """
-            SELECT
+            SELECT DISTINCT
                 workorder.id,
                 site.name,
                 department.name,

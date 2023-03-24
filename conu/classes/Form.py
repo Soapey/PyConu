@@ -18,7 +18,7 @@ class Form:
         with SQLiteConnection() as cur:
             rows = cur.execute(
                 """
-                SELECT form.id, form.name, form.path
+                SELECT DISTINCT form.id, form.name, form.path
                 FROM form;
                 """
             ).fetchall()

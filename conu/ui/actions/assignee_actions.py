@@ -13,7 +13,7 @@ from conu.db.helpers import (
 )
 from conu.helpers import (
     clear_widget_children,
-    load_entities_into_table,
+    load_query_rows_into_table,
     navigate,
     selected_row_id,
     set_button_visibility,
@@ -26,9 +26,6 @@ assigned_department_ids = set()
 
 
 def load_assignee_listingview(main_window) -> None:
-
-    global global_assignees
-    global_assignees = get_by_user_departments(Assignee, main_window.current_user.id)
 
     main_window.ui.assignee_listingview_txtSearch.clear()
 
@@ -230,22 +227,22 @@ def back_to_assignee_listingview(main_window) -> None:
 
 def assignees_by_search(main_window, search_text: str) -> None:
 
-    global global_assignees
+    assignees = Assignee.get_listingview_table_data(main_window)
 
     if not search_text:
-        matches = list(global_assignees.values())
+        matches = assignees
     else:
         matches = list(
             filter(
-                lambda e: search_text in "".join([str(e.id), e.name.lower()]),
-                global_assignees.values(),
+                lambda tup: search_text in "".join([str(tup[0]), tup[1].lower()]),
+                assignees,
             )
         )
 
-    load_entities_into_table(
+    load_query_rows_into_table(
         main_window.ui.assignee_listingview_tblAssignee,
         matches,
-        {"id": "ID", "name": "Name", "description": "Description"},
+        {"ID": (0, str), "Name": (1, None), "Description": (2, None)},
     )
 
 
@@ -257,12 +254,17 @@ def set_assignee_button_visibility(main_window):
                 main_window.ui.assignee_listingview_btnNew,
                 main_window.ui.assignee_listingview_btnEdit,
                 main_window.ui.assignee_listingview_btnDelete,
+                main_window.ui.assignee_listingview_btnExportTable,
             ],
             is_visible=False,
         )
     else:
         set_button_visibility(
-            [main_window.ui.assignee_listingview_btnNew], is_visible=True
+            [
+                main_window.ui.assignee_listingview_btnNew,
+                main_window.ui.assignee_listingview_btnExportTable,
+            ],
+            is_visible=True,
         )
         set_button_visibility(
             [

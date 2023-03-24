@@ -1,6 +1,5 @@
 from conu.classes.Department import Department
 from conu.db.SQLiteConnection import SQLiteConnection
-from conu.db.helpers import get_by_user_departments
 
 
 class User:
@@ -50,7 +49,7 @@ class User:
 
             rows = cur.execute(
                 """
-                SELECT * 
+                SELECT DISTINCT * 
                 FROM department
                 JOIN userdepartment ON department.id = userdepartment.department_id
                 WHERE userdepartment.user_id = ?;
@@ -81,7 +80,8 @@ class User:
         if not current_user:
             return
 
-        users = get_by_user_departments(User, current_user.id)
+        users = None
+        # users = get_by_user_departments(User, current_user.id)
 
         return [
             (

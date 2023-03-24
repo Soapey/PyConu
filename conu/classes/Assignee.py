@@ -32,7 +32,7 @@ class Assignee:
         with SQLiteConnection() as cur:
             rows = cur.execute(
                 """
-                SELECT assignee.id, assignee.name, assignee.description
+                SELECT DISTINCT assignee.id, assignee.name, assignee.description
                 FROM assignee
                 JOIN assigneedepartment ON assignee.id = assigneedepartment.assignee_id
                 JOIN userdepartment ON assigneedepartment.department_id = userdepartment.department_id

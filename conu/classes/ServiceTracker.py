@@ -168,10 +168,8 @@ class ServiceTracker:
 
             rows = cur.execute(
                 """
-                SELECT 
-                    * 
-                FROM 
-                    servicetracker;
+                SELECT * 
+                FROM servicetracker;
                 """
             ).fetchall()
 
@@ -184,12 +182,9 @@ class ServiceTracker:
 
             rows = cur.execute(
                 """
-                SELECT 
-                    * 
-                FROM 
-                    servicetracker 
-                WHERE 
-                    servicetracker.item_id IN (SELECT itemdepartment.item_id FROM itemdepartment WHERE itemdepartment.department_id IN (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?))
+                SELECT DISTINCT * 
+                FROM servicetracker 
+                WHERE servicetracker.item_id IN (SELECT itemdepartment.item_id FROM itemdepartment WHERE itemdepartment.department_id IN (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?))
                 """,
                 (user_id,),
             ).fetchall()

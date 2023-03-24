@@ -288,7 +288,7 @@ class RecurringWorkOrder:
 
             rows = cur.execute(
                 """
-                SELECT * 
+                SELECT DISTINCT * 
                 FROM recurringworkorder 
                 JOIN userdepartment ON recurringworkorder.department_id = userdepartment.department_id
                 WHERE userdepartment.user_id = ?;""",
