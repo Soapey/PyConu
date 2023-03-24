@@ -94,8 +94,8 @@ def new_assignee(main_window) -> None:
 def edit_assignee(main_window) -> None:
 
     selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
-    global global_assignees
-    entity = global_assignees[selected_id]
+    assignees = Assignee.get()
+    entity = assignees[selected_id]
 
     clear_assignee_entryform(main_window, selected_id)
 
@@ -115,8 +115,8 @@ def delete_assignee(main_window) -> None:
         return
 
     selected_id = selected_row_id(main_window.ui.assignee_listingview_tblAssignee)
-    global global_assignees
-    entity = global_assignees[selected_id]
+    assignees = Assignee.get()
+    entity = assignees[selected_id]
 
     delete_by_attrs_dict(Assignee, {"id": entity.id})
 

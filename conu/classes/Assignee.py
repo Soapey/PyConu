@@ -22,6 +22,20 @@ class Assignee:
         }
 
     @classmethod
+    def get(cls) -> dict:
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute(
+                """
+                SELECT *
+                FROM assignee
+                """
+            ).fetchall()
+
+        return cls.convert_rows_to_instances(rows)
+
+    @classmethod
     def get_listingview_table_data(cls, main_window) -> list[tuple]:
 
         current_user = main_window.current_user
