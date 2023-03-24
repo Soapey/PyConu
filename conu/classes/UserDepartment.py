@@ -1,8 +1,7 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class UserDepartment:
-    id: int
-    user_id: int
-    department_id: int
+    def __init__(
+        self, id: int = None, user_id: int = None, department_id: int = None
+    ) -> None:
+        self.id = id
+        self.user_id = user_id
+        self.department_id = department_id
