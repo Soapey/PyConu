@@ -1,56 +1,97 @@
 from conu.classes.Department import Department
 from conu.db.SQLiteConnection import SQLiteConnection
+from conu.db.helpers import get_by_user_departments
 
 
 class User:
     def __init__(
         self,
-        _id: int,
-        _first_name: str,
-        _last_name: str,
-        _job_title: str,
-        _email_address: str,
-        _username: str,
-        _password: str,
-        _permission_level: int,
-        _available: bool,
+        id: int = None,
+        first_name: str = None,
+        last_name: str = None,
+        job_title: str = None,
+        email_address: str = None,
+        username: str = None,
+        password: str = None,
+        permission_level: int = None,
+        available: bool = None,
     ) -> None:
-        self.id = _id
-        self.first_name = _first_name
-        self.last_name = _last_name
-        self.job_title = _job_title
-        self.email_address = _email_address
-        self.username = _username
-        self.password = _password
-        self.permission_level = _permission_level
-        self.available = _available
+        self.id = id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.job_title = job_title
+        self.email_address = email_address
+        self.username = username
+        self.password = password
+        self.permission_level = permission_level
+        self.available = available
+
+    @classmethod
+    def convert_rows_to_instances(cls, rows):
+
+        return {
+            row[0]: cls(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                row[6],
+                row[7],
+                row[8],
+            )
+            for row in rows
+        }
 
     def get_departments(self) -> dict:
 
         with SQLiteConnection() as cur:
 
-            query = """
-            SELECT 
-                * 
-            FROM 
-                department 
-            WHERE 
-                department.id 
-                IN (
-                    SELECT 
-                        userdepartment.department_id 
-                    FROM 
-                        userdepartment 
-                    WHERE 
-                        userdepartment.user_id = ?
-                    );
-            """
+            rows = cur.execute(
+                """
+                SELECT * 
+                FROM department
+                JOIN userdepartment ON department.id = userdepartment.department_id
+                WHERE userdepartment.user_id = ?;
+                """,
+                (self.id,),
+            ).fetchall()
 
-            rows = cur.execute(query, (self.id,)).fetchall()
+        return {row[0]: Department(*row) for row in rows}
 
-        departments = dict()
-        for row in rows:
-            department = Department(*row)
-            departments[department.id] = department
+    @classmethod
+    def get(cls):
 
-        return departments
+        with SQLiteConnection() as cur:
+            rows = cur.execute(
+                """
+                SELECT *
+                FROM user;
+                """
+            ).fetchall()
+
+        return cls.convert_rows_to_instances(rows)
+
+    @classmethod
+    def get_listingview_table_data(cls, main_window) -> list[tuple]:
+
+        current_user = main_window.current_user
+
+        if not current_user:
+            return
+
+        users = get_by_user_departments(User, current_user.id)
+
+        return [
+            (
+                user.id,
+                user.first_name,
+                user.last_name,
+                user.job_title,
+                user.email_address,
+                user.permission_level,
+                user.available,
+            )
+            for user in users
+        ]
