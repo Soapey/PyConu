@@ -9,10 +9,10 @@ from conu.classes.Department import Department
 from conu.classes.User import User
 from conu.db.SQLiteConnection import SQLiteConnection
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
-from conu.helpers import select_directory, hex_to_rgb
+from conu.helpers import select_directory
 from conu.ui.components.Notification import SuccessNotification, ErrorNotification
 import openpyxl
-from openpyxl.styles import Alignment, Border, Side, Font, PatternFill, Color
+from openpyxl.styles import Alignment, Border, Side, Font, PatternFill
 from openpyxl.utils import range_boundaries
 import win32com.client as win32
 import os
@@ -127,19 +127,42 @@ class WorkOrder:
         }
 
     @classmethod
+    def get(cls):
+
+        with SQLiteConnection() as cur:
+
+            rows = cur.execute("SELECT * FROM workorder;").fetchall()
+
+        return {
+            row[0]: cls(
+                row[0],
+                row[1],
+                row[2],
+                row[3],
+                row[4],
+                row[5],
+                format_nullable_database_date(row[6]),
+                format_nullable_database_date(row[7]),
+                row[8],
+                format_nullable_database_date(row[9]),
+                row[10],
+                row[11],
+            )
+            for row in rows
+        }
+
+    @classmethod
     def get_by_user_departments(cls, user_id):
 
         with SQLiteConnection() as cur:
 
             rows = cur.execute(
                 """
-                SELECT 
-                    * 
-                FROM 
-                    workorder 
-                WHERE 
-                    workorder.department_id IN 
-                        (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?);""",
+                SELECT * 
+                FROM workorder 
+                JOIN userdepartment ON workorder.department_id = userdepartment.department_id
+                WHERE userdepartment.user_id = ?;
+                """,
                 (user_id,),
             ).fetchall()
 
@@ -170,16 +193,15 @@ class WorkOrder:
                 workorder.close_out_comments,
                 user.first_name || ' ' || user.last_name,
                 strftime('%d-%m-%Y', workorder.date_created)
-            FROM
-                workorder
-                JOIN site ON workorder.site_id = site.id
-                JOIN department ON workorder.department_id = department.id
-                JOIN prioritylevel ON workorder.prioritylevel_id = prioritylevel.id
-                JOIN user ON workorder.raisedby_user_id = user.id
-                LEFT JOIN workorderitem ON workorder.id = workorderitem.workorder_id
-                LEFT JOIN item ON workorderitem.item_id = item.id
-                LEFT JOIN workorderassignee ON workorder.id = workorderassignee.workorder_id
-                LEFT JOIN assignee ON workorderassignee.assignee_id = assignee.id
+            FROM workorder
+            JOIN site ON workorder.site_id = site.id
+            JOIN department ON workorder.department_id = department.id
+            JOIN prioritylevel ON workorder.prioritylevel_id = prioritylevel.id
+            JOIN user ON workorder.raisedby_user_id = user.id
+            LEFT JOIN workorderitem ON workorder.id = workorderitem.workorder_id
+            LEFT JOIN item ON workorderitem.item_id = item.id
+            LEFT JOIN workorderassignee ON workorder.id = workorderassignee.workorder_id
+            LEFT JOIN assignee ON workorderassignee.assignee_id = assignee.id
             WHERE
                 workorder.department_id IN (
                     SELECT department_id
@@ -194,31 +216,6 @@ class WorkOrder:
             ).fetchall()
 
         return rows
-
-    @classmethod
-    def get(cls):
-
-        with SQLiteConnection() as cur:
-
-            rows = cur.execute("SELECT * FROM workorder;").fetchall()
-
-        return {
-            row[0]: cls(
-                row[0],
-                row[1],
-                row[2],
-                row[3],
-                row[4],
-                row[5],
-                format_nullable_database_date(row[6]),
-                format_nullable_database_date(row[7]),
-                row[8],
-                format_nullable_database_date(row[9]),
-                row[10],
-                row[11],
-            )
-            for row in rows
-        }
 
     def site(self):
 

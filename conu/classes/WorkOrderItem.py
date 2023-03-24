@@ -7,4 +7,8 @@ class WorkOrderItem:
         self.item_id = item_id
 
     def __eq__(self, __o: object) -> bool:
-        return self.id == __o.id
+        return (
+            self.id == __o.id
+            and self.workorder_id == __o.workorder_id
+            and self.item_id == __o.item_id
+        )
