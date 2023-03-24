@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from datetime import datetime, date
 from conu.db.SQLiteConnection import SQLiteConnection
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem
@@ -6,15 +5,24 @@ from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 from conu.classes.Item import Item
 
 
-@dataclass
 class ServiceTracker:
-    id: int
-    item_id: int
-    units_calibration_date: date
-    current_units: int
-    average_units_per_day: int
-    service_due_units: int
-    service_interval: int
+    def __init__(
+        self,
+        id: int = None,
+        item_id: int = None,
+        units_calibration_date: date = None,
+        current_units: int = None,
+        average_units_per_day: int = None,
+        service_due_units: int = None,
+        service_interval: int = None,
+    ) -> None:
+        self.id = id
+        self.item_id = item_id
+        self.units_calibration_date = units_calibration_date
+        self.current_units = current_units
+        self.average_units_per_day = average_units_per_day
+        self.service_due_units = service_due_units
+        self.service_interval = service_interval
 
     def __str__(self) -> str:
         items = select_by_attrs_dict(Item)
@@ -93,7 +101,7 @@ class ServiceTracker:
     def load_entities_into_table(cls, table, entities: list = None):
 
         if not entities:
-            entites = list(cls.select_by_attr_dict().values())
+            entities = list(cls.select_by_attr_dict().values())
 
         items = select_by_attrs_dict(Item)
 
@@ -182,9 +190,11 @@ class ServiceTracker:
 
             rows = cur.execute(
                 """
-                SELECT DISTINCT * 
-                FROM servicetracker 
-                WHERE servicetracker.item_id IN (SELECT itemdepartment.item_id FROM itemdepartment WHERE itemdepartment.department_id IN (SELECT userdepartment.department_id FROM userdepartment WHERE userdepartment.user_id = ?))
+                SELECT DISTINCT st.*
+                FROM servicetracker st
+                JOIN itemdepartment id ON st.item_id = id.item_id
+                JOIN userdepartment ud ON id.department_id = ud.department_id
+                WHERE ud.user_id = ?
                 """,
                 (user_id,),
             ).fetchall()
