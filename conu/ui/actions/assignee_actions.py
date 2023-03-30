@@ -127,6 +127,11 @@ def delete_assignee(main_window) -> None:
     load_assignee_listingview(main_window)
 
 
+def export_assignee_table(main_window):
+
+    Assignee.get_listingview_table_data(main_window, export_to_excel=True)
+
+
 def assignee_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
@@ -289,6 +294,9 @@ def connect_assignee_actions(main_window) -> None:
     )
     main_window.ui.assignee_listingview_btnDelete.clicked.connect(
         lambda: delete_assignee(main_window)
+    )
+    main_window.ui.assignee_listingview_btnExportTable.clicked.connect(
+        lambda: export_assignee_table(main_window)
     )
     main_window.ui.assignee_entryform_btnSave.clicked.connect(
         lambda: save_assignee(main_window)
