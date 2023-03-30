@@ -8,6 +8,7 @@ from conu.classes.Site import Site
 from conu.classes.Department import Department
 from conu.classes.User import User
 from conu.db.SQLiteConnection import SQLiteConnection
+from conu.db.QueryExporter import QueryExporter
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
 from conu.helpers import select_directory
 from conu.ui.components.Notification import SuccessNotification, ErrorNotification
@@ -169,51 +170,65 @@ class WorkOrder:
         return cls.convert_rows_to_instances(rows)
 
     @classmethod
-    def get_listingview_table_data(cls, main_window):
+    def get_listingview_table_data(cls, main_window, export_to_excel = False):
 
         current_user = main_window.current_user
 
         if not current_user:
             return
 
+        query = """
+                SELECT DISTINCT
+                    workorder.id AS 'ID',
+                    site.name AS 'Site',
+                    department.name AS 'Department',
+                    prioritylevel.name AS 'Priority Level',
+                    workorder.task_description AS 'Task Description',
+                    workorder.comments 'Comments',
+                    GROUP_CONCAT(DISTINCT item.name) AS 'Items',
+                    GROUP_CONCAT(DISTINCT assignee.name) AS 'Assignees',
+                    strftime('%d-%m-%Y', workorder.date_allocated) AS 'Date Allocated',
+                    strftime('%d-%m-%Y', workorder.date_completed) AS 'Date Completed',
+                    workorder.close_out_comments AS 'Close Out Comments',
+                    user.first_name || ' ' || user.last_name AS 'Raised By',
+                    strftime('%d-%m-%Y', workorder.date_created) AS 'Date Created'
+                FROM workorder
+                JOIN site ON workorder.site_id = site.id
+                JOIN department ON workorder.department_id = department.id
+                JOIN prioritylevel ON workorder.prioritylevel_id = prioritylevel.id
+                JOIN user ON workorder.raisedby_user_id = user.id
+                LEFT JOIN workorderitem ON workorder.id = workorderitem.workorder_id
+                LEFT JOIN item ON workorderitem.item_id = item.id
+                LEFT JOIN workorderassignee ON workorder.id = workorderassignee.workorder_id
+                LEFT JOIN assignee ON workorderassignee.assignee_id = assignee.id
+                WHERE
+                    workorder.department_id IN (
+                        SELECT department_id
+                        FROM userdepartment
+                        WHERE user_id = ?
+                    )
+                GROUP BY
+                    workorder.id
+                ORDER BY
+                    workorder.id ASC;"""
+        
+        params = (current_user.id,)
+
         with SQLiteConnection() as cur:
-            rows = cur.execute(
-                """
-            SELECT DISTINCT
-                workorder.id,
-                site.name,
-                department.name,
-                prioritylevel.name,
-                workorder.task_description,
-                workorder.comments,
-                GROUP_CONCAT(DISTINCT item.name),
-                GROUP_CONCAT(DISTINCT assignee.name),
-                strftime('%d-%m-%Y', workorder.date_allocated),
-                strftime('%d-%m-%Y', workorder.date_completed),
-                workorder.close_out_comments,
-                user.first_name || ' ' || user.last_name,
-                strftime('%d-%m-%Y', workorder.date_created)
-            FROM workorder
-            JOIN site ON workorder.site_id = site.id
-            JOIN department ON workorder.department_id = department.id
-            JOIN prioritylevel ON workorder.prioritylevel_id = prioritylevel.id
-            JOIN user ON workorder.raisedby_user_id = user.id
-            LEFT JOIN workorderitem ON workorder.id = workorderitem.workorder_id
-            LEFT JOIN item ON workorderitem.item_id = item.id
-            LEFT JOIN workorderassignee ON workorder.id = workorderassignee.workorder_id
-            LEFT JOIN assignee ON workorderassignee.assignee_id = assignee.id
-            WHERE
-                workorder.department_id IN (
-                    SELECT department_id
-                    FROM userdepartment
-                    WHERE user_id = ?
-                )
-            GROUP BY
-                workorder.id
-            ORDER BY
-                workorder.id ASC;""",
-                (current_user.id,),
-            ).fetchall()
+            rows = cur.execute(query, params).fetchall()
+
+        if export_to_excel:
+
+            directory_path: str = None
+            try:
+                directory_path = select_directory()
+            except:
+                pass
+            
+            if directory_path:
+                exporter = QueryExporter(query, params, directory_path, "workorders")
+                exporter.to_xlsx()
+                
 
         return rows
 

@@ -82,7 +82,7 @@ class Notification:
 
 class ErrorNotification(Notification):
     def __init__(self, title, messages):
-        super().__init__(title, messages, "#e63946", "#ffffff")
+        super().__init__(title, messages, "#e63946", "#ffffff", 3000)
 
 
 class SuccessNotification(Notification):

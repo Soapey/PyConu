@@ -49,7 +49,7 @@ class User:
 
             rows = cur.execute(
                 """
-                SELECT DISTINCT * 
+                SELECT DISTINCT department.id, department.name
                 FROM department
                 JOIN userdepartment ON department.id = userdepartment.department_id
                 WHERE userdepartment.user_id = ?;

@@ -639,6 +639,11 @@ def print_workorder(main_window):
     )
 
 
+def export_workorder_table(main_window):
+    
+    WorkOrder.get_listingview_table_data(main_window, export_to_excel=True)
+
+
 def set_workorder_button_visibility(main_window):
 
     if main_window.current_user.permission_level <= 1:
@@ -909,6 +914,9 @@ def connect_workorder_actions(main_window) -> None:
     main_window.ui.workorder_listingview_btnDelete.clicked.connect(
         lambda: delete_workorder(main_window)
     )
+    main_window.ui.workorder_listingview_btnExportTable.clicked.connect(
+        lambda: export_workorder_table(main_window)
+    ) 
     main_window.ui.workorder_entryform_btnSave.clicked.connect(
         lambda: save_workorder(main_window)
     )

@@ -1,14 +1,15 @@
 import configparser
-from datetime import datetime, date
 import hashlib
 import os
-from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 import re
-from tkinter import Tk, Label, Button
-from tkinter import filedialog
+from datetime import datetime, date
 from typing import List
+
+from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
+from tkinter import Tk, filedialog
 from conu.ui.PageEnum import Page
 import colorsys
+
 
 
 def navigate(main_window, page: Page):
