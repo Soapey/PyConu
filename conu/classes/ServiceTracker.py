@@ -1,7 +1,9 @@
 from datetime import datetime, date
+from conu.db.QueryExporter import QueryExporter
 from conu.db.SQLiteConnection import SQLiteConnection
 from PyQt5.QtWidgets import QHeaderView, QTableWidgetItem
 from conu.db.helpers import select_by_attrs_dict, format_nullable_database_date
+from conu.helpers import select_directory
 from conu.classes.Item import Item
 
 
@@ -200,3 +202,46 @@ class ServiceTracker:
             ).fetchall()
 
         return cls.convert_rows_to_instances(rows)
+    
+    @classmethod
+    def get_listingview_table_data(cls, main_window, export_to_excel = False):
+
+        current_user = main_window.current_user
+
+        if not current_user:
+            return
+
+        query = """
+                SELECT DISTINCT
+                    st.id AS 'ID',
+                    i.name AS 'Item',
+                    st.units_calibration_date AS 'Units Calibration Date',
+                    st.current_units AS 'Current Units',
+                    st.average_units_per_day AS 'Average Units per Day',
+                    st.service_due_units AS 'Service Due Units',
+                    st.service_interval AS 'Service Interval Units'
+                FROM servicetracker st
+                JOIN item i ON st.item_id = i.id
+                JOIN itemdepartment id ON st.item_id = id.item_id
+                JOIN userdepartment ud ON id.department_id = ud.department_id
+                WHERE ud.user_id = ?
+                """
+        
+        params = (current_user.id,)
+
+        with SQLiteConnection() as cur:
+            rows = cur.execute(query, params).fetchall()
+
+        if export_to_excel:
+
+            directory_path: str = None
+            try:
+                directory_path = select_directory()
+            except:
+                pass
+            
+            if directory_path:
+                exporter = QueryExporter(query, params, directory_path, "servicetrackers")
+                exporter.to_xlsx()
+
+        return rows
