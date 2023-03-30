@@ -83,6 +83,11 @@ def delete_site(main_window) -> None:
     load_site_listingview(main_window)
 
 
+def export_site_table(main_window):
+    
+    Site.get_listingview_table_data(main_window, export_to_excel=True)
+
+
 def site_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
@@ -204,6 +209,9 @@ def connect_site_actions(main_window) -> None:
     )
     main_window.ui.site_listingview_btnDelete.clicked.connect(
         lambda: delete_site(main_window)
+    )
+    main_window.ui.site_listingview_btnExportTable.clicked.connect(
+        lambda: export_site_table(main_window)
     )
     main_window.ui.site_entryform_btnSave.clicked.connect(
         lambda: save_site(main_window)
