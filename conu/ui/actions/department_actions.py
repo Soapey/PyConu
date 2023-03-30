@@ -74,6 +74,10 @@ def delete_department(main_window) -> None:
 
     load_department_listingview(main_window)
 
+def export_department_table(main_window):
+
+    Department.get_listingview_table_data(main_window, export_to_excel=True)
+
 
 def department_entryform_is_valid(main_window) -> bool:
 
@@ -195,6 +199,9 @@ def connect_department_actions(main_window) -> None:
     )
     main_window.ui.department_listingview_btnDelete.clicked.connect(
         lambda: delete_department(main_window)
+    )
+    main_window.ui.department_listingview_btnExportTable.clicked.connect(
+        lambda: export_department_table(main_window)
     )
     main_window.ui.department_entryform_btnSave.clicked.connect(
         lambda: save_department(main_window)
