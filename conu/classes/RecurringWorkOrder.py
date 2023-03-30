@@ -1,7 +1,9 @@
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 import calendar
+from conu.helpers import select_directory
 from conu.db.SQLiteConnection import SQLiteConnection
+from conu.db.RowsExporter import RowsExporter
 from conu.db.helpers import format_nullable_database_date, select_by_attrs_dict
 from conu.classes.Item import Item
 from conu.classes.Site import Site
@@ -298,7 +300,7 @@ class RecurringWorkOrder:
         return cls.convert_rows_to_instances(rows)
 
     @classmethod
-    def get_listingview_table_data(cls, main_window):
+    def get_listingview_table_data(cls, main_window, export_to_excel = False):
 
         current_user = main_window.current_user
 
@@ -324,5 +326,16 @@ class RecurringWorkOrder:
             )
             for rwo in recurringworkorders.values()
         ]
+
+        if export_to_excel:
+            directory_path: str = None
+            try:
+                directory_path = select_directory()
+            except:
+                pass
+            
+            if directory_path:
+                exporter = RowsExporter(["ID", "Site", "Department", "Priority Level", "Description", "Comments", "Recurrence", "Is Due"], data, directory_path, "recurringworkorders")
+                exporter.to_xlsx()
 
         return data

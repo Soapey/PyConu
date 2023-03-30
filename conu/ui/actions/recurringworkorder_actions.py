@@ -566,6 +566,10 @@ def delete_recurringworkorder(main_window) -> None:
     load_recurringworkorder_listingview(main_window)
 
 
+def export_recurringworkorder_table(main_window):
+
+    RecurringWorkOrder.get_listingview_table_data(main_window, export_to_excel=True)
+
 def recurringworkorder_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
@@ -1114,6 +1118,9 @@ def connect_recurringworkorder_actions(main_window) -> None:
     )
     main_window.ui.recurringworkorder_listingview_btnDelete.clicked.connect(
         lambda: delete_recurringworkorder(main_window)
+    )
+    main_window.ui.recurringworkorder_listingview_btnExportTable.clicked.connect(
+        lambda: export_recurringworkorder_table(main_window)
     )
     main_window.ui.recurringworkorder_entryform_btnSave.clicked.connect(
         lambda: save_recurringworkorder(main_window)
