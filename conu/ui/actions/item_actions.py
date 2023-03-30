@@ -130,6 +130,11 @@ def delete_item(main_window) -> None:
     load_item_listingview(main_window)
 
 
+def export_item_table(main_window):
+
+    Item.get_listingview_table_data(main_window, export_to_excel=True)
+
+
 def item_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
@@ -285,6 +290,9 @@ def connect_item_actions(main_window) -> None:
     )
     main_window.ui.item_listingview_btnDelete.clicked.connect(
         lambda: delete_item(main_window)
+    )
+    main_window.ui.item_listingview_btnExportTable.clicked.connect(
+        lambda: export_item_table(main_window)
     )
     main_window.ui.item_entryform_btnSave.clicked.connect(
         lambda: save_item(main_window)
