@@ -87,6 +87,11 @@ def delete_prioritylevel(main_window) -> None:
     load_prioritylevel_listingview(main_window)
 
 
+def export_prioritylevel_table(main_window):
+
+    PriorityLevel.get_listingview_table_data(main_window, export_to_excel=True)
+
+
 def prioritylevel_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
@@ -208,6 +213,9 @@ def connect_prioritylevel_actions(main_window) -> None:
     )
     main_window.ui.prioritylevel_listingview_btnDelete.clicked.connect(
         lambda: delete_prioritylevel(main_window)
+    )
+    main_window.ui.prioritylevel_listingview_btnExportTable.clicked.connect(
+        lambda: export_prioritylevel_table(main_window)
     )
     main_window.ui.prioritylevel_entryform_btnSave.clicked.connect(
         lambda: save_prioritylevel(main_window)

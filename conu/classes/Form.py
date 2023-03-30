@@ -18,7 +18,10 @@ class Form:
             return
 
         query = """
-                SELECT DISTINCT form.id, form.name, form.path
+                SELECT DISTINCT 
+                    form.id AS 'ID', 
+                    form.name AS 'Name', 
+                    form.path AS 'Path'
                 FROM form;
                 """
         

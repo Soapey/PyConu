@@ -30,7 +30,10 @@ class Item:
             return
 
         query = """
-                SELECT DISTINCT item.id, item.name, item.comments
+                SELECT DISTINCT 
+                    item.id AS 'ID', 
+                    item.name AS 'Name', 
+                    item.comments AS 'Comments'
                 FROM item
                 JOIN itemdepartment ON item.id = itemdepartment.item_id
                 JOIN userdepartment ON itemdepartment.department_id = userdepartment.department_id
