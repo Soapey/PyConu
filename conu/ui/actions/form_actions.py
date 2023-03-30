@@ -81,6 +81,11 @@ def delete_form(main_window) -> None:
     load_form_listingview(main_window)
 
 
+def export_form_table(main_window):
+
+    Form.get_listingview_table_data(main_window, export_to_excel=True)
+
+
 def form_entryform_is_valid(main_window) -> bool:
 
     error_strings = list()
@@ -214,6 +219,9 @@ def connect_form_actions(main_window) -> None:
     )
     main_window.ui.form_listingview_btnDelete.clicked.connect(
         lambda: delete_form(main_window)
+    )
+    main_window.ui.form_listingview_btnExportTable.clicked.connect(
+        lambda: export_form_table(main_window)
     )
     main_window.ui.form_entryform_btnSave.clicked.connect(
         lambda: save_form(main_window)
