@@ -2,6 +2,7 @@ import configparser
 from datetime import datetime, date
 import hashlib
 import os
+from os import environ
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 import re
 from tkinter import Tk, Label, Button
@@ -283,3 +284,12 @@ def darken_color(color_hex: str, percent):
     # Convert the modified HLS color back to RGB color
     r, g, b = colorsys.hls_to_rgb(h, l, s)
     return int(r * 255), int(g * 255), int(b * 255)
+
+
+def sharepoint_path(relative_path: str) -> str:
+
+    user_profile_directory = environ["USERPROFILE"]
+    config = read_config_file()['SQLiteSettings']
+    sharepoint_documents_extension = config['sharepoint_documents_extension']
+    full_path = fr"{user_profile_directory}{sharepoint_documents_extension}{relative_path}"
+    return full_path

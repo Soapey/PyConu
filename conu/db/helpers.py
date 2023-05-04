@@ -5,7 +5,7 @@ from conu.classes.PriorityLevel import PriorityLevel
 from conu.classes.User import User
 from conu.classes.UserDepartment import UserDepartment
 from conu.db.SQLiteConnection import SQLiteConnection
-from conu.helpers import read_config_file, join_to_project_folder, hash_sha512
+from conu.helpers import read_config_file, join_to_project_folder, hash_sha512, sharepoint_path
 import shutil
 
 
@@ -268,13 +268,13 @@ def create_db_backup():
         return
 
     try:
-        db_path = config["SQLiteSettings"]["database_file"]
+        db_path = sharepoint_path(config["SQLiteSettings"]["database_file"])
     except Exception as e:
         print(e)
         return
 
     try:
-        backup_directory = config["SQLiteSettings"]["backup_directory"]
+        backup_directory = sharepoint_path(config["SQLiteSettings"]["backup_directory"])
     except Exception as e:
         print(e)
         return

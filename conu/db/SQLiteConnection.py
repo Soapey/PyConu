@@ -1,5 +1,5 @@
 import sqlite3
-from conu.helpers import read_config_file
+from conu.helpers import read_config_file, sharepoint_path
 
 
 class SQLiteConnection:
@@ -30,7 +30,7 @@ class SQLiteConnection:
             config = read_config_file()
 
             # Create the default file path within the database directory
-            self.file_path = config["SQLiteSettings"]["database_file"]
+            self.file_path = sharepoint_path(config["SQLiteSettings"]["database_file"])
 
         else:
             self.file_path = file_path
