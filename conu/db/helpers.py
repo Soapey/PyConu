@@ -13,7 +13,7 @@ def init_db(file_path: str = None, clean: bool = False):
 
     if not file_path:
         config = read_config_file()
-        file_path = config["SQLiteSettings"]["database_file"]
+        file_path = sharepoint_path(config["SQLiteSettings"]["database_file"])
 
     if clean and os.path.exists(file_path):
         os.remove(file_path)
